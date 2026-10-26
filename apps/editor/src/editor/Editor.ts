@@ -22,6 +22,12 @@ export class Editor {
   constructor(doc: DesignDoc) {
     this.doc = doc;
     this.ui = createStore<EditorState>({ ...initialEditorState, activePageId: doc.snapshot.pageOrder[0] ?? null });
+    // Pages can arrive later (live collaboration) or be deleted by someone else.
+    doc.subscribe(() => {
+      const order = doc.snapshot.pageOrder;
+      const active = this.ui.get().activePageId;
+      if (!active || !order.includes(active)) this.ui.set({ activePageId: order[0] ?? null });
+    });
   }
 
   get s() {

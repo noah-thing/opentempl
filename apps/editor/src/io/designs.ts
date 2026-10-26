@@ -113,13 +113,16 @@ export interface OpenDesign {
   close: () => Promise<void>;
 }
 
-export async function openDesign(id: string): Promise<OpenDesign | null> {
+export async function openDesign(id: string, opts: { joining?: boolean } = {}): Promise<OpenDesign | null> {
   const entry = await db.get<DesignEntry>('designs', id);
   const ydoc = new Y.Doc();
   const persistence = new IndexeddbPersistence(dbName(id), ydoc);
   await persistence.whenSynced;
   const doc = new DesignDoc(ydoc);
-  if (!doc.snapshot.pageOrder.length) {
+  if (opts.joining && !entry) {
+    // Joining someone else's live design: start empty and let the peers fill it in.
+    await db.set('designs', id, { id, title: 'Shared design', width: 1080, height: 1080, createdAt: Date.now(), updatedAt: Date.now(), pages: 0 });
+  } else if (!doc.snapshot.pageOrder.length) {
     if (!entry) {
       await persistence.destroy();
       return null;

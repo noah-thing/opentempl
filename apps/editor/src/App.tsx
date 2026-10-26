@@ -5,6 +5,7 @@ import { createDesign } from './io/designs';
 import { formatById } from './doc/formats';
 import { templateById } from './templates';
 import { Eyes } from './ui/Logo';
+import { IconSheet } from './ui/IconSheet';
 
 // Hash routes: #/ home, #/d/<id> editor, #/new?format=<id>&template=<id>
 function useHash() {
@@ -25,10 +26,16 @@ export function App() {
   const hash = useHash();
   const path = hash.replace(/^#/, '') || '/';
 
+  if (path.startsWith('/join/')) {
+    const [id, q] = path.slice(6).split('?');
+    window.location.replace(`#/d/${id}?${q ?? ''}`);
+    return null;
+  }
   if (path.startsWith('/d/')) {
     const id = path.slice(3).split('?')[0];
     return <EditorScreen key={id} id={id} />;
   }
+  if (path === '/icons') return <IconSheet />;
   if (path.startsWith('/new')) return <NewDesign query={path.split('?')[1] ?? ''} />;
   return <Home />;
 }

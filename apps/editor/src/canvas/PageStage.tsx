@@ -14,6 +14,8 @@ import { CropOverlay } from './CropOverlay';
 import { importFiles } from '../io/upload';
 import { dropLibraryItem, LIBRARY_MIME } from '../panels/library';
 import { smoothPath } from './draw';
+import { activeCollab, usePeers } from '../collab/collab';
+import { listUploads } from '../io/uploads';
 
 interface Props {
   pageId: Id;
@@ -315,6 +317,8 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
+    const collab = activeCollab();
+    if (collab) collab.setCursor({ pageId, ...toLocal(e.clientX, e.clientY) });
     if (editor.state.dragging || tool !== 'select') return;
     const id = hitId(e.target);
     if (id !== editor.state.hoverId) editor.ui.set({ hoverId: id });
@@ -324,6 +328,18 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     e.preventDefault();
     const p = toLocal(e.clientX, e.clientY);
     editor.setActivePage(pageId);
+    const upload = e.dataTransfer.getData('application/x-tavla-upload');
+    if (upload) {
+      const a = (await listUploads()).find((x) => x.id === upload);
+      if (a) {
+        if (!editor.doc.getAsset(a.id)) editor.doc.addAsset(a);
+        const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+        const over = overId ? editor.s.elements[overId] : null;
+        if (over?.type === 'image') editor.replaceImage(over.id, a.id, a.width, a.height);
+        else editor.addImageAsset(a.id, a.width, a.height, p);
+      }
+      return;
+    }
     const lib = e.dataTransfer.getData(LIBRARY_MIME);
     if (lib) {
       const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
@@ -382,6 +398,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
           <TextEditor el={elements[editingTextId] as TextElement} zoom={zoom} />
         ) : null}
         {cropId && editor.s.elementPage[cropId] === pageId ? <CropOverlay id={cropId} zoom={zoom} toLocal={toLocal} /> : null}
+        <Peers pageId={pageId} zoom={zoom} />
       </div>
     </div>
   );
@@ -428,3 +445,37 @@ function RulerGuides({ pageId, zoom, W, H }: { pageId: Id; zoom: number; W: numb
     </>
   );
 }
+
+function Peers({ pageId, zoom }: { pageId: Id; zoom: number }) {
+  const peers = usePeers();
+  const elements = useDoc((s) => s.elements);
+  const elementPage = useDoc((s) => s.elementPage);
+  return (
+    <>
+      {peers.map((p) => (
+        <div key={p.id}>
+          {(p.selection ?? []).map((id) => {
+            const el = elements[id];
+            if (!el || elementPage[id] !== pageId) return null;
+            return (
+              <div
+                key={id}
+                className="peer-selection"
+                style={{ left: el.x * zoom, top: el.y * zoom, width: el.w * zoom, height: el.h * zoom, transform: el.rotation ? `rotate(${el.rotation}deg)` : undefined, boxShadow: `0 0 0 1.5px ${p.color}` }}
+              />
+            );
+          })}
+          {p.cursor && p.cursor.pageId === pageId ? (
+            <div className="peer-cursor" style={{ left: p.cursor.x * zoom, top: p.cursor.y * zoom, color: p.color }}>
+              <svg width="18" height="18" viewBox="0 0 16 16" shapeRendering="crispEdges">
+                <path d="M1 1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1H7v1h1v2H7v1H6v-2H5v-1H4v1H3v1H2v1H1z" fill="currentColor" stroke="#fff" strokeWidth="0.6" />
+              </svg>
+              <span style={{ background: p.color }}>{p.name}</span>
+            </div>
+          ) : null}
+        </div>
+      ))}
+    </>
+  );
+}
+

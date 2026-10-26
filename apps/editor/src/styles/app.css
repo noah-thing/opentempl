@@ -1765,3 +1765,64 @@ kbd {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------- collaborators ---------- */
+.peer-selection {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: center;
+}
+.peer-cursor {
+  position: absolute;
+  pointer-events: none;
+  transition: left 0.08s linear, top 0.08s linear;
+  z-index: 5;
+}
+.peer-cursor span {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 8px 8px 8px 2px;
+  white-space: nowrap;
+}
+
+/* ---------- rulers ---------- */
+.ruler {
+  position: absolute;
+  z-index: 11;
+  cursor: crosshair;
+}
+.ruler-top {
+  top: 0;
+  left: 22px;
+  right: 0;
+  height: 22px;
+  width: calc(100% - 22px);
+  cursor: row-resize;
+}
+.ruler-left {
+  top: 22px;
+  left: 0;
+  width: 22px;
+  height: calc(100% - 64px);
+  cursor: col-resize;
+}
+.ruler-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  z-index: 12;
+}
+.ruler-guide-x,
+.ruler-guide-y {
+  z-index: 3;
+}

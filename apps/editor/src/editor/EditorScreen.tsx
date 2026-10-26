@@ -7,6 +7,7 @@ import { Rail } from '../chrome/Rail';
 import { SidePanel } from '../chrome/SidePanel';
 import { ContextToolbar } from '../toolbar/ContextToolbar';
 import { Viewport } from '../canvas/Viewport';
+import { Rulers } from '../canvas/Rulers';
 import { StatusBar } from '../chrome/StatusBar';
 import { ContextMenu } from '../chrome/ContextMenu';
 import { CommandPalette } from '../chrome/CommandPalette';
@@ -19,6 +20,9 @@ import { useShortcuts } from './shortcuts';
 import { useUI } from './hooks';
 import { onFontsChange, preloadFonts } from '../fonts/fonts';
 import { connectCollab, type Collab } from '../collab/collab';
+import { startAutoVersions } from '../io/versions';
+import { registerCustomFonts } from '../fonts/custom';
+import { Eyes } from '../ui/Logo';
 
 export function EditorScreen({ id }: { id: string }) {
   const [state, setState] = useState<{ open: OpenDesign; editor: Editor } | null>(null);
@@ -29,8 +33,11 @@ export function EditorScreen({ id }: { id: string }) {
     let opened: OpenDesign | null = null;
     let collab: Collab | null = null;
     let offFonts: (() => void) | null = null;
+    let stopVersions: (() => void) | null = null;
     (async () => {
-      opened = await openDesign(id);
+      await registerCustomFonts().catch(() => {});
+      const room = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room');
+      opened = await openDesign(id, { joining: !!room });
       if (cancelled) {
         opened?.close();
         return;
@@ -44,14 +51,15 @@ export function EditorScreen({ id }: { id: string }) {
       const fams = Object.values(opened.doc.snapshot.elements).flatMap((e) => ('fontFamily' in e ? [e.fontFamily] : []));
       preloadFonts(fams).then(() => editor.refitAllText());
       offFonts = onFontsChange(() => editor.refitAllText()) as () => void;
-      const room = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room');
       if (room) collab = connectCollab(editor, room);
+      stopVersions = startAutoVersions(opened.doc);
       setState({ open: opened, editor });
       document.title = `${opened.doc.snapshot.meta.title} · Tavla`;
     })();
     return () => {
       cancelled = true;
       offFonts?.();
+      stopVersions?.();
       collab?.destroy();
       opened?.close();
     };
@@ -59,9 +67,11 @@ export function EditorScreen({ id }: { id: string }) {
 
   if (missing)
     return (
-      <div style={{ height: '100%', display: 'grid', placeItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
-          <p>This design is not on this device.</p>
+      <div style={{ height: '100%', display: 'grid', placeItems: 'center', background: 'var(--paper)' }}>
+        <div style={{ display: 'grid', justifyItems: 'center', gap: 14, textAlign: 'center' }}>
+          <Eyes size={96} mood="wow" />
+          <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>This design lives on another device</h2>
+          <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>Tavla keeps designs in the browser that made them. Ask for a .tavla file or a live link.</p>
           <button className="btn btn-ink" onClick={() => navigate('/')}>
             Back to your designs
           </button>
@@ -90,6 +100,7 @@ function EditorLayout() {
       <SidePanel />
       <main className="workspace">
         <ContextToolbar />
+        <Rulers />
         <Viewport />
         <StatusBar />
       </main>
