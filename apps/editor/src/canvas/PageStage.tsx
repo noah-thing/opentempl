@@ -1,0 +1,430 @@
+import { memo, useMemo, useRef, useState } from 'react';
+import type { Element, Id, TextElement } from '../doc/types';
+import { cloneElement } from '../doc/design';
+import { makeLine, makeShape, makeText, TEXT_PRESETS, makeDraw } from '../doc/factory';
+import { useEditor } from '../editor/Editor';
+import { startDrag, useDoc, useFontsVersion, useUI } from '../editor/hooks';
+import { aabb, rectsIntersect, unionRects, type Point, type Rect } from '../lib/geom';
+import { PageView } from '../render/PageView';
+import { RenderContext, type RenderEnv } from '../render/RenderContext';
+import { collectTargets, snapBox } from './snap';
+import { SelectionOverlay } from './SelectionOverlay';
+import { TextEditor } from './TextEditor';
+import { CropOverlay } from './CropOverlay';
+import { importFiles } from '../io/upload';
+import { dropLibraryItem, LIBRARY_MIME } from '../panels/library';
+import { smoothPath } from './draw';
+
+interface Props {
+  pageId: Id;
+  zoom: number;
+}
+
+export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
+  const editor = useEditor();
+  const page = useDoc((s) => s.pages[pageId]);
+  const elements = useDoc((s) => s.elements);
+  const meta = useDoc((s) => s.meta);
+  const fontsVersion = useFontsVersion();
+  const { selection, editingTextId, cropId, tool, guides, marquee, hoverId, showGrid } = useUI((s) => ({
+    selection: s.selection,
+    editingTextId: s.editingTextId,
+    cropId: s.cropId,
+    tool: s.tool,
+    guides: s.guides,
+    marquee: s.marquee,
+    hoverId: s.hoverId,
+    showGrid: s.showGrid,
+  }));
+  const ref = useRef<HTMLDivElement>(null);
+  const [drawing, setDrawing] = useState<{ d: string; color: string; width: number } | null>(null);
+
+  const env: RenderEnv = useMemo(
+    () => ({
+      assetUrl: (id) => editor.doc.assetUrl(id),
+      assetSize: (id) => {
+        const a = editor.doc.getAsset(id);
+        return a ? { width: a.width, height: a.height } : undefined;
+      },
+      fontsVersion,
+      mode: 'edit',
+      hiddenIds: editingTextId ? new Set([editingTextId]) : undefined,
+    }),
+    [editor, fontsVersion, editingTextId],
+  );
+
+  if (!page) return null;
+  const W = meta.width;
+  const H = meta.height;
+  const onThisPage = selection.length > 0 && editor.s.elementPage[selection[0]] === pageId;
+
+  const toLocal = (clientX: number, clientY: number): Point => {
+    const r = ref.current!.getBoundingClientRect();
+    return { x: (clientX - r.left) / zoom, y: (clientY - r.top) / zoom };
+  };
+
+  const hitId = (target: EventTarget | null): Id | null => {
+    const node = (target as globalThis.Element | null)?.closest?.('[data-id]');
+    const id = node?.getAttribute('data-id') ?? null;
+    return id && editor.s.elementPage[id] === pageId ? id : null;
+  };
+
+  // ---------- creation tools ----------
+  const createAt = (p: Point, e: React.PointerEvent) => {
+    const kind = tool;
+    if (kind === 'text') {
+      const t = makeText({ ...TEXT_PRESETS.subheading, text: '' , w: Math.min(W * 0.6, 900) });
+      const placed = editor.add([{ ...t, x: p.x, y: p.y - t.fontSize * 0.6 }], { at: { x: p.x + t.w / 2, y: p.y } });
+      if (placed?.[0]) editor.ui.set({ editingTextId: placed[0].id, tool: 'select' });
+      return;
+    }
+    const startEl: Element =
+      kind === 'line'
+        ? makeLine({ x: p.x, y: p.y - 12, w: 1, h: 24 })
+        : kind === 'sticky'
+          ? makeShape('rect', { x: p.x, y: p.y, w: 1, h: 1, fill: { type: 'solid', color: '#FFE600' }, radius: 6, shadow: { x: 0, y: 8, blur: 24, color: 'rgba(0,0,0,0.18)' } })
+          : makeShape(kind === 'ellipse' ? 'ellipse' : 'rect', { x: p.x, y: p.y, w: 1, h: 1, fill: { type: 'solid', color: '#2B3BFF' } });
+    editor.doc.undo.stopCapturing();
+    editor.doc.addElement(pageId, startEl);
+    editor.ui.set({ selection: [startEl.id], activePageId: pageId });
+    startDrag(
+      e,
+      (ev) => {
+        const q = toLocal(ev.clientX, ev.clientY);
+        if (startEl.type === 'line') {
+          const len = Math.hypot(q.x - p.x, q.y - p.y);
+          const ang = (Math.atan2(q.y - p.y, q.x - p.x) * 180) / Math.PI;
+          const snapped = ev.shiftKey ? Math.round(ang / 45) * 45 : ang;
+          const cx = p.x + (Math.cos((snapped * Math.PI) / 180) * len) / 2;
+          const cy = p.y + (Math.sin((snapped * Math.PI) / 180) * len) / 2;
+          editor.doc.updateElement(startEl.id, { x: cx - len / 2, y: cy - 12, w: len, rotation: (snapped + 360) % 360 });
+        } else {
+          let w = q.x - p.x;
+          let h = q.y - p.y;
+          if (ev.shiftKey || kind === 'sticky') {
+            const s = Math.max(Math.abs(w), Math.abs(h));
+            w = Math.sign(w || 1) * s;
+            h = Math.sign(h || 1) * s;
+          }
+          editor.doc.updateElement(startEl.id, { x: Math.min(p.x, p.x + w), y: Math.min(p.y, p.y + h), w: Math.max(1, Math.abs(w)), h: Math.max(1, Math.abs(h)) });
+        }
+      },
+      (_ev, moved) => {
+        if (!moved) {
+          // Plain click: drop a default sized element centred on the click.
+          const size = kind === 'line' ? { w: 320, h: 24 } : kind === 'sticky' ? { w: 360, h: 360 } : { w: 280, h: 280 };
+          editor.doc.updateElement(startEl.id, { x: p.x - size.w / 2, y: p.y - size.h / 2, ...size });
+        }
+        if (kind === 'sticky') {
+          const s = editor.s.elements[startEl.id];
+          const note = makeText({ ...TEXT_PRESETS.body, text: 'Note', x: s.x + s.w * 0.1, y: s.y + s.w * 0.1, w: s.w * 0.8, fontSize: Math.max(18, s.w * 0.08) });
+          const gid = startEl.id + 'g';
+          editor.doc.addElement(pageId, { ...note, groupId: gid });
+          editor.doc.updateElement(startEl.id, { groupId: gid });
+          editor.ui.set({ selection: [note.id], editingTextId: note.id });
+        }
+        editor.ui.set({ tool: 'select' });
+      },
+      0,
+    );
+  };
+
+  // ---------- freehand ----------
+  const startDraw = (p: Point, e: React.PointerEvent) => {
+    const settings = editor.state.draw;
+    if (settings.tool === 'eraser') {
+      const erase = (ev: { clientX: number; clientY: number; target: EventTarget | null }) => {
+        const node = document.elementFromPoint(ev.clientX, ev.clientY);
+        const id = hitId(node);
+        if (id && editor.s.elements[id]?.type === 'draw') editor.doc.deleteElements([id]);
+      };
+      erase(e);
+      startDrag(e, (ev) => erase(ev), undefined, 0);
+      return;
+    }
+    const pts: Point[] = [p];
+    const width = settings.tool === 'marker' ? settings.width * 2.2 : settings.tool === 'highlighter' ? settings.width * 3.4 : settings.width;
+    setDrawing({ d: smoothPath(pts), color: settings.color, width });
+    startDrag(
+      e,
+      (ev) => {
+        pts.push(toLocal(ev.clientX, ev.clientY));
+        setDrawing({ d: smoothPath(pts), color: settings.color, width });
+      },
+      () => {
+        setDrawing(null);
+        if (pts.length < 2) pts.push({ x: p.x + 0.5, y: p.y + 0.5 });
+        const b = unionRects(pts.map((q) => ({ x: q.x, y: q.y, w: 0, h: 0 })))!;
+        const pad = width;
+        const ox = b.x - pad;
+        const oy = b.y - pad;
+        const w0 = b.w + pad * 2;
+        const h0 = b.h + pad * 2;
+        const local = pts.map((q) => ({ x: q.x - ox, y: q.y - oy }));
+        const el = makeDraw({ x: ox, y: oy, w: w0, h: h0, w0, h0, paths: [{ d: smoothPath(local), color: settings.color, width, tool: settings.tool as 'pen' }] });
+        editor.doc.undo.stopCapturing();
+        editor.doc.addElement(pageId, el);
+      },
+      0,
+    );
+  };
+
+  // ---------- select / move ----------
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0) return;
+    if ((e.target as HTMLElement).closest('[data-overlay-control]')) return;
+    if (editor.state.presenting) return;
+    const p = toLocal(e.clientX, e.clientY);
+    editor.setActivePage(pageId);
+    if (tool === 'hand') return;
+    if (tool === 'draw') return startDraw(p, e);
+    if (tool !== 'select') return createAt(p, e);
+    if (editor.state.cropId) {
+      editor.ui.set({ cropId: null });
+      return;
+    }
+    if (editor.state.editingTextId) {
+      editor.ui.set({ editingTextId: null });
+    }
+
+    let id = hitId(e.target);
+    if (!id && (e.target as HTMLElement).closest('[data-selection-body]')) id = editor.state.selection[0] ?? null;
+    if (!id) {
+      // Empty space: marquee selection.
+      if (!e.shiftKey) editor.clearSelection();
+      const base = e.shiftKey ? editor.state.selection : [];
+      startDrag(
+        e,
+        (ev) => {
+          const q = toLocal(ev.clientX, ev.clientY);
+          const rect: Rect = { x: Math.min(p.x, q.x), y: Math.min(p.y, q.y), w: Math.abs(q.x - p.x), h: Math.abs(q.y - p.y) };
+          const hits = editor.s.pages[pageId].elementIds.filter((eid) => {
+            const el = editor.s.elements[eid];
+            return el && !el.locked && !el.hidden && rectsIntersect(rect, aabb(el));
+          });
+          const expanded = [...new Set([...base, ...hits.flatMap((h) => editor.groupMembers(h))])];
+          editor.ui.set({ marquee: { pageId, rect }, selection: expanded });
+        },
+        () => editor.ui.set({ marquee: null }),
+      );
+      return;
+    }
+
+    const already = editor.state.selection.includes(id);
+    if (e.shiftKey) {
+      editor.select([id], { additive: true });
+      return;
+    }
+    if (!already) editor.select([id]);
+    const ids = editor.state.selection;
+    const movable = ids.filter((i) => !editor.s.elements[i]?.locked);
+    if (!movable.length) return;
+    beginMove(e, p, movable, e.altKey, already && ids.length === 1 ? id : null);
+  };
+
+  const beginMove = (e: React.PointerEvent, p: Point, ids: Id[], duplicate: boolean, clickedSelected: Id | null = null) => {
+    let moving = ids;
+    let starts = moving.map((i) => editor.s.elements[i]);
+    let duplicated = false;
+    const others = editor.s.pages[pageId].elementIds.filter((i) => !ids.includes(i)).map((i) => editor.s.elements[i]).filter(Boolean);
+    const targets = collectTargets(pageId, { w: W, h: H }, others, editor.state.pageGuides[pageId]);
+    const startBox = unionRects(starts.map((s) => aabb(s)))!;
+    editor.doc.undo.stopCapturing();
+    startDrag(
+      e,
+      (ev) => {
+        if (duplicate && !duplicated) {
+          duplicated = true;
+          const groups = new Map<Id, Id>();
+          const copies = starts.map((s) => cloneElement(s, groups));
+          editor.doc.addElements(pageId, copies);
+          moving = copies.map((c) => c.id);
+          starts = copies;
+          editor.ui.set({ selection: moving });
+        }
+        const q = toLocal(ev.clientX, ev.clientY);
+        let dx = q.x - p.x;
+        let dy = q.y - p.y;
+        if (ev.shiftKey) {
+          if (Math.abs(dx) > Math.abs(dy)) dy = 0;
+          else dx = 0;
+        }
+        let guidesOut: typeof guides = [];
+        if (editor.state.snap && !ev.metaKey && !ev.ctrlKey) {
+          const moved = { ...startBox, x: startBox.x + dx, y: startBox.y + dy };
+          const snap = snapBox(moved, targets, 6 / zoom, { x: !ev.shiftKey || dx !== 0, y: !ev.shiftKey || dy !== 0 });
+          dx += snap.dx;
+          dy += snap.dy;
+          guidesOut = snap.guides;
+        }
+        const patches: Record<Id, Partial<Element>> = {};
+        starts.forEach((s) => (patches[s.id] = { x: s.x + dx, y: s.y + dy }));
+        editor.doc.updateElements(patches);
+        editor.ui.set({ guides: guidesOut, dragging: true });
+      },
+      (ev, moved) => {
+        editor.ui.set({ guides: [], dragging: false });
+        if (!moved) {
+          // A second click on a selected text box starts editing it.
+          if (clickedSelected && editor.s.elements[clickedSelected]?.type === 'text') editor.ui.set({ editingTextId: clickedSelected });
+          return;
+        }
+        // Dropped over another page: move the elements there.
+        const under = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-page-id]');
+        const target = under?.getAttribute('data-page-id');
+        if (target && target !== pageId) {
+          const r = under!.getBoundingClientRect();
+          const local = { x: (ev.clientX - r.left) / zoom, y: (ev.clientY - r.top) / zoom };
+          const q = toLocal(ev.clientX, ev.clientY);
+          const shift = { x: local.x - q.x, y: local.y - q.y };
+          const patches: Record<Id, Partial<Element>> = {};
+          moving.forEach((i) => {
+            const el = editor.s.elements[i];
+            patches[i] = { x: el.x + shift.x, y: el.y + shift.y };
+          });
+          editor.doc.transact(() => {
+            editor.doc.moveElementsToPage(moving, target);
+            editor.doc.updateElements(patches);
+          });
+          editor.ui.set({ activePageId: target, selection: moving });
+        }
+      },
+    );
+  };
+
+  const onDoubleClick = (e: React.MouseEvent) => {
+    const id = hitId(e.target);
+    if (!id) return;
+    const el = editor.s.elements[id];
+    if (!el || el.locked) return;
+    if (el.groupId && editor.state.selection.length > 1) {
+      editor.select([id], { expandGroups: false });
+      return;
+    }
+    if (el.type === 'text') editor.ui.set({ selection: [id], editingTextId: id });
+    else if (el.type === 'image' && el.assetId) editor.ui.set({ selection: [id], cropId: id });
+    else if (el.type === 'chart') editor.openPanel('chart');
+    else if (el.type === 'table') editor.openPanel('table');
+  };
+
+  const onContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const id = hitId(e.target);
+    if (id && !editor.state.selection.includes(id)) editor.select([id]);
+    window.dispatchEvent(new CustomEvent('tavla:contextmenu', { detail: { x: e.clientX, y: e.clientY, pageId, empty: !id } }));
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (editor.state.dragging || tool !== 'select') return;
+    const id = hitId(e.target);
+    if (id !== editor.state.hoverId) editor.ui.set({ hoverId: id });
+  };
+
+  const onDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    const p = toLocal(e.clientX, e.clientY);
+    editor.setActivePage(pageId);
+    const lib = e.dataTransfer.getData(LIBRARY_MIME);
+    if (lib) {
+      const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+      dropLibraryItem(editor, JSON.parse(lib), p, overId);
+      return;
+    }
+    if (e.dataTransfer.files.length) {
+      const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+      await importFiles(editor, [...e.dataTransfer.files], { at: p, replaceId: overId });
+    }
+  };
+
+  const hover = hoverId && !selection.includes(hoverId) && editor.s.elementPage[hoverId] === pageId ? elements[hoverId] : null;
+  const cursor = tool === 'text' ? 'text' : tool === 'draw' ? 'crosshair' : tool === 'hand' ? 'grab' : tool !== 'select' ? 'crosshair' : undefined;
+
+  return (
+    <div
+      ref={ref}
+      className="page-stage"
+      data-page-id={pageId}
+      style={{ width: W * zoom, height: H * zoom, cursor }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerLeave={() => editor.state.hoverId && editor.ui.set({ hoverId: null })}
+      onDoubleClick={onDoubleClick}
+      onContextMenu={onContextMenu}
+      onDragOver={(e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+      }}
+      onDrop={onDrop}
+    >
+      <RenderContext.Provider value={env}>
+        <PageView page={page} elements={elements} width={W} height={H} displayWidth={W * zoom} displayHeight={H * zoom} />
+      </RenderContext.Provider>
+      <div className="page-overlay">
+        {showGrid ? <div className="page-grid" style={{ backgroundSize: `${(W / 12) * zoom}px ${(W / 12) * zoom}px` }} /> : null}
+        {hover ? <HoverOutline el={hover} zoom={zoom} /> : null}
+        {drawing ? (
+          <svg className="draw-preview" viewBox={`0 0 ${W} ${H}`} width={W * zoom} height={H * zoom}>
+            <path d={drawing.d} fill="none" stroke={drawing.color} strokeWidth={drawing.width} strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        ) : null}
+        <RulerGuides pageId={pageId} zoom={zoom} W={W} H={H} />
+        {guides.filter((g) => g.pageId === pageId).map((g, i) => (
+          <GuideLine key={i} g={g} zoom={zoom} />
+        ))}
+        {marquee && marquee.pageId === pageId ? (
+          <div
+            className="marquee"
+            style={{ left: marquee.rect.x * zoom, top: marquee.rect.y * zoom, width: marquee.rect.w * zoom, height: marquee.rect.h * zoom }}
+          />
+        ) : null}
+        {onThisPage && !cropId ? <SelectionOverlay pageId={pageId} zoom={zoom} toLocal={toLocal} /> : null}
+        {editingTextId && editor.s.elementPage[editingTextId] === pageId ? (
+          <TextEditor el={elements[editingTextId] as TextElement} zoom={zoom} />
+        ) : null}
+        {cropId && editor.s.elementPage[cropId] === pageId ? <CropOverlay id={cropId} zoom={zoom} toLocal={toLocal} /> : null}
+      </div>
+    </div>
+  );
+});
+
+function HoverOutline({ el, zoom }: { el: Element; zoom: number }) {
+  return (
+    <div
+      className="hover-outline"
+      style={{
+        left: el.x * zoom,
+        top: el.y * zoom,
+        width: el.w * zoom,
+        height: el.h * zoom,
+        transform: el.rotation ? `rotate(${el.rotation}deg)` : undefined,
+      }}
+    />
+  );
+}
+
+function GuideLine({ g, zoom }: { g: import('../editor/state').Guide; zoom: number }) {
+  const style: React.CSSProperties =
+    g.axis === 'x'
+      ? { left: g.pos * zoom, top: g.from * zoom, height: Math.max(1, (g.to - g.from) * zoom), width: 0 }
+      : { top: g.pos * zoom, left: g.from * zoom, width: Math.max(1, (g.to - g.from) * zoom), height: 0 };
+  return (
+    <div className={`guide guide-${g.axis} guide-${g.kind}`} style={style}>
+      {g.label ? <span className="guide-label">{g.label}</span> : null}
+    </div>
+  );
+}
+
+function RulerGuides({ pageId, zoom, W, H }: { pageId: Id; zoom: number; W: number; H: number }) {
+  const guides = useUI((s) => s.pageGuides[pageId]);
+  if (!guides) return null;
+  return (
+    <>
+      {guides.x.map((x, i) => (
+        <div key={`x${i}`} className="ruler-guide ruler-guide-x" style={{ left: x * zoom, height: H * zoom }} />
+      ))}
+      {guides.y.map((y, i) => (
+        <div key={`y${i}`} className="ruler-guide ruler-guide-y" style={{ top: y * zoom, width: W * zoom }} />
+      ))}
+    </>
+  );
+}
