@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tavla · a free design tool that stays yours</title>
+    <meta name="description" content="Tavla is a free, open source design tool for posters, slides, videos and invites. It runs in your browser, works offline and keeps your files on your machine." />
+    <meta property="og:title" content="Tavla" />
+    <meta property="og:description" content="Posters, slides, videos and invites. Free, open source, and your files stay with you." />
+    <meta property="og:image" content="/shots/tpl-pixel-hello.webp" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="nav" id="top">
+      <a class="brand" href="#top" aria-label="Tavla home">
+        <svg class="mark" viewBox="0 0 16 16" width="30" height="30" shape-rendering="crispEdges" aria-hidden="true">
+          <path d="M2 1h9l3 3v11H2z" fill="#fff" />
+          <path d="M2 1h9v1H3v12h10V5h1v10H2zM11 1h1v1h1v1h1v2h-1V4h-2z" fill="#0B0B0D" />
+          <rect class="pupil" x="5.5" y="8" width="1.5" height="2" fill="#0B0B0D" />
+          <rect class="pupil" x="9.5" y="8" width="1.5" height="2" fill="#0B0B0D" />
+        </svg>
+        <span>tavla</span>
+      </a>
+      <nav class="links" aria-label="Sections">
+        <a href="#make">What it makes</a>
+        <a href="#free">Free</a>
+        <a href="#inside">Inside</a>
+        <a href="#yours">Privacy</a>
+        <a href="#download">Download</a>
+      </nav>
+      <a class="btn btn-primary" href="app/">Open Tavla</a>
+    </header>
+
+    <main>
+      <!-- 01 · the hero is a working sheet -->
+      <section class="hero" aria-labelledby="headline">
+        <div class="hero-toolbar" role="toolbar" aria-label="Headline style">
+          <span class="tb-font">Host Grotesk</span>
+          <span class="tb-div"></span>
+          <span class="tb-size"><b data-size>168</b></span>
+          <span class="tb-div"></span>
+          <button class="tb-swatch is-on" data-color="#0B0B0D" style="--c: #0b0b0d" aria-label="Ink"></button>
+          <button class="tb-swatch" data-color="#2B3BFF" style="--c: #2b3bff" aria-label="Cobalt"></button>
+          <button class="tb-swatch" data-color="#FF4B39" style="--c: #ff4b39" aria-label="Tomato"></button>
+          <button class="tb-swatch" data-color="#FF3C8E" style="--c: #ff3c8e" aria-label="Pink"></button>
+          <span class="tb-div"></span>
+          <button class="tb-btn" data-weight aria-label="Toggle weight">B</button>
+          <button class="tb-btn" data-italic aria-label="Toggle italic"><i>I</i></button>
+        </div>
+
+        <div class="sheet-wrap">
+          <div class="sheet-head">
+            <span class="sheet-num">01</span>
+            <span class="sheet-title">Poster for tonight</span>
+            <span class="sheet-size tabular" data-dims>1920 × 1080</span>
+          </div>
+          <div class="sheet" data-sheet>
+            <div class="el el-text is-selected" data-el="headline" style="--x: 6%; --y: 17%">
+              <h1 id="headline" class="headline" spellcheck="false">Make the thing.</h1>
+              <span class="h h-nw"></span><span class="h h-ne"></span><span class="h h-sw"></span><span class="h h-se"></span>
+              <span class="h h-e"></span><span class="h h-w"></span>
+              <span class="hint-chip">Double click to edit</span>
+              <span class="dims tabular" data-live></span>
+            </div>
+            <p class="el sheet-copy" style="--x: 6.6%; --y: 70%">
+              Tavla is a free design tool for posters, slides, videos and invites. Open source, runs in your browser, and your files never leave your machine.
+            </p>
+            <img class="el obj" data-drag src="/img/voxel-cursor.webp" alt="Pixel cursor" style="--x: 80%; --y: 5%; --w: 12.5%; --r: -12deg" />
+            <img class="el obj" data-drag src="/img/voxel-star.webp" alt="Pixel star" style="--x: 85%; --y: 58%; --w: 10.5%; --r: 14deg" />
+            <img class="el obj" data-drag src="/img/voxel-bucket.webp" alt="Paint bucket" style="--x: 66%; --y: 56%; --w: 12%; --r: 8deg" />
+            <img class="el obj" data-drag src="/img/char-blob-blue.webp" alt="Curious blob" style="--x: 52%; --y: 70%; --w: 10%; --r: -6deg" />
+            <img class="el obj obj-small" data-drag src="/img/voxel-pen.webp" alt="Pixel pen" style="--x: 89%; --y: 34%; --w: 6.5%; --r: 24deg" />
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="app/">Open Tavla, it's free</a>
+          <a class="btn btn-ghost btn-lg" href="#download">Get the desktop app</a>
+        </div>
+        <p class="hero-note">Drag the objects. Retype the headline. That's the editor.</p>
+      </section>
+
+      <!-- 02 · sums: what it makes -->
+      <section class="sums" id="make" aria-labelledby="sums-title">
+        <div class="wrap">
+          <p class="kicker tabular">#02 · What it makes</p>
+          <h2 id="sums-title" class="display">A photo, some words, one evening.</h2>
+          <ol class="sum-list">
+            <li class="sum">
+              <span class="pill pill-photo"><img src="/img/photo-coffee.jpg" alt="" /></span>
+              <span class="op">+</span>
+              <span class="pill pill-type">Aa</span>
+              <span class="op">+</span>
+              <span class="pill pill-obj"><img src="/img/voxel-star.webp" alt="" /></span>
+              <span class="op">=</span>
+              <span class="result"><img src="/shots/tpl-fika-poster.webp" alt="Fika poster made in Tavla" /></span>
+            </li>
+            <li class="sum">
+              <span class="pill pill-file">names.csv</span>
+              <span class="op">×</span>
+              <span class="pill pill-page"><img src="/shots/tpl-business-card.webp" alt="" onerror="this.parentElement.textContent='card'" /></span>
+              <span class="op">=</span>
+              <span class="word">300 name tags</span>
+            </li>
+            <li class="sum">
+              <span class="pill pill-page"><img src="/shots/tpl-open-studio.webp" alt="" /></span>
+              <span class="op">→</span>
+              <span class="pill pill-page tall"><img src="/shots/tpl-game-night.webp" alt="" /></span>
+              <span class="pill pill-page wide"><img src="/shots/tpl-quarter-deck.webp" alt="" /></span>
+              <span class="pill pill-page wide"><img src="/shots/tpl-archipelago-thumb.webp" alt="" /></span>
+              <span class="word small">in one click</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 03 · the pile of prints -->
+      <section class="pile-section" aria-labelledby="pile-title">
+        <div class="wrap">
+          <p class="kicker tabular">#03 · Templates</p>
+          <h2 id="pile-title" class="display">Start from the pile.</h2>
+          <p class="lede">Eighteen templates to begin with, each made for an actual Tuesday: a bakery menu, a run club story, a gig poster, a deck for the quarter. Every one adapts to any page size.</p>
+        </div>
+        <div class="pile" data-pile>
+          <img src="/shots/tpl-gig-poster.webp" alt="Gig poster template" style="--r: -7deg" />
+          <img src="/shots/tpl-adopt-dog.webp" alt="Adopt me template" style="--r: 4deg" />
+          <img src="/shots/tpl-bakery-menu.webp" alt="Bakery menu template" style="--r: -3deg" />
+          <img src="/shots/tpl-run-club.webp" alt="Run club story template" style="--r: 6deg" />
+          <img src="/shots/tpl-sneaker-drop.webp" alt="Sneaker drop template" style="--r: -5deg" />
+          <img src="/shots/tpl-wedding-invite.webp" alt="Save the date template" style="--r: 3deg" />
+          <img src="/shots/tpl-forest-retreat.webp" alt="Forest retreat template" style="--r: -4deg" />
+          <img src="/shots/tpl-pink-quote.webp" alt="Quote card template" style="--r: 5deg" />
+          <img src="/shots/tpl-ceramics-flyer.webp" alt="Ceramics workshop flyer template" style="--r: -2deg" />
+          <img src="/shots/tpl-sushi-menu.webp" alt="Omakase night template" style="--r: 7deg" />
+        </div>
+      </section>
+
+      <!-- 04 · free -->
+      <section class="free" id="free" aria-labelledby="free-title">
+        <div class="wrap">
+          <p class="kicker tabular">#04 · Free</p>
+          <h2 id="free-title" class="display">Paid elsewhere.<br />Free here, for good.</h2>
+          <p class="lede">Canva keeps these behind its Pro plan. In Tavla they are just features.</p>
+          <div class="tickets">
+            <article class="ticket" style="--bg: #ffffff; --r: -2deg">
+              <span class="t-num tabular">#01</span>
+              <h3>Background remover</h3>
+              <p>Cuts the subject out of any photo with an open model that runs on your machine.</p>
+            </article>
+            <article class="ticket" style="--bg: #ffe600; --r: 1.5deg">
+              <span class="t-num tabular">#02</span>
+              <h3>Magic resize</h3>
+              <p>A post becomes a story, slides or a banner. Photos re-crop, text rescales.</p>
+            </article>
+            <article class="ticket" style="--bg: #3edd8a; --r: -1deg">
+              <span class="t-num tabular">#03</span>
+              <h3>Brand kits</h3>
+              <p>Logos, colours and fonts for as many brands as you run, applied in one click.</p>
+            </article>
+            <article class="ticket" style="--bg: #ff3c8e; --r: 2deg">
+              <span class="t-num tabular">#04</span>
+              <h3>Bulk create</h3>
+              <p>Paste a spreadsheet, connect the columns, get a page for every row.</p>
+            </article>
+            <article class="ticket" style="--bg: #9aa2ea; --r: -2.5deg">
+              <span class="t-num tabular">#05</span>
+              <h3>Transparent PNG</h3>
+              <p>Export without the background, at up to four times the size.</p>
+            </article>
+            <article class="ticket" style="--bg: #ffffff; --r: 1deg">
+              <span class="t-num tabular">#06</span>
+              <h3>SVG export</h3>
+              <p>Vector files that open in Figma, Illustrator and your browser.</p>
+            </article>
+            <article class="ticket" style="--bg: #ff4b39; --r: -1.5deg">
+              <span class="t-num tabular">#07</span>
+              <h3>Version history</h3>
+              <p>A snapshot every ten minutes of work. Go back to any of them.</p>
+            </article>
+            <article class="ticket" style="--bg: #0aa0ff; --r: 2deg">
+              <span class="t-num tabular">#08</span>
+              <h3>Your own fonts</h3>
+              <p>Drop in an OTF, TTF or WOFF you own. It works in every design.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 · inside -->
+      <section class="inside" id="inside" aria-labelledby="inside-title">
+        <div class="wrap">
+          <p class="kicker tabular">#05 · Inside</p>
+          <h2 id="inside-title" class="display">Quiet tools,<br />loud pages.</h2>
+          <div class="window">
+            <div class="window-bar"><i></i><i></i><i></i><span>tavla.app</span></div>
+            <img src="/shots/editor.webp" alt="The Tavla editor with a poster open, the font menu and the contextual toolbar" />
+          </div>
+          <div class="facts">
+            <div class="fact"><b class="tabular">1,344</b><span>open fonts, plus your own</span></div>
+            <div class="fact"><b class="tabular">200,000</b><span>icons and graphics from open sets</span></div>
+            <div class="fact"><b class="tabular">700 M</b><span>openly licensed photos via Openverse</span></div>
+            <div class="fact"><b class="tabular">⌘ K</b><span>every action, a few keystrokes away</span></div>
+          </div>
+          <ul class="feature-grid">
+            <li><b>Smart guides</b><span>Edges, centres and equal gaps snap while you drag, with the spacing written on the guide.</span></li>
+            <li><b>Ten text effects</b><span>Shadow, lift, hollow, splice, outline, echo, glitch, neon, highlight and curved text.</span></li>
+            <li><b>Photo editing</b><span>Twelve filters, eight sliders, duotones, crop, masks in any shape, borders.</span></li>
+            <li><b>Charts and tables</b><span>Paste from a spreadsheet. Everything stays vector and editable.</span></li>
+            <li><b>Present and animate</b><span>Ten entrance animations, page transitions, speaker notes, autoplay.</span></li>
+            <li><b>Export anything</b><span>PNG, JPG, WebP, SVG, PDF for print, MP4 video and the editable .tavla file.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 06 · yours -->
+      <section class="yours" id="yours" aria-labelledby="yours-title">
+        <div class="wrap yours-grid">
+          <div>
+            <p class="kicker tabular">#06 · Privacy</p>
+            <h2 id="yours-title" class="display">It watches your cursor.<br />Nothing else.</h2>
+            <p class="lede">There is no account to make and nothing gets uploaded. Designs live in your browser on this machine. When you design with a friend, every change travels straight between your two browsers, encrypted with a key that only the link holds.</p>
+            <p class="lede muted">Want a copy for email or a backup drive? Export a .tavla file. It holds every page, photo and choice you made.</p>
+          </div>
+          <div class="eye-stage" data-eye aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- 07 · open source -->
+      <section class="source" id="source" aria-labelledby="source-title">
+        <div class="wrap source-grid">
+          <div>
+            <p class="kicker tabular">#07 · Open source</p>
+            <h2 id="source-title" class="display">Read every line.</h2>
+            <p class="lede">Tavla is MIT licensed. React and TypeScript for the editor, Yjs for undo, offline saving and live sessions. Fork it, theme it, put it in your school.</p>
+            <a class="btn btn-ink btn-lg" href="https://github.com/noah-thing/tavla">Source on GitHub</a>
+          </div>
+          <figure class="code">
+            <figcaption>src/canvas/snap.ts</figcaption>
+            <pre><code><span class="c">// Smart guides. Given the box being moved, find the nearest</span>
+<span class="c">// alignment on each axis among page edges, the page centre,</span>
+<span class="c">// other elements and ruler guides, plus equal gaps.</span>
+<span class="k">export function</span> snapBox(box, targets, threshold) {
+  <span class="k">const</span> guides = [];
+  <span class="k">let</span> dx = 0;
+  <span class="k">let</span> dy = 0;
+  <span class="k">const</span> hx = best([box.x, box.x + box.w / 2, box.x + box.w], targets.xs);
+  <span class="k">if</span> (hx) dx = hx.d;
+  …
+}</code></pre>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 08 · download -->
+      <section class="download" id="download" aria-labelledby="download-title">
+        <div class="wrap">
+          <p class="kicker tabular">#08 · Download</p>
+          <h2 id="download-title" class="display">Take it with you.</h2>
+          <div class="dl-grid">
+            <a class="dl dl-main" href="app/">
+              <img src="/img/voxel-cursor.webp" alt="" />
+              <span class="dl-name">In your browser</span>
+              <span class="dl-note">Works now in Chrome, Edge, Safari and Firefox. Install it from the address bar to use it offline.</span>
+              <span class="btn btn-primary">Open Tavla</span>
+            </a>
+            <div class="dl">
+              <span class="dl-name">macOS</span>
+              <span class="dl-note">Apple silicon and Intel</span>
+              <span class="badge">Coming soon</span>
+            </div>
+            <div class="dl">
+              <span class="dl-name">Windows</span>
+              <span class="dl-note">Windows 10 and 11</span>
+              <span class="badge">Coming soon</span>
+            </div>
+            <div class="dl">
+              <span class="dl-name">Linux</span>
+              <span class="dl-note">AppImage and .deb</span>
+              <span class="badge">Coming soon</span>
+            </div>
+            <div class="dl dl-code">
+              <span class="dl-name">Run it yourself</span>
+              <code>git clone tavla<br />npm install<br />npm run dev</code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wordmark" data-wordmark aria-label="tavla"></div>
+      <div class="wrap foot-row">
+        <span>Made in Stockholm, mostly after midnight.</span>
+        <span class="foot-links"><a href="app/">Open Tavla</a><a href="https://github.com/noah-thing/tavla">Source</a><a href="#top">Back to the top</a></span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "npm run dev -w @tavla/editor",
     "dev:site": "npm run dev -w @tavla/site",
-    "build": "npm run build -w @tavla/editor && npm run build -w @tavla/site",
+    "build": "npm run build -w @tavla/site && npm run build -w @tavla/editor",
+    "preview": "npx vite preview --outDir dist --port 4173",
     "typecheck": "npm run typecheck -w @tavla/editor"
   }
 }
