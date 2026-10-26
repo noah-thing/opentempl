@@ -17,6 +17,7 @@ export class Editor {
   readonly doc: DesignDoc;
   readonly ui: Store<EditorState>;
   private clipboard: Element[] = [];
+  private styleClipboard: { type: Element['type']; style: Record<string, unknown> } | null = null;
   private toastTimer = 0;
 
   constructor(doc: DesignDoc) {
@@ -265,6 +266,58 @@ export class Editor {
     this.ui.set({ selection: shifted.map((c) => c.id) });
     this.clipboard = shifted;
     return true;
+  }
+
+  // ---------- style clipboard ----------
+  copyStyle() {
+    const el = this.selected()[0];
+    if (!el) return;
+    const keys: Record<string, string[]> = {
+      text: ['fontFamily', 'fontSize', 'fontWeight', 'italic', 'underline', 'strike', 'color', 'gradient', 'align', 'lineHeight', 'letterSpacing', 'uppercase', 'effect', 'curve'],
+      shape: ['fill', 'stroke', 'radius'],
+      image: ['filters', 'radius', 'border', 'mask'],
+      line: ['color', 'width', 'dash', 'start', 'end'],
+      svg: ['colors'],
+      chart: ['fontFamily', 'textColor', 'gridColor', 'showLegend', 'showValues', 'showGrid', 'rounded'],
+      table: ['fontFamily', 'fontSize', 'textColor', 'headerFill', 'headerColor', 'bodyFill', 'stripeFill', 'lineColor', 'radius'],
+      qr: ['color', 'background'],
+      draw: [],
+    };
+    const style: Record<string, unknown> = { opacity: el.opacity, shadow: el.shadow ?? null, blur: el.blur, blend: el.blend };
+    for (const k of keys[el.type] ?? []) style[k] = structuredClone((el as unknown as Record<string, unknown>)[k]);
+    this.styleClipboard = { type: el.type, style };
+    this.toast('Style copied. Select something and paste it with ⌥⌘V.');
+  }
+
+  pasteStyle() {
+    const clip = this.styleClipboard;
+    if (!clip) return this.toast('Copy a style first with ⌥⌘C');
+    this.updateSelected((el) => {
+      const common = { opacity: clip.style.opacity, shadow: clip.style.shadow, blur: clip.style.blur, blend: clip.style.blend } as Partial<Element>;
+      if (el.type !== clip.type) {
+        // Colours still carry across types: text colour onto a shape fill and back.
+        const c = (clip.style.color ?? (clip.style.fill as { color?: string } | undefined)?.color) as string | undefined;
+        if (c && el.type === 'shape') return { ...common, fill: { type: 'solid', color: c } } as Partial<Element>;
+        if (c && el.type === 'text') return { ...common, color: c } as Partial<Element>;
+        return common;
+      }
+      return { ...common, ...structuredClone(clip.style) } as Partial<Element>;
+    });
+  }
+
+  // Put copies of the selection on every other page, at the same spot.
+  addToAllPages() {
+    const els = this.selected();
+    if (!els.length) return;
+    const from = this.s.elementPage[els[0].id];
+    this.doc.transact(() => {
+      for (const pid of this.s.pageOrder) {
+        if (pid === from) continue;
+        const groups = new Map<Id, Id>();
+        this.doc.addElements(pid, els.map((e) => cloneElement(e, groups)));
+      }
+    });
+    this.toast(`Added to ${this.s.pageOrder.length - 1} other pages`);
   }
 
   group() {

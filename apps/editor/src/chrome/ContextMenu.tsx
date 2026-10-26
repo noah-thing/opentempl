@@ -22,6 +22,8 @@ export function ContextMenu() {
         { label: 'Copy', icon: 'duplicate', kbd: '⌘C', onClick: () => editor.copy() },
         { label: 'Paste', kbd: '⌘V', onClick: () => editor.paste() },
         { label: 'Duplicate', kbd: '⌘D', onClick: () => editor.duplicateSelected() },
+        { label: 'Copy style', kbd: '⌥⌘C', onClick: () => editor.copyStyle() },
+        { label: 'Paste style', kbd: '⌥⌘V', onClick: () => editor.pasteStyle() },
         { label: 'Delete', icon: 'trash', kbd: '⌫', danger: true, onClick: () => editor.deleteSelected() },
         { separator: true },
         { label: 'Bring forward', icon: 'forward', kbd: '⌘]', onClick: () => editor.reorder('forward') },
@@ -54,6 +56,7 @@ export function ContextMenu() {
             ]
           : []),
         { label: 'Add link', icon: 'link', onClick: () => promptLink(editor) },
+        { label: 'Add to every page', icon: 'page', disabled: editor.s.pageOrder.length < 2, onClick: () => editor.addToAllPages() },
       ]
     : [
         { label: 'Paste', kbd: '⌘V', onClick: () => editor.paste() },

@@ -159,8 +159,9 @@ export function Viewport() {
 function PageBlock({ pageId, index, total, zoom, active }: { pageId: Id; index: number; total: number; zoom: number; active: boolean }) {
   const editor = useEditor();
   const name = useDoc((s) => s.pages[pageId]?.name ?? '');
+  const hidden = useDoc((s) => !!s.pages[pageId]?.hidden);
   return (
-    <div className={`page-wrap ${active ? 'is-active' : ''}`} data-page-wrap={pageId}>
+    <div className={`page-wrap ${active ? 'is-active' : ''} ${hidden ? 'is-hidden' : ''}`} data-page-wrap={pageId}>
       <div className="page-head">
         <span className="num">{String(index + 1).padStart(2, '0')}</span>
         <input
@@ -176,6 +177,9 @@ function PageBlock({ pageId, index, total, zoom, active }: { pageId: Id; index: 
           </button>
           <button className="icon-btn" title="Move down" disabled={index === total - 1} onClick={() => editor.doc.movePage(pageId, index + 1)}>
             <Icon name="chevron-down" />
+          </button>
+          <button className="icon-btn" title={hidden ? 'Show page in present and export' : 'Hide page from present and export'} onClick={() => editor.doc.updatePage(pageId, { hidden: !hidden })}>
+            <Icon name={hidden ? 'eye-off' : 'eye'} />
           </button>
           <button className="icon-btn" title="Duplicate page" onClick={() => editor.duplicatePage(pageId)}>
             <Icon name="duplicate" />

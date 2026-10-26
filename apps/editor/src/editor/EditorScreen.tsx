@@ -14,6 +14,7 @@ import { CommandPalette } from '../chrome/CommandPalette';
 import { ExportDialog } from '../chrome/ExportDialog';
 import { ShareDialog } from '../chrome/ShareDialog';
 import { ShortcutsDialog } from '../chrome/ShortcutsDialog';
+import { FindReplace } from '../chrome/FindReplace';
 import { Present } from '../present/Present';
 import { Toast } from '../chrome/Toast';
 import { useShortcuts } from './shortcuts';
@@ -93,6 +94,7 @@ function EditorLayout() {
   const shareOpen = useUI((s) => s.shareOpen);
   const commandOpen = useUI((s) => s.commandOpen);
   const shortcutsOpen = useUI((s) => s.shortcutsOpen);
+  const findOpen = useUI((s) => s.findOpen);
   return (
     <div className="editor">
       <TopBar />
@@ -109,6 +111,7 @@ function EditorLayout() {
       {exportOpen ? <ExportDialog /> : null}
       {shareOpen ? <ShareDialog /> : null}
       {shortcutsOpen ? <ShortcutsDialog /> : null}
+      {findOpen ? <FindReplace /> : null}
       {presenting ? <Present /> : null}
       <Toast />
     </div>

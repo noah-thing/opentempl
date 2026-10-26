@@ -41,7 +41,15 @@ export const ElementView = memo(function ElementView({ el }: { el: Element }) {
   const revealId = st && st.reveal < 1 ? `rv-${uid}` : undefined;
 
   return (
-    <g transform={transform} opacity={el.opacity} style={el.blend ? { mixBlendMode: el.blend as React.CSSProperties['mixBlendMode'] } : undefined} data-id={el.id}>
+    <g
+      transform={transform}
+      opacity={el.opacity}
+      style={el.blend ? { mixBlendMode: el.blend as React.CSSProperties['mixBlendMode'] } : undefined}
+      data-id={el.id}
+      role={el.alt ? 'img' : undefined}
+      aria-label={el.alt || undefined}
+    >
+      {el.alt ? <title>{el.alt}</title> : null}
       {filterId ? (
         <defs>
           <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">

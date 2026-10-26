@@ -21,6 +21,8 @@ export const SHORTCUTS: Shortcut[] = [
   { keys: 'Delete', label: 'Delete', group: 'Edit' },
   { keys: '⌥ drag', label: 'Duplicate while dragging', group: 'Edit' },
   { keys: '⌘ K', label: 'Command palette', group: 'Edit' },
+  { keys: '⌥ ⌘ C / V', label: 'Copy or paste style', group: 'Edit' },
+  { keys: '⌘ F', label: 'Find and replace', group: 'Edit' },
   { keys: '⌘ G', label: 'Group', group: 'Arrange' },
   { keys: '⌘ ⇧ G', label: 'Ungroup', group: 'Arrange' },
   { keys: '⌘ ]', label: 'Bring forward', group: 'Arrange' },
@@ -76,6 +78,9 @@ export function useShortcuts() {
       if (mod && k === 'k' && !e.shiftKey) return stop(), editor.ui.set({ commandOpen: true });
       if (mod && k === 'd') return stop(), editor.duplicateSelected();
       if (mod && k === 'a') return stop(), editor.selectAll();
+      if (mod && e.altKey && (k === 'c' || e.code === 'KeyC')) return stop(), editor.copyStyle();
+      if (mod && e.altKey && (k === 'v' || e.code === 'KeyV')) return stop(), editor.pasteStyle();
+      if (mod && k === 'f') return stop(), editor.ui.set({ findOpen: true });
       if (mod && k === 'c') return editor.copy();
       if (mod && k === 'x') return editor.copy(true);
       if (mod && k === 'g') return stop(), e.shiftKey ? editor.ungroup() : editor.group();

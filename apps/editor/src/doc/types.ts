@@ -55,6 +55,7 @@ interface BaseElement {
   flipY?: boolean;
   groupId?: Id;
   link?: string;
+  alt?: string; // alternative text for screen readers and exports
   shadow?: Shadow | null;
   blur?: number; // layer blur in px
   blend?: string; // css mix-blend-mode
@@ -276,6 +277,7 @@ export interface Page {
   notes: string;
   transition: PageTransition;
   duration: number; // seconds a page shows when playing as a video or autoplay
+  hidden?: boolean; // skipped when presenting and exporting
 }
 
 export interface DesignMeta {

@@ -8,7 +8,9 @@ import { Icon } from '../ui/icons';
 
 export function Present() {
   const editor = useEditor();
-  const order = useDoc((s) => s.pageOrder);
+  const allPages = useDoc((s) => s.pageOrder);
+  const hiddenMap = useDoc((s) => s.pages);
+  const order = allPages.filter((id) => !hiddenMap[id]?.hidden);
   const pages = useDoc((s) => s.pages);
   const elements = useDoc((s) => s.elements);
   const meta = useDoc((s) => s.meta);

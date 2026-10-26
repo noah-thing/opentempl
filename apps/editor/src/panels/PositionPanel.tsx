@@ -147,6 +147,18 @@ export default function PositionPanel() {
           </div>
         </Section>
       ) : null}
+      {one && (one.type === 'image' || one.type === 'svg' || one.type === 'chart' || one.type === 'draw' || one.type === 'shape') ? (
+        <Section title="Alternative text">
+          <textarea
+            defaultValue={one.alt ?? ''}
+            key={one.id}
+            placeholder="Describe this for people using screen readers. It travels with SVG and PDF exports."
+            onBlur={(e) => editor.update(one.id, { alt: e.target.value.trim() || undefined })}
+            onKeyDown={(e) => e.stopPropagation()}
+            style={{ width: '100%', height: 72, borderRadius: 10, border: 0, boxShadow: 'inset 0 0 0 1px var(--line)', padding: 10, resize: 'vertical', background: 'var(--sheet)' }}
+          />
+        </Section>
+      ) : null}
       <Section title="Lock">
         <button className="btn btn-outline btn-block" onClick={() => editor.toggleLock()}>
           <Icon name={els.every((e) => e.locked) ? 'unlock' : 'lock'} /> {els.every((e) => e.locked) ? 'Unlock' : 'Lock in place'}

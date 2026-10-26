@@ -67,6 +67,7 @@ export interface EditorState {
   exportOpen: boolean;
   shareOpen: boolean;
   shortcutsOpen: boolean;
+  findOpen: boolean;
   view: 'scroll' | 'grid';
   toast: { text: string; id: number } | null;
   dragging: boolean;
@@ -96,6 +97,7 @@ export const initialEditorState: EditorState = {
   exportOpen: false,
   shareOpen: false,
   shortcutsOpen: false,
+  findOpen: false,
   view: 'scroll',
   toast: null,
   dragging: false,

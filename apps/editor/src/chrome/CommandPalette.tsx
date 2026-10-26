@@ -5,6 +5,7 @@ import { QUICK } from '../editor/shortcuts';
 import { SHAPE_KINDS } from '../render/shapes';
 import { makeShape, makeChart, makeQr, makeTable } from '../doc/factory';
 import { navigate } from '../App';
+import { toggleTheme } from '../ui/theme';
 
 interface Command {
   label: string;
@@ -35,6 +36,11 @@ function commands(): Command[] {
     { label: 'Redo', group: 'Edit', icon: 'redo', kbd: '⌘⇧Z', run: (ed) => ed.redo() },
     { label: 'Duplicate selection', group: 'Edit', icon: 'duplicate', kbd: '⌘D', run: (ed) => ed.duplicateSelected() },
     { label: 'Delete selection', group: 'Edit', icon: 'trash', kbd: '⌫', run: (ed) => ed.deleteSelected() },
+    { label: 'Copy style', group: 'Edit', icon: 'color', kbd: '⌥⌘C', run: (ed) => ed.copyStyle() },
+    { label: 'Paste style', group: 'Edit', icon: 'color', kbd: '⌥⌘V', run: (ed) => ed.pasteStyle() },
+    { label: 'Find and replace', group: 'Edit', icon: 'search', kbd: '⌘F', run: (ed) => ed.ui.set({ findOpen: true }) },
+    { label: 'Add selection to every page', group: 'Pages', icon: 'page', run: (ed) => ed.addToAllPages() },
+    { label: 'Toggle dark theme', group: 'View', icon: 'eye', run: () => toggleTheme() },
     { label: 'Group selection', group: 'Arrange', icon: 'group', kbd: '⌘G', run: (ed) => ed.group() },
     { label: 'Ungroup', group: 'Arrange', icon: 'ungroup', kbd: '⌘⇧G', run: (ed) => ed.ungroup() },
     { label: 'Tidy up into a grid', group: 'Arrange', icon: 'tidy', run: (ed) => ed.tidy() },

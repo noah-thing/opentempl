@@ -6,10 +6,11 @@ import { Mark } from '../ui/Logo';
 import { Menu, Popover, usePopover, type MenuItem } from '../ui/Popover';
 import { navigate } from '../App';
 import { exportDesign } from '../export/exporters';
-import { createDesign, duplicateDesign, importTavla } from '../io/designs';
+import { duplicateDesign, importTavla } from '../io/designs';
 import { pickFiles, importFiles } from '../io/upload';
 import { usePeers } from '../collab/collab';
 import { saveVersion } from '../io/versions';
+import { isDark, toggleTheme } from '../ui/theme';
 
 export function TopBar() {
   const editor = useEditor();
@@ -51,6 +52,8 @@ export function TopBar() {
     { label: 'Show rulers and guides', checked: showRulers, kbd: '⌘⇧R', onClick: () => editor.ui.set({ showRulers: !showRulers }) },
     { label: 'Show layout grid', checked: editor.state.showGrid, kbd: "⌘'", onClick: () => editor.ui.set({ showGrid: !editor.state.showGrid }) },
     { label: 'Snap to guides', checked: editor.state.snap, onClick: () => editor.ui.set({ snap: !editor.state.snap }) },
+    { label: 'Dark theme', checked: isDark(), onClick: () => toggleTheme() },
+    { label: 'Find and replace', icon: 'search', kbd: '⌘F', onClick: () => editor.ui.set({ findOpen: true }) },
     { separator: true },
     { label: 'Download as .tavla file', icon: 'download', onClick: () => exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
     { label: 'Keyboard shortcuts', icon: 'keyboard', kbd: '?', onClick: () => editor.ui.set({ shortcutsOpen: true }) },
@@ -155,4 +158,3 @@ function useUndoState() {
   return s;
 }
 
-void createDesign;

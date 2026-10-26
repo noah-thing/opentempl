@@ -17,7 +17,9 @@ const FORMATS: { id: ExportFormat; name: string; note: string }[] = [
 
 export function ExportDialog() {
   const editor = useEditor();
-  const pageOrder = useDoc((s) => s.pageOrder);
+  const allPages = useDoc((s) => s.pageOrder);
+  const pagesMap = useDoc((s) => s.pages);
+  const pageOrder = allPages.filter((id) => !pagesMap[id]?.hidden);
   const meta = useDoc((s) => s.meta);
   const [format, setFormat] = useState<ExportFormat>('png');
   const [scale, setScale] = useState(1);
