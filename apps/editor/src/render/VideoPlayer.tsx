@@ -27,6 +27,12 @@ export function VideoPlayer({ el }: { el: VideoElement }) {
     v.volume = Math.max(0, Math.min(1, el.volume));
   }, [el.muted, el.volume]);
 
+  // A clip that plays once tells the toolbar, so its button turns back to Play.
+  const finish = (v: HTMLVideoElement) => {
+    v.pause();
+    window.dispatchEvent(new CustomEvent('tavla:clip-ended', { detail: el.id }));
+  };
+
   return (
     <video
       ref={ref}
@@ -37,7 +43,14 @@ export function VideoPlayer({ el }: { el: VideoElement }) {
         const v = e.currentTarget;
         if (v.currentTime < end - 0.03) return;
         if (el.loop) v.currentTime = el.trimStart;
-        else v.pause();
+        else finish(v);
+      }}
+      // An untrimmed clip reaches the file's end before timeupdate sees the trim end.
+      onEnded={(e) => {
+        const v = e.currentTarget;
+        if (!el.loop) return finish(v);
+        v.currentTime = el.trimStart;
+        v.play().catch(() => {});
       }}
     />
   );

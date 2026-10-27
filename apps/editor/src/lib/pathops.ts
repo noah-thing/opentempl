@@ -133,6 +133,7 @@ export function combineShapes(shapes: ShapeElement[], op: BooleanOp): ShapeEleme
     h0: r(h),
     nodes: undefined,
     groupId: undefined,
+    locked: false,
   };
 }
 

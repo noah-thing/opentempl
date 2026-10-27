@@ -3,6 +3,7 @@ import { newId } from '../doc/design';
 import { prepareImage } from '../io/upload';
 import { DEFS } from './defs';
 import { DEFS2 } from './defs2';
+import { DEFS3 } from './defs3';
 
 // Templates are plain data. Images point at the bundled library with ids like
 // "lib:photos/coffee.jpg"; building a template fetches those files and copies
@@ -87,7 +88,7 @@ function make(def: TemplateDef): Template {
   };
 }
 
-export const TEMPLATES: Template[] = [...DEFS, ...DEFS2].map(make);
+export const TEMPLATES: Template[] = [...DEFS, ...DEFS2, ...DEFS3].map(make);
 
 export function templateById(id: string) {
   return TEMPLATES.find((t) => t.id === id);

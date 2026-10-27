@@ -30,7 +30,6 @@ export function fontsUsed(page: Page, elements: Record<Id, Element>) {
     if (!el) continue;
     if (el.type === 'text' || el.type === 'chart' || el.type === 'table') set.add(el.fontFamily);
   }
-  set.add('Host Grotesk');
   return [...set];
 }
 

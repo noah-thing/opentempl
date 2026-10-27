@@ -2265,6 +2265,10 @@ kbd {
 }
 
 .table-grid {
+  /* Without these a flex parent lets the grid grow to its content and clips it. */
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: thin;

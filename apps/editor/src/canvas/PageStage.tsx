@@ -352,7 +352,9 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
 
   const onContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    const id = hitId(e.target);
+    // A right click inside the selection box keeps the whole selection.
+    const onBox = !!(e.target as HTMLElement).closest?.('[data-selection-body]') && editor.state.selection.length > 0;
+    const id = onBox ? editor.state.selection[0] : hitId(e.target);
     if (id && !editor.state.selection.includes(id)) editor.select([id]);
     if (!id) editor.clearSelection();
     window.dispatchEvent(new CustomEvent('tavla:contextmenu', { detail: { x: e.clientX, y: e.clientY, pageId, empty: !id } }));

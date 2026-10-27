@@ -17,6 +17,12 @@ export function VideoTools({ el, TBtn, Div }: { el: VideoElement; TBtn: TBtnType
   const len = Math.max(0, (el.trimEnd || el.duration) - el.trimStart);
   const set = (p: Partial<VideoElement>) => editor.update(el.id, p as Partial<Element>);
 
+  useEffect(() => {
+    const on = (e: Event) => (e as CustomEvent).detail === el.id && editor.state.playingVideoId === el.id && editor.ui.set({ playingVideoId: null });
+    window.addEventListener('tavla:clip-ended', on);
+    return () => window.removeEventListener('tavla:clip-ended', on);
+  }, [editor, el.id]);
+
   // Stop previewing when the clip is deselected or leaves the page.
   useEffect(() => () => {
     if (editor.state.playingVideoId === el.id) editor.ui.set({ playingVideoId: null });

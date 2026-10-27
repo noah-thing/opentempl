@@ -44,6 +44,15 @@ export class Editor {
       const active = this.ui.get().activePageId;
       if (!active || !order.includes(active)) this.ui.set({ activePageId: order[0] ?? null });
     });
+    // Undo and redo bring back what was selected when the step was made, so
+    // "try union, undo, try subtract" needs no reselecting.
+    doc.undo.on('stack-item-added', (e: { stackItem: { meta: Map<string, unknown> } }) => {
+      if (!e.stackItem.meta.has('selection')) e.stackItem.meta.set('selection', this.state.selection);
+    });
+    doc.undo.on('stack-item-popped', (e: { stackItem: { meta: Map<string, unknown> } }) => {
+      const sel = (e.stackItem.meta.get('selection') as Id[] | undefined) ?? [];
+      queueMicrotask(() => this.ui.set({ selection: sel.filter((id) => this.s.elements[id]) }));
+    });
     // Connectors follow the elements they are stuck to. Only our own edits
     // trigger this; a collaborator's editor moves their connectors itself.
     let queued = false;
@@ -470,6 +479,7 @@ export class Editor {
   // The polygon maths loads the first time someone combines shapes.
   async combine(op: BooleanOp) {
     if (!this.canCombine()) return this.toast('Select two or more shapes to combine');
+    if (this.selected().some((e) => e.locked)) return this.toast('Unlock the shapes first, then combine them');
     const { combineShapes } = await import('../lib/pathops');
     const pageId = this.s.elementPage[this.state.selection[0]];
     const order = this.s.pages[pageId].elementIds;

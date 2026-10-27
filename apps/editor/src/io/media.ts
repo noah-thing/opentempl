@@ -88,6 +88,7 @@ export function clipLength(el: { trimStart: number; trimEnd: number; duration: n
 }
 
 export function formatTime(s: number) {
+  s = Math.round(s);
   const m = Math.floor(s / 60);
   const r = Math.floor(s % 60);
   return `${m}:${String(r).padStart(2, '0')}`;

@@ -127,8 +127,9 @@ export async function importSoundtrack(editor: Editor, file: File) {
         mime: file.type || 'audio/mpeg',
         duration: buf.duration,
         trimStart: 0,
-        volume: 0.8,
-        fadeOut: true,
+        // A replaced track keeps the volume and fade that were set for the last one.
+        volume: editor.s.meta.soundtrack?.volume ?? 0.8,
+        fadeOut: editor.s.meta.soundtrack?.fadeOut ?? true,
         peaks: raw.map((v) => Math.round((v / top) * 100) / 100),
       },
     });

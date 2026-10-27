@@ -11,17 +11,21 @@ export function canConnect(el: Element | undefined): el is Element {
 }
 
 // Where a line aimed from the element's centre towards `toward` leaves the element.
+// The ray is turned into the element's own unrotated frame, so rotated boxes
+// and ellipses are met on their real outline, not their bounding box.
 export function edgePoint(el: Element, toward: Point, gap: number): Point {
-  const box = aabb(el);
-  const c = center(box);
+  const c = { x: el.x + el.w / 2, y: el.y + el.h / 2 };
   const dx = toward.x - c.x;
   const dy = toward.y - c.y;
   const dist = Math.hypot(dx, dy);
   if (dist < 0.001) return c;
-  const rx = box.w / 2;
-  const ry = box.h / 2;
-  const round = el.type === 'shape' && el.shape === 'ellipse' && !el.rotation;
-  const t = round ? 1 / Math.hypot(dx / rx, dy / ry) : Math.min(rx / Math.abs(dx || 1e-9), ry / Math.abs(dy || 1e-9));
+  const a = (-(el.rotation || 0) * Math.PI) / 180;
+  const lx = dx * Math.cos(a) - dy * Math.sin(a);
+  const ly = dx * Math.sin(a) + dy * Math.cos(a);
+  const rx = Math.max(0.5, el.w / 2);
+  const ry = Math.max(0.5, el.h / 2);
+  const round = el.type === 'shape' && (el.shape === 'ellipse' || el.shape === 'flower' || el.shape === 'blob');
+  const t = round ? 1 / Math.hypot(lx / rx, ly / ry) : Math.min(rx / Math.abs(lx || 1e-9), ry / Math.abs(ly || 1e-9));
   const reach = Math.min(1, t + gap / dist);
   return { x: c.x + dx * reach, y: c.y + dy * reach };
 }
@@ -60,6 +64,14 @@ export function staleConnectors(elements: Record<Id, Element>): Record<Id, Parti
   const out: Record<Id, Partial<LineElement>> = {};
   for (const el of Object.values(elements)) {
     if (el.type !== 'line' || (!el.from && !el.to)) continue;
+    // An end whose element was deleted lets go, so a later paste cannot snap it back.
+    const gone: Partial<LineElement> = {};
+    if (el.from && !elements[el.from]) gone.from = undefined;
+    if (el.to && !elements[el.to]) gone.to = undefined;
+    if ('from' in gone || 'to' in gone) {
+      out[el.id] = gone;
+      continue;
+    }
     const p = connectorPatch(el, elements);
     if (!p) continue;
     const off =

@@ -36,6 +36,7 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
     done.current = true;
     const pts = live.current;
     if (pts.length >= 3) commit(pts);
+    else if (pts.length) editor.toast('A shape needs at least three points');
     editor.ui.set({ tool: 'select', penEditId: null });
   };
 
@@ -71,6 +72,7 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
       if (done.current || editor.state.tool === 'pen') return;
       done.current = true;
       if (live.current.length >= 3) commit(live.current);
+      else if (live.current.length) editor.toast('A shape needs at least three points');
       if (editor.state.penEditId) editor.ui.set({ penEditId: null });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
