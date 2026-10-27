@@ -1881,3 +1881,17 @@ kbd {
 .find {
   z-index: 190;
 }
+
+/* ---------- desktop app ---------- */
+.is-desktop.is-darwin .topbar {
+  padding-left: 78px;
+  -webkit-app-region: drag;
+}
+.is-desktop.is-darwin .topbar .mark {
+  width: 48px;
+}
+.is-desktop .topbar button,
+.is-desktop .topbar input,
+.is-desktop .topbar a {
+  -webkit-app-region: no-drag;
+}

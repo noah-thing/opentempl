@@ -1,0 +1,26 @@
+{
+  "name": "@tavla/desktop",
+  "productName": "Tavla",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Tavla desktop: the free design tool, offline, in its own window.",
+  "main": "main.cjs",
+  "author": "Noah",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack:mac": "electron-builder --mac dmg --arm64 --x64",
+    "pack:win": "electron-builder --win nsis --x64",
+    "pack:linux": "electron-builder --linux AppImage deb --x64"
+  },
+  "build": {
+    "appId": "app.tavla.desktop",
+    "productName": "Tavla",
+    "files": ["main.cjs", "preload.cjs", "app/**/*"],
+    "directories": { "output": "release" },
+    "mac": { "category": "public.app-category.graphics-design", "icon": "icon.png", "identity": null },
+    "win": { "icon": "icon.png" },
+    "linux": { "icon": "icon.png", "category": "Graphics" },
+    "fileAssociations": [{ "ext": "tavla", "name": "Tavla design", "role": "Editor" }]
+  }
+}

@@ -22,6 +22,22 @@ export function navigate(path: string) {
   window.location.hash = path;
 }
 
+declare global {
+  interface Window {
+    tavlaDesktop?: { platform: string; onOpenFile: (cb: (f: { name: string; bytes: Uint8Array }) => void) => void };
+  }
+}
+
+// Inside the desktop app: make room for the window buttons and open .tavla files from Finder.
+if (window.tavlaDesktop) {
+  document.documentElement.classList.add('is-desktop', `is-${window.tavlaDesktop.platform}`);
+  window.tavlaDesktop.onOpenFile(async (f) => {
+    const { importTavla } = await import('./io/designs');
+    const id = await importTavla(new File([f.bytes as BlobPart], f.name));
+    if (id) navigate(`/d/${id}`);
+  });
+}
+
 export function App() {
   const hash = useHash();
   const path = hash.replace(/^#/, '') || '/';

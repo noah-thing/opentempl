@@ -328,3 +328,13 @@
   z-index: 50;
   pointer-events: none;
 }
+
+.is-desktop.is-darwin .home-top {
+  padding-left: 88px;
+  -webkit-app-region: drag;
+}
+.is-desktop .home-top button,
+.is-desktop .home-top input,
+.is-desktop .home-top a {
+  -webkit-app-region: no-drag;
+}
