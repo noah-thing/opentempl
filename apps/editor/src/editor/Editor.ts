@@ -3,6 +3,7 @@ import { DesignDoc, LOCAL, cloneElements, newId } from '../doc/design';
 import { staleConnectors } from '../canvas/connectors';
 import type { Element, Id, ImageElement, ShapeElement, TextElement } from '../doc/types';
 import { combineShapes, type BooleanOp } from '../lib/pathops';
+import { elementPath, pathToNodes, penPath } from '../render/shapes';
 import { makeImage } from '../doc/factory';
 import { aabb, unionRects, type Rect } from '../lib/geom';
 import { createStore, type Store } from '../lib/store';
@@ -395,6 +396,19 @@ export class Editor {
     if (!ids.length) return;
     this.doc.updateElements(Object.fromEntries(ids.map((id) => [id, { groupId: undefined }])));
     this.toast('Ungrouped');
+  }
+
+  // Any shape becomes pen points: built in ones are converted once, then edited like pen shapes.
+  editPoints(id: Id) {
+    const el = this.s.elements[id];
+    if (el?.type !== 'shape' || el.locked) return;
+    if (!el.nodes?.length) {
+      const nodes = pathToNodes(elementPath(el));
+      if (!nodes || nodes.length > 400) return this.toast('This shape has more than one outline. Redraw it with the pen, or edit it as it is.');
+      this.doc.undo.stopCapturing();
+      this.doc.updateElement(id, { shape: 'path', path: penPath(nodes, true), nodes, w0: el.w, h0: el.h, radius: 0 } as Partial<Element>);
+    }
+    this.ui.set({ tool: 'pen', penEditId: id, selection: [] });
   }
 
   // Shapes only: everything else has no outline to combine.

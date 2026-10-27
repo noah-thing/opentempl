@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { collectTargets, snapBox } from '../src/canvas/snap';
-import { elementPath, penPath, shapePath, SHAPE_KINDS, transformPath } from '../src/render/shapes';
+import { elementPath, pathToNodes, penPath, shapePath, SHAPE_KINDS, transformPath } from '../src/render/shapes';
 import { animState } from '../src/render/animate';
 import { charStyles } from '../src/text/layout';
 import { aabb, rotatePoint, snapAngle } from '../src/lib/geom';
@@ -91,5 +91,29 @@ describe('vector paths', () => {
   it('stretches a pen shape through elementPath', () => {
     const el = makeShape('path', { w: 200, h: 100, w0: 100, h0: 100, path: 'M0 0 L100 0 L100 100 Z' });
     expect(elementPath(el)).toBe('M0 0 L200 0 L200 100 Z');
+  });
+});
+
+describe('shapes to pen points', () => {
+  it('turns a plain rectangle into its four corners', () => {
+    const n = pathToNodes(shapePath('rect', 100, 50, 0))!;
+    expect(n.map((p) => [p.x, p.y])).toEqual([[0, 0], [100, 0], [100, 50], [0, 50]]);
+  });
+  it('turns an ellipse into four smooth points with the classic handle length', () => {
+    const n = pathToNodes(shapePath('ellipse', 200, 100))!;
+    expect(n.length).toBe(4);
+    for (const p of n) expect(p.ix).toBeUndefined();
+    const right = n.find((p) => Math.abs(p.x - 200) < 0.01)!;
+    expect(Math.abs(right.hy)).toBeCloseTo(50 * 0.5523, 1);
+  });
+  it('gives a rounded rectangle eight points', () => {
+    expect(pathToNodes(shapePath('rect', 100, 100, 20))!.length).toBe(8);
+  });
+  it('handles every built in shape without NaN', () => {
+    for (const { kind } of SHAPE_KINDS) {
+      const n = pathToNodes(shapePath(kind, 200, 120, 10));
+      if (!n) continue;
+      expect(penPath(n, true)).not.toContain('NaN');
+    }
   });
 });

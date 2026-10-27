@@ -354,9 +354,7 @@ function ShapeTools({ el }: { el: ShapeElement }) {
         onStroke={(stroke) => editor.update(el.id, { stroke } as Partial<Element>)}
         onRadius={(radius) => editor.update(el.id, { radius } as Partial<Element>)}
       />
-      {el.nodes?.length ? (
-        <TBtn label="Edit points" icon="bezier" onClick={() => editor.ui.set({ tool: 'pen', penEditId: el.id, selection: [] })} />
-      ) : null}
+      <TBtn label="Edit points" icon="bezier" title="Edit points: drag anchors and handles, Alt click to switch corner and curve" onClick={() => editor.editPoints(el.id)} />
       <TBtn title="Change shape" onClick={swap.toggle}>
         <svg width="16" height="16" viewBox="0 0 16 16">
           <path d={elementPath(el, 14, 14)} transform="translate(1 1)" fill="currentColor" fillRule="evenodd" />

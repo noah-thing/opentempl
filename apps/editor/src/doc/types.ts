@@ -167,8 +167,11 @@ export interface ShapeElement extends BaseElement {
 export interface PenNode {
   x: number;
   y: number;
-  hx: number; // outgoing handle, relative to the anchor; the incoming one mirrors it
+  hx: number; // outgoing handle, relative to the anchor
   hy: number;
+  // Incoming handle, relative to the anchor. Left out, it mirrors the outgoing one.
+  ix?: number;
+  iy?: number;
 }
 
 export type LineCap = 'none' | 'arrow' | 'triangle' | 'circle' | 'square' | 'bar' | 'diamond';

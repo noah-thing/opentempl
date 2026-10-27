@@ -5,7 +5,7 @@ import { useEditor } from '../editor/Editor';
 import { startDrag } from '../editor/hooks';
 import type { Point } from '../lib/geom';
 import { pathBounds } from '../lib/pathops';
-import { penPath } from '../render/shapes';
+import { inHandle, penPath } from '../render/shapes';
 
 // The pen: click for a corner, drag for a curve, click the first point (or
 // press Enter) to close the shape. Backspace takes the last point back.
@@ -43,7 +43,14 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
     const b = pathBounds(penPath(pts, true));
     const w = Math.max(1, b.w);
     const h = Math.max(1, b.h);
-    const local = pts.map((n) => ({ ...n, x: round(n.x - b.x), y: round(n.y - b.y), hx: round(n.hx), hy: round(n.hy) }));
+    const local = pts.map((n) => {
+      const out: PenNode = { x: round(n.x - b.x), y: round(n.y - b.y), hx: round(n.hx), hy: round(n.hy) };
+      if (n.ix !== undefined) {
+        out.ix = round(n.ix);
+        out.iy = round(n.iy ?? 0);
+      }
+      return out;
+    });
     const geo = { x: round(b.x), y: round(b.y), w: round(w), h: round(h), w0: round(w), h0: round(h), path: penPath(local, true), nodes: local };
     editor.doc.undo.stopCapturing();
     if (editing) {
@@ -109,14 +116,26 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
 
   const editDown = (e: React.PointerEvent, p: Point) => {
     // Handles first: they sit on top of anchors when a curve is tight.
+    // Mirrored handles move together; a broken pair (or Alt) moves one side alone.
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
-      if (!n.hx && !n.hy) continue;
-      for (const sign of [1, -1]) {
-        if (!near(p, { x: n.x + sign * n.hx, y: n.y + sign * n.hy })) continue;
+      const [ix, iy] = inHandle(n);
+      for (const side of ['out', 'in'] as const) {
+        const [ox, oy] = side === 'out' ? [n.hx, n.hy] : [ix, iy];
+        if ((!ox && !oy) || !near(p, { x: n.x + ox, y: n.y + oy })) continue;
         startDrag(e, (ev) => {
           const q = toLocal(ev.clientX, ev.clientY);
-          setNodes((ns) => ns.map((m, j) => (j === i ? { ...m, hx: sign * (q.x - m.x), hy: sign * (q.y - m.y) } : m)));
+          setNodes((ns) =>
+            ns.map((m, j) => {
+              if (j !== i) return m;
+              const vx = q.x - m.x;
+              const vy = q.y - m.y;
+              const broken = m.ix !== undefined || ev.altKey;
+              if (!broken) return side === 'out' ? { ...m, hx: vx, hy: vy } : { ...m, hx: -vx, hy: -vy };
+              const [kx, ky] = inHandle(m);
+              return side === 'out' ? { ...m, hx: vx, hy: vy, ix: kx, iy: ky } : { ...m, ix: vx, iy: vy };
+            }),
+          );
         }, undefined, 0);
         return;
       }
@@ -125,7 +144,13 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
     if (hit < 0) return finish();
     if (e.altKey) {
       // Alt click turns a curve point into a corner and back.
-      return setNodes((ns) => ns.map((m, j) => (j === hit ? (m.hx || m.hy ? { ...m, hx: 0, hy: 0 } : { ...m, hx: 40 * px, hy: 0 }) : m)));
+      return setNodes((ns) =>
+        ns.map((m, j) => {
+          if (j !== hit) return m;
+          const [ix, iy] = inHandle(m);
+          return m.hx || m.hy || ix || iy ? { x: m.x, y: m.y, hx: 0, hy: 0, ix: 0, iy: 0 } : { x: m.x, y: m.y, hx: 40 * px, hy: 0 };
+        }),
+      );
     }
     const start = nodes[hit];
     startDrag(e, (ev) => {
@@ -158,15 +183,24 @@ export function PenLayer({ pageId, zoom, W, H, toLocal }: Props) {
       ) : null}
       <path d={penPath(nodes, !!editing)} fill="none" stroke="var(--cobalt)" strokeWidth={1.5 * px} />
       {ghost ? <path d={ghost} fill="none" stroke="var(--cobalt)" strokeWidth={px} strokeDasharray={`${4 * px} ${3 * px}`} /> : null}
-      {showHandles.map((n, i) =>
-        n.hx || n.hy ? (
+      {showHandles.map((n, i) => {
+        const [ix, iy] = inHandle(n);
+        return (
           <g key={`h${i}`}>
-            <line x1={n.x - n.hx} y1={n.y - n.hy} x2={n.x + n.hx} y2={n.y + n.hy} stroke="var(--cobalt)" strokeWidth={px} />
-            <circle cx={n.x + n.hx} cy={n.y + n.hy} r={3.5 * px} fill="var(--sheet)" stroke="var(--cobalt)" strokeWidth={1.5 * px} />
-            <circle cx={n.x - n.hx} cy={n.y - n.hy} r={3.5 * px} fill="var(--sheet)" stroke="var(--cobalt)" strokeWidth={1.5 * px} />
+            {[
+              [n.hx, n.hy],
+              [ix, iy],
+            ].map(([dx, dy], k) =>
+              dx || dy ? (
+                <g key={k}>
+                  <line x1={n.x} y1={n.y} x2={n.x + dx} y2={n.y + dy} stroke="var(--cobalt)" strokeWidth={px} />
+                  <circle cx={n.x + dx} cy={n.y + dy} r={3.5 * px} fill="var(--sheet)" stroke="var(--cobalt)" strokeWidth={1.5 * px} />
+                </g>
+              ) : null,
+            )}
           </g>
-        ) : null,
-      )}
+        );
+      })}
       {nodes.map((n, i) => {
         const big = i === 0 && closing;
         const s = big ? a * 1.5 : a;
@@ -203,7 +237,9 @@ function toPageNodes(el: ShapeElement): PenNode[] {
     const ly = n.y * Math.abs(sy) * Math.sign(sy) + (sy < 0 ? el.h : 0) - cy;
     const [px, py] = vec(lx, ly);
     const [hx, hy] = vec(n.hx * sx, n.hy * sy);
-    return { x: el.x + cx + px, y: el.y + cy + py, hx, hy };
+    const out: PenNode = { x: el.x + cx + px, y: el.y + cy + py, hx, hy };
+    if (n.ix !== undefined) [out.ix, out.iy] = vec(n.ix * sx, (n.iy ?? 0) * sy);
+    return out;
   });
 }
 

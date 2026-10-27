@@ -346,7 +346,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     else if (el.type === 'image' && el.assetId) editor.ui.set({ selection: [id], cropId: id });
     else if (el.type === 'chart') editor.openPanel('chart');
     else if (el.type === 'table') editor.openPanel('table');
-    else if (el.type === 'shape' && el.nodes?.length) editor.ui.set({ tool: 'pen', penEditId: id, selection: [] });
+    else if (el.type === 'shape' && el.nodes?.length) editor.editPoints(id);
   };
 
   const onContextMenu = (e: React.MouseEvent) => {

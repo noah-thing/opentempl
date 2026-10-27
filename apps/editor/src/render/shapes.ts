@@ -183,17 +183,131 @@ export function elementPath(el: ShapeElement, w = el.w, h = el.h): string {
   return shapePath(el.shape, w, h, el.radius);
 }
 
+// Where a node's incoming handle sits, relative to the anchor.
+export function inHandle(n: PenNode): [number, number] {
+  return n.ix !== undefined ? [n.ix, n.iy ?? 0] : [-n.hx, -n.hy];
+}
+
 // Pen anchors to a path. Segments with no handles on either end stay straight.
 export function penPath(nodes: PenNode[], closed: boolean): string {
   if (!nodes.length) return '';
   let d = `M${f(nodes[0].x)} ${f(nodes[0].y)}`;
   const seg = (a: PenNode, b: PenNode) => {
-    if (!a.hx && !a.hy && !b.hx && !b.hy) return ` L${f(b.x)} ${f(b.y)}`;
-    return ` C${f(a.x + a.hx)} ${f(a.y + a.hy)} ${f(b.x - b.hx)} ${f(b.y - b.hy)} ${f(b.x)} ${f(b.y)}`;
+    const [ix, iy] = inHandle(b);
+    if (!a.hx && !a.hy && !ix && !iy) return ` L${f(b.x)} ${f(b.y)}`;
+    return ` C${f(a.x + a.hx)} ${f(a.y + a.hy)} ${f(b.x + ix)} ${f(b.y + iy)} ${f(b.x)} ${f(b.y)}`;
   };
   for (let i = 1; i < nodes.length; i++) d += seg(nodes[i - 1], nodes[i]);
   if (closed && nodes.length > 2) d += seg(nodes[nodes.length - 1], nodes[0]) + ' Z';
   return d;
+}
+
+// The other way round: any single outline (lines, cubic and quadratic curves,
+// arcs) as pen nodes, so built in shapes can be edited point by point.
+export function pathToNodes(d: string): PenNode[] | null {
+  const nodes: PenNode[] = [];
+  let cx = 0;
+  let cy = 0;
+  let closed = false;
+  const cmds = [...d.matchAll(/([MLHVCQAZ])([^MLHVCQAZ]*)/gi)];
+  if (cmds.some(([, c]) => c !== c.toUpperCase())) return null; // only absolute paths, which is what Tavla writes
+  const add = (x: number, y: number, ix = 0, iy = 0) => {
+    nodes.push({ x, y, hx: 0, hy: 0, ix, iy });
+    cx = x;
+    cy = y;
+  };
+  const cubic = (x1: number, y1: number, x2: number, y2: number, x: number, y: number) => {
+    const prev = nodes[nodes.length - 1];
+    prev.hx = x1 - prev.x;
+    prev.hy = y1 - prev.y;
+    add(x, y, x2 - x, y2 - y);
+  };
+  for (const [, cmd, args] of cmds) {
+    const n = (args.match(/-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi) ?? []).map(Number);
+    if (cmd === 'M') {
+      if (nodes.length) return null; // one outline only
+      add(n[0], n[1]);
+      for (let i = 2; i + 1 < n.length; i += 2) add(n[i], n[i + 1]);
+    } else if (cmd === 'L') for (let i = 0; i + 1 < n.length; i += 2) add(n[i], n[i + 1]);
+    else if (cmd === 'H') n.forEach((x) => add(x, cy));
+    else if (cmd === 'V') n.forEach((y) => add(cx, y));
+    else if (cmd === 'C') for (let i = 0; i + 5 < n.length; i += 6) cubic(n[i], n[i + 1], n[i + 2], n[i + 3], n[i + 4], n[i + 5]);
+    else if (cmd === 'Q')
+      for (let i = 0; i + 3 < n.length; i += 4) {
+        const [qx, qy, x, y] = n.slice(i, i + 4);
+        cubic(cx + (2 / 3) * (qx - cx), cy + (2 / 3) * (qy - cy), x + (2 / 3) * (qx - x), y + (2 / 3) * (qy - y), x, y);
+      }
+    else if (cmd === 'A')
+      for (let i = 0; i + 6 < n.length; i += 7)
+        for (const c of arcToCubics(cx, cy, n[i], n[i + 1], n[i + 2], !!n[i + 3], !!n[i + 4], n[i + 5], n[i + 6])) cubic(...c);
+    else if (cmd === 'Z') closed = true;
+  }
+  if (nodes.length < 2) return null;
+  // A closing point on top of the first one is the same anchor.
+  const first = nodes[0];
+  const last = nodes[nodes.length - 1];
+  if (closed && nodes.length > 2 && Math.hypot(last.x - first.x, last.y - first.y) < 0.01) {
+    first.ix = last.ix;
+    first.iy = last.iy;
+    nodes.pop();
+  }
+  // Smooth nodes (handles in a straight line, same length) go back to mirrored handles.
+  for (const nd of nodes) {
+    if (nd.ix !== undefined && Math.abs(nd.ix + nd.hx) < 0.01 && Math.abs((nd.iy ?? 0) + nd.hy) < 0.01) {
+      delete nd.ix;
+      delete nd.iy;
+    }
+  }
+  return nodes;
+}
+
+type Cubic = [number, number, number, number, number, number];
+
+// SVG arc to cubic curves of at most 90 degrees each (the usual endpoint to centre conversion).
+function arcToCubics(x0: number, y0: number, rx: number, ry: number, rot: number, large: boolean, sweep: boolean, x: number, y: number): Cubic[] {
+  if (!rx || !ry || (x0 === x && y0 === y)) return [[x0, y0, x, y, x, y]];
+  rx = Math.abs(rx);
+  ry = Math.abs(ry);
+  const phi = (rot * Math.PI) / 180;
+  const cos = Math.cos(phi);
+  const sin = Math.sin(phi);
+  const dx = (x0 - x) / 2;
+  const dy = (y0 - y) / 2;
+  const x1 = cos * dx + sin * dy;
+  const y1 = -sin * dx + cos * dy;
+  const lambda = (x1 * x1) / (rx * rx) + (y1 * y1) / (ry * ry);
+  if (lambda > 1) {
+    rx *= Math.sqrt(lambda);
+    ry *= Math.sqrt(lambda);
+  }
+  const num = rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1;
+  const den = rx * rx * y1 * y1 + ry * ry * x1 * x1;
+  const k = (large === sweep ? -1 : 1) * Math.sqrt(Math.max(0, num / den));
+  const cxp = (k * rx * y1) / ry;
+  const cyp = (-k * ry * x1) / rx;
+  const ccx = cos * cxp - sin * cyp + (x0 + x) / 2;
+  const ccy = sin * cxp + cos * cyp + (y0 + y) / 2;
+  const ang = (ux: number, uy: number, vx: number, vy: number) => Math.atan2(ux * vy - uy * vx, ux * vx + uy * vy);
+  const t1 = ang(1, 0, (x1 - cxp) / rx, (y1 - cyp) / ry);
+  let dt = ang((x1 - cxp) / rx, (y1 - cyp) / ry, (-x1 - cxp) / rx, (-y1 - cyp) / ry);
+  if (!sweep && dt > 0) dt -= 2 * Math.PI;
+  if (sweep && dt < 0) dt += 2 * Math.PI;
+  const parts = Math.ceil(Math.abs(dt) / (Math.PI / 2) - 1e-9);
+  const step = dt / parts;
+  const alpha = (4 / 3) * Math.tan(step / 4);
+  const pt = (t: number) => [ccx + rx * Math.cos(t) * cos - ry * Math.sin(t) * sin, ccy + rx * Math.cos(t) * sin + ry * Math.sin(t) * cos];
+  const dpt = (t: number) => [-rx * Math.sin(t) * cos - ry * Math.cos(t) * sin, -rx * Math.sin(t) * sin + ry * Math.cos(t) * cos];
+  const out: Cubic[] = [];
+  for (let i = 0; i < parts; i++) {
+    const a = t1 + i * step;
+    const b = a + step;
+    const [ax, ay] = pt(a);
+    const [bx, by] = pt(b);
+    const [dax, day] = dpt(a);
+    const [dbx, dby] = dpt(b);
+    out.push([ax + alpha * dax, ay + alpha * day, bx - alpha * dbx, by - alpha * dby, bx, by]);
+  }
+  return out;
 }
 
 export const SHAPE_KINDS: { kind: ShapeKind; label: string }[] = [
