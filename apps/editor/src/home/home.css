@@ -366,3 +366,19 @@
 .is-desktop .home-top a {
   -webkit-app-region: no-drag;
 }
+
+@media (max-width: 640px) {
+  .home-top a.btn {
+    display: none;
+  }
+  .home-search {
+    width: auto;
+    flex: 1;
+  }
+  .home-brand span {
+    display: none;
+  }
+  .sheet {
+    width: calc(50% - 4px);
+  }
+}

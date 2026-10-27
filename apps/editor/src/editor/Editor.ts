@@ -24,7 +24,12 @@ export class Editor {
 
   constructor(doc: DesignDoc) {
     this.doc = doc;
-    this.ui = createStore<EditorState>({ ...initialEditorState, activePageId: doc.snapshot.pageOrder[0] ?? null });
+    this.ui = createStore<EditorState>({
+      ...initialEditorState,
+      activePageId: doc.snapshot.pageOrder[0] ?? null,
+      // On a phone the canvas comes first; panels open from the bottom bar.
+      panel: window.innerWidth < 760 ? null : initialEditorState.panel,
+    });
     // Pages can arrive later (live collaboration) or be deleted by someone else.
     doc.subscribe(() => {
       const order = doc.snapshot.pageOrder;

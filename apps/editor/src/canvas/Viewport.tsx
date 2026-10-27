@@ -27,8 +27,9 @@ export function Viewport() {
   const fit = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    const pad = view === 'grid' ? 120 : 180;
-    const z = Math.min((el.clientWidth - 128) / meta.w, (el.clientHeight - pad) / meta.h);
+    const narrow = el.clientWidth < 700;
+    const pad = view === 'grid' ? 120 : narrow ? 150 : 180;
+    const z = Math.min((el.clientWidth - (narrow ? 28 : 128)) / meta.w, (el.clientHeight - pad) / meta.h);
     editor.ui.set({ zoom: Math.max(ZOOM_MIN, Math.min(view === 'grid' ? 0.4 : 2, z * (view === 'grid' ? 0.42 : 1))) });
   }, [editor, meta.w, meta.h, view]);
 
@@ -73,6 +74,46 @@ export function Viewport() {
     };
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
+  }, [editor]);
+
+  // Two finger pinch zooms on touch screens, around the midpoint of the fingers.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let start: { d: number; z: number; mx: number; my: number; sl: number; st: number } | null = null;
+    const dist = (t: TouchList) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    const onStart = (e: TouchEvent) => {
+      if (e.touches.length !== 2) return;
+      const r = el.getBoundingClientRect();
+      start = {
+        d: dist(e.touches),
+        z: editor.state.zoom,
+        mx: (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left,
+        my: (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top,
+        sl: el.scrollLeft,
+        st: el.scrollTop,
+      };
+    };
+    const onMove = (e: TouchEvent) => {
+      if (!start || e.touches.length !== 2) return;
+      e.preventDefault();
+      const z1 = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, (start.z * dist(e.touches)) / start.d));
+      const k = z1 / start.z;
+      editor.ui.set({ zoom: z1, autoFit: false });
+      el.scrollLeft = (start.sl + start.mx) * k - start.mx;
+      el.scrollTop = (start.st + start.my) * k - start.my;
+    };
+    const onEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) start = null;
+    };
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd);
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+    };
   }, [editor]);
 
   // Space bar pans, like every design tool.

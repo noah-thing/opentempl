@@ -66,10 +66,10 @@ export function TopBar() {
         <Mark size={30} />
       </button>
       <button className="btn" onClick={file.toggle}>
-        File <Icon name="chevron-down" size={12} />
+        <span className="btn-label">File</span> <Icon name="chevron-down" size={12} />
       </button>
       <button className="btn" onClick={() => editor.openPanel('resize')}>
-        <Icon name="resize" /> Resize
+        <Icon name="resize" /> <span className="btn-label">Resize</span>
       </button>
       <div className="sep" />
       <button className="icon-btn" title="Undo (⌘Z)" disabled={!canUndo.undo} onClick={() => editor.undo()}>
@@ -123,13 +123,13 @@ export function TopBar() {
       ) : null}
       <CommentsButton />
       <button className="btn" onClick={() => editor.ui.set({ shareOpen: true })}>
-        <Icon name="users" /> Share
+        <Icon name="users" /> <span className="btn-label">Share</span>
       </button>
       <button className="btn" onClick={() => editor.ui.set({ presenting: true, presentStart: editor.s.pageOrder.indexOf(editor.state.activePageId ?? '') })}>
-        <Icon name="play" /> Present
+        <Icon name="play" /> <span className="btn-label">Present</span>
       </button>
       <button className="btn btn-primary" onClick={() => editor.ui.set({ exportOpen: true })}>
-        <Icon name="download" /> Export
+        <Icon name="download" /> <span className="btn-label">Export</span>
       </button>
       {file.anchor ? (
         <Popover anchor={file.anchor} onClose={file.close} className="menu">

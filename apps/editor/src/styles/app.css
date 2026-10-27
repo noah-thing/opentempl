@@ -2020,3 +2020,132 @@ kbd {
   place-items: center;
   padding: 0 4px;
 }
+
+/* ---------- phones and small tablets ---------- */
+@media (max-width: 760px) {
+  :root {
+    --top: 50px;
+  }
+  .editor {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--top) 1fr 62px;
+  }
+  .topbar {
+    gap: 2px;
+    padding-right: 6px;
+  }
+  .topbar .mark {
+    width: 46px;
+  }
+  .topbar .btn-label,
+  .topbar .saved,
+  .topbar .size-chip,
+  .topbar .sep,
+  .topbar .icon-btn[title^='Redo'] {
+    display: none;
+  }
+  .topbar .btn {
+    padding: 0 8px;
+  }
+  .topbar .title {
+    max-width: 110px;
+    min-width: 0;
+  }
+  .rail {
+    grid-row: 3;
+    grid-column: 1;
+    flex-direction: row;
+    border-right: 0;
+    border-top: 1px solid var(--line);
+    padding: 4px 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .rail .grow,
+  .rail-item:last-child {
+    display: none;
+  }
+  .rail-item {
+    flex: none;
+    width: 62px;
+    padding: 5px 0 4px;
+    gap: 3px;
+    font-size: 10px;
+    justify-content: center;
+  }
+  .rail-item .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .rail-item.is-on::before {
+    left: 14px;
+    right: 14px;
+    top: -4px;
+    bottom: auto;
+    width: auto;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+  }
+  .panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 62px;
+    width: 100% !important;
+    height: 0;
+    border-right: 0;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -16px 40px -12px rgba(11, 11, 13, 0.3);
+    transition: height 0.26s var(--ease);
+    z-index: 40;
+  }
+  .panel.is-open {
+    height: min(58vh, 520px);
+  }
+  .panel-inner {
+    width: 100%;
+  }
+  .workspace {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .pages {
+    padding: 70px 12px 120px;
+    gap: 40px;
+  }
+  .page-head .name,
+  .page-head .actions .icon-btn:not(:nth-child(5)):not(:nth-child(6)) {
+    display: none;
+  }
+  .statusbar .zoom,
+  .statusbar .pages-count,
+  .statusbar .btn {
+    display: none;
+  }
+  .statusbar {
+    justify-content: flex-end;
+    height: 40px;
+  }
+  .ctxbar-row {
+    top: 8px;
+    padding: 0 8px;
+  }
+  .ctxbar {
+    max-width: 100%;
+  }
+  .quickbar button {
+    width: 36px;
+    height: 34px;
+  }
+  .handle {
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+  }
+  .dialog {
+    border-radius: 18px;
+  }
+  .grid-2[style*='repeat(2'] {
+    grid-template-columns: 1fr !important;
+  }
+}
