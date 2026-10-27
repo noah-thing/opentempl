@@ -12,7 +12,10 @@ export type Fill =
   | { type: 'solid'; color: string }
   | { type: 'linear'; angle: number; stops: GradientStop[] }
   | { type: 'radial'; stops: GradientStop[] }
-  | { type: 'image'; assetId: Id; fit: 'cover' | 'contain' | 'tile'; opacity: number };
+  | { type: 'image'; assetId: Id; fit: 'cover' | 'contain' | 'tile'; opacity: number }
+  | { type: 'pattern'; kind: PatternKind; color: string; background: string; scale: number };
+
+export type PatternKind = 'dots' | 'grid' | 'stripes' | 'diagonal' | 'checker' | 'waves' | 'crosses' | 'pixels';
 
 export interface Shadow {
   x: number;

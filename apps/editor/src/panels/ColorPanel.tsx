@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useEditor, type Editor } from '../editor/Editor';
 import { useDoc, useUI } from '../editor/hooks';
 import type { Element, Fill, GradientStop, Page } from '../doc/types';
-import { fillCss } from '../render/paint';
+import { fillCss, PATTERNS, patternDef } from '../render/paint';
+import { Slider } from './controls';
 import { Section } from './controls';
 import { useBrand } from './brand';
 import { Icon } from '../ui/icons';
@@ -200,6 +201,37 @@ export default function ColorPanel() {
             ))}
           </div>
           {gradient ? <GradientEditor fill={gradient} onChange={set} /> : null}
+        </Section>
+      ) : null}
+      {target === 'fill' || target === 'bg' ? (
+        <Section title="Patterns">
+          <div className="swatches">
+            {PATTERNS.map((p) => {
+              const pat = current && typeof current !== 'string' && current.type === 'pattern' ? current : null;
+              const f = { type: 'pattern' as const, kind: p.kind, color: pat?.color ?? '#0B0B0D', background: pat?.background ?? '#FFFFFF', scale: pat?.scale ?? 40 };
+              return (
+                <button key={p.kind} className={`swatch ${pat?.kind === p.kind ? 'is-on' : ''}`} title={p.label} onClick={() => set(f)} style={{ overflow: 'hidden', padding: 0 }}>
+                  <svg viewBox="0 0 40 40" width="100%" height="100%" style={{ borderRadius: '50%' }}>
+                    <defs>{patternDef(`pp-${p.kind}`, { ...f, scale: 10 })}</defs>
+                    <rect width="40" height="40" fill={`url(#pp-${p.kind})`} />
+                  </svg>
+                </button>
+              );
+            })}
+          </div>
+          {current && typeof current !== 'string' && current.type === 'pattern' ? (
+            <div className="stack" style={{ marginTop: 12, padding: 12, borderRadius: 12, background: 'var(--paper)' }}>
+              <div className="row-between">
+                <span className="label">Ink and paper</span>
+                <div className="row" style={{ gap: 6 }}>
+                  <input type="color" value={current.color.slice(0, 7)} onChange={(e) => set({ ...current, color: e.target.value.toUpperCase() })} />
+                  <input type="color" value={current.background.slice(0, 7)} onChange={(e) => set({ ...current, background: e.target.value.toUpperCase() })} />
+                </div>
+              </div>
+              <span className="label">Size</span>
+              <Slider value={current.scale} min={8} max={200} onChange={(scale) => set({ ...current, scale })} />
+            </div>
+          ) : null}
         </Section>
       ) : null}
     </>

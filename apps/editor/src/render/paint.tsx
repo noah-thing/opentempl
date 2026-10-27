@@ -25,6 +25,7 @@ export function fillDef(id: string, fill: Fill, w: number, h: number, assetUrl: 
       </radialGradient>
     );
   }
+  if (fill.type === 'pattern') return patternDef(id, fill);
   if (fill.type === 'image') {
     const url = assetUrl(fill.assetId);
     if (!url) return null;
@@ -50,6 +51,67 @@ export function fillDef(id: string, fill: Fill, w: number, h: number, assetUrl: 
   return null;
 }
 
+// Repeating patterns, drawn in a cell of `scale` design units.
+export function patternDef(id: string, f: Extract<Fill, { type: 'pattern' }>) {
+  const s = Math.max(4, f.scale);
+  const c = f.color;
+  let body: React.ReactNode = null;
+  switch (f.kind) {
+    case 'dots':
+      body = <circle cx={s / 2} cy={s / 2} r={s * 0.18} fill={c} />;
+      break;
+    case 'grid':
+      body = <path d={`M${s} 0 V${s} M0 ${s} H${s}`} stroke={c} strokeWidth={Math.max(1, s * 0.06)} fill="none" />;
+      break;
+    case 'stripes':
+      body = <rect y={0} width={s} height={s / 2} fill={c} />;
+      break;
+    case 'diagonal':
+      body = <path d={`M0 ${s} L${s} 0 M${-s / 2} ${s / 2} L${s / 2} ${-s / 2} M${s / 2} ${s * 1.5} L${s * 1.5} ${s / 2}`} stroke={c} strokeWidth={s * 0.18} />;
+      break;
+    case 'checker':
+      body = (
+        <>
+          <rect width={s / 2} height={s / 2} fill={c} />
+          <rect x={s / 2} y={s / 2} width={s / 2} height={s / 2} fill={c} />
+        </>
+      );
+      break;
+    case 'waves':
+      body = <path d={`M0 ${s * 0.5} Q${s * 0.25} ${s * 0.2} ${s * 0.5} ${s * 0.5} T${s} ${s * 0.5}`} stroke={c} strokeWidth={s * 0.1} fill="none" />;
+      break;
+    case 'crosses':
+      body = <path d={`M${s * 0.5} ${s * 0.3} V${s * 0.7} M${s * 0.3} ${s * 0.5} H${s * 0.7}`} stroke={c} strokeWidth={s * 0.08} strokeLinecap="round" />;
+      break;
+    case 'pixels':
+      body = (
+        <>
+          <rect x={0} y={0} width={s / 4} height={s / 4} fill={c} />
+          <rect x={s / 2} y={s / 4} width={s / 4} height={s / 4} fill={c} />
+          <rect x={s / 4} y={s * 0.75} width={s / 4} height={s / 4} fill={c} />
+        </>
+      );
+      break;
+  }
+  return (
+    <pattern id={id} patternUnits="userSpaceOnUse" width={s} height={s}>
+      <rect width={s} height={s} fill={f.background} />
+      {body}
+    </pattern>
+  );
+}
+
+export const PATTERNS: { kind: import('../doc/types').PatternKind; label: string }[] = [
+  { kind: 'dots', label: 'Dots' },
+  { kind: 'grid', label: 'Grid' },
+  { kind: 'stripes', label: 'Stripes' },
+  { kind: 'diagonal', label: 'Diagonal' },
+  { kind: 'checker', label: 'Checker' },
+  { kind: 'waves', label: 'Waves' },
+  { kind: 'crosses', label: 'Crosses' },
+  { kind: 'pixels', label: 'Pixels' },
+];
+
 export function fillRef(id: string, fill: Fill) {
   return fill.type === 'solid' ? fill.color : `url(#${id})`;
 }
@@ -60,6 +122,7 @@ export function fillCss(fill: Fill): string {
     return `linear-gradient(${fill.angle}deg, ${fill.stops.map((s) => `${s.color} ${s.offset * 100}%`).join(', ')})`;
   if (fill.type === 'radial')
     return `radial-gradient(circle, ${fill.stops.map((s) => `${s.color} ${s.offset * 100}%`).join(', ')})`;
+  if (fill.type === 'pattern') return fill.background;
   return '#ffffff';
 }
 

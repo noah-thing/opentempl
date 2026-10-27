@@ -381,7 +381,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
         <PageView page={page} elements={elements} width={W} height={H} displayWidth={W * zoom} displayHeight={H * zoom} />
       </RenderContext.Provider>
       <div className="page-overlay">
-        {page.elementIds.length === 0 && tool === 'select' ? (
+        {page.elementIds.length === 0 && tool === 'select' && page.background.type === 'solid' ? (
           <div className="empty-sheet" style={{ fontSize: Math.max(11, Math.min(15, W * zoom * 0.022)) }}>
             <Eyes size={Math.max(40, Math.min(84, W * zoom * 0.11))} />
             <span>An empty sheet. Pick a template, drag a photo in, or press T and start typing.</span>
