@@ -161,6 +161,9 @@ async function importVideo(editor: Editor, file: File, at?: Point) {
       name: file.name,
     } as Parameters<typeof makeVideo>[0]);
     editor.add([editor.fitToPage(el, 0.7)], { at });
+    // A page plays at least as long as the clip on it, like Canva's video pages.
+    const pid = editor.state.activePageId;
+    if (pid && editor.s.pages[pid] && editor.s.pages[pid].duration < duration) editor.doc.updatePage(pid, { duration: Math.ceil(duration * 10) / 10 });
   } catch {
     editor.toast(`Could not play ${file.name} in this browser`);
   } finally {

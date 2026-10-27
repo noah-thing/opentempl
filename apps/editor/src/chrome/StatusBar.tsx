@@ -4,6 +4,7 @@ import { useDoc, useUI } from '../editor/hooks';
 import { Icon } from '../ui/icons';
 import { ZOOM_MAX, ZOOM_MIN } from '../canvas/Viewport';
 import { PageStrip } from './PageStrip';
+import { Timeline } from './Timeline';
 
 // Zoom is shown on a log scale so 10% to 800% feels even on the slider.
 const toSlider = (z: number) => (Math.log(z) - Math.log(ZOOM_MIN)) / (Math.log(ZOOM_MAX) - Math.log(ZOOM_MIN));
@@ -16,18 +17,21 @@ export function StatusBar() {
   const pages = useDoc((s) => s.pageOrder.length);
   const active = useUI((s) => s.activePageId);
   const index = useDoc((s) => s.pageOrder.indexOf(active ?? '')) + 1;
-  const [strip, setStrip] = useState(false);
+  const [strip, setStrip] = useState<'pages' | 'timeline' | null>(null);
   const [notes, setNotes] = useState(false);
   return (
     <>
       {notes && active ? <Notes pageId={active} /> : null}
-      {strip ? <PageStrip /> : null}
+      {strip === 'pages' ? <PageStrip /> : strip === 'timeline' ? <Timeline /> : null}
       <footer className="statusbar">
         <button className={`btn btn-sm ${notes ? 'is-on' : ''}`} onClick={() => setNotes((n) => !n)}>
           <Icon name="notes" /> Notes
         </button>
-        <button className={`btn btn-sm`} onClick={() => setStrip((s) => !s)}>
+        <button className={`btn btn-sm ${strip === 'pages' ? 'is-on' : ''}`} onClick={() => setStrip((s) => (s === 'pages' ? null : 'pages'))}>
           <Icon name="page" /> Pages
+        </button>
+        <button className={`btn btn-sm ${strip === 'timeline' ? 'is-on' : ''}`} onClick={() => setStrip((s) => (s === 'timeline' ? null : 'timeline'))}>
+          <Icon name="video" /> Timeline
         </button>
         <span className="pages-count">
           Page {index} of {pages}

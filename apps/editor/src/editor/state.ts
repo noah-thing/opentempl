@@ -69,6 +69,7 @@ export interface EditorState {
   showGrid: boolean;
   presenting: boolean;
   presentStart: number;
+  presentAuto: boolean; // start presenting with autoplay on (the timeline's play button)
   commandOpen: boolean;
   exportOpen: boolean;
   shareOpen: boolean;
@@ -104,6 +105,7 @@ export const initialEditorState: EditorState = {
   showGrid: false,
   presenting: false,
   presentStart: 0,
+  presentAuto: false,
   commandOpen: false,
   exportOpen: false,
   shareOpen: false,

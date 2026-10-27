@@ -21,14 +21,14 @@ export function Present() {
   const [index, setIndex] = useState(Math.max(0, Math.min(order.length - 1, start)));
   const [time, setTime] = useState(0);
   const [cursor, setCursor] = useState(true);
-  const [auto, setAuto] = useState(false);
+  const [auto, setAuto] = useState(() => editor.state.presentAuto);
   const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight });
   const root = useRef<HTMLDivElement>(null);
   const page = pages[order[index]];
 
   const exit = () => {
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-    editor.ui.set({ presenting: false });
+    editor.ui.set({ presenting: false, presentAuto: false });
   };
   const go = (d: number) => setIndex((i) => Math.max(0, Math.min(order.length - 1, i + d)));
 
@@ -83,7 +83,7 @@ export function Present() {
 
   useEffect(() => {
     root.current?.requestFullscreen?.().catch(() => {});
-    const onFs = () => !document.fullscreenElement && editor.ui.set({ presenting: false });
+    const onFs = () => !document.fullscreenElement && editor.ui.set({ presenting: false, presentAuto: false });
     const onResize = () => setSize({ w: window.innerWidth, h: window.innerHeight });
     document.addEventListener('fullscreenchange', onFs);
     window.addEventListener('resize', onResize);
