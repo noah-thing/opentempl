@@ -18,6 +18,7 @@ import { activeCollab, usePeers } from '../collab/collab';
 import { listUploads } from '../io/uploads';
 import { Eyes } from '../ui/Logo';
 import { CommentDraft, CommentPins } from './Comments';
+import { PenLayer } from './PenTool';
 
 interface Props {
   pageId: Id;
@@ -30,7 +31,9 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   const elements = useDoc((s) => s.elements);
   const meta = useDoc((s) => s.meta);
   const fontsVersion = useFontsVersion();
-  const { selection, editingTextId, cropId, tool, guides, marquee, hoverId, showGrid } = useUI((s) => ({
+  const { selection, editingTextId, cropId, tool, guides, marquee, hoverId, showGrid, penEditId, activePageId } = useUI((s) => ({
+    penEditId: s.tool === 'pen' ? s.penEditId : null,
+    activePageId: s.activePageId,
     selection: s.selection,
     editingTextId: s.editingTextId,
     cropId: s.cropId,
@@ -54,9 +57,9 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       },
       fontsVersion,
       mode: 'edit',
-      hiddenIds: editingTextId ? new Set([editingTextId]) : undefined,
+      hiddenIds: editingTextId || penEditId ? new Set([editingTextId ?? penEditId!]) : undefined,
     }),
-    [editor, fontsVersion, editingTextId],
+    [editor, fontsVersion, editingTextId, penEditId],
   );
 
   if (!page) return null;
@@ -194,6 +197,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     }
     if (editor.state.openCommentId) editor.ui.set({ openCommentId: null });
     if (tool === 'draw') return startDraw(p, e);
+    if (tool === 'pen') return; // the pen layer has its own pointer handling
     if (tool !== 'select') return createAt(p, e);
     if (editor.state.cropId) {
       editor.ui.set({ cropId: null });
@@ -321,6 +325,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     else if (el.type === 'image' && el.assetId) editor.ui.set({ selection: [id], cropId: id });
     else if (el.type === 'chart') editor.openPanel('chart');
     else if (el.type === 'table') editor.openPanel('table');
+    else if (el.type === 'shape' && el.nodes?.length) editor.ui.set({ tool: 'pen', penEditId: id, selection: [] });
   };
 
   const onContextMenu = (e: React.MouseEvent) => {
@@ -404,6 +409,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
             <path d={drawing.d} fill="none" stroke={drawing.color} strokeWidth={drawing.width} strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         ) : null}
+        {tool === 'pen' && activePageId === pageId ? <PenLayer key={penEditId ?? 'new'} pageId={pageId} zoom={zoom} W={W} H={H} toLocal={toLocal} /> : null}
         <RulerGuides pageId={pageId} zoom={zoom} W={W} H={H} />
         {guides.filter((g) => g.pageId === pageId).map((g, i) => (
           <GuideLine key={i} g={g} zoom={zoom} />

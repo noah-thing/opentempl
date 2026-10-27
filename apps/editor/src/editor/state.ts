@@ -1,7 +1,7 @@
 import type { Id } from '../doc/types';
 import type { Rect } from '../lib/geom';
 
-export type Tool = 'select' | 'hand' | 'text' | 'rect' | 'ellipse' | 'line' | 'draw' | 'sticky';
+export type Tool = 'select' | 'hand' | 'text' | 'rect' | 'ellipse' | 'line' | 'draw' | 'pen' | 'sticky';
 
 export type PanelId =
   | 'templates'
@@ -54,6 +54,7 @@ export interface EditorState {
   draw: DrawSettings;
   editingTextId: Id | null;
   cropId: Id | null;
+  penEditId: Id | null; // a path shape whose points the pen is editing
   panel: PanelId;
   colorTarget: string | null; // which property the colour panel edits, e.g. "fill", "text", "stroke", "bg"
   hoverId: Id | null;
@@ -86,6 +87,7 @@ export const initialEditorState: EditorState = {
   draw: { tool: 'pen', color: '#2B3BFF', width: 8 },
   editingTextId: null,
   cropId: null,
+  penEditId: null,
   panel: 'templates',
   colorTarget: null,
   hoverId: null,

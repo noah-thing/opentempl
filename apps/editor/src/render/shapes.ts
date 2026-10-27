@@ -1,4 +1,4 @@
-import type { ShapeKind } from '../doc/types';
+import type { PenNode, ShapeElement, ShapeKind } from '../doc/types';
 
 // Every shape is a path inside a w x h box, so it stretches like Canva's shapes
 // and can double as an image mask.
@@ -147,6 +147,53 @@ export function shapePath(kind: ShapeKind, w: number, h: number, radius = 0): st
     default:
       return roundRect(w, h, radius);
   }
+}
+
+// Scale and move a path. Relative commands only scale; arcs keep their flags.
+export function transformPath(d: string, sx: number, sy: number, dx = 0, dy = 0): string {
+  let out = '';
+  for (const [, cmd, args] of d.matchAll(/([MLHVCSQTAZmlhvcsqtaz])([^MLHVCSQTAZmlhvcsqtaz]*)/g)) {
+    const n = (args.match(/-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi) ?? []).map(Number);
+    const abs = cmd === cmd.toUpperCase();
+    const ox = abs ? dx : 0;
+    const oy = abs ? dy : 0;
+    const k = cmd.toUpperCase();
+    let m: number[];
+    if (k === 'Z') m = [];
+    else if (k === 'H') m = n.map((v) => v * sx + ox);
+    else if (k === 'V') m = n.map((v) => v * sy + oy);
+    else if (k === 'A')
+      m = n.map((v, i) => {
+        const j = i % 7;
+        if (j === 0) return Math.abs(v * sx);
+        if (j === 1) return Math.abs(v * sy);
+        if (j === 5) return v * sx + ox;
+        if (j === 6) return v * sy + oy;
+        return v;
+      });
+    else m = n.map((v, i) => (i % 2 === 0 ? v * sx + ox : v * sy + oy));
+    out += cmd + m.map(f).join(' ') + ' ';
+  }
+  return out.trim();
+}
+
+// The outline of a shape element at a given size.
+export function elementPath(el: ShapeElement, w = el.w, h = el.h): string {
+  if (el.shape === 'path' && el.path) return transformPath(el.path, w / (el.w0 || w), h / (el.h0 || h));
+  return shapePath(el.shape, w, h, el.radius);
+}
+
+// Pen anchors to a path. Segments with no handles on either end stay straight.
+export function penPath(nodes: PenNode[], closed: boolean): string {
+  if (!nodes.length) return '';
+  let d = `M${f(nodes[0].x)} ${f(nodes[0].y)}`;
+  const seg = (a: PenNode, b: PenNode) => {
+    if (!a.hx && !a.hy && !b.hx && !b.hy) return ` L${f(b.x)} ${f(b.y)}`;
+    return ` C${f(a.x + a.hx)} ${f(a.y + a.hy)} ${f(b.x - b.hx)} ${f(b.y - b.hy)} ${f(b.x)} ${f(b.y)}`;
+  };
+  for (let i = 1; i < nodes.length; i++) d += seg(nodes[i - 1], nodes[i]);
+  if (closed && nodes.length > 2) d += seg(nodes[nodes.length - 1], nodes[0]) + ' Z';
+  return d;
 }
 
 export const SHAPE_KINDS: { kind: ShapeKind; label: string }[] = [

@@ -41,6 +41,19 @@ export function ContextMenu() {
             ? { label: 'Ungroup', icon: 'ungroup', kbd: '⇧⌘G', onClick: () => editor.ungroup() }
             : { label: 'Group', icon: 'group', kbd: '⌘G', onClick: () => editor.group() }
           : { label: sel[0].locked ? 'Unlock' : 'Lock', icon: sel[0].locked ? 'unlock' : 'lock', kbd: '⇧⌘L', onClick: () => editor.toggleLock() },
+        ...(editor.canCombine()
+          ? [
+              {
+                label: 'Combine',
+                row: [
+                  { icon: 'union', title: 'Union', onClick: () => editor.combine('union') },
+                  { icon: 'subtract', title: 'Subtract', onClick: () => editor.combine('subtract') },
+                  { icon: 'intersect', title: 'Intersect', onClick: () => editor.combine('intersect') },
+                  { icon: 'exclude', title: 'Exclude', onClick: () => editor.combine('exclude') },
+                ],
+              },
+            ]
+          : []),
         {
           label: 'Align',
           row: [

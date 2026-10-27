@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { collectTargets, snapBox } from '../src/canvas/snap';
-import { shapePath, SHAPE_KINDS } from '../src/render/shapes';
+import { elementPath, penPath, shapePath, SHAPE_KINDS, transformPath } from '../src/render/shapes';
 import { animState } from '../src/render/animate';
 import { charStyles } from '../src/text/layout';
 import { aabb, rotatePoint, snapAngle } from '../src/lib/geom';
@@ -71,5 +71,25 @@ describe('text runs', () => {
     expect(styles[index[0]].fontWeight).toBe(400);
     expect(styles[index[6]].fontWeight).toBe(700);
     expect(styles[index[6]].color).toBe('#FF4B39');
+  });
+});
+
+describe('vector paths', () => {
+  it('stretches a path with its box, arcs included', () => {
+    expect(transformPath('M0 0 L10 0 L10 20 Z', 2, 0.5)).toBe('M0 0 L20 0 L20 10 Z');
+    expect(transformPath('M0 5 A5 5 0 0 1 10 5', 2, 1)).toBe('M0 5 A10 5 0 0 1 20 5');
+  });
+  it('moves absolute points but only scales relative ones', () => {
+    expect(transformPath('M1 1 l2 2', 1, 1, 10, 10)).toBe('M11 11 l2 2');
+  });
+  it('keeps corners straight and turns handles into curves', () => {
+    const corners = [{ x: 0, y: 0, hx: 0, hy: 0 }, { x: 10, y: 0, hx: 0, hy: 0 }, { x: 10, y: 10, hx: 0, hy: 0 }];
+    expect(penPath(corners, true)).toBe('M0 0 L10 0 L10 10 L0 0 Z');
+    const curve = [{ x: 0, y: 0, hx: 5, hy: 0 }, { x: 10, y: 10, hx: 0, hy: 5 }];
+    expect(penPath(curve, false)).toBe('M0 0 C5 0 10 5 10 10');
+  });
+  it('stretches a pen shape through elementPath', () => {
+    const el = makeShape('path', { w: 200, h: 100, w0: 100, h0: 100, path: 'M0 0 L100 0 L100 100 Z' });
+    expect(elementPath(el)).toBe('M0 0 L200 0 L200 100 Z');
   });
 });

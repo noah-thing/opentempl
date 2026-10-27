@@ -37,7 +37,8 @@ export const SHORTCUTS: Shortcut[] = [
   { keys: 'C', label: 'Circle', group: 'Tools' },
   { keys: 'L', label: 'Line', group: 'Tools' },
   { keys: 'S', label: 'Sticky note', group: 'Tools' },
-  { keys: 'P', label: 'Draw', group: 'Tools' },
+  { keys: 'P', label: 'Pen (click for corners, drag for curves)', group: 'Tools' },
+  { keys: 'D', label: 'Draw', group: 'Tools' },
   { keys: 'H or Space', label: 'Hand, pan the canvas', group: 'Tools' },
   { keys: 'V or Esc', label: 'Select', group: 'Tools' },
   { keys: '⌘ B / I / U', label: 'Bold, italic, underline', group: 'Text' },
@@ -151,7 +152,7 @@ export function useShortcuts() {
         return;
       }
       if (mod || e.altKey) return;
-      const tools: Record<string, typeof editor.state.tool> = { v: 'select', h: 'hand', t: 'text', r: 'rect', c: 'ellipse', l: 'line', s: 'sticky', p: 'draw' };
+      const tools: Record<string, typeof editor.state.tool> = { v: 'select', h: 'hand', t: 'text', r: 'rect', c: 'ellipse', l: 'line', s: 'sticky', p: 'pen', d: 'draw' };
       if (tools[k]) {
         stop();
         editor.ui.set({ tool: tools[k], selection: tools[k] === 'select' ? editor.state.selection : [] });

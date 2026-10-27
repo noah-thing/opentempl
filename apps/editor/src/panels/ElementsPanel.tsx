@@ -65,6 +65,12 @@ export default function ElementsPanel() {
             );
           })}
         </div>
+        <button className="btn btn-ink btn-block" style={{ height: 36, marginTop: 10 }} onClick={() => editor.ui.set({ tool: 'pen', penEditId: null, selection: [] })}>
+          <Icon name="bezier" /> Draw your own shape
+        </button>
+        <p className="hint" style={{ marginTop: 8 }}>
+          Click for corners, drag for curves, press P any time. Select two shapes to merge, cut or overlap them.
+        </p>
       </Section>
       <Section title="Lines and arrows">
         <div className="grid-4">

@@ -16,7 +16,7 @@ import type {
 import { layoutText } from '../text/layout';
 import { ImageFilterDef, fillDef, fillRef, filtersActive, combinedFilters } from './paint';
 import { useRenderEnv } from './RenderContext';
-import { shapePath } from './shapes';
+import { elementPath, shapePath } from './shapes';
 import { ChartView } from './ChartView';
 import { animState } from './animate';
 
@@ -110,7 +110,9 @@ function Body({ el, uid }: { el: Element; uid: string }) {
 
 function ShapeView({ el, uid }: { el: ShapeElement; uid: string }) {
   const env = useRenderEnv();
-  const d = shapePath(el.shape, el.w, el.h, el.radius);
+  const d = elementPath(el);
+  // Combined shapes can have holes; even odd keeps them open.
+  const rule = el.shape === 'path' ? 'evenodd' : undefined;
   const fid = `fill-${uid}`;
   const stroke = el.stroke && el.stroke.width > 0 ? el.stroke : null;
   const clip = `clip-${uid}`;
@@ -120,11 +122,11 @@ function ShapeView({ el, uid }: { el: ShapeElement; uid: string }) {
         {fillDef(fid, el.fill, el.w, el.h, env.assetUrl)}
         {stroke ? (
           <clipPath id={clip}>
-            <path d={d} />
+            <path d={d} clipRule={rule} />
           </clipPath>
         ) : null}
       </defs>
-      <path d={d} fill={fillRef(fid, el.fill)} />
+      <path d={d} fill={fillRef(fid, el.fill)} fillRule={rule} />
       {stroke ? (
         // Stroke drawn twice as wide and clipped so it sits inside the shape, like Canva borders.
         <path

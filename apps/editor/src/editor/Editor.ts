@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 import { DesignDoc, cloneElement, newId } from '../doc/design';
-import type { Element, Id, ImageElement, TextElement } from '../doc/types';
+import type { Element, Id, ImageElement, ShapeElement, TextElement } from '../doc/types';
+import { combineShapes, type BooleanOp } from '../lib/pathops';
 import { makeImage } from '../doc/factory';
 import { aabb, unionRects, type Rect } from '../lib/geom';
 import { createStore, type Store } from '../lib/store';
@@ -378,6 +379,28 @@ export class Editor {
     if (!ids.length) return;
     this.doc.updateElements(Object.fromEntries(ids.map((id) => [id, { groupId: undefined }])));
     this.toast('Ungrouped');
+  }
+
+  // Shapes only: everything else has no outline to combine.
+  canCombine() {
+    const sel = this.selected();
+    return sel.length > 1 && sel.every((e) => e.type === 'shape');
+  }
+
+  combine(op: BooleanOp) {
+    if (!this.canCombine()) return this.toast('Select two or more shapes to combine');
+    const pageId = this.s.elementPage[this.state.selection[0]];
+    const order = this.s.pages[pageId].elementIds;
+    const shapes = (this.selected() as ShapeElement[]).sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+    const result = combineShapes(shapes, op);
+    if (!result) return this.toast('Those shapes leave nothing behind');
+    const at = order.indexOf(shapes[0].id);
+    this.doc.undo.stopCapturing();
+    this.doc.transact(() => {
+      this.doc.deleteElements(shapes.map((e) => e.id));
+      this.doc.addElement(pageId, result, at);
+    });
+    this.ui.set({ selection: [result.id] });
   }
 
   isGrouped() {

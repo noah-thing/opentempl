@@ -892,6 +892,15 @@ input[type='range']:active::-webkit-slider-thumb {
   inset: 0;
   pointer-events: none;
 }
+.pen-layer {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  cursor: crosshair;
+  touch-action: none;
+  pointer-events: auto;
+  z-index: 3;
+}
 
 .text-editor {
   position: absolute;

@@ -6,7 +6,7 @@ import { Icon } from '../ui/icons';
 import { Popover, usePopover } from '../ui/Popover';
 import { fillCss } from '../render/paint';
 import { parseSvg } from '../render/ElementView';
-import { SHAPE_KINDS, shapePath } from '../render/shapes';
+import { SHAPE_KINDS, elementPath, shapePath } from '../render/shapes';
 import { nearestWeight } from '../fonts/fonts';
 import { Slider } from '../panels/controls';
 import { richCommand } from '../canvas/TextEditor';
@@ -347,13 +347,16 @@ function ShapeTools({ el }: { el: ShapeElement }) {
       <BorderPopover
         stroke={el.stroke}
         radius={el.radius}
-        showRadius={!['ellipse', 'heart', 'blob', 'cloud', 'flower', 'squircle', 'halfcircle', 'pill'].includes(el.shape)}
+        showRadius={!['ellipse', 'heart', 'blob', 'cloud', 'flower', 'squircle', 'halfcircle', 'pill', 'path'].includes(el.shape)}
         onStroke={(stroke) => editor.update(el.id, { stroke } as Partial<Element>)}
         onRadius={(radius) => editor.update(el.id, { radius } as Partial<Element>)}
       />
+      {el.nodes?.length ? (
+        <TBtn label="Edit points" icon="bezier" onClick={() => editor.ui.set({ tool: 'pen', penEditId: el.id, selection: [] })} />
+      ) : null}
       <TBtn title="Change shape" onClick={swap.toggle}>
         <svg width="16" height="16" viewBox="0 0 16 16">
-          <path d={shapePath(el.shape, 14, 14, 2)} transform="translate(1 1)" fill="currentColor" />
+          <path d={elementPath(el, 14, 14)} transform="translate(1 1)" fill="currentColor" fillRule="evenodd" />
         </svg>
       </TBtn>
       <Div />
@@ -621,6 +624,15 @@ function MultiTools() {
         {n} selected
       </span>
       <TBtn label={grouped ? 'Ungroup' : 'Group'} icon={grouped ? 'ungroup' : 'group'} onClick={() => (grouped ? editor.ungroup() : editor.group())} />
+      {editor.canCombine() ? (
+        <>
+          <Div />
+          <TBtn icon="union" title="Union: merge into one shape" onClick={() => editor.combine('union')} />
+          <TBtn icon="subtract" title="Subtract: cut the top shapes out of the bottom one" onClick={() => editor.combine('subtract')} />
+          <TBtn icon="intersect" title="Intersect: keep only where they overlap" onClick={() => editor.combine('intersect')} />
+          <TBtn icon="exclude" title="Exclude: keep everything but the overlap" onClick={() => editor.combine('exclude')} />
+        </>
+      ) : null}
       <Div />
       <TBtn icon="align-left-obj" title="Align left" onClick={() => editor.align('left')} />
       <TBtn icon="align-hcenter-obj" title="Align centre" onClick={() => editor.align('hcenter')} />

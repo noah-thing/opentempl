@@ -19,6 +19,7 @@
     "nanoid": "^6.0.2",
     "pdfjs-dist": "^6.4.299",
     "peerjs": "^1.5.5",
+    "polygon-clipping": "^0.15.7",
     "pptxgenjs": "^4.0.1",
     "qrcode": "^1.5.4",
     "react": "^19.3.1",

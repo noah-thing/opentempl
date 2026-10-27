@@ -141,7 +141,8 @@ export type ShapeKind =
   | 'squircle'
   | 'halfcircle'
   | 'ticket'
-  | 'cloud';
+  | 'cloud'
+  | 'path'; // a free vector path: drawn with the pen or made by combining shapes
 
 export interface Stroke {
   color: string;
@@ -155,6 +156,19 @@ export interface ShapeElement extends BaseElement {
   fill: Fill;
   stroke: Stroke | null;
   radius: number; // corner radius for rect like shapes
+  // Only for shape 'path': the outline in its own space (0..w0, 0..h0), so it stretches with the box.
+  path?: string;
+  w0?: number;
+  h0?: number;
+  // Pen anchors in the same space, kept so the outline can be edited point by point.
+  nodes?: PenNode[];
+}
+
+export interface PenNode {
+  x: number;
+  y: number;
+  hx: number; // outgoing handle, relative to the anchor; the incoming one mirrors it
+  hy: number;
 }
 
 export type LineCap = 'none' | 'arrow' | 'triangle' | 'circle' | 'square' | 'bar' | 'diamond';
