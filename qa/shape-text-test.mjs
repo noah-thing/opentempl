@@ -1,0 +1,26 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+page.on('pageerror', (e) => console.log('pageerror', e.message));
+await page.goto('http://localhost:5181/#/new?format=instagram-post', { waitUntil: 'networkidle' });
+await page.waitForTimeout(2500);
+const box = await page.locator('.page-stage').first().boundingBox();
+const at = (fx, fy) => [box.x + box.width * fx, box.y + box.height * fy];
+await page.keyboard.press('c');
+await page.mouse.move(...at(0.2, 0.2)); await page.mouse.down(); await page.mouse.move(...at(0.7, 0.6), { steps: 6 }); await page.mouse.up();
+await page.waitForTimeout(200);
+await page.mouse.dblclick(...at(0.45, 0.4));
+await page.waitForTimeout(300);
+await page.keyboard.type('Inside the circle');
+await page.keyboard.press('Escape');
+await page.waitForTimeout(300);
+const els = await page.evaluate(() => Object.values(window.__tavla.s.elements).map((e) => ({ type: e.type, g: e.groupId, text: e.text, color: e.color, cx: Math.round(e.x + e.w / 2), cy: Math.round(e.y + e.h / 2) })));
+console.log(JSON.stringify(els));
+// drag the circle; the label should come along
+await page.mouse.click(...at(0.9, 0.9));
+await page.mouse.move(...at(0.3, 0.45)); await page.mouse.down(); await page.mouse.move(...at(0.4, 0.55), { steps: 6 }); await page.mouse.up();
+await page.waitForTimeout(200);
+console.log(JSON.stringify(await page.evaluate(() => Object.values(window.__tavla.s.elements).map((e) => [e.type, Math.round(e.x + e.w / 2), Math.round(e.y + e.h / 2)]))));
+await page.mouse.click(...at(0.95, 0.95));
+await page.locator('.page-stage').first().screenshot({ path: '/tmp/shape-text.png' });
+await browser.close();

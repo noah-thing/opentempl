@@ -4,13 +4,13 @@ import { staleConnectors } from '../canvas/connectors';
 import type { Element, Id, ImageElement, ShapeElement, TextElement } from '../doc/types';
 import { combineShapes, type BooleanOp } from '../lib/pathops';
 import { elementPath, pathToNodes, penPath } from '../render/shapes';
-import { makeImage } from '../doc/factory';
+import { makeImage, makeText } from '../doc/factory';
 import { aabb, unionRects, type Rect } from '../lib/geom';
 import { createStore, type Store } from '../lib/store';
 import { layoutText } from '../text/layout';
 import { curvedGeometry } from '../render/ElementView';
 import { fontsVersion, ensureFont, nearestWeight } from '../fonts/fonts';
-import { recolor, refont, type FontPair } from '../tools/restyle';
+import { luminance, recolor, refont, type FontPair } from '../tools/restyle';
 import { initialEditorState, type EditorState, type PanelId } from './state';
 import { localName } from '../collab/collab';
 import type { Comment } from '../doc/types';
@@ -221,7 +221,7 @@ export class Editor {
       }
     } else {
       const lay = layoutText(el, fontsVersion());
-      if (Math.abs(lay.height - el.h) > 0.5) patch = { h: lay.height };
+      if (Math.abs(lay.height - el.h) > 0.5) patch = el.valign === 'middle' ? { h: lay.height, y: el.y + (el.h - lay.height) / 2 } : { h: lay.height };
     }
     if (!patch) return;
     if (tracked) this.doc.updateElement(id, patch);
@@ -397,6 +397,33 @@ export class Editor {
     if (!ids.length) return;
     this.doc.updateElements(Object.fromEntries(ids.map((id) => [id, { groupId: undefined }])));
     this.toast('Ungrouped');
+  }
+
+  // Typing into a shape: a centred label grouped with it, in a colour that
+  // reads on the fill. A label that is already there is edited instead.
+  textInShape(id: Id) {
+    const el = this.s.elements[id];
+    if (el?.type !== 'shape' || el.locked) return;
+    const pageId = this.s.elementPage[id];
+    const box = aabb(el);
+    const inside = (t: Element) => {
+      const c = { x: t.x + t.w / 2, y: t.y + t.h / 2 };
+      return c.x > box.x && c.x < box.x + box.w && c.y > box.y && c.y < box.y + box.h;
+    };
+    const label = el.groupId ? this.groupMembers(id).map((i) => this.s.elements[i]).find((t) => t?.type === 'text' && inside(t)) : undefined;
+    if (label) return this.ui.set({ selection: [label.id], editingTextId: label.id });
+    const fill = el.fill.type === 'solid' && /^#[0-9a-f]{6}/i.test(el.fill.color) ? el.fill.color : '#FFFFFF';
+    const size = Math.round(Math.max(16, Math.min(96, Math.min(el.w, el.h) * 0.16)));
+    const h = size * 1.3;
+    const t = makeText({ text: '', x: el.x + el.w * 0.12, y: el.y + el.h / 2 - h / 2, w: el.w * 0.76, h, fontSize: size, fontWeight: 600, align: 'center', valign: 'middle', lineHeight: 1.3, rotation: el.rotation, color: luminance(fill) < 0.35 ? '#FFFFFF' : '#0B0B0D' });
+    const gid = el.groupId ?? newId();
+    const at = this.s.pages[pageId].elementIds.indexOf(id) + 1;
+    this.doc.undo.stopCapturing();
+    this.doc.transact(() => {
+      if (!el.groupId) this.doc.updateElement(id, { groupId: gid });
+      this.doc.addElement(pageId, { ...t, groupId: gid }, at);
+    });
+    this.ui.set({ selection: [t.id], editingTextId: t.id });
   }
 
   // ---------- styles ----------

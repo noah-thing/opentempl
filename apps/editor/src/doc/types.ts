@@ -116,6 +116,7 @@ export interface TextElement extends BaseElement {
   curve: number; // -100..100, 0 = straight
   role?: 'heading' | 'subheading' | 'body';
   runs?: TextRun[];
+  valign?: 'middle'; // grows up and down from its centre, like a label inside a shape
 }
 
 export type ShapeKind =
