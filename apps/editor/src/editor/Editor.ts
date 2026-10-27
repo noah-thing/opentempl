@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import { DesignDoc, LOCAL, cloneElements, newId } from '../doc/design';
 import { staleConnectors } from '../canvas/connectors';
 import type { Element, Id, ImageElement, ShapeElement, TextElement } from '../doc/types';
-import { combineShapes, type BooleanOp } from '../lib/pathops';
+import type { BooleanOp } from '../lib/pathops';
 import { elementPath, pathToNodes, penPath } from '../render/shapes';
 import { makeImage, makeText } from '../doc/factory';
 import { aabb, unionRects, type Rect } from '../lib/geom';
@@ -467,8 +467,10 @@ export class Editor {
     return sel.length > 1 && sel.every((e) => e.type === 'shape');
   }
 
-  combine(op: BooleanOp) {
+  // The polygon maths loads the first time someone combines shapes.
+  async combine(op: BooleanOp) {
     if (!this.canCombine()) return this.toast('Select two or more shapes to combine');
+    const { combineShapes } = await import('../lib/pathops');
     const pageId = this.s.elementPage[this.state.selection[0]];
     const order = this.s.pages[pageId].elementIds;
     const shapes = (this.selected() as ShapeElement[]).sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));

@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { PeerProvider } from './peerProvider';
+import type { PeerProvider } from './peerProvider';
 import type { Editor } from '../editor/Editor';
 import type { Id } from '../doc/types';
 
@@ -34,7 +34,7 @@ export function usePeers() {
 }
 
 export interface Collab {
-  provider: PeerProvider;
+  provider: PeerProvider | null; // null until the networking code has loaded
   destroy: () => void;
   setCursor: (c: Peer['cursor']) => void;
 }
@@ -55,49 +55,61 @@ export function localName() {
 
 export function setLocalName(n: string) {
   localStorage.setItem('tavla:name', n);
-  active?.provider.awareness.setLocalStateField('user', { ...active.provider.awareness.getLocalState()?.user, name: n });
+  const aw = active?.provider?.awareness;
+  aw?.setLocalStateField('user', { ...aw.getLocalState()?.user, name: n });
 }
 
+// PeerJS and the WebRTC shims load only when a session starts, so the editor
+// opens without them.
 export function connectCollab(editor: Editor, room: string): Collab {
-  const provider = new PeerProvider(editor.doc.ydoc, room);
-  const aw = provider.awareness;
   const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-  aw.setLocalStateField('user', { name: localName(), color });
-
-  const sync = () => {
-    const out: Peer[] = [];
-    aw.getStates().forEach((st, id) => {
-      if (id === aw.clientID || !st.user) return;
-      out.push({ id, name: st.user.name, color: st.user.color, cursor: st.cursor ?? null, selection: st.selection ?? [] });
-    });
-    peers = out;
-    emit();
-  };
-  aw.on('change', sync);
-  const unsub = editor.ui.subscribe(() => {
-    const sel = editor.state.selection;
-    const prev = aw.getLocalState()?.selection;
-    if (prev !== sel) aw.setLocalStateField('selection', sel);
-  });
+  let cleanup = () => {};
+  let closed = false;
   let last = 0;
   const collab: Collab = {
-    provider,
+    provider: null,
     setCursor: (c) => {
       const now = performance.now();
       if (now - last < 40) return;
       last = now;
-      aw.setLocalStateField('cursor', c);
+      collab.provider?.awareness.setLocalStateField('cursor', c);
     },
     destroy: () => {
-      unsub();
-      aw.off('change', sync);
-      provider.destroy();
+      closed = true;
+      cleanup();
+      collab.provider?.destroy();
       peers = [];
       emit();
-      active = null;
+      if (active === collab) active = null;
     },
   };
   active = collab;
+  import('./peerProvider').then(({ PeerProvider }) => {
+    if (closed) return;
+    const provider = new PeerProvider(editor.doc.ydoc, room);
+    collab.provider = provider;
+    const aw = provider.awareness;
+    aw.setLocalStateField('user', { name: localName(), color });
+    const sync = () => {
+      const out: Peer[] = [];
+      aw.getStates().forEach((st, id) => {
+        if (id === aw.clientID || !st.user) return;
+        out.push({ id, name: st.user.name, color: st.user.color, cursor: st.cursor ?? null, selection: st.selection ?? [] });
+      });
+      peers = out;
+      emit();
+    };
+    aw.on('change', sync);
+    const unsub = editor.ui.subscribe(() => {
+      const sel = editor.state.selection;
+      const prev = aw.getLocalState()?.selection;
+      if (prev !== sel) aw.setLocalStateField('selection', sel);
+    });
+    cleanup = () => {
+      unsub();
+      aw.off('change', sync);
+    };
+  });
   return collab;
 }
 

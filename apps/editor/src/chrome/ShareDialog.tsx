@@ -3,7 +3,6 @@ import { useEditor } from '../editor/Editor';
 import { Icon } from '../ui/icons';
 import { useEscape } from '../ui/useEscape';
 import { activeCollab, connectCollab, localName, newRoomKey, setLocalName, usePeers } from '../collab/collab';
-import { exportDesign } from '../export/exporters';
 
 export function ShareDialog() {
   const editor = useEditor();
@@ -91,7 +90,7 @@ export function ShareDialog() {
             <p className="hint" style={{ margin: '0 0 12px' }}>A .tavla file holds every page, photo and font choice. The other person opens it from File, Open.</p>
             <button
               className="btn btn-outline"
-              onClick={() => exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' })}
+              onClick={async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' })}
             >
               <Icon name="download" /> Download .tavla file
             </button>

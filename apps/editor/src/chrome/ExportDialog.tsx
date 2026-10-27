@@ -4,7 +4,7 @@ import { useDoc } from '../editor/hooks';
 import { Icon } from '../ui/icons';
 import { useEscape } from '../ui/useEscape';
 import { Eyes } from '../ui/Logo';
-import { exportDesign, type ExportFormat } from '../export/exporters';
+import type { ExportFormat } from '../export/exporters';
 
 const FORMATS: { id: ExportFormat; name: string; note: string }[] = [
   { id: 'png', name: 'PNG', note: 'Sharp images, transparent backgrounds' },
@@ -40,6 +40,7 @@ export function ExportDialog() {
     setError(null);
     setBusy({ done: 0, total: 1 });
     try {
+      const { exportDesign } = await import('../export/exporters');
       await exportDesign(editor.doc, {
         format,
         pageIds: which === 'current' && editor.state.activePageId ? [editor.state.activePageId] : pageOrder,

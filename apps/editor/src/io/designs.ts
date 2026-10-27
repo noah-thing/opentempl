@@ -4,7 +4,7 @@ import { DesignDoc, newId } from '../doc/design';
 import type { Asset, DesignMeta, DesignSnapshot } from '../doc/types';
 import { db } from './db';
 import { thumbnail } from '../export/render';
-import { readTavlaFile } from '../export/exporters';
+import { readTavlaFile } from '../export/tavlaFile';
 import { putMedia } from './media';
 
 // Design library: every design is its own Y.Doc persisted in IndexedDB, plus a

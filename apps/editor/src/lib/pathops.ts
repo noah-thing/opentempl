@@ -136,8 +136,3 @@ export function combineShapes(shapes: ShapeElement[], op: BooleanOp): ShapeEleme
   };
 }
 
-// Tight bounds of any path, curves included.
-export function pathBounds(d: string) {
-  const b = probePath(d).getBBox();
-  return { x: b.x, y: b.y, w: b.width, h: b.height };
-}

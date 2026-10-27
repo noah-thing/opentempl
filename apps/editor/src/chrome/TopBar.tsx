@@ -5,7 +5,6 @@ import { Icon } from '../ui/icons';
 import { Mark } from '../ui/Logo';
 import { Menu, Popover, usePopover, type MenuItem } from '../ui/Popover';
 import { navigate } from '../App';
-import { exportDesign } from '../export/exporters';
 import { duplicateDesign, importTavla } from '../io/designs';
 import { pickFiles, importFiles } from '../io/upload';
 import { usePeers } from '../collab/collab';
@@ -92,7 +91,7 @@ export function TopBar() {
     { label: 'Dark theme', checked: isDark(), onClick: () => toggleTheme() },
     { label: 'Find and replace', icon: 'search', kbd: '⌘F', onClick: () => editor.ui.set({ findOpen: true }) },
     { separator: true },
-    { label: 'Download as .tavla file', icon: 'download', onClick: () => exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
+    { label: 'Download as .tavla file', icon: 'download', onClick: async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
     { label: 'Keyboard shortcuts', icon: 'keyboard', kbd: '?', onClick: () => editor.ui.set({ shortcutsOpen: true }) },
     { label: 'Command palette', icon: 'command', kbd: '⌘K', onClick: () => editor.ui.set({ commandOpen: true }) },
   ];

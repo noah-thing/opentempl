@@ -4,7 +4,7 @@ import { makeShape } from '../doc/factory';
 import { useEditor } from '../editor/Editor';
 import { startDrag } from '../editor/hooks';
 import type { Point } from '../lib/geom';
-import { pathBounds } from '../lib/pathops';
+import { pathBounds } from '../lib/pathBounds';
 import { inHandle, penPath } from '../render/shapes';
 
 // The pen: click for a corner, drag for a curve, click the first point (or
