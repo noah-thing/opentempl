@@ -11,6 +11,7 @@ const PANELS: Partial<Record<Exclude<PanelId, null>, { title: string; C: Compone
   photos: { title: 'Photos', C: lazy(() => import('../panels/PhotosPanel')) },
   uploads: { title: 'Uploads', C: lazy(() => import('../panels/UploadsPanel')) },
   draw: { title: 'Draw', C: lazy(() => import('../panels/DrawPanel')) },
+  audio: { title: 'Audio', C: lazy(() => import('../panels/AudioPanel')) },
   brand: { title: 'Brand kit', C: lazy(() => import('../panels/BrandPanel')) },
   layers: { title: 'Layers', C: lazy(() => import('../panels/LayersPanel')) },
   apps: { title: 'Tools', C: lazy(() => import('../panels/ToolsPanel')) },

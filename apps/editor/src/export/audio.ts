@@ -1,8 +1,9 @@
 import type { DesignSnapshot, Id, VideoElement } from '../doc/types';
 import { clipLength, getMedia } from '../io/media';
 
-// The sound of an exported video: every clip that is not muted, placed at its
-// page's start, trimmed, looped and set to its volume, mixed down offline.
+// The sound of an exported video: the design's soundtrack underneath, then
+// every clip that is not muted, placed at its page's start, trimmed, looped
+// and set to its volume, all mixed down offline.
 
 export const SAMPLE_RATE = 48000;
 
@@ -20,11 +21,34 @@ export async function mixSound(snap: DesignSnapshot, spans: PageSpan[]): Promise
       if (el?.type === 'video' && !el.muted && !el.hidden && el.volume > 0) clips.push({ el, span });
     }
   }
-  if (!clips.length) return null;
+  const track = snap.meta.soundtrack;
+  if (!clips.length && !track) return null;
   const total = spans.reduce((a, s) => Math.max(a, s.start + s.length), 0);
   const ctx = new OfflineAudioContext(2, Math.ceil(total * SAMPLE_RATE), SAMPLE_RATE);
   const decoded = new Map<Id, AudioBuffer | null>();
   let any = false;
+
+  if (track && track.volume > 0) {
+    const blob = await getMedia(track.mediaId);
+    const buf = blob ? await ctx.decodeAudioData(await blob.arrayBuffer()).catch(() => null) : null;
+    if (buf) {
+      any = true;
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.loop = true;
+      src.loopStart = track.trimStart;
+      src.loopEnd = buf.duration;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(track.volume, 0);
+      if (track.fadeOut && total > 3) {
+        gain.gain.setValueAtTime(track.volume, total - 2);
+        gain.gain.linearRampToValueAtTime(0, total);
+      }
+      src.connect(gain).connect(ctx.destination);
+      src.start(0, track.trimStart);
+      src.stop(total);
+    }
+  }
   for (const { el, span } of clips) {
     if (!decoded.has(el.mediaId)) {
       const blob = await getMedia(el.mediaId);

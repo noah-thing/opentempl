@@ -88,6 +88,10 @@ export async function importFiles(editor: Editor, files: File[], opts: { at?: Po
       }
       continue;
     }
+    if (file.type.startsWith('audio/') || /\.(mp3|m4a|aac|wav|ogg|oga|flac|opus)$/i.test(file.name)) {
+      await importSoundtrack(editor, file);
+      continue;
+    }
     if (file.type.startsWith('video/') || /\.(mp4|m4v|mov|webm)$/i.test(file.name)) {
       await importVideo(editor, file, at);
       continue;
@@ -97,6 +101,43 @@ export async function importFiles(editor: Editor, files: File[], opts: { at?: Po
 }
 
 const MAX_VIDEO = 500 * 1024 * 1024;
+const PEAKS = 160;
+
+// A song or voice over becomes the design's soundtrack (one per design).
+export async function importSoundtrack(editor: Editor, file: File) {
+  if (file.size > MAX_VIDEO) return editor.toast(`${file.name} is over 500 MB`);
+  try {
+    const ctx = new OfflineAudioContext(1, 1, 44100);
+    const buf = await ctx.decodeAudioData(await file.arrayBuffer());
+    const data = buf.getChannelData(0);
+    const step = Math.max(1, Math.floor(data.length / PEAKS));
+    const raw: number[] = [];
+    for (let i = 0; i < PEAKS; i++) {
+      let m = 0;
+      for (let j = i * step; j < Math.min(data.length, (i + 1) * step); j += 16) m = Math.max(m, Math.abs(data[j]));
+      raw.push(m);
+    }
+    const top = Math.max(0.0001, ...raw);
+    const mediaId = newId();
+    await putMedia(mediaId, file);
+    editor.doc.setMeta({
+      soundtrack: {
+        mediaId,
+        name: file.name.replace(/\.[a-z0-9]+$/i, ''),
+        mime: file.type || 'audio/mpeg',
+        duration: buf.duration,
+        trimStart: 0,
+        volume: 0.8,
+        fadeOut: true,
+        peaks: raw.map((v) => Math.round((v / top) * 100) / 100),
+      },
+    });
+    editor.ui.set({ panel: 'audio' });
+    editor.toast(`${file.name} now plays under the design`);
+  } catch {
+    editor.toast(`Could not read ${file.name} as sound`);
+  }
+}
 
 async function importVideo(editor: Editor, file: File, at?: Point) {
   if (file.size > MAX_VIDEO) return editor.toast(`${file.name} is over 500 MB. Trim it first, then bring it in.`);
@@ -140,7 +181,7 @@ async function realDuration(v: HTMLVideoElement): Promise<number> {
   return d || 1;
 }
 
-export function pickFiles(accept = 'image/*,.svg,video/*'): Promise<File[]> {
+export function pickFiles(accept = 'image/*,.svg,video/*,audio/*'): Promise<File[]> {
   return new Promise((resolve) => {
     const input = document.createElement('input');
     input.type = 'file';

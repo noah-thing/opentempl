@@ -162,7 +162,8 @@ interface TavlaHeader {
 
 export async function writeTavlaFile(doc: DesignDoc): Promise<Blob> {
   const update = Y.encodeStateAsUpdate(doc.ydoc);
-  const ids = [...new Set(Object.values(doc.snapshot.elements).flatMap((e) => (e.type === 'video' ? [e.mediaId] : [])))];
+  const track = doc.snapshot.meta.soundtrack;
+  const ids = [...new Set([...Object.values(doc.snapshot.elements).flatMap((e) => (e.type === 'video' ? [e.mediaId] : [])), ...(track ? [track.mediaId] : [])])];
   const media = (await Promise.all(ids.map(async (id) => ({ id, blob: await getMedia(id) })))).filter((m): m is { id: Id; blob: Blob } => !!m.blob);
   if (!media.length) return new Blob([TAVLA_MAGIC, update as BlobPart], { type: 'application/x-tavla' });
   const header: TavlaHeader = { update: update.length, media: media.map((m) => ({ id: m.id, mime: m.blob.type, size: m.blob.size })) };

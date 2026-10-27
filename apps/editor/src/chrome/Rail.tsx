@@ -10,6 +10,7 @@ const ITEMS: { id: PanelId; label: string; icon: string }[] = [
   { id: 'photos', label: 'Photos', icon: 'photos' },
   { id: 'uploads', label: 'Uploads', icon: 'uploads' },
   { id: 'draw', label: 'Draw', icon: 'draw' },
+  { id: 'audio', label: 'Audio', icon: 'music' },
   { id: 'brand', label: 'Brand', icon: 'brand' },
   { id: 'layers', label: 'Layers', icon: 'layers' },
   { id: 'apps', label: 'Tools', icon: 'apps' },

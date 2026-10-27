@@ -338,6 +338,20 @@ export interface DesignMeta {
   createdAt: number;
   updatedAt: number;
   formatId?: string;
+  soundtrack?: Soundtrack | null;
+}
+
+// Music or a voice over under the whole design: plays in Present and is mixed
+// into MP4 exports. Bytes live in the media store, like video clips.
+export interface Soundtrack {
+  mediaId: Id;
+  name: string;
+  mime: string;
+  duration: number; // seconds
+  trimStart: number;
+  volume: number; // 0..1
+  fadeOut: boolean;
+  peaks: number[]; // waveform, 0..1, for drawing without decoding
 }
 
 export interface Asset {

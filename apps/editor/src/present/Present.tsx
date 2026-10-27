@@ -6,6 +6,7 @@ import { RenderContext, type RenderEnv } from '../render/RenderContext';
 import { pageAnimationLength } from '../render/animate';
 import { Icon } from '../ui/icons';
 import { presentChannel } from './Presenter';
+import { mediaUrl } from '../io/media';
 
 export function Present() {
   const editor = useEditor();
@@ -45,6 +46,40 @@ export function Present() {
     ch.postMessage({ index });
     ch.close();
   }, [editor, index]);
+
+  // The soundtrack runs under the whole presentation, looping from its start point.
+  const track = meta.soundtrack;
+  useEffect(() => {
+    if (!track) return;
+    const a = new Audio();
+    let live = true;
+    mediaUrl(track.mediaId).then((src) => {
+      if (!live || !src) return;
+      a.src = src;
+      a.volume = track.volume;
+      a.currentTime = track.trimStart;
+      a.play().catch(() => {});
+    });
+    a.onended = () => {
+      a.currentTime = track.trimStart;
+      a.play().catch(() => {});
+    };
+    return () => {
+      live = false;
+      // A short fade instead of a hard stop when the presentation ends.
+      const v0 = a.volume;
+      let k = 0;
+      const t = setInterval(() => {
+        k++;
+        a.volume = Math.max(0, v0 * (1 - k / 10));
+        if (k >= 10) {
+          clearInterval(t);
+          a.pause();
+          a.removeAttribute('src');
+        }
+      }, 40);
+    };
+  }, [track?.mediaId, track?.trimStart]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     root.current?.requestFullscreen?.().catch(() => {});

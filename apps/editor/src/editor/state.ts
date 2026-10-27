@@ -13,6 +13,7 @@ export type PanelId =
   | 'brand'
   | 'layers'
   | 'apps'
+  | 'audio'
   // contextual panels opened from the selection toolbar
   | 'font'
   | 'color'

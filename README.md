@@ -55,6 +55,8 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Export.** PNG (transparent, up to 4×), JPG, WebP, SVG, PDF for screen or print with live links and bleed, PowerPoint with editable text, MP4 video of pages, animations and clips with their mixed sound (WebCodecs), GIF, multi page ZIP, and the editable `.tavla` file (video clips included).
 
+**Sound.** A soundtrack under the whole design, from your own file or one of four Tavla tones that the app synthesises on the spot. Trim it on its waveform, set volume and fade out. It plays in Present mode and is mixed with the clips' sound into MP4 exports.
+
 **Import.** `.tavla` files and PDFs (each page comes in as a picture).
 
 **Share.** A live link for real time editing with cursors and selections of everyone in the room, peer to peer and encrypted.
