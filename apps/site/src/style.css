@@ -812,8 +812,13 @@ a {
 .source .btn {
   margin-top: 32px;
 }
+.source-grid > *,
+.yours-grid > * {
+  min-width: 0;
+}
 .code {
   margin: 0;
+  max-width: 100%;
   background: var(--sheet);
   border-radius: 20px;
   padding: 22px 24px 26px;
@@ -1040,7 +1045,41 @@ a {
     white-space: normal;
   }
   .el-text {
-    --w: 86% !important;
+    width: 88%;
+  }
+  .sheet-copy {
+    --x: 6.6% !important;
+  }
+  .obj[alt='Pixel pen'],
+  .obj[alt='Paint bucket'] {
+    display: none;
+  }
+  .obj[alt='Pixel cursor'] {
+    --x: 76% !important;
+    --y: 1% !important;
+    --w: 17% !important;
+  }
+  .obj[alt='Pixel star'] {
+    --x: 76% !important;
+    --y: 82% !important;
+    --w: 17% !important;
+  }
+  .obj[alt='Curious blob'] {
+    --x: 52% !important;
+    --y: 84% !important;
+    --w: 15% !important;
+  }
+  .code {
+    transform: none;
+  }
+  .code pre {
+    font-size: 11.5px;
+  }
+  .hero-cta .btn {
+    width: 100%;
+  }
+  .sum .result {
+    height: 1.4em;
   }
   .sheet-copy {
     width: 82%;
