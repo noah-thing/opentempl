@@ -33,7 +33,7 @@ npm run build        # site into dist/, editor into dist/app/
 npm test -w @tavla/editor   # unit tests (vitest)
 ```
 
-Browser tests live in `qa/` (Playwright scripts against the dev server).
+Browser tests live in `qa/` (Playwright scripts against the dev server). `scripts/ship-mini.sh` rebuilds the private preview on the Mac mini, and with `--desktop` also the desktop apps in the draft release.
 
 Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `apps/desktop/app`, then `npx electron-builder --mac dmg`.
 
