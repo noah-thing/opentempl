@@ -43,6 +43,17 @@ export function TopBar() {
       },
     },
     { label: 'Upload images', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
+    {
+      label: 'Import a PDF as a new design',
+      icon: 'file',
+      onClick: async () => {
+        const [f] = await pickFiles('.pdf');
+        if (!f) return;
+        editor.toast('Importing PDF pages');
+        const { importPdf } = await import('../io/pdfImport');
+        navigate(`/d/${await importPdf(f)}`);
+      },
+    },
     { separator: true },
     { label: 'Save version', icon: 'history', kbd: '', onClick: async () => (await saveVersion(editor.doc, 'Saved by hand'), editor.toast('Version saved')) },
     { label: 'Version history', icon: 'history', onClick: () => editor.openPanel('history') },

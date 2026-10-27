@@ -54,6 +54,12 @@ export function Home() {
       onDrop={async (e) => {
         e.preventDefault();
         setDrop(false);
+        const pdf = [...e.dataTransfer.files].find((x) => x.name.toLowerCase().endsWith('.pdf'));
+        if (pdf) {
+          const { importPdf } = await import('../io/pdfImport');
+          navigate(`/d/${await importPdf(pdf)}`);
+          return;
+        }
         const f = [...e.dataTransfer.files].find((x) => x.name.endsWith('.tavla'));
         if (f) {
           const id = await importTavla(f);
@@ -73,8 +79,13 @@ export function Home() {
         <button
           className="btn"
           onClick={async () => {
-            const [f] = await pickFiles('.tavla');
+            const [f] = await pickFiles('.tavla,.pdf');
             if (!f) return;
+            if (f.name.toLowerCase().endsWith('.pdf')) {
+              const { importPdf } = await import('../io/pdfImport');
+              navigate(`/d/${await importPdf(f)}`);
+              return;
+            }
             const id = await importTavla(f);
             if (id) navigate(`/d/${id}`);
           }}
@@ -172,7 +183,7 @@ export function Home() {
               <Eyes size={96} />
               <div>
                 <h3>{q ? `Nothing called “${q}”` : 'Nothing here yet'}</h3>
-                <p className="muted">{q ? 'Try another word.' : 'Pick a sheet above or start from a template below. Drop a .tavla file anywhere on this page to open it.'}</p>
+                <p className="muted">{q ? 'Try another word.' : 'Pick a sheet above or start from a template below. Drop a .tavla file or a PDF anywhere on this page to open it.'}</p>
               </div>
             </div>
           )}
@@ -207,7 +218,7 @@ export function Home() {
       {drop ? (
         <div className="home-drop">
           <Eyes size={120} mood="wow" />
-          <span>Drop a .tavla file to open it</span>
+          <span>Drop a .tavla or PDF file to open it</span>
         </div>
       ) : null}
     </div>
