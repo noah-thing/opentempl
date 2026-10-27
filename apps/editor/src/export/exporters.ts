@@ -15,6 +15,7 @@ export interface ExportOptions {
   transparent: boolean;
   quality: number; // 0..1 for jpg/webp
   pdfQuality: 'standard' | 'print';
+  bleed?: boolean; // 3 mm bleed with crop marks, for print shops
   onProgress?: (done: number, total: number) => void;
 }
 
@@ -53,21 +54,44 @@ export async function exportDesign(doc: DesignDoc, opts: ExportOptions) {
   }
 
   if (opts.format === 'pdf') {
-    const w = snap.meta.width * 0.75;
-    const h = snap.meta.height * 0.75;
+    // 3 mm of bleed plus 7 mm of slug for crop marks, in design units (96 dpi).
+    const bleed = opts.bleed ? 11.34 : 0;
+    const slug = opts.bleed ? 26.46 : 0;
+    const w = (snap.meta.width + 2 * (bleed + slug)) * 0.75;
+    const h = (snap.meta.height + 2 * (bleed + slug)) * 0.75;
     const pdf = new jsPDF({ orientation: w > h ? 'landscape' : 'portrait', unit: 'pt', format: [w, h], compress: true });
     const scale = opts.pdfQuality === 'print' ? Math.max(2, 300 / 96) : 1.5;
     for (let i = 0; i < pages.length; i++) {
       if (i > 0) pdf.addPage([w, h], w > h ? 'landscape' : 'portrait');
-      const svg = await pageSvg(doc, snap, pages[i]);
-      const canvas = await rasterize(svg, snap.meta.width, snap.meta.height, scale, '#FFFFFF');
+      const svg = await pageSvg(doc, snap, pages[i], { bleed });
+      const bw = snap.meta.width + 2 * bleed;
+      const bh = snap.meta.height + 2 * bleed;
+      const canvas = await rasterize(svg, bw, bh, scale, '#FFFFFF');
       const blob = await canvasToBlob(canvas, 'image/jpeg', opts.pdfQuality === 'print' ? 0.95 : 0.88);
       const buf = new Uint8Array(await blob.arrayBuffer());
-      pdf.addImage(buf, 'JPEG', 0, 0, w, h, undefined, 'FAST');
+      pdf.addImage(buf, 'JPEG', slug * 0.75, slug * 0.75, bw * 0.75, bh * 0.75, undefined, 'FAST');
+      if (opts.bleed) {
+        // Crop marks at the trim edges, outside the bleed.
+        const o = (slug + bleed) * 0.75;
+        const tw = snap.meta.width * 0.75;
+        const th = snap.meta.height * 0.75;
+        const m = slug * 0.75 - 4;
+        pdf.setLineWidth(0.25);
+        pdf.setDrawColor(0, 0, 0);
+        for (const x of [o, o + tw]) {
+          pdf.line(x, 0, x, m);
+          pdf.line(x, h - m, x, h);
+        }
+        for (const y of [o, o + th]) {
+          pdf.line(0, y, m, y);
+          pdf.line(w - m, y, w, y);
+        }
+      }
       // Keep links clickable in the PDF.
+      const off = (slug + bleed) * 0.75;
       for (const id of snap.pages[pages[i]].elementIds) {
         const el = snap.elements[id];
-        if (el?.link) pdf.link(el.x * 0.75, el.y * 0.75, el.w * 0.75, el.h * 0.75, { url: el.link });
+        if (el?.link) pdf.link(off + el.x * 0.75, off + el.y * 0.75, el.w * 0.75, el.h * 0.75, { url: el.link });
       }
       progress(i + 1);
     }

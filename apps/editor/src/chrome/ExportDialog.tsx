@@ -27,6 +27,7 @@ export function ExportDialog() {
   const [quality, setQuality] = useState(0.9);
   const [pdfQuality, setPdfQuality] = useState<'standard' | 'print'>('standard');
   const [which, setWhich] = useState<'all' | 'current'>('all');
+  const [bleed, setBleed] = useState(false);
   const [busy, setBusy] = useState<{ done: number; total: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const close = () => !busy && editor.ui.set({ exportOpen: false });
@@ -42,6 +43,7 @@ export function ExportDialog() {
         transparent,
         quality,
         pdfQuality,
+        bleed,
         onProgress: (done, total) => setBusy({ done, total }),
       });
       setBusy(null);
@@ -160,6 +162,12 @@ export function ExportDialog() {
                     </button>
                   </div>
                 </div>
+              ) : null}
+              {format === 'pdf' ? (
+                <label className="row-between">
+                  <span className="label">Bleed and crop marks, for print shops</span>
+                  <button className={`switch ${bleed ? 'is-on' : ''}`} onClick={() => setBleed((b) => !b)} aria-pressed={bleed} />
+                </label>
               ) : null}
               {error ? <div style={{ color: '#d22b1b' }}>{error}</div> : null}
               <button className="btn btn-primary btn-block" style={{ height: 44 }} onClick={run}>

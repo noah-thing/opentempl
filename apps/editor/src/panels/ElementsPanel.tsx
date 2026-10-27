@@ -9,6 +9,23 @@ import { Icon } from '../ui/icons';
 import { STICKERS } from './stickers';
 import { searchIcons, iconSvg } from './iconify';
 
+// Collage layouts as fractions of a square: [x, y, w, h].
+const GRIDS: [number, number, number, number][][] = [
+  [[0, 0, 0.5, 1], [0.5, 0, 0.5, 1]],
+  [[0, 0, 1, 0.5], [0, 0.5, 1, 0.5]],
+  [[0, 0, 0.5, 0.5], [0.5, 0, 0.5, 0.5], [0, 0.5, 0.5, 0.5], [0.5, 0.5, 0.5, 0.5]],
+  [[0, 0, 0.62, 1], [0.62, 0, 0.38, 0.5], [0.62, 0.5, 0.38, 0.5]],
+  [[0, 0, 1, 0.6], [0, 0.6, 0.333, 0.4], [0.333, 0.6, 0.334, 0.4], [0.667, 0.6, 0.333, 0.4]],
+  [[0, 0, 0.333, 1], [0.333, 0, 0.334, 1], [0.667, 0, 0.333, 1]],
+];
+
+function gridElements(g: [number, number, number, number][]) {
+  const S = 900;
+  const gap = 12;
+  const gid = Math.random().toString(36).slice(2, 10);
+  return g.map(([x, y, w, h]) => makeImage({ x: x * S + gap / 2, y: y * S + gap / 2, w: w * S - gap, h: h * S - gap, groupId: gid, radius: 6 }));
+}
+
 const SHAPE_COLORS = ['#2B3BFF', '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0B0B0D', '#9AA2EA', '#0AA0FF'];
 
 export default function ElementsPanel() {
@@ -73,6 +90,22 @@ export default function ElementsPanel() {
                       <circle cx="34" cy="20" r="3.4" fill="#0B0B0D" />
                     </>
                   ) : null}
+                </svg>
+              </button>
+            );
+          })}
+        </div>
+      </Section>
+      <Section title="Collage grids">
+        <div className="grid-3">
+          {GRIDS.map((g, i) => {
+            const item = (): LibraryItem => ({ kind: 'elements', elements: gridElements(g) });
+            return (
+              <button key={i} className="shape-tile" title="Collage grid" onClick={() => addLibraryItem(editor, item())} {...dragProps(item)}>
+                <svg viewBox="0 0 40 40">
+                  {g.map(([x, y, w, h], j) => (
+                    <rect key={j} x={4 + x * 32 + 1} y={4 + y * 32 + 1} width={w * 32 - 2} height={h * 32 - 2} rx="1.5" fill="#C9C9D3" />
+                  ))}
                 </svg>
               </button>
             );

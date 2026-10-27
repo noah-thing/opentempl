@@ -37,6 +37,7 @@ export interface PageSvgOptions {
   embedFonts?: boolean;
   idPrefix?: string;
   time?: number; // render entrance animations at this moment
+  bleed?: number; // extra design units drawn around the page, for print
 }
 
 export async function pageSvg(doc: DesignDoc, snap: DesignSnapshot, pageId: Id, opts: PageSvgOptions = {}) {
@@ -59,11 +60,22 @@ export async function pageSvg(doc: DesignDoc, snap: DesignSnapshot, pageId: Id, 
     idPrefix: opts.idPrefix ?? `p${snap.pageOrder.indexOf(pageId)}-`,
   };
   const p = opts.transparent ? { ...page, background: { type: 'solid' as const, color: 'transparent' } } : page;
+  const elements = opts.bleed ? extendIntoBleed(page, snap.elements, snap.meta.width, snap.meta.height, opts.bleed) : snap.elements;
   let markup = renderToStaticMarkup(
     <RenderContext.Provider value={env}>
-      <PageView page={p} elements={snap.elements} width={snap.meta.width} height={snap.meta.height} />
+      <PageView page={p} elements={elements} width={snap.meta.width} height={snap.meta.height} />
     </RenderContext.Provider>,
   );
+  if (opts.bleed) {
+    // Widen the view so anything running off the page edge prints into the bleed.
+    const b = opts.bleed;
+    const W = snap.meta.width;
+    const H = snap.meta.height;
+    markup = markup
+      .replace(/viewBox="[^"]*"/, `viewBox="${-b} ${-b} ${W + 2 * b} ${H + 2 * b}"`)
+      .replace(/width="[^"]*" height="[^"]*"/, `width="${W + 2 * b}" height="${H + 2 * b}"`)
+      .replace(/<rect width="([\d.]+)" height="([\d.]+)" fill=/, `<rect x="${-b}" y="${-b}" width="${W + 2 * b}" height="${H + 2 * b}" fill=`);
+  }
   if (css) markup = markup.replace(/<svg([^>]*)>/, `<svg$1><style>${css.replace(/<\/style/g, '')}</style>`);
   return markup;
 }
@@ -122,4 +134,43 @@ export async function thumbnail(doc: DesignDoc, snap: DesignSnapshot, pageId: Id
   const svg = await pageSvg(doc, snap, pageId, { idPrefix: 'thumb-' });
   const canvas = await rasterize(svg, snap.meta.width, snap.meta.height, scale);
   return canvasToBlob(canvas, 'image/webp', 0.82);
+}
+
+// Anything that touches a page edge grows into the bleed so trimming never
+// shows a sliver of background. Photos keep their scale and reveal more image.
+function extendIntoBleed(page: Page, elements: Record<Id, Element>, W: number, H: number, b: number) {
+  const out: Record<Id, Element> = { ...elements };
+  const near = (a: number, c: number) => Math.abs(a - c) < 1;
+  for (const id of page.elementIds) {
+    const el = elements[id];
+    if (!el || el.rotation) continue;
+    const l = near(el.x, 0) || el.x < 0;
+    const t = near(el.y, 0) || el.y < 0;
+    const r = near(el.x + el.w, W) || el.x + el.w > W;
+    const btm = near(el.y + el.h, H) || el.y + el.h > H;
+    if (!(l || t || r || btm) || el.type === 'text' || el.type === 'line') continue;
+    const x = l ? Math.min(el.x, -b) : el.x;
+    const y = t ? Math.min(el.y, -b) : el.y;
+    const w = (r ? Math.max(el.x + el.w, W + b) : el.x + el.w) - x;
+    const h = (btm ? Math.max(el.y + el.h, H + b) : el.y + el.h) - y;
+    const next = { ...el, x, y, w, h } as Element;
+    if (next.type === 'image' && el.type === 'image') {
+      const iw = el.w / el.crop.w;
+      const ih = el.h / el.crop.h;
+      let cw = w / iw;
+      let ch = h / ih;
+      let cx = el.crop.x - (el.x - x) / iw;
+      let cy = el.crop.y - (el.y - y) / ih;
+      const over = Math.max(cw, ch, 1);
+      if (over > 1) {
+        cw /= over;
+        ch /= over;
+      }
+      cx = Math.max(0, Math.min(1 - cw, cx));
+      cy = Math.max(0, Math.min(1 - ch, cy));
+      next.crop = { x: cx, y: cy, w: cw, h: ch };
+    }
+    out[id] = next;
+  }
+  return out;
 }

@@ -50,6 +50,7 @@ export const SHORTCUTS: Shortcut[] = [
   { keys: '⌘ ⇧ R', label: 'Rulers and guides', group: 'View' },
   { keys: "⌘ '", label: 'Layout grid', group: 'View' },
   { keys: 'Page up / down', label: 'Previous or next page', group: 'View' },
+  { keys: 'Tab', label: 'Select the next element', group: 'Edit' },
   { keys: '?', label: 'This list', group: 'View' },
 ];
 
@@ -130,6 +131,16 @@ export function useShortcuts() {
         const el = editor.s.elements[sel[0]];
         if (el?.type === 'text') return stop(), editor.ui.set({ editingTextId: el.id });
         if (el?.type === 'image') return stop(), editor.ui.set({ cropId: el.id });
+      }
+      if (k === 'tab') {
+        stop();
+        const pid = editor.state.activePageId;
+        const ids = pid ? editor.s.pages[pid].elementIds.filter((i) => !editor.s.elements[i]?.hidden) : [];
+        if (!ids.length) return;
+        const cur = ids.indexOf(editor.state.selection[0] ?? '');
+        const next = ids[(cur + (e.shiftKey ? -1 : 1) + ids.length) % ids.length];
+        editor.select([next], { expandGroups: false });
+        return;
       }
       if (k === 'pagedown' || k === 'pageup') {
         stop();
