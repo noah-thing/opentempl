@@ -8,6 +8,7 @@ export default function ToolsPanel() {
   const editor = useEditor();
   const image = editor.selected().find((e) => e.type === 'image') as ImageElement | undefined;
   const tools: { icon: string; title: string; text: string; run: () => void; badge?: string }[] = [
+    { icon: 'palette', title: 'Styles', text: 'Recolour everything with one palette, or one taken from a photo, and swap the fonts for a pair.', run: () => editor.openPanel('styles') },
     { icon: 'resize', title: 'Resize', text: 'Turn a post into a story, a poster into slides. Everything rescales to fit.', run: () => editor.openPanel('resize') },
     { icon: 'bulk', title: 'Bulk create', text: 'Paste a spreadsheet and get one page per row: name tags, certificates, menus.', run: () => editor.openPanel('bulk') },
     { icon: 'wand', title: 'Remove background', text: image ? 'Cut the subject out of the selected photo.' : 'Select a photo first, then cut its subject out.', run: () => editor.openPanel('adjust') },

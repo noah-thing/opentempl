@@ -47,6 +47,7 @@ function commands(): Command[] {
     { label: 'Combine shapes: subtract', group: 'Arrange', icon: 'subtract', run: (ed) => ed.combine('subtract') },
     { label: 'Combine shapes: intersect', group: 'Arrange', icon: 'intersect', run: (ed) => ed.combine('intersect') },
     { label: 'Combine shapes: exclude', group: 'Arrange', icon: 'exclude', run: (ed) => ed.combine('exclude') },
+    { label: 'Styles: palettes and font pairs', group: 'Pages', icon: 'palette', run: (ed) => ed.openPanel('styles') },
     { label: 'Pen tool', group: 'Add', icon: 'bezier', kbd: 'P', run: (ed) => ed.ui.set({ tool: 'pen', selection: [] }) },
     { label: 'Tidy up into a grid', group: 'Arrange', icon: 'tidy', run: (ed) => ed.tidy() },
     { label: 'Align left', group: 'Arrange', icon: 'align-left-obj', run: (ed) => ed.align('left') },

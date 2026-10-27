@@ -9,7 +9,8 @@ import { aabb, unionRects, type Rect } from '../lib/geom';
 import { createStore, type Store } from '../lib/store';
 import { layoutText } from '../text/layout';
 import { curvedGeometry } from '../render/ElementView';
-import { fontsVersion, ensureFont } from '../fonts/fonts';
+import { fontsVersion, ensureFont, nearestWeight } from '../fonts/fonts';
+import { recolor, refont, type FontPair } from '../tools/restyle';
 import { initialEditorState, type EditorState, type PanelId } from './state';
 import { localName } from '../collab/collab';
 import type { Comment } from '../doc/types';
@@ -396,6 +397,28 @@ export class Editor {
     if (!ids.length) return;
     this.doc.updateElements(Object.fromEntries(ids.map((id) => [id, { groupId: undefined }])));
     this.toast('Ungrouped');
+  }
+
+  // ---------- styles ----------
+  private scopePages(scope: 'page' | 'all') {
+    return scope === 'all' ? this.s.pageOrder : this.state.activePageId ? [this.state.activePageId] : [];
+  }
+
+  applyPalette(colors: string[], scope: 'page' | 'all') {
+    const { elements, pages } = recolor(this.s, this.scopePages(scope), colors);
+    this.doc.undo.stopCapturing();
+    this.doc.transact(() => {
+      this.doc.updateElements(elements);
+      for (const [id, p] of Object.entries(pages)) this.doc.updatePage(id, p);
+    });
+  }
+
+  async applyFonts(pair: FontPair, scope: 'page' | 'all') {
+    await Promise.all([ensureFont(pair.heading, pair.headingWeight), ensureFont(pair.body, 400), ensureFont(pair.body, 700)]);
+    const patches = refont(this.s, this.scopePages(scope), pair, nearestWeight);
+    this.doc.undo.stopCapturing();
+    this.doc.updateElements(patches);
+    this.refitAllText();
   }
 
   // Any shape becomes pen points: built in ones are converted once, then edited like pen shapes.

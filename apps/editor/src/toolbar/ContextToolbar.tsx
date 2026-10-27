@@ -182,6 +182,7 @@ function PageTools() {
       <Div />
       <TBtn icon="animate" label={page.transition === 'none' ? 'Transition' : `Transition: ${page.transition}`} onClick={pop.toggle} />
       <Div />
+      <TBtn icon="palette" label="Styles" onClick={() => editor.openPanel('styles')} />
       <TBtn icon="resize" label="Resize" onClick={() => editor.openPanel('resize')} />
       <TBtn icon="ruler" title="Rulers and guides" on={editor.state.showRulers} onClick={() => editor.ui.set({ showRulers: !editor.state.showRulers })} />
       <TBtn icon="grid" title="Layout grid" on={editor.state.showGrid} onClick={() => editor.ui.set({ showGrid: !editor.state.showGrid })} />
