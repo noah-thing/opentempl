@@ -13,6 +13,7 @@ export interface TemplatePage {
   elements: Element[];
   name?: string;
   transition?: Page['transition'];
+  notes?: string;
 }
 
 export interface TemplateDef {
@@ -69,7 +70,7 @@ function make(def: TemplateDef): Template {
           elements[id] = { ...structuredClone(e), id };
           ids.push(id);
         }
-        pages[pid] = { id: pid, name: tp.name ?? '', background: tp.background, elementIds: ids, notes: '', transition: tp.transition ?? 'none', duration: 5 };
+        pages[pid] = { id: pid, name: tp.name ?? '', background: tp.background, elementIds: ids, notes: tp.notes ?? '', transition: tp.transition ?? 'none', duration: 5 };
         pageOrder.push(pid);
       }
       const now = Date.now();

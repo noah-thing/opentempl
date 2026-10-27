@@ -29,6 +29,7 @@ export function Home() {
   const [cw, setCw] = useState(1600);
   const [ch, setCh] = useState(900);
   const [tplFilter, setTplFilter] = useState('All');
+  const [starredOnly, setStarredOnly] = useState(false);
   const [drop, setDrop] = useState(false);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export function Home() {
     return onDesignsChange(load) as () => void;
   }, []);
 
-  const filtered = useMemo(() => (designs ?? []).filter((d) => !q || d.title.toLowerCase().includes(q.toLowerCase())), [designs, q]);
+  const filtered = useMemo(() => (designs ?? []).filter((d) => (!q || d.title.toLowerCase().includes(q.toLowerCase())) && (!starredOnly || d.starred)), [designs, q, starredOnly]);
   const cats = ['All', ...new Set(TEMPLATES.map((t) => t.category))];
   const tpls = TEMPLATES.filter((t) => tplFilter === 'All' || t.category === tplFilter);
 
@@ -146,7 +147,19 @@ export function Home() {
         <section className="home-section">
           <div className="home-section-head">
             <h2>Your designs</h2>
-            <span className="muted tabular">{designs ? `${designs.length} on this device` : ''}</span>
+            <div className="row">
+              {designs?.some((d) => d.starred) ? (
+                <div className="chips">
+                  <button className={`chip ${!starredOnly ? 'is-on' : ''}`} onClick={() => setStarredOnly(false)}>
+                    All
+                  </button>
+                  <button className={`chip ${starredOnly ? 'is-on' : ''}`} onClick={() => setStarredOnly(true)}>
+                    Starred
+                  </button>
+                </div>
+              ) : null}
+              <span className="muted tabular">{designs ? `${designs.length} on this device` : ''}</span>
+            </div>
           </div>
           {designs === null ? null : filtered.length ? (
             <div className="design-grid">

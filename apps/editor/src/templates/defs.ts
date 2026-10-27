@@ -179,6 +179,7 @@ export const DEFS: TemplateDef[] = [
       {
         background: solid('#FFFFFF'),
         transition: 'fade',
+        notes: 'Welcome everyone. Twenty minutes, then questions. Start with the three numbers, end with what we change next quarter.',
         elements: [
           text('Q3', 120, 120, 600, { fontFamily: G, fontSize: 64, fontWeight: 600, color: COBALT }),
           text('What we shipped,\nwhat we learned', 120, 420, 1400, { fontFamily: G, fontSize: 150, fontWeight: 500, lineHeight: 0.92, letterSpacing: -45, color: INK, anim: { kind: 'rise', delay: 0, duration: 800 } }),
@@ -190,6 +191,7 @@ export const DEFS: TemplateDef[] = [
       {
         background: solid(PAPER),
         transition: 'slide',
+        notes: 'Pause on each number. The 38 percent is the one people will ask about: it comes from moving packing to the morning shift.',
         elements: [
           text('Three numbers', 120, 110, 1200, { fontFamily: G, fontSize: 72, fontWeight: 600, letterSpacing: -25, color: INK }),
           text('214', 120, 360, 520, { fontFamily: G, fontSize: 210, fontWeight: 500, letterSpacing: -60, color: COBALT, anim: { kind: 'rise', delay: 0, duration: 700 } }),

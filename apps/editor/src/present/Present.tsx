@@ -5,6 +5,7 @@ import { PageView } from '../render/PageView';
 import { RenderContext, type RenderEnv } from '../render/RenderContext';
 import { pageAnimationLength } from '../render/animate';
 import { Icon } from '../ui/icons';
+import { presentChannel } from './Presenter';
 
 export function Present() {
   const editor = useEditor();
@@ -29,6 +30,21 @@ export function Present() {
     editor.ui.set({ presenting: false });
   };
   const go = (d: number) => setIndex((i) => Math.max(0, Math.min(order.length - 1, i + d)));
+
+  // Presenter view in another window steers this one, and follows it.
+  useEffect(() => {
+    const ch = presentChannel(editor.s.meta.id);
+    ch.onmessage = (e) => {
+      if (typeof e.data?.go === 'number') setIndex(e.data.go);
+      if (e.data?.hello) ch.postMessage({ index });
+    };
+    return () => ch.close();
+  }, [editor, index]);
+  useEffect(() => {
+    const ch = presentChannel(editor.s.meta.id);
+    ch.postMessage({ index });
+    ch.close();
+  }, [editor, index]);
 
   useEffect(() => {
     root.current?.requestFullscreen?.().catch(() => {});
@@ -124,6 +140,12 @@ export function Present() {
         </span>
         <button onClick={() => go(1)} title="Next">
           <Icon name="chevron-right" />
+        </button>
+        <button
+          onClick={() => window.open(`${window.location.pathname}#/presenter/${editor.s.meta.id}`, 'tavla-presenter', 'width=1280,height=760')}
+          title="Presenter view with notes and a timer"
+        >
+          <Icon name="notes" />
         </button>
         <button onClick={() => setAuto((a) => !a)} title="Autoplay (A)" style={{ background: auto ? 'rgba(255,255,255,.18)' : undefined }}>
           <Icon name="play" />

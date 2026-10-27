@@ -7,6 +7,7 @@ import { templateById } from './templates';
 import { Eyes } from './ui/Logo';
 import { IconSheet } from './ui/IconSheet';
 import { ErrorBoundary } from './ui/ErrorBoundary';
+import { Presenter } from './present/Presenter';
 
 // Hash routes: #/ home, #/d/<id> editor, #/new?format=<id>&template=<id>
 function useHash() {
@@ -53,6 +54,7 @@ export function App() {
     );
   }
   if (path === '/icons') return <IconSheet />;
+  if (path.startsWith('/presenter/')) return <Presenter id={path.slice(11).split('?')[0]} />;
   if (path.startsWith('/new')) return <NewDesign query={path.split('?')[1] ?? ''} />;
   return <Home />;
 }
