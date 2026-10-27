@@ -3,8 +3,8 @@ import { useEditor } from '../editor/Editor';
 import { SHAPE_KINDS, shapePath } from '../render/shapes';
 import { addLibraryItem, dragProps, type LibraryItem } from './library';
 import { Search, Section } from './controls';
-import { makeChart, makeImage, makeLine, makeQr, makeTable } from '../doc/factory';
-import type { ChartElement, LineElement, ShapeKind } from '../doc/types';
+import { makeChart, makeImage, makeLine, makeQr, makeShape, makeTable } from '../doc/factory';
+import type { ChartElement, Element, LineElement, ShapeKind } from '../doc/types';
 import { Icon } from '../ui/icons';
 import { STICKERS } from './stickers';
 import { searchIcons, iconSvg } from './iconify';
@@ -24,6 +24,85 @@ function gridElements(g: [number, number, number, number][]) {
   const gap = 12;
   const gid = Math.random().toString(36).slice(2, 10);
   return g.map(([x, y, w, h]) => makeImage({ x: x * S + gap / 2, y: y * S + gap / 2, w: w * S - gap, h: h * S - gap, groupId: gid, radius: 6 }));
+}
+
+// Device frames: plain shapes around a photo slot, grouped, so every part can
+// be recoloured or resized. Drop a screenshot onto the screen to fill it.
+type Device = 'phone' | 'tablet' | 'laptop' | 'browser';
+const DEVICES: { id: Device; label: string }[] = [
+  { id: 'phone', label: 'Phone' },
+  { id: 'tablet', label: 'Tablet' },
+  { id: 'laptop', label: 'Laptop' },
+  { id: 'browser', label: 'Browser window' },
+];
+
+function deviceElements(d: Device): Element[] {
+  const gid = Math.random().toString(36).slice(2, 10);
+  const ink = { type: 'solid' as const, color: '#0B0B0D' };
+  const g = <T extends Element>(e: T) => ({ ...e, groupId: gid, name: e.name });
+  if (d === 'phone')
+    return [
+      g(makeShape('rect', { x: 0, y: 0, w: 400, h: 820, radius: 64, fill: ink, name: 'Phone' })),
+      g(makeImage({ x: 18, y: 18, w: 364, h: 784, radius: 48, name: 'Screen' })),
+      g(makeShape('pill', { x: 140, y: 34, w: 120, h: 32, fill: ink, name: 'Camera' })),
+    ];
+  if (d === 'tablet')
+    return [
+      g(makeShape('rect', { x: 0, y: 0, w: 900, h: 660, radius: 48, fill: ink, name: 'Tablet' })),
+      g(makeImage({ x: 30, y: 30, w: 840, h: 600, radius: 20, name: 'Screen' })),
+    ];
+  if (d === 'laptop')
+    return [
+      g(makeShape('rect', { x: 80, y: 0, w: 900, h: 590, radius: 28, fill: ink, name: 'Lid' })),
+      g(makeImage({ x: 104, y: 24, w: 852, h: 534, radius: 6, name: 'Screen' })),
+      g(makeShape('rect', { x: 0, y: 590, w: 1060, h: 34, radius: 17, fill: { type: 'solid', color: '#C9CCD6' }, name: 'Base' })),
+      g(makeShape('rect', { x: 450, y: 590, w: 160, h: 10, radius: 5, fill: { type: 'solid', color: '#A3A6B2' }, name: 'Opening' })),
+    ];
+  return [
+    g(makeShape('rect', { x: 0, y: 0, w: 1000, h: 680, radius: 20, fill: { type: 'solid', color: '#EDEDF0' }, name: 'Window' })),
+    g(makeShape('ellipse', { x: 22, y: 20, w: 16, h: 16, fill: { type: 'solid', color: '#FF4B39' }, name: 'Close' })),
+    g(makeShape('ellipse', { x: 46, y: 20, w: 16, h: 16, fill: { type: 'solid', color: '#FFE600' }, name: 'Minimise' })),
+    g(makeShape('ellipse', { x: 70, y: 20, w: 16, h: 16, fill: { type: 'solid', color: '#3EDD8A' }, name: 'Zoom' })),
+    g(makeShape('pill', { x: 240, y: 13, w: 520, h: 30, fill: { type: 'solid', color: '#FFFFFF' }, name: 'Address bar' })),
+    g(makeImage({ x: 12, y: 56, w: 976, h: 612, radius: 10, name: 'Page' })),
+  ];
+}
+
+function DeviceGlyph({ d }: { d: Device }) {
+  const ink = 'currentColor';
+  const scr = '#C9C9D3';
+  if (d === 'phone')
+    return (
+      <>
+        <rect x="13" y="3" width="14" height="34" rx="3" fill={ink} />
+        <rect x="14.5" y="4.5" width="11" height="31" rx="2" fill={scr} />
+        <rect x="17.5" y="5.5" width="5" height="1.6" rx="0.8" fill={ink} />
+      </>
+    );
+  if (d === 'tablet')
+    return (
+      <>
+        <rect x="4" y="8" width="32" height="24" rx="2.5" fill={ink} />
+        <rect x="5.5" y="9.5" width="29" height="21" rx="1.2" fill={scr} />
+      </>
+    );
+  if (d === 'laptop')
+    return (
+      <>
+        <rect x="7" y="9" width="26" height="17" rx="1.6" fill={ink} />
+        <rect x="8.2" y="10.2" width="23.6" height="14.6" rx="0.6" fill={scr} />
+        <rect x="4" y="26" width="32" height="2.4" rx="1.2" fill="#A3A6B2" />
+      </>
+    );
+  return (
+    <>
+      <rect x="3" y="8" width="34" height="24" rx="2" fill="#E4E4E9" />
+      <circle cx="6" cy="10.6" r="0.9" fill="#FF4B39" />
+      <circle cx="8.6" cy="10.6" r="0.9" fill="#FFE600" />
+      <circle cx="11.2" cy="10.6" r="0.9" fill="#3EDD8A" />
+      <rect x="3.6" y="13" width="32.8" height="18.4" rx="1" fill={scr} />
+    </>
+  );
 }
 
 const SHAPE_COLORS = ['#2B3BFF', '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0B0B0D', '#9AA2EA', '#0AA0FF'];
@@ -112,6 +191,23 @@ export default function ElementsPanel() {
                   {g.map(([x, y, w, h], j) => (
                     <rect key={j} x={4 + x * 32 + 1} y={4 + y * 32 + 1} width={w * 32 - 2} height={h * 32 - 2} rx="1.5" fill="#C9C9D3" />
                   ))}
+                </svg>
+              </button>
+            );
+          })}
+        </div>
+      </Section>
+      <Section title="Device frames">
+        <p className="hint" style={{ margin: '-2px 0 8px' }}>
+          Drop a screenshot onto the screen.
+        </p>
+        <div className="grid-4">
+          {DEVICES.map((d) => {
+            const item = (): LibraryItem => ({ kind: 'elements', elements: deviceElements(d.id) });
+            return (
+              <button key={d.id} className="shape-tile" title={d.label} onClick={() => addLibraryItem(editor, item())} {...dragProps(item)}>
+                <svg viewBox="0 0 40 40">
+                  <DeviceGlyph d={d.id} />
                 </svg>
               </button>
             );
