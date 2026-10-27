@@ -13,6 +13,10 @@ import type { Comment } from '../doc/types';
 
 const CLIP_PREFIX = 'tavla/elements:';
 
+// Photos copied in one design travel with the elements to another design in
+// the same tab. Across tabs, pasted images are looked up in the uploads library.
+const clipboardAssets = new Map<Id, import('../doc/types').Asset>();
+
 // The editor ties a live DesignDoc to UI state and holds every user action, so
 // toolbars, shortcuts, the command palette and panels all call the same code.
 export class Editor {
@@ -238,10 +242,14 @@ export class Editor {
     const els = this.selected();
     if (!els.length) return;
     this.clipboard = structuredClone(els);
-    const assets = els
-      .flatMap((e) => (e.type === 'image' && e.assetId ? [e.assetId] : []))
-      .map((id) => this.doc.getAsset(id))
-      .filter(Boolean);
+    clipboardAssets.clear();
+    for (const e of els) {
+      const ids = [e.type === 'image' ? e.assetId : null, e.type === 'shape' && e.fill.type === 'image' ? e.fill.assetId : null].filter(Boolean) as Id[];
+      for (const id of ids) {
+        const a = this.doc.getAsset(id);
+        if (a) clipboardAssets.set(id, a);
+      }
+    }
     try {
       // Assets are left out of the system clipboard: other Tavla tabs share the
       // same origin storage so they can still resolve them later.
@@ -249,7 +257,6 @@ export class Editor {
     } catch {
       /* clipboard may be unavailable */
     }
-    void assets;
     if (cut) this.deleteSelected();
   }
 
@@ -263,6 +270,17 @@ export class Editor {
       }
     }
     if (!els.length) return false;
+    // Bring along any photo bytes this design does not have yet.
+    for (const el of els) {
+      const id = el.type === 'image' ? el.assetId : el.type === 'shape' && el.fill.type === 'image' ? el.fill.assetId : null;
+      if (!id || this.doc.getAsset(id)) continue;
+      let a = clipboardAssets.get(id);
+      if (!a) {
+        const { listUploads } = await import('../io/uploads');
+        a = (await listUploads()).find((u) => u.id === id);
+      }
+      if (a) this.doc.addAsset(a);
+    }
     const groups = new Map<Id, Id>();
     const copies = els.map((el) => cloneElement(el, groups));
     const pageId = this.state.activePageId!;

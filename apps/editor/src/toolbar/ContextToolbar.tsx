@@ -395,6 +395,21 @@ function ImageTools({ el }: { el: ImageElement }) {
     <>
       <TBtn label="Edit photo" icon="adjust" on={panel === 'adjust'} onClick={() => editor.openPanel('adjust')} />
       <TBtn label="Crop" icon="crop" onClick={() => el.assetId && editor.ui.set({ cropId: el.id })} />
+      <TBtn
+        label="Replace"
+        icon="upload"
+        title="Replace the photo, keep the frame"
+        onClick={async () => {
+          const { pickFiles, prepareImage } = await import('../io/upload');
+          const { addUpload } = await import('../io/uploads');
+          const [f] = await pickFiles('image/*');
+          if (!f) return;
+          const a = await prepareImage(f, f.name);
+          editor.doc.addAsset(a);
+          addUpload(a).catch(() => {});
+          editor.replaceImage(el.id, a.id, a.width, a.height);
+        }}
+      />
       <TBtn icon="flip-h" title="Flip" onClick={flip.toggle} />
       <TBtn label="Shape" title="Mask with a shape" onClick={mask.toggle}>
         <Icon name="chevron-down" size={12} />
