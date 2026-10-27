@@ -5,8 +5,9 @@ import type { DesignDoc } from '../doc/design';
 import type { Id } from '../doc/types';
 import { canvasToBlob, pageSvg, rasterize, renderPageBlob } from './render';
 import { renderAnimationVideo } from './video';
+import { renderGif } from './gif';
 
-export type ExportFormat = 'png' | 'jpg' | 'webp' | 'pdf' | 'svg' | 'tavla' | 'video';
+export type ExportFormat = 'png' | 'jpg' | 'webp' | 'pdf' | 'svg' | 'tavla' | 'video' | 'gif';
 
 export interface ExportOptions {
   format: ExportFormat;
@@ -44,6 +45,11 @@ export async function exportDesign(doc: DesignDoc, opts: ExportOptions) {
   if (opts.format === 'tavla') {
     const update = Y.encodeStateAsUpdate(doc.ydoc);
     download(new Blob([TAVLA_MAGIC, update as BlobPart], { type: 'application/x-tavla' }), `${name}.tavla`);
+    return;
+  }
+
+  if (opts.format === 'gif') {
+    download(await renderGif(doc, snap, pages, { onProgress: opts.onProgress }), `${name}.gif`);
     return;
   }
 
