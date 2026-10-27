@@ -55,6 +55,21 @@ export function TopBar() {
       },
     },
     {
+      label: 'Import a PowerPoint',
+      icon: 'file',
+      onClick: async () => {
+        const [f] = await pickFiles('.pptx');
+        if (!f) return;
+        editor.toast('Reading the slides');
+        const { importPptx } = await import('../io/pptxImport');
+        try {
+          navigate(`/d/${await importPptx(f)}`);
+        } catch {
+          editor.toast('That file could not be read as a PowerPoint presentation');
+        }
+      },
+    },
+    {
       label: 'Import a PDF as pictures',
       icon: 'file',
       onClick: async () => {

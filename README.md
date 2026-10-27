@@ -57,7 +57,7 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Sound.** A soundtrack under the whole design, from your own file or one of four Tavla tones that the app synthesises on the spot. Trim it on its waveform, set volume and fade out. It plays in Present mode and is mixed with the clips' sound into MP4 exports.
 
-**Import.** `.tavla` files and PDFs. PDF text comes in as editable text boxes over the page drawn without its text, in fonts with matching widths (Arimo for Helvetica and Arial, Tinos for Times, Cousine for Courier), with weight, colour and paragraph spacing read from the file; or pages as plain pictures if you prefer.
+**Import.** `.tavla` files, PowerPoint files (slides, text with bold, italic and colour runs, theme colours, shapes, pictures with crops, backgrounds, speaker notes; placeholders take their position from the layout like in PowerPoint) and PDFs. PDF text comes in as editable text boxes over the page drawn without its text, in fonts with matching widths (Arimo for Helvetica and Arial, Tinos for Times, Cousine for Courier), with weight, colour and paragraph spacing read from the file; or pages as plain pictures if you prefer.
 
 **Share.** A live link for real time editing with cursors and selections of everyone in the room, peer to peer and encrypted.
 

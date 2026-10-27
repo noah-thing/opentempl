@@ -69,7 +69,8 @@ export async function exportPptx(doc: DesignDoc, snap: DesignSnapshot, pageIds: 
           align: el.align === 'justify' ? 'justify' : el.align,
           valign: 'top',
           margin: 0,
-          lineSpacingMultiple: el.lineHeight,
+          // PowerPoint measures in multiples of single spacing, which is about 1.2 em.
+          lineSpacingMultiple: el.lineHeight / 1.2,
           charSpacing: (el.letterSpacing / 1000) * el.fontSize * 0.75,
           transparency: Math.round((1 - el.opacity) * 100),
           bullet: el.list === 'bullet' ? true : el.list === 'number' ? { type: 'number' } : undefined,

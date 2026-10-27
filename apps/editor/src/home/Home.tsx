@@ -65,6 +65,12 @@ export function Home() {
           navigate(`/d/${await importPdf(pdf)}`);
           return;
         }
+        const pptx = [...e.dataTransfer.files].find((x) => x.name.toLowerCase().endsWith('.pptx'));
+        if (pptx) {
+          const { importPptx } = await import('../io/pptxImport');
+          navigate(`/d/${await importPptx(pptx)}`);
+          return;
+        }
         const f = [...e.dataTransfer.files].find((x) => x.name.endsWith('.tavla'));
         if (f) {
           const id = await importTavla(f);
@@ -84,11 +90,16 @@ export function Home() {
         <button
           className="btn"
           onClick={async () => {
-            const [f] = await pickFiles('.tavla,.pdf');
+            const [f] = await pickFiles('.tavla,.pdf,.pptx');
             if (!f) return;
             if (f.name.toLowerCase().endsWith('.pdf')) {
               const { importPdf } = await import('../io/pdfImport');
               navigate(`/d/${await importPdf(f)}`);
+              return;
+            }
+            if (f.name.toLowerCase().endsWith('.pptx')) {
+              const { importPptx } = await import('../io/pptxImport');
+              navigate(`/d/${await importPptx(f)}`);
               return;
             }
             const id = await importTavla(f);
@@ -188,7 +199,7 @@ export function Home() {
               <Eyes size={96} />
               <div>
                 <h3>{q ? `Nothing called “${q}”` : 'Nothing here yet'}</h3>
-                <p className="muted">{q ? 'Try another word.' : 'Pick a sheet above or start from a template below. Drop a .tavla file or a PDF anywhere on this page to open it.'}</p>
+                <p className="muted">{q ? 'Try another word.' : 'Pick a sheet above or start from a template below. Drop a .tavla file, a PDF or a PowerPoint anywhere on this page to open it.'}</p>
               </div>
             </div>
           )}
