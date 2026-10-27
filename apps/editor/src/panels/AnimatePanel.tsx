@@ -23,20 +23,25 @@ function Preview({ kind, playing }: { kind: AnimationKind; playing: boolean }) {
     raf = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf);
   }, [playing]);
-  const s = animState({ kind, delay: 0, duration: 900 }, t);
+  const glyph = (time: number, fade = 1) => {
+    const s = animState({ kind, delay: 0, duration: 900 }, time);
+    return {
+      display: 'block',
+      fontWeight: 700,
+      fontSize: 26,
+      opacity: s.opacity * fade,
+      transform: `translate(${s.tx * 40}px, ${s.ty * 30}px) rotate(${s.rotate}deg) scale(${s.scale})`,
+      filter: s.blur ? `blur(${s.blur / 3}px)` : undefined,
+      clipPath: s.reveal < 1 ? `inset(0 ${100 - s.reveal * 100}% 0 0)` : undefined,
+    } as React.CSSProperties;
+  };
+  if (playing) return <span style={glyph(t)}>Ag</span>;
+  // At rest each tile keeps a faint trace of where its motion starts, so the
+  // tiles read apart without hovering.
   return (
-    <span
-      style={{
-        display: 'block',
-        fontWeight: 700,
-        fontSize: 26,
-        opacity: s.opacity,
-        transform: `translate(${s.tx * 40}px, ${s.ty * 30}px) rotate(${s.rotate}deg) scale(${s.scale})`,
-        filter: s.blur ? `blur(${s.blur / 3}px)` : undefined,
-        clipPath: s.reveal < 1 ? `inset(0 ${100 - s.reveal * 100}% 0 0)` : undefined,
-      }}
-    >
-      Ag
+    <span style={{ position: 'relative', display: 'block' }}>
+      <span style={{ ...glyph(kind === 'typewriter' || kind === 'wipe' ? 380 : 220, 0.32), position: 'absolute', inset: 0 }}>Ag</span>
+      <span style={glyph(10000)}>Ag</span>
     </span>
   );
 }

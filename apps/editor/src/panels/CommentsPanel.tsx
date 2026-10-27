@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { useDoc, useUI } from '../editor/hooks';
 import { Icon } from '../ui/icons';
@@ -9,7 +8,8 @@ export default function CommentsPanel() {
   const comments = useDoc((s) => s.comments);
   const order = useDoc((s) => s.pageOrder);
   const mode = useUI((s) => s.commentMode);
-  const [showResolved, setShowResolved] = useState(false);
+  const showResolved = useUI((s) => s.showResolved);
+  const resolved = Object.values(comments).filter((c) => c.resolved).length;
   const list = Object.values(comments)
     .filter((c) => showResolved || !c.resolved)
     .sort((a, b) => order.indexOf(a.pageId) - order.indexOf(b.pageId) || a.at - b.at);
@@ -21,7 +21,7 @@ export default function CommentsPanel() {
       <div className="row-between" style={{ margin: '12px 0' }}>
         <span className="label">{list.length} {list.length === 1 ? 'thread' : 'threads'}</span>
         <label className="row" style={{ gap: 8, fontSize: 12 }}>
-          <button className={`switch ${showResolved ? 'is-on' : ''}`} onClick={() => setShowResolved((v) => !v)} aria-label="Show resolved" />
+          <button className={`switch ${showResolved ? 'is-on' : ''}`} onClick={() => editor.ui.set({ showResolved: !showResolved })} aria-label="Show resolved" />
           Show resolved
         </label>
       </div>
@@ -48,8 +48,12 @@ export default function CommentsPanel() {
       ) : (
         <div className="empty">
           <Eyes size={64} />
-          <h4>No comments yet</h4>
-          <span className="hint">Pin notes on a page for yourself or for whoever you share the design with.</span>
+          <h4>{resolved ? 'Everything is resolved' : 'No comments yet'}</h4>
+          <span className="hint">
+            {resolved
+              ? `${resolved} resolved ${resolved === 1 ? 'thread is' : 'threads are'} tucked away. Turn on Show resolved to see ${resolved === 1 ? 'it' : 'them'}.`
+              : 'Pin notes on a page for yourself or for whoever you share the design with.'}
+          </span>
         </div>
       )}
     </>

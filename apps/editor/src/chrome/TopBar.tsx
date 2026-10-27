@@ -44,7 +44,7 @@ export function TopBar() {
     },
     { label: 'Upload photos or videos', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
     {
-      label: 'Import a PDF as a new design',
+      label: 'Import a PDF as a new design (pages as pictures)',
       icon: 'file',
       onClick: async () => {
         const [f] = await pickFiles('.pdf');

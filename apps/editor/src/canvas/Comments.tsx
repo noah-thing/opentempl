@@ -18,7 +18,8 @@ export function CommentPins({ pageId, zoom }: { pageId: Id; zoom: number }) {
   const editor = useEditor();
   const comments = useDoc((s) => s.comments);
   const open = useUI((s) => s.openCommentId);
-  const list = Object.values(comments).filter((c) => c.pageId === pageId && (!c.resolved || c.id === open));
+  const showResolved = useUI((s) => s.showResolved);
+  const list = Object.values(comments).filter((c) => c.pageId === pageId && (!c.resolved || showResolved || c.id === open));
   return (
     <>
       {list.map((c) => (
@@ -26,7 +27,7 @@ export function CommentPins({ pageId, zoom }: { pageId: Id; zoom: number }) {
           <button
             data-overlay-control
             className={`comment-pin ${open === c.id ? 'is-open' : ''}`}
-            style={{ left: c.x * zoom, top: c.y * zoom, background: c.color }}
+            style={{ left: c.x * zoom, top: c.y * zoom, background: c.color, opacity: c.resolved && open !== c.id ? 0.5 : undefined }}
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => editor.ui.set({ openCommentId: open === c.id ? null : c.id })}
             title={`${c.author}: ${c.text}`}

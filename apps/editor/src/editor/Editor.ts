@@ -169,10 +169,13 @@ export class Editor {
   }
 
   addImageAsset(assetId: Id, iw: number, ih: number, at?: { x: number; y: number }) {
-    // Dropping onto a selected empty frame or an image swaps the photo instead.
-    const target = this.selected().find((e) => e.type === 'image') as ImageElement | undefined;
-    if (target && this.state.selection.length === 1 && !target.assetId) {
-      this.replaceImage(target.id, assetId, iw, ih);
+    // A selected empty frame takes the photo instead. With a whole collage
+    // selected, each photo fills the next empty cell.
+    const frames = this.selected().filter((e): e is ImageElement => e.type === 'image' && !e.assetId);
+    if (frames.length && (this.state.selection.length === 1 || this.isGrouped())) {
+      const order = this.s.pages[this.s.elementPage[frames[0].id]].elementIds;
+      frames.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+      this.replaceImage(frames[0].id, assetId, iw, ih);
       return;
     }
     const el = this.fitToPage(makeImage({ assetId, w: iw, h: ih }), 0.6);

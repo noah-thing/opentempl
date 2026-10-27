@@ -62,7 +62,7 @@ export function Viewport() {
       if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       const z0 = editor.state.zoom;
-      const z1 = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z0 * Math.exp(-Math.max(-60, Math.min(60, e.deltaY)) * 0.006)));
+      const z1 = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z0 * Math.exp(-Math.max(-30, Math.min(30, e.deltaY)) * 0.006)));
       const rect = el.getBoundingClientRect();
       const mx = e.clientX - rect.left + el.scrollLeft;
       const my = e.clientY - rect.top + el.scrollTop;

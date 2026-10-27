@@ -379,7 +379,7 @@ function ShapeTools({ el }: { el: ShapeElement }) {
                 }}
               >
                 <svg viewBox="0 0 40 40">
-                  <path d={shapePath(s.kind, 40, 40, 4)} fill="#0B0B0D" />
+                  <path d={shapePath(s.kind, 40, 40, 4)} fill="currentColor" />
                 </svg>
               </button>
             ))}
@@ -440,7 +440,7 @@ function ImageTools({ el }: { el: ImageElement }) {
             {SHAPE_KINDS.filter((s) => s.kind !== 'rect').map((s) => (
               <button key={s.kind} className="shape-tile" title={s.label} onClick={() => (editor.update(el.id, { mask: s.kind } as Partial<Element>), mask.close())}>
                 <svg viewBox="0 0 40 40">
-                  <path d={shapePath(s.kind, 40, 40, 4)} fill="#0B0B0D" />
+                  <path d={shapePath(s.kind, 40, 40, 4)} fill="currentColor" />
                 </svg>
               </button>
             ))}

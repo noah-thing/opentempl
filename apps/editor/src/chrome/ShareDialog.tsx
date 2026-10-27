@@ -21,6 +21,13 @@ export function ShareDialog() {
     if (!activeCollab()) connectCollab(editor, key);
     setRoom(key);
   };
+  const stop = () => {
+    activeCollab()?.destroy();
+    const base = window.location.hash.split('?')[0];
+    window.history.replaceState(null, '', `${window.location.pathname}${base}`);
+    setRoom(null);
+    editor.toast('Live session ended. The design stays on this device.');
+  };
   const link = room ? `${window.location.origin}${window.location.pathname}#/join/${editor.s.meta.id}?room=${room}` : '';
 
   return (
@@ -56,7 +63,7 @@ export function ShareDialog() {
             {room ? (
               <div className="stack">
                 <div className="field">
-                  <input readOnly value={link} onFocus={(e) => e.target.select()} />
+                  <input readOnly value={link} title={link} onFocus={(e) => e.target.select()} />
                   <button
                     className="btn btn-sm btn-ink"
                     onClick={() => {
@@ -69,6 +76,9 @@ export function ShareDialog() {
                   </button>
                 </div>
                 <div className="hint">{peers.length ? `${peers.length} other ${peers.length === 1 ? 'person' : 'people'} here: ${peers.map((p) => p.name).join(', ')}` : 'Waiting for someone to open the link. Keep this tab open while you work together.'}</div>
+                <button className="btn btn-sm btn-outline" style={{ alignSelf: 'flex-start' }} onClick={stop}>
+                  Stop sharing
+                </button>
               </div>
             ) : (
               <button className="btn btn-primary" onClick={start}>

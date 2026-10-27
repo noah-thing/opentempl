@@ -47,7 +47,11 @@ export function Popover({
 
   useEffect(() => {
     const onDown = (e: PointerEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+      if (!ref.current || ref.current.contains(e.target as Node)) return;
+      // A press on the button that opened it is left to that button, which toggles it shut.
+      const a = anchor;
+      if (e.clientX >= a.left && e.clientX <= a.right && e.clientY >= a.top && e.clientY <= a.bottom) return;
+      onClose();
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -63,7 +67,7 @@ export function Popover({
       window.removeEventListener('pointerdown', onDown, true);
       window.removeEventListener('keydown', onKey, true);
     };
-  }, [onClose]);
+  }, [onClose, anchor]);
 
   return createPortal(
     <div ref={ref} className={className} style={{ ...pos, width }} onPointerDown={(e) => e.stopPropagation()}>

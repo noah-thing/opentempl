@@ -1,0 +1,15 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 860 } });
+await page.goto('http://localhost:5181/#/', { waitUntil: 'networkidle' });
+await page.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
+await page.waitForTimeout(800);
+await page.screenshot({ path: '/tmp/dark-home.png' });
+await page.goto('http://localhost:5181/#/new?format=instagram-post', { waitUntil: 'networkidle' });
+await page.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
+await page.waitForTimeout(1500);
+await page.click('.rail :text("Elements")');
+await page.evaluate(() => window.__tavla.ui.set({ showRulers: true }));
+await page.waitForTimeout(1200);
+await page.screenshot({ path: '/tmp/dark-elements.png' });
+await browser.close();

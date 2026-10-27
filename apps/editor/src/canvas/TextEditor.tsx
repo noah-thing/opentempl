@@ -26,15 +26,34 @@ document.addEventListener('selectionchange', () => {
 // Returns false when nothing is selected, so callers style the whole box.
 export function richCommand(cmd: 'bold' | 'italic' | 'underline' | 'strikeThrough' | 'foreColor', value?: string) {
   const node = editorNode();
+  const sel = window.getSelection();
+  // The live selection wins when it is in the editor; the saved one covers
+  // toolbar clicks that moved focus away.
+  const live = sel?.rangeCount ? sel.getRangeAt(0) : null;
+  if (live && !live.collapsed && node?.contains(live.commonAncestorContainer)) savedRange = live.cloneRange();
   if (!node || !savedRange || savedRange.collapsed || !node.contains(savedRange.commonAncestorContainer)) return false;
   node.focus();
-  const sel = window.getSelection();
   sel?.removeAllRanges();
   sel?.addRange(savedRange);
   document.execCommand('styleWithCSS', false, 'true');
   document.execCommand(cmd, false, value);
+  // execCommand replaces nodes; keep the range it left so a second command lands too.
+  if (sel?.rangeCount) savedRange = sel.getRangeAt(0).cloneRange();
   node.dispatchEvent(new Event('input', { bubbles: true }));
   return true;
+}
+
+// The colour at the start of the selected words, as #RRGGBB, so the colour
+// panel can show what the selection is rather than the whole box.
+export function richSelectionColor(): string | null {
+  if (!hasRichSelection()) return null;
+  let n: Node | null = savedRange!.startContainer;
+  if (n.nodeType === Node.TEXT_NODE && savedRange!.startOffset >= (n.textContent?.length ?? 0) && n.nextSibling) n = n.nextSibling;
+  const el = n.nodeType === Node.ELEMENT_NODE ? (n as HTMLElement) : n.parentElement;
+  if (!el) return null;
+  const m = getComputedStyle(el).color.match(/\d+(\.\d+)?/g);
+  if (!m || m.length < 3) return null;
+  return '#' + m.slice(0, 3).map((v) => Math.round(+v).toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
 export function hasRichSelection() {

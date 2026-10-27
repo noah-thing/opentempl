@@ -327,7 +327,14 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   };
 
   const onDoubleClick = (e: React.MouseEvent) => {
-    const id = hitId(e.target);
+    // Over a group the selection box sits on top; look through it for the element.
+    let id = hitId(e.target);
+    if (!id && (e.target as HTMLElement).closest?.('[data-selection-body]')) {
+      for (const node of document.elementsFromPoint(e.clientX, e.clientY)) {
+        id = hitId(node);
+        if (id) break;
+      }
+    }
     if (!id) return;
     const el = editor.s.elements[id];
     if (!el || el.locked) return;
@@ -411,7 +418,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       </RenderContext.Provider>
       <div className="page-overlay">
         {page.elementIds.length === 0 && tool === 'select' && page.background.type === 'solid' ? (
-          <div className="empty-sheet" style={{ fontSize: Math.max(11, Math.min(15, W * zoom * 0.022)) }}>
+          <div className="empty-sheet" style={{ fontSize: Math.max(13, Math.min(16, W * zoom * 0.024)) }}>
             <Eyes size={Math.max(40, Math.min(84, W * zoom * 0.11))} />
             <span>An empty sheet. Pick a template, drag a photo in, or press T and start typing.</span>
           </div>

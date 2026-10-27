@@ -620,7 +620,7 @@ input[type='range']:active::-webkit-slider-thumb {
 }
 .page-head .name:focus,
 .page-head .name:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: color-mix(in srgb, var(--sheet) 70%, transparent);
 }
 .page-head .actions {
   margin-left: auto;
@@ -1428,6 +1428,7 @@ input[type='range']:active::-webkit-slider-thumb {
   place-items: center;
   border-radius: 10px;
   background: var(--paper);
+  color: var(--ink);
   cursor: grab;
   transition: background 0.14s var(--ease);
 }
@@ -1898,7 +1899,7 @@ kbd {
   left: 0;
   width: 22px;
   height: 22px;
-  background: #fff;
+  background: var(--sheet);
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   z-index: 12;
@@ -1949,7 +1950,10 @@ kbd {
   animation: fade-in 0.4s var(--ease);
 }
 .empty-sheet span {
-  max-width: 300px;
+  max-width: 320px;
+  /* Sits on the page itself, which stays light in the dark theme. */
+  color: #5e5e69;
+  text-wrap: balance;
 }
 
 .pages.is-grid .page-head .name,
@@ -2256,4 +2260,10 @@ kbd {
 }
 .trim-grip.is-b {
   right: -8px;
+}
+
+.table-grid {
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
 }

@@ -8,7 +8,7 @@ import { Section } from './controls';
 import { useBrand } from './brand';
 import { Icon } from '../ui/icons';
 import { extractPalette } from './palette';
-import { hasRichSelection, richCommand } from '../canvas/TextEditor';
+import { hasRichSelection, richCommand, richSelectionColor } from '../canvas/TextEditor';
 
 // One colour panel for everything. `colorTarget` says what it edits: text,
 // fill, stroke, line, bg, qr, qrbg, draw, svg:<colour>, chart:<series>.
@@ -33,7 +33,7 @@ function currentFill(editor: Editor, target: string | null, els: Element[], page
   const el = els[0];
   if (target === 'bg') return page?.background ?? null;
   if (!el) return null;
-  if (target === 'text' && el.type === 'text') return el.gradient ?? el.color;
+  if (target === 'text' && el.type === 'text') return richSelectionColor() ?? el.gradient ?? el.color;
   if (target === 'fill' && el.type === 'shape') return el.fill;
   if (target === 'stroke') return el.type === 'shape' ? el.stroke?.color ?? '#0B0B0D' : el.type === 'image' ? el.border?.color ?? '#0B0B0D' : null;
   if (target === 'line' && el.type === 'line') return el.color;

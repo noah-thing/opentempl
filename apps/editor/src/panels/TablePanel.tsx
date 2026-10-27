@@ -12,7 +12,11 @@ export default function TablePanel() {
   const set = (p: Partial<TableElement>) => editor.update(el.id, p);
   const resize = (rows: number, cols: number) => {
     const cells = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, (_, c) => el.cells[r]?.[c] ?? ''));
-    set({ rows, cols, cells, h: (el.h / el.rows) * rows, w: (el.w / el.cols) * cols });
+    // Grow the table while it fits; past the page edge, squeeze the cells instead.
+    const room = { w: editor.s.meta.width - el.x, h: editor.s.meta.height - el.y };
+    const w = (el.w / el.cols) * cols;
+    const h = (el.h / el.rows) * rows;
+    set({ rows, cols, cells, w: w > room.w ? Math.max(el.w, room.w) : w, h: h > room.h ? Math.max(el.h, room.h) : h });
   };
   const color = (label: string, key: keyof TableElement) => (
     <div className="row-between" style={{ marginBottom: 8 }}>
@@ -34,8 +38,8 @@ export default function TablePanel() {
       <p className="hint" style={{ margin: '0 0 10px' }}>
         Edit cells here, or paste a range from a spreadsheet.
       </p>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ borderCollapse: 'collapse' }}>
+      <div className="table-grid">
+        <table style={{ borderCollapse: 'collapse', tableLayout: 'fixed', width: '100%', minWidth: el.cols * 56 }}>
           <tbody>
             {el.cells.map((row, r) => (
               <tr key={r}>
@@ -43,7 +47,7 @@ export default function TablePanel() {
                   <td key={c} style={{ padding: 2 }}>
                     <input
                       className="num"
-                      style={{ width: Math.max(52, Math.floor(300 / el.cols)), fontWeight: r === 0 ? 600 : 400, padding: '0 6px' }}
+                      style={{ width: '100%', fontWeight: r === 0 ? 600 : 400, padding: '0 6px' }}
                       value={cell}
                       onChange={(e) => set({ cells: el.cells.map((rr, i) => (i === r ? rr.map((cc, j) => (j === c ? e.target.value : cc)) : rr)) })}
                       onKeyDown={(e) => e.stopPropagation()}
@@ -55,7 +59,7 @@ export default function TablePanel() {
           </tbody>
         </table>
       </div>
-      <div className="row" style={{ marginTop: 10, flexWrap: 'wrap' }}>
+      <div style={{ marginTop: 10, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
         <button className="btn btn-sm btn-outline" onClick={() => resize(el.rows + 1, el.cols)}>
           <Icon name="plus" size={12} /> Row
         </button>

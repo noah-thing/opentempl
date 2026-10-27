@@ -83,17 +83,17 @@ export default function ElementsPanel() {
                   <path
                     d={l.patch.curve ? 'M6 30 Q20 4 34 30' : 'M6 20 H34'}
                     fill="none"
-                    stroke="#0B0B0D"
+                    stroke="currentColor"
                     strokeWidth={l.patch.width ? 5 : 2.4}
                     strokeDasharray={l.patch.dash === 'dash' ? '6 4' : l.patch.dash === 'dot' ? '0.1 5' : undefined}
                     strokeLinecap="round"
                   />
-                  {l.patch.end === 'arrow' ? <path d={l.patch.curve ? 'M28 23 L34 30 L26 31' : 'M28 14 L34 20 L28 26'} fill="none" stroke="#0B0B0D" strokeWidth="2.4" strokeLinejoin="round" /> : null}
-                  {l.patch.end === 'triangle' ? <path d="M28 14 L36 20 L28 26 Z" fill="#0B0B0D" /> : null}
+                  {l.patch.end === 'arrow' ? <path d={l.patch.curve ? 'M28 23 L34 30 L26 31' : 'M28 14 L34 20 L28 26'} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" /> : null}
+                  {l.patch.end === 'triangle' ? <path d="M28 14 L36 20 L28 26 Z" fill="currentColor" /> : null}
                   {l.patch.start === 'circle' ? (
                     <>
-                      <circle cx="6" cy="20" r="3.4" fill="#0B0B0D" />
-                      <circle cx="34" cy="20" r="3.4" fill="#0B0B0D" />
+                      <circle cx="6" cy="20" r="3.4" fill="currentColor" />
+                      <circle cx="34" cy="20" r="3.4" fill="currentColor" />
                     </>
                   ) : null}
                 </svg>
@@ -184,7 +184,7 @@ export default function ElementsPanel() {
 function ShapeGlyph({ kind, color }: { kind: ShapeKind; color: string }) {
   const wide: Partial<Record<ShapeKind, [number, number]>> = { pill: [40, 16], halfcircle: [40, 20], ticket: [40, 22], arrow: [40, 26], chevron: [40, 28], arch: [30, 40] };
   const [w, h] = wide[kind] ?? [40, 40];
-  return <path transform={`translate(${(40 - w) / 2} ${(40 - h) / 2})`} d={shapePath(kind, w, h, 4)} fill={color} />;
+  return <path transform={`translate(${(40 - w) / 2} ${(40 - h) / 2})`} d={shapePath(kind, w, h, 4)} fill={color === '#0B0B0D' ? 'currentColor' : color} />;
 }
 
 function ChartGlyph({ kind }: { kind: ChartElement['kind'] }) {
@@ -239,7 +239,7 @@ function AllShapes({ back }: { back: () => void }) {
           return (
             <button key={s.kind} className="shape-tile" title={s.label} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)}>
               <svg viewBox="0 0 40 40">
-                <path d={shapePath(s.kind, 40, 40, 4)} fill={item.color} />
+                <path d={shapePath(s.kind, 40, 40, 4)} fill={item.color === '#0B0B0D' ? 'currentColor' : item.color} />
               </svg>
             </button>
           );

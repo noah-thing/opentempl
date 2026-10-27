@@ -40,6 +40,12 @@ function PresenterView({ open, id }: { open: OpenDesign; id: string }) {
   const [index, setIndex] = useState(0);
   const [start] = useState(() => Date.now());
   const [now, setNow] = useState(Date.now());
+  const [view, setView] = useState({ w: window.innerWidth, h: window.innerHeight });
+  useEffect(() => {
+    const on = () => setView({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, []);
   const channel = useMemo(() => presentChannel(id), [id]);
 
   useEffect(() => {
@@ -73,8 +79,9 @@ function PresenterView({ open, id }: { open: OpenDesign; id: string }) {
   const next = snap.pages[order[index + 1]];
   const secs = Math.floor((now - start) / 1000);
   const clock = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
-  const big = Math.min(760 / W, 430 / H);
-  const small = Math.min(380 / W, 220 / H);
+  // The current slide takes about 60 percent of the window, the next one a third of that.
+  const big = Math.min((view.w * 0.6 - 56) / W, (view.h - 150) / H);
+  const small = Math.min((view.w * 0.3) / W, (view.h * 0.32) / H);
 
   return (
     <div style={{ height: '100%', background: '#0B0B0D', color: '#F1F1F4', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 28, padding: 28, overflow: 'auto' }}>
@@ -83,7 +90,11 @@ function PresenterView({ open, id }: { open: OpenDesign; id: string }) {
           <div style={{ fontSize: 13, color: '#8A8A96' }}>
             Now · {index + 1} of {order.length}
           </div>
-          {page ? <PageView page={page} elements={snap.elements} width={W} height={H} displayWidth={W * big} displayHeight={H * big} /> : null}
+          {page ? (
+            <div style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.14)', width: W * big, lineHeight: 0 }}>
+              <PageView page={page} elements={snap.elements} width={W} height={H} displayWidth={W * big} displayHeight={H * big} />
+            </div>
+          ) : null}
           <div style={{ display: 'flex', gap: 8 }}>
             <button className="btn btn-outline" style={{ background: '#1F1F25', color: '#fff' }} onClick={() => go(index - 1)}>
               <Icon name="chevron-left" /> Back
@@ -97,7 +108,9 @@ function PresenterView({ open, id }: { open: OpenDesign; id: string }) {
           <div style={{ fontSize: 64, fontWeight: 500, letterSpacing: '-0.04em', fontVariantNumeric: 'tabular-nums' }}>{clock}</div>
           <div style={{ fontSize: 13, color: '#8A8A96' }}>Next</div>
           {next ? (
-            <PageView page={next} elements={snap.elements} width={W} height={H} displayWidth={W * small} displayHeight={H * small} />
+            <div style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.14)', width: W * small, lineHeight: 0 }}>
+              <PageView page={next} elements={snap.elements} width={W} height={H} displayWidth={W * small} displayHeight={H * small} />
+            </div>
           ) : (
             <div style={{ color: '#8A8A96' }}>That was the last page.</div>
           )}

@@ -34,7 +34,12 @@ export function Home() {
 
   useEffect(() => {
     document.title = 'Tavla';
-    const load = () => listDesigns().then(setDesigns);
+    const load = () =>
+      listDesigns().then((list) => {
+        setDesigns(list);
+        // The Starred filter goes away with the last star; never leave it on with no way back.
+        if (!list.some((d) => d.starred)) setStarredOnly(false);
+      });
     load();
     return onDesignsChange(load) as () => void;
   }, []);

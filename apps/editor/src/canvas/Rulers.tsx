@@ -37,6 +37,10 @@ export function Rulers() {
         const dpr = window.devicePixelRatio || 1;
         const z = editor.state.zoom;
         const st = step(z);
+        // Colours from the theme, so the rulers go dark with everything else.
+        const css = getComputedStyle(document.documentElement);
+        const tok = (n: string, fb: string) => css.getPropertyValue(n).trim() || fb;
+        const col = { bg: tok('--sheet', '#ffffff'), page: tok('--paper', '#EDEDF0'), tick: tok('--ink-3', '#8A8A96'), text: tok('--ink-2', '#4A4A55'), edge: tok('--line', '#DEDEE4') };
         for (const [c, horizontal, rect] of [
           [t, true, tr],
           [l, false, lr],
@@ -50,12 +54,12 @@ export function Rulers() {
           const ctx = c.getContext('2d')!;
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
           ctx.clearRect(0, 0, rect.width, rect.height);
-          ctx.fillStyle = '#ffffff';
+          ctx.fillStyle = col.bg;
           ctx.fillRect(0, 0, rect.width, rect.height);
           // Highlight the page's extent.
           const origin = horizontal ? pr.left - rect.left : pr.top - rect.top;
           const extent = horizontal ? pr.width : pr.height;
-          ctx.fillStyle = '#EDEDF0';
+          ctx.fillStyle = col.page;
           if (horizontal) ctx.fillRect(origin, 0, extent, SIZE);
           else ctx.fillRect(0, origin, SIZE, extent);
           // Selection extent in cobalt.
@@ -65,8 +69,8 @@ export function Rulers() {
             if (horizontal) ctx.fillRect(origin + b.x * z, 0, b.w * z, SIZE);
             else ctx.fillRect(0, origin + b.y * z, SIZE, b.h * z);
           }
-          ctx.strokeStyle = '#8A8A96';
-          ctx.fillStyle = '#4A4A55';
+          ctx.strokeStyle = col.tick;
+          ctx.fillStyle = col.text;
           ctx.font = '500 9.5px "Host Grotesk", sans-serif';
           ctx.lineWidth = 1;
           const len = horizontal ? rect.width : rect.height;
@@ -84,7 +88,8 @@ export function Rulers() {
               ctx.lineTo(SIZE - tick, p);
             }
             ctx.stroke();
-            if (major) {
+            // Labels whose tick has scrolled off the start would show as clipped digits.
+            if (major && p >= 0) {
               const label = String(Math.round(u));
               if (horizontal) ctx.fillText(label, p + 3, 10);
               else {
@@ -96,7 +101,7 @@ export function Rulers() {
               }
             }
           }
-          ctx.fillStyle = '#DEDEE4';
+          ctx.fillStyle = col.edge;
           if (horizontal) ctx.fillRect(0, SIZE - 1, rect.width, 1);
           else ctx.fillRect(SIZE - 1, 0, 1, rect.height);
         }
