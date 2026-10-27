@@ -762,6 +762,34 @@ a {
   max-width: 380px;
 }
 
+/* ---------- together ---------- */
+
+.together {
+  background: var(--mint);
+  padding: clamp(80px, 11vw, 160px) 0;
+  overflow: hidden;
+}
+.together .lede {
+  color: rgba(11, 11, 13, 0.72);
+}
+.together .display {
+  font-size: clamp(44px, 5.4vw, 88px);
+}
+.together-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 48px;
+  align-items: center;
+}
+.together-grid > * {
+  min-width: 0;
+}
+.window-tilt {
+  margin-top: 0;
+  transform: rotate(2deg) translateX(4%);
+  box-shadow: 0 0 0 1px rgba(11, 11, 13, 0.1), 0 60px 90px -40px rgba(11, 60, 40, 0.55);
+}
+
 /* ---------- yours ---------- */
 
 .yours {
@@ -1012,8 +1040,12 @@ a {
     grid-template-columns: 1fr 1fr;
   }
   .yours-grid,
-  .source-grid {
+  .source-grid,
+  .together-grid {
     grid-template-columns: 1fr;
+  }
+  .window-tilt {
+    transform: none;
   }
   .eye-stage {
     justify-self: center;

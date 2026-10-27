@@ -18,7 +18,7 @@ const io = new IntersectionObserver(
   },
   { rootMargin: '0px 0px -10% 0px' },
 );
-document.querySelectorAll('.display, .lede, .sum, .ticket, .window, .fact, .feature-grid li, .dl, .code, .pile').forEach((el, i) => {
+document.querySelectorAll('.display, .lede, .sum, .ticket, .window:not(.window-tilt), .fact, .feature-grid li, .dl, .code, .pile').forEach((el, i) => {
   el.setAttribute('data-reveal', '');
   (el as HTMLElement).style.transitionDelay = `${(i % 4) * 70}ms`;
   io.observe(el);
