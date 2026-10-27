@@ -7,7 +7,7 @@ import { canvasToBlob, pageSvg, rasterize, renderPageBlob } from './render';
 import { renderAnimationVideo } from './video';
 import { renderGif } from './gif';
 
-export type ExportFormat = 'png' | 'jpg' | 'webp' | 'pdf' | 'svg' | 'tavla' | 'video' | 'gif';
+export type ExportFormat = 'png' | 'jpg' | 'webp' | 'pdf' | 'svg' | 'tavla' | 'video' | 'gif' | 'pptx';
 
 export interface ExportOptions {
   format: ExportFormat;
@@ -45,6 +45,12 @@ export async function exportDesign(doc: DesignDoc, opts: ExportOptions) {
   if (opts.format === 'tavla') {
     const update = Y.encodeStateAsUpdate(doc.ydoc);
     download(new Blob([TAVLA_MAGIC, update as BlobPart], { type: 'application/x-tavla' }), `${name}.tavla`);
+    return;
+  }
+
+  if (opts.format === 'pptx') {
+    const { exportPptx } = await import('./pptx');
+    download(await exportPptx(doc, snap, pages, opts.onProgress), `${name}.pptx`);
     return;
   }
 

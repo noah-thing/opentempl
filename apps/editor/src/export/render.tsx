@@ -2,6 +2,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import type { DesignSnapshot, Element, Id, Page } from '../doc/types';
 import type { DesignDoc } from '../doc/design';
 import { PageView } from '../render/PageView';
+import { ElementView } from '../render/ElementView';
+import { aabb } from '../lib/geom';
 import { RenderContext, type RenderEnv } from '../render/RenderContext';
 import { embeddedFontCss, ensureFont, fontsVersion } from '../fonts/fonts';
 
@@ -173,4 +175,35 @@ function extendIntoBleed(page: Page, elements: Record<Id, Element>, W: number, H
     out[id] = next;
   }
   return out;
+}
+
+// A single element as a standalone SVG cropped to its bounds (for PPTX export
+// of anything PowerPoint cannot draw natively).
+export async function elementSvg(doc: DesignDoc, snap: DesignSnapshot, id: Id) {
+  const el = snap.elements[id];
+  const b = aabb(el);
+  const pad = el.shadow ? el.shadow.blur + Math.max(Math.abs(el.shadow.x), Math.abs(el.shadow.y)) : el.type === 'text' && el.effect.kind !== 'none' ? el.fontSize * 0.4 : 2;
+  const fams = 'fontFamily' in el ? [el.fontFamily, 'Host Grotesk'] : [];
+  await Promise.all(fams.map((f) => ensureFont(f)));
+  const css = (await Promise.all(fams.map((f) => embeddedFontCss(f)))).join('\n');
+  const env: RenderEnv = {
+    assetUrl: (a) => {
+      const asset = doc.getAsset(a);
+      return asset ? bytesToDataUrl(asset.bytes, asset.mime) : undefined;
+    },
+    assetSize: () => undefined,
+    fontsVersion: fontsVersion(),
+    mode: 'export',
+    idPrefix: `el-${id}-`,
+  };
+  const box = { x: b.x - pad, y: b.y - pad, w: b.w + pad * 2, h: b.h + pad * 2 };
+  let markup = renderToStaticMarkup(
+    <RenderContext.Provider value={env}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} width={box.w} height={box.h}>
+        <ElementView el={{ ...el, anim: null }} />
+      </svg>
+    </RenderContext.Provider>,
+  );
+  if (css) markup = markup.replace(/<svg([^>]*)>/, `<svg$1><style>${css}</style>`);
+  return { svg: markup, box };
 }
