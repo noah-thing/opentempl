@@ -1895,3 +1895,21 @@ kbd {
 .is-desktop .topbar a {
   -webkit-app-region: no-drag;
 }
+
+.empty-sheet {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+  color: #8a8a96;
+  padding: 10%;
+  line-height: 1.4;
+  pointer-events: none;
+  animation: fade-in 0.4s var(--ease);
+}
+.empty-sheet span {
+  max-width: 300px;
+}

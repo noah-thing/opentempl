@@ -87,6 +87,7 @@ export function Home() {
 
       <main className="home-main">
         <section className="home-hero">
+          <img className="home-cursor" src={`${import.meta.env.BASE_URL}library/stickers/voxel-cursor.webp`} alt="" aria-hidden />
           <h1>Pick a sheet.</h1>
           <p>Everything you make stays on this machine. No account, no watermark, no paid tier.</p>
         </section>
@@ -117,7 +118,7 @@ export function Home() {
               </span>
             </span>
             <span className="sheet-name">Custom size</span>
-            <span className="sheet-size">Any width, any height</span>
+            <span className="sheet-size">Any width or height</span>
           </button>
         </section>
         {custom ? (
