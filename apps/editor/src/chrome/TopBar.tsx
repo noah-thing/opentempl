@@ -121,6 +121,7 @@ export function TopBar() {
           ))}
         </div>
       ) : null}
+      <CommentsButton />
       <button className="btn" onClick={() => editor.ui.set({ shareOpen: true })}>
         <Icon name="users" /> Share
       </button>
@@ -136,6 +137,18 @@ export function TopBar() {
         </Popover>
       ) : null}
     </header>
+  );
+}
+
+function CommentsButton() {
+  const editor = useEditor();
+  const open = useDoc((s) => Object.values(s.comments).filter((c) => !c.resolved).length);
+  const panel = useUI((s) => s.panel);
+  return (
+    <button className={`icon-btn ${panel === 'comments' ? 'is-on' : ''}`} title="Comments" onClick={() => editor.openPanel('comments')}>
+      <Icon name="comment" />
+      {open ? <span className="badge-dot tabular">{open}</span> : null}
+    </button>
   );
 }
 

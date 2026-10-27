@@ -8,6 +8,8 @@ import { layoutText } from '../text/layout';
 import { curvedGeometry } from '../render/ElementView';
 import { fontsVersion, ensureFont } from '../fonts/fonts';
 import { initialEditorState, type EditorState, type PanelId } from './state';
+import { localName } from '../collab/collab';
+import type { Comment } from '../doc/types';
 
 const CLIP_PREFIX = 'tavla/elements:';
 
@@ -268,6 +270,26 @@ export class Editor {
     return true;
   }
 
+  // ---------- comments ----------
+  addComment(pageId: Id, x: number, y: number, text: string) {
+    const c: Comment = { id: newId(), pageId, x, y, author: localName(), color: commentColor(localName()), text, at: Date.now(), resolved: false, replies: [] };
+    this.doc.setComment(c);
+    this.ui.set({ openCommentId: c.id, commentMode: false });
+    return c.id;
+  }
+
+  replyComment(id: Id, text: string) {
+    const c = this.s.comments[id];
+    if (!c) return;
+    this.doc.setComment({ ...c, replies: [...c.replies, { author: localName(), color: commentColor(localName()), text, at: Date.now() }] });
+  }
+
+  resolveComment(id: Id, resolved = true) {
+    const c = this.s.comments[id];
+    if (c) this.doc.setComment({ ...c, resolved });
+    if (resolved) this.ui.set({ openCommentId: null });
+  }
+
   // ---------- style clipboard ----------
   copyStyle() {
     const el = this.selected()[0];
@@ -463,6 +485,13 @@ export class Editor {
     const sel = this.state.selection.filter((id) => this.s.elements[id]);
     if (sel.length !== this.state.selection.length) this.ui.set({ selection: sel });
   }
+}
+
+export function commentColor(name: string) {
+  const colors = ['#2B3BFF', '#FF4B39', '#0E8A5F', '#FF3C8E', '#0AA0FF', '#7B5CFF'];
+  let h = 0;
+  for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return colors[h % colors.length];
 }
 
 // Crop that covers a w x h box with an image of natural size iw x ih, centred.

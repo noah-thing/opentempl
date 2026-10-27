@@ -324,6 +324,27 @@ export interface DesignSnapshot {
   elements: Record<Id, Element>;
 }
 
+export interface CommentReply {
+  author: string;
+  color: string;
+  text: string;
+  at: number;
+}
+
+// A pinned comment on a page, at a point in design units.
+export interface Comment {
+  id: Id;
+  pageId: Id;
+  x: number;
+  y: number;
+  author: string;
+  color: string;
+  text: string;
+  at: number;
+  resolved: boolean;
+  replies: CommentReply[];
+}
+
 export interface BrandKit {
   colors: string[];
   fonts: { heading: string; subheading: string; body: string };

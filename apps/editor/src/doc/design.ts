@@ -1,6 +1,6 @@
 import * as Y from 'yjs';
 import { nanoid } from 'nanoid';
-import type { Asset, DesignMeta, DesignSnapshot, Element, Id, Page } from './types';
+import type { Asset, Comment, DesignMeta, DesignSnapshot, Element, Id, Page } from './types';
 
 // A live design. The Y.Doc is the source of truth; `snapshot` is an immutable
 // plain copy that React reads. Every local edit goes through `transact` so it
@@ -12,6 +12,7 @@ type Listener = () => void;
 
 export interface Snapshot extends DesignSnapshot {
   elementPage: Record<Id, Id>; // element id -> page id
+  comments: Record<Id, Comment>;
   version: number;
 }
 
@@ -33,6 +34,7 @@ export class DesignDoc {
   readonly pages: Y.Map<Y.Map<unknown>>;
   readonly elements: Y.Map<Y.Map<unknown>>;
   readonly assets: Y.Map<Asset>;
+  readonly comments: Y.Map<Comment>;
   readonly undo: Y.UndoManager;
   snapshot: Snapshot;
   private listeners = new Set<Listener>();
@@ -45,6 +47,7 @@ export class DesignDoc {
     this.pages = ydoc.getMap('pages');
     this.elements = ydoc.getMap('elements');
     this.assets = ydoc.getMap('assets');
+    this.comments = ydoc.getMap('comments');
     this.undo = new Y.UndoManager([this.meta, this.pageOrder, this.pages, this.elements], {
       trackedOrigins: new Set([LOCAL]),
       captureTimeout: 450,
@@ -82,6 +85,7 @@ export class DesignDoc {
     this.pageOrder.observe(() => this.commit({ pageOrder: this.pageOrder.toArray() }));
     this.meta.observe(() => this.commit({ meta: readMeta(this.meta) }));
     this.assets.observe(() => this.commit({}));
+    this.comments.observe(() => this.commit({ comments: this.comments.toJSON() as Record<Id, Comment> }));
   }
 
   private readAll(): Snapshot {
@@ -95,6 +99,7 @@ export class DesignDoc {
       pages,
       elements,
       elementPage: indexElementPages(pages),
+      comments: this.comments?.toJSON() as Record<Id, Comment> ?? {},
       version: (this.snapshot?.version ?? 0) + 1,
     };
   }
@@ -330,6 +335,15 @@ export class DesignDoc {
     const url = URL.createObjectURL(new Blob([a.bytes as BlobPart], { type: a.mime }));
     this.assetUrls.set(id, url);
     return url;
+  }
+
+  // ---------- comments (outside undo, like a chat beside the design) ----------
+  setComment(c: Comment) {
+    this.ydoc.transact(() => this.comments.set(c.id, c), 'comment');
+  }
+
+  deleteComment(id: Id) {
+    this.ydoc.transact(() => this.comments.delete(id), 'comment');
   }
 
   // ---------- whole design ----------

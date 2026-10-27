@@ -17,6 +17,7 @@ import { smoothPath } from './draw';
 import { activeCollab, usePeers } from '../collab/collab';
 import { listUploads } from '../io/uploads';
 import { Eyes } from '../ui/Logo';
+import { CommentDraft, CommentPins } from './Comments';
 
 interface Props {
   pageId: Id;
@@ -41,6 +42,8 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   }));
   const ref = useRef<HTMLDivElement>(null);
   const [drawing, setDrawing] = useState<{ d: string; color: string; width: number } | null>(null);
+  const [draft, setDraft] = useState<{ pageId: Id; x: number; y: number } | null>(null);
+  const commentMode = useUI((s) => s.commentMode);
 
   const env: RenderEnv = useMemo(
     () => ({
@@ -183,6 +186,13 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     const p = toLocal(e.clientX, e.clientY);
     editor.setActivePage(pageId);
     if (tool === 'hand') return;
+    if (editor.state.commentMode) {
+      e.preventDefault();
+      setDraft({ pageId, ...p });
+      editor.ui.set({ commentMode: false, openCommentId: null });
+      return;
+    }
+    if (editor.state.openCommentId) editor.ui.set({ openCommentId: null });
     if (tool === 'draw') return startDraw(p, e);
     if (tool !== 'select') return createAt(p, e);
     if (editor.state.cropId) {
@@ -358,7 +368,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   };
 
   const hover = hoverId && !selection.includes(hoverId) && editor.s.elementPage[hoverId] === pageId ? elements[hoverId] : null;
-  const cursor = tool === 'text' ? 'text' : tool === 'draw' ? 'crosshair' : tool === 'hand' ? 'grab' : tool !== 'select' ? 'crosshair' : undefined;
+  const cursor = commentMode ? 'copy' : tool === 'text' ? 'text' : tool === 'draw' ? 'crosshair' : tool === 'hand' ? 'grab' : tool !== 'select' ? 'crosshair' : undefined;
 
   return (
     <div
@@ -410,6 +420,8 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
         ) : null}
         {cropId && editor.s.elementPage[cropId] === pageId ? <CropOverlay id={cropId} zoom={zoom} toLocal={toLocal} /> : null}
         <Peers pageId={pageId} zoom={zoom} />
+        <CommentPins pageId={pageId} zoom={zoom} />
+        {draft ? <CommentDraft at={draft} zoom={zoom} onDone={() => setDraft(null)} /> : null}
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ export type PanelId =
   | 'resize'
   | 'bulk'
   | 'history'
+  | 'comments'
   | null;
 
 export interface Guide {
@@ -68,6 +69,8 @@ export interface EditorState {
   shareOpen: boolean;
   shortcutsOpen: boolean;
   findOpen: boolean;
+  commentMode: boolean;
+  openCommentId: Id | null;
   view: 'scroll' | 'grid';
   toast: { text: string; id: number } | null;
   dragging: boolean;
@@ -98,6 +101,8 @@ export const initialEditorState: EditorState = {
   shareOpen: false,
   shortcutsOpen: false,
   findOpen: false,
+  commentMode: false,
+  openCommentId: null,
   view: 'scroll',
   toast: null,
   dragging: false,

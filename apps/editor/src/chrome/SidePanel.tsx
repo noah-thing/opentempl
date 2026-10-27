@@ -26,6 +26,7 @@ const PANELS: Partial<Record<Exclude<PanelId, null>, { title: string; C: Compone
   resize: { title: 'Resize', C: lazy(() => import('../panels/ResizePanel')) },
   bulk: { title: 'Bulk create', C: lazy(() => import('../panels/BulkPanel')) },
   history: { title: 'Version history', C: lazy(() => import('../panels/HistoryPanel')) },
+  comments: { title: 'Comments', C: lazy(() => import('../panels/CommentsPanel')) },
 };
 
 export function SidePanel() {
