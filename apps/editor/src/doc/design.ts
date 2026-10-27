@@ -190,6 +190,7 @@ export class DesignDoc {
     if (!page || this.snapshot.pageOrder.length <= 1) return;
     this.transact(() => {
       page.elementIds.forEach((eid) => this.elements.delete(eid));
+      this.comments.forEach((c, cid) => c.pageId === id && this.comments.delete(cid));
       const i = this.pageOrder.toArray().indexOf(id);
       if (i >= 0) this.pageOrder.delete(i, 1);
       this.pages.delete(id);
