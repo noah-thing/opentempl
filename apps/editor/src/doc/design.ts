@@ -172,10 +172,10 @@ export class DesignDoc {
     if (!page) return null;
     const idx = this.snapshot.pageOrder.indexOf(id);
     const groupMap = new Map<Id, Id>();
-    const els = page.elementIds
-      .map((eid) => this.snapshot.elements[eid])
-      .filter(Boolean)
-      .map((el) => cloneElement(el, groupMap));
+    const els = cloneElements(
+      page.elementIds.map((eid) => this.snapshot.elements[eid]).filter(Boolean),
+      groupMap,
+    );
     let newPage: Id = '';
     this.transact(() => {
       const { id: _old, elementIds: _ids, ...rest } = structuredClone(page);
@@ -398,6 +398,23 @@ function sameValue(a: unknown, b: unknown) {
 
 // Copy an element with a fresh id. Elements that shared a group keep sharing
 // a (new) group, so duplicating a grouped selection stays grouped.
+// Copy a set of elements together: connector lines follow the copies of the
+// shapes they were stuck to, and let go of anything left behind.
+export function cloneElements(els: Element[], groupMap = new Map<Id, Id>()): Element[] {
+  const ids = new Map<Id, Id>();
+  const copies = els.map((el) => {
+    const c = cloneElement(el, groupMap);
+    ids.set(el.id, c.id);
+    return c;
+  });
+  for (const c of copies) {
+    if (c.type !== 'line') continue;
+    if (c.from) c.from = ids.get(c.from);
+    if (c.to) c.to = ids.get(c.to);
+  }
+  return copies;
+}
+
 export function cloneElement(el: Element, groupMap = new Map<Id, Id>()): Element {
   const copy = structuredClone(el);
   copy.id = newId();

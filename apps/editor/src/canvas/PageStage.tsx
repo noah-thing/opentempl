@@ -1,6 +1,6 @@
 import { memo, useMemo, useRef, useState } from 'react';
 import type { Element, Id, TextElement } from '../doc/types';
-import { cloneElement } from '../doc/design';
+import { cloneElements } from '../doc/design';
 import { makeLine, makeShape, makeText, TEXT_PRESETS, makeDraw } from '../doc/factory';
 import { useEditor } from '../editor/Editor';
 import { startDrag, useDoc, useFontsVersion, useUI } from '../editor/hooks';
@@ -250,13 +250,25 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     const targets = collectTargets(pageId, { w: W, h: H }, others, editor.state.pageGuides[pageId]);
     const startBox = unionRects(starts.map((s) => aabb(s)))!;
     editor.doc.undo.stopCapturing();
+    // Dragging a connector away from its elements unsticks it.
+    const unstick: Record<Id, Partial<Element>> = {};
+    for (const s of starts) {
+      if (s.type !== 'line') continue;
+      if (s.from && !ids.includes(s.from)) unstick[s.id] = { ...unstick[s.id], from: undefined } as Partial<Element>;
+      if (s.to && !ids.includes(s.to)) unstick[s.id] = { ...unstick[s.id], to: undefined } as Partial<Element>;
+    }
+    let unstuck = duplicate || !Object.keys(unstick).length;
     startDrag(
       e,
       (ev) => {
+        if (!unstuck) {
+          unstuck = true;
+          editor.doc.updateElements(unstick);
+        }
         if (duplicate && !duplicated) {
           duplicated = true;
           const groups = new Map<Id, Id>();
-          const copies = starts.map((s) => cloneElement(s, groups));
+          const copies = cloneElements(starts, groups);
           editor.doc.addElements(pageId, copies);
           moving = copies.map((c) => c.id);
           starts = copies;

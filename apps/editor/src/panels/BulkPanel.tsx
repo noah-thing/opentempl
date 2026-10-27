@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { useDoc, useUI } from '../editor/hooks';
 import type { TextElement } from '../doc/types';
-import { cloneElement } from '../doc/design';
+import { cloneElements } from '../doc/design';
 import { Section } from './controls';
 import { Icon } from '../ui/icons';
 
@@ -68,18 +68,18 @@ export default function BulkPanel() {
         const groups = new Map<string, string>();
         const { id: _i, elementIds: _e, ...rest } = structuredClone(page);
         const np = editor.doc.addPage({ ...rest, name: row[0] ?? `Row ${i + 1}` }, start + i);
-        for (const eid of page.elementIds) {
-          const el = editor.s.elements[eid];
-          if (!el) continue;
-          const copy = cloneElement(el, groups);
-          const col = mapping[eid];
+        const originals = page.elementIds.map((eid) => editor.s.elements[eid]).filter(Boolean);
+        const copies = cloneElements(originals, groups);
+        originals.forEach((el, k) => {
+          const copy = copies[k];
+          const col = mapping[el.id];
           if (copy.type === 'text' && col) {
             const v = row[data.header.indexOf(col)] ?? '';
             copy.runs = undefined;
             copy.text = /\{\{/.test(copy.text) ? copy.text.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, k) => row[data.header.indexOf(k)] ?? '') : v;
           }
           editor.doc.addElement(np, copy);
-        }
+        });
       });
     });
     editor.refitAllText();

@@ -48,6 +48,8 @@ export function EditorScreen({ id }: { id: string }) {
         return;
       }
       const editor = new Editor(opened.doc);
+      // A handle for the browser tests in qa/, dev builds only.
+      if (import.meta.env.DEV) (window as unknown as { __tavla: Editor }).__tavla = editor;
       // Fonts used anywhere in the design load up front; text re-measures as they land.
       const fams = Object.values(opened.doc.snapshot.elements).flatMap((e) => ('fontFamily' in e ? [e.fontFamily] : []));
       preloadFonts(fams).then(() => editor.refitAllText());

@@ -1,7 +1,7 @@
 import type { Editor } from '../editor/Editor';
 import type { Element, Id, ShapeKind } from '../doc/types';
 import { makeImage, makeShape, makeSvg, makeText } from '../doc/factory';
-import { cloneElement } from '../doc/design';
+import { cloneElements } from '../doc/design';
 import { assetFromUrl } from '../io/upload';
 import type { Point } from '../lib/geom';
 import { unionRects, aabb } from '../lib/geom';
@@ -79,7 +79,7 @@ export function addLibraryItem(editor: Editor, item: LibraryItem, at?: Point, ov
     case 'elements': {
       // Scale combos so they feel the same size on any page format.
       const groups = new Map<Id, Id>();
-      const els = item.elements.map((e) => cloneElement(e, groups));
+      const els = cloneElements(item.elements, groups);
       const b = unionRects(els.map((e) => aabb(e)))!;
       const target = Math.min(editor.s.meta.width, editor.s.meta.height) * 0.6;
       const s = Math.min(1.6, target / Math.max(b.w, b.h));

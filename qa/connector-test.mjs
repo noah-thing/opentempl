@@ -1,0 +1,32 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1512, height: 900 } });
+page.on('pageerror', (e) => console.log('pageerror', e.message));
+await page.goto('http://localhost:5181/#/new?format=instagram-post', { waitUntil: 'networkidle' });
+await page.waitForTimeout(2500);
+const box = await page.locator('.page-stage').first().boundingBox();
+const at = (fx, fy) => [box.x + box.width * fx, box.y + box.height * fy];
+const drag = async (from, to) => { await page.mouse.move(...from); await page.mouse.down(); await page.mouse.move(...to, { steps: 8 }); await page.mouse.up(); await page.waitForTimeout(150); };
+await page.keyboard.press('r'); await drag(at(0.1, 0.1), at(0.3, 0.3));
+await page.keyboard.press('r'); await drag(at(0.6, 0.6), at(0.85, 0.8));
+await page.keyboard.press('Escape');
+await page.keyboard.press('l'); await drag(at(0.4, 0.2), at(0.5, 0.5));
+await page.waitForTimeout(200);
+const handles = page.locator('.line-handle');
+console.log('line handles', await handles.count());
+const h0 = await handles.nth(0).boundingBox();
+await drag([h0.x + h0.width / 2, h0.y + h0.height / 2], at(0.2, 0.2));
+const h1 = await handles.nth(1).boundingBox();
+await drag([h1.x + h1.width / 2, h1.y + h1.height / 2], at(0.72, 0.7));
+const lineInfo = () => page.evaluate(() => {
+  const ed = window.__tavla;
+  return ed ? Object.values(ed.s.elements).filter((e) => e.type === 'line').map((l) => ({ from: !!l.from, to: !!l.to, x: Math.round(l.x), w: Math.round(l.w), r: Math.round(l.rotation) })) : 'no handle';
+});
+console.log('after sticking', JSON.stringify(await lineInfo()));
+await page.locator('.page-stage').first().screenshot({ path: '/tmp/conn1.png' });
+// Move the second rect far down left.
+await page.keyboard.press('Escape');
+await drag(at(0.75, 0.7), at(0.25, 0.85));
+console.log('after moving rect', JSON.stringify(await lineInfo()));
+await page.locator('.page-stage').first().screenshot({ path: '/tmp/conn2.png' });
+await browser.close();

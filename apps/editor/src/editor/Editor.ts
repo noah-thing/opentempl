@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
-import { DesignDoc, cloneElement, newId } from '../doc/design';
+import { DesignDoc, LOCAL, cloneElements, newId } from '../doc/design';
+import { staleConnectors } from '../canvas/connectors';
 import type { Element, Id, ImageElement, ShapeElement, TextElement } from '../doc/types';
 import { combineShapes, type BooleanOp } from '../lib/pathops';
 import { makeImage } from '../doc/factory';
@@ -40,6 +41,19 @@ export class Editor {
       const order = doc.snapshot.pageOrder;
       const active = this.ui.get().activePageId;
       if (!active || !order.includes(active)) this.ui.set({ activePageId: order[0] ?? null });
+    });
+    // Connectors follow the elements they are stuck to. Only our own edits
+    // trigger this; a collaborator's editor moves their connectors itself.
+    let queued = false;
+    doc.elements.observeDeep((_events, tr) => {
+      // Undo and redo restore connectors with their shapes, so they are left alone.
+      if (tr.origin !== LOCAL || queued) return;
+      queued = true;
+      queueMicrotask(() => {
+        queued = false;
+        const stale = staleConnectors(doc.snapshot.elements);
+        if (Object.keys(stale).length) doc.updateElements(stale);
+      });
     });
   }
 
@@ -230,10 +244,9 @@ export class Editor {
     const pageId = this.s.elementPage[els[0].id];
     const order = this.s.pages[pageId].elementIds;
     const groups = new Map<Id, Id>();
-    const copies = els
-      .slice()
-      .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id))
-      .map((el) => ({ ...cloneElement(el, groups), x: el.x + offset, y: el.y + offset, locked: false }) as Element);
+    const copies = cloneElements(els.slice().sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id)), groups).map(
+      (el) => ({ ...el, x: el.x + offset, y: el.y + offset, locked: false }) as Element,
+    );
     this.doc.undo.stopCapturing();
     this.doc.addElements(pageId, copies);
     this.ui.set({ selection: copies.map((c) => c.id) });
@@ -283,7 +296,7 @@ export class Editor {
       if (a) this.doc.addAsset(a);
     }
     const groups = new Map<Id, Id>();
-    const copies = els.map((el) => cloneElement(el, groups));
+    const copies = cloneElements(els, groups);
     const pageId = this.state.activePageId!;
     const sameSpot = copies.some((c) => this.s.pages[pageId]?.elementIds.some((id) => this.s.elements[id]?.x === c.x && this.s.elements[id]?.y === c.y));
     const shifted = copies.map((c) => ({ ...c, x: c.x + (sameSpot ? 24 : 0), y: c.y + (sameSpot ? 24 : 0) }) as Element);
@@ -360,7 +373,7 @@ export class Editor {
       for (const pid of this.s.pageOrder) {
         if (pid === from) continue;
         const groups = new Map<Id, Id>();
-        this.doc.addElements(pid, els.map((e) => cloneElement(e, groups)));
+        this.doc.addElements(pid, cloneElements(els, groups));
       }
     });
     this.toast(`Added to ${this.s.pageOrder.length - 1} other pages`);

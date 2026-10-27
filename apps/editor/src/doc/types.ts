@@ -183,6 +183,9 @@ export interface LineElement extends BaseElement {
   start: LineCap;
   end: LineCap;
   curve: number; // -100..100 bend
+  // Connector ends: the elements this line's start and end stick to.
+  from?: Id;
+  to?: Id;
 }
 
 export interface ImageFilters {

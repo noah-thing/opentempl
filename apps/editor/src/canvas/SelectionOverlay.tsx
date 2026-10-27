@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import type { Element, Id, LineElement } from '../doc/types';
+import { makeLine } from '../doc/factory';
 import { useEditor } from '../editor/Editor';
 import { startDrag, useDoc, useUI } from '../editor/hooks';
 import { aabb, center, unionRects, type Point } from '../lib/geom';
 import { collectTargets, snapBox } from './snap';
+import { canConnect, connectorGap, edgePoint, lineBetween } from './connectors';
 import {
   groupResizeBox,
   handlesFor,
@@ -135,10 +137,29 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
     editor.doc.undo.stopCapturing();
     const [a, b] = lineEnds(line);
     const targets = collectTargets(pageId, { w: editor.s.meta.width, h: editor.s.meta.height }, others(), editor.state.pageGuides[pageId]);
+    const key = which === 0 ? 'from' : 'to';
+    let stuck: Id | undefined;
     startDrag(
       e,
       (ev) => {
         let p = toLocal(ev.clientX, ev.clientY);
+        // Over another element: the end sticks to its edge and follows it from then on.
+        stuck = stickTarget(ev.clientX, ev.clientY, line.id);
+        if (stuck) {
+          const cur = editor.s.elements[line.id] as LineElement;
+          const fixed = which === 0 ? lineEnds(cur)[1] : lineEnds(cur)[0];
+          const other = cur[which === 0 ? 'to' : 'from'];
+          const otherEl = other ? editor.s.elements[other] : undefined;
+          const aimAt = otherEl && otherEl.id !== stuck ? center(aabb(otherEl)) : fixed;
+          const edge = edgePoint(editor.s.elements[stuck], aimAt, connectorGap(line));
+          const patch = which === 1 ? lineBetween(line, fixed, edge) : lineBetween(line, edge, fixed);
+          editor.doc.updateElement(line.id, { ...patch, [key]: stuck });
+          editor.ui.set({ dragging: true, guides: [], hoverId: stuck });
+          setLive('Stuck to an element');
+          return;
+        }
+        if (editor.state.hoverId) editor.ui.set({ hoverId: null });
+        if (editor.s.elements[line.id] && (editor.s.elements[line.id] as LineElement)[key]) editor.doc.updateElement(line.id, { [key]: undefined } as Partial<LineElement>);
         if (editor.state.snap) {
           const s = snapBox({ x: p.x, y: p.y, w: 0, h: 0 }, targets, 6 / zoom);
           p = { x: p.x + s.dx, y: p.y + s.dy };
@@ -155,9 +176,55 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
       },
       () => {
         setLive(null);
-        editor.ui.set({ guides: [], dragging: false });
+        editor.ui.set({ guides: [], dragging: false, hoverId: null });
       },
       0,
+    );
+  };
+
+  const stickTarget = (clientX: number, clientY: number, lineId: Id, skip: Id[] = []): Id | undefined => {
+    for (const node of document.elementsFromPoint(clientX, clientY)) {
+      const id = node.closest('[data-id]')?.getAttribute('data-id');
+      if (!id || id === lineId || skip.includes(id) || editor.s.elementPage[id] !== pageId) continue;
+      const el = editor.s.elements[id];
+      if (canConnect(el) && !el.locked) return id;
+    }
+    return undefined;
+  };
+
+  // ---------- connect dots: pull an arrow out of an element ----------
+  // A sticky note is a group; its connector hangs off the biggest member.
+  const source = locked || (!single && !grouped) ? null : single ?? els.reduce((a, b) => (a.w * a.h >= b.w * b.h ? a : b));
+  const connectable = !!source && canConnect(source) && ['shape', 'svg', 'image', 'text'].includes(source.type) && box.w * zoom > 24 && box.h * zoom > 24;
+  const onConnect = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!source) return;
+    const skip = els.map((x) => x.id);
+    const line = makeLine({ end: 'arrow', from: source.id });
+    const gap = connectorGap(line);
+    let made = false;
+    editor.doc.undo.stopCapturing();
+    startDrag(
+      e,
+      (ev) => {
+        const p = toLocal(ev.clientX, ev.clientY);
+        const target = stickTarget(ev.clientX, ev.clientY, line.id, skip);
+        const to = target ? editor.s.elements[target] : undefined;
+        const end = to ? edgePoint(to, center(aabb(editor.s.elements[source.id])), gap) : p;
+        const start = edgePoint(editor.s.elements[source.id], to ? center(aabb(to)) : p, gap);
+        const geo = { ...lineBetween(line, start, end), to: target };
+        if (!made) {
+          made = true;
+          editor.doc.addElement(pageId, { ...line, ...geo });
+        } else editor.doc.updateElement(line.id, geo as Partial<LineElement>);
+        editor.ui.set({ hoverId: target ?? null, dragging: true });
+      },
+      () => {
+        editor.ui.set({ hoverId: null, dragging: false });
+        if (made) editor.ui.set({ selection: [line.id] });
+      },
+      2,
     );
   };
 
@@ -169,7 +236,7 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
   return (
     <>
       <div
-        className={`selection ${locked ? 'is-locked' : ''} ${grouped ? 'is-group' : ''}`}
+        className={`selection ${locked ? 'is-locked' : ''} ${grouped ? 'is-group' : ''} ${connectable ? 'has-connect' : ''}`}
         data-selection-body={els.length > 1 ? 'multi' : undefined}
         style={{
           left: box.x * z,
@@ -207,12 +274,33 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
             />
           ))
         : null}
-      {!dragging ? <QuickBar box={box} zoom={z} locked={locked} /> : null}
+      {connectable && !dragging
+        ? (() => {
+            const b = aabb(box);
+            const spots = [
+              { side: 'top', x: b.x + b.w / 2, y: b.y, dx: 0, dy: -1 },
+              { side: 'right', x: b.x + b.w, y: b.y + b.h / 2, dx: 1, dy: 0 },
+              { side: 'bottom', x: b.x + b.w / 2, y: b.y + b.h, dx: 0, dy: 1 },
+              { side: 'left', x: b.x, y: b.y + b.h / 2, dx: -1, dy: 0 },
+            ];
+            return spots.map((s) => (
+              <div
+                key={s.side}
+                data-overlay-control
+                className="connect-dot"
+                title="Drag to connect"
+                style={{ left: s.x * z + s.dx * 20, top: s.y * z + s.dy * 20 }}
+                onPointerDown={onConnect}
+              />
+            ));
+          })()
+        : null}
+      {!dragging ? <QuickBar box={box} zoom={z} locked={locked} lifted={connectable} /> : null}
     </>
   );
 }
 
-function QuickBar({ box, zoom, locked }: { box: { x: number; y: number; w: number; h: number; rotation: number }; zoom: number; locked: boolean }) {
+function QuickBar({ box, zoom, locked, lifted }: { box: { x: number; y: number; w: number; h: number; rotation: number }; zoom: number; locked: boolean; lifted: boolean }) {
   const editor = useEditor();
   const b = aabb(box);
   // Near the top of the page the bar would sit under the toolbar, so it goes below.
@@ -221,7 +309,7 @@ function QuickBar({ box, zoom, locked }: { box: { x: number; y: number; w: numbe
     <div
       className={`quickbar ${below ? 'is-below' : ''}`}
       data-overlay-control
-      style={{ left: (b.x + b.w / 2) * zoom, top: below ? (b.y + b.h) * zoom + 56 : b.y * zoom }}
+      style={{ left: (b.x + b.w / 2) * zoom, top: below ? (b.y + b.h) * zoom + (lifted ? 78 : 56) : b.y * zoom - (lifted ? 20 : 0) }}
       onPointerDown={(e) => e.stopPropagation()}
     >
       {locked ? (

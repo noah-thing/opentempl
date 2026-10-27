@@ -787,6 +787,31 @@ input[type='range']:active::-webkit-slider-thumb {
   display: grid;
   place-items: center;
 }
+.selection.has-connect .rotate-handle {
+  margin-top: 34px;
+}
+.connect-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1.5px var(--cobalt), 0 1px 3px rgba(11, 11, 13, 0.18);
+  cursor: crosshair;
+  transition: transform 0.14s var(--ease), background 0.14s var(--ease);
+}
+.connect-dot::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--cobalt);
+}
+.connect-dot:hover {
+  transform: scale(1.35);
+  background: var(--cobalt-soft);
+}
 .line-handle {
   position: absolute;
   width: 16px;
