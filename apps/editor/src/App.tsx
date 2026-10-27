@@ -30,12 +30,17 @@ declare global {
   }
 }
 
-// Inside the desktop app: make room for the window buttons and open .tavla files from Finder.
+// Inside the desktop app: make room for the window buttons and open files
+// from Finder or Explorer (.tavla, and PowerPoint and PDF through Open With).
 if (window.tavlaDesktop) {
   document.documentElement.classList.add('is-desktop', `is-${window.tavlaDesktop.platform}`);
   window.tavlaDesktop.onOpenFile(async (f) => {
-    const { importTavla } = await import('./io/designs');
-    const id = await importTavla(new File([f.bytes as BlobPart], f.name));
+    const file = new File([f.bytes as BlobPart], f.name);
+    const name = f.name.toLowerCase();
+    let id: string | null = null;
+    if (name.endsWith('.pptx')) id = await (await import('./io/pptxImport')).importPptx(file);
+    else if (name.endsWith('.pdf')) id = await (await import('./io/pdfImport')).importPdf(file);
+    else id = await (await import('./io/designs')).importTavla(file);
     if (id) navigate(`/d/${id}`);
   });
 }

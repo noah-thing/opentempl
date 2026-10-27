@@ -79,7 +79,7 @@ app.whenReady().then(() => {
     ]),
   );
   createWindow();
-  const arg = process.argv.find((a) => a.endsWith('.tavla'));
+  const arg = process.argv.find((a) => /\.(tavla|pptx|pdf)$/i.test(a));
   if (arg) openFile(arg);
   app.on('activate', () => BrowserWindow.getAllWindows().length === 0 && createWindow());
 });

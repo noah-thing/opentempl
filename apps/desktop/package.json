@@ -43,6 +43,18 @@
         "ext": "tavla",
         "name": "Tavla design",
         "role": "Editor"
+      },
+      {
+        "ext": "pptx",
+        "name": "PowerPoint presentation",
+        "role": "Viewer",
+        "rank": "Alternate"
+      },
+      {
+        "ext": "pdf",
+        "name": "PDF document",
+        "role": "Viewer",
+        "rank": "Alternate"
       }
     ],
     "electronVersion": "45.0.0"
