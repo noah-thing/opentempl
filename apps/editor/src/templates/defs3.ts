@@ -418,7 +418,7 @@ export const DEFS3: TemplateDef[] = [
           text('Stockholmsmässan · 14 to 15 May', 40, 150, 520, { fontFamily: G, fontSize: 21, fontWeight: 600, color: INK }),
           photo('portrait', 40, 220, 250, 300, { radius: 14 }),
           text('Ines\nKarlsson', 40, 540, 540, { fontFamily: 'Archivo', fontSize: 100, fontWeight: 900, lineHeight: 0.9, letterSpacing: -30, color: INK }),
-          text('Design engineer, Klarna', 40, 740, 540, { fontFamily: G, fontSize: 26, fontWeight: 600, color: INK }),
+          text('Design engineer, Lera', 40, 740, 540, { fontFamily: G, fontSize: 26, fontWeight: 600, color: INK }),
           shape('rect', 0, 800, 600, 100, INK),
           text('SPEAKER', 40, 828, 300, { fontFamily: 'Archivo', fontSize: 44, fontWeight: 900, letterSpacing: 40, color: MINT }),
           makeQr('https://frontenddays.example/ines', { x: 340, y: 250, w: 220, h: 220, background: MINT, margin: 0 }),
