@@ -1,0 +1,20 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+page.on('pageerror', (e) => console.log('pageerror', e.message));
+await page.goto('http://localhost:5181/#/new?template=open-studio', { waitUntil: 'networkidle' });
+await page.waitForTimeout(2500);
+await page.evaluate(async () => {
+  const { makeText } = await import('/src/doc/factory.ts');
+  window.__tavla.add([makeText({ text: 'Barely there', x: 80, y: 900, w: 400, fontSize: 9, color: '#3344FF' })]);
+});
+await page.keyboard.press('Meta+k');
+await page.keyboard.type('check the design');
+await page.keyboard.press('Enter');
+await page.waitForTimeout(800);
+await page.locator('.panel').screenshot({ path: '/tmp/check-panel.png' });
+console.log(await page.locator('.issue').count(), 'issues');
+await page.click('.panel button:has-text("Fix")');
+await page.waitForTimeout(400);
+console.log(await page.locator('.issue').count(), 'after fix all');
+await browser.close();

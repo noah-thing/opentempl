@@ -51,6 +51,8 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Organise.** Layers panel with drag to restack, hide, lock and rename; group, align, distribute and tidy; numeric position panel; copy and paste style; find and replace; add to every page; alt text.
 
+**Check.** A design check flags text that does not stand out from what is actually behind it (WCAG contrast), text too small for the page, photos that will print soft, missing alt text, elements off the page and empty boxes, with one click fixes.
+
 **Restyle.** Styles recolour the whole design with one of sixteen palettes or five colours taken from a photo, matched by brightness so contrast survives, and swap the fonts for one of twelve pairs.
 
 **Make more.** Magic resize into any format, in place or as a copy. Bulk create: paste a table and get a page per row. Brand kits with logos, colours and fonts. 32 templates. Version history with a snapshot every ten minutes. A command palette on ⌘K with every action.

@@ -13,6 +13,7 @@ const PANELS: Partial<Record<Exclude<PanelId, null>, { title: string; C: Compone
   draw: { title: 'Draw', C: lazy(() => import('../panels/DrawPanel')) },
   audio: { title: 'Audio', C: lazy(() => import('../panels/AudioPanel')) },
   styles: { title: 'Styles', C: lazy(() => import('../panels/StylesPanel')) },
+  check: { title: 'Check the design', C: lazy(() => import('../panels/CheckPanel')) },
   brand: { title: 'Brand kit', C: lazy(() => import('../panels/BrandPanel')) },
   layers: { title: 'Layers', C: lazy(() => import('../panels/LayersPanel')) },
   apps: { title: 'Tools', C: lazy(() => import('../panels/ToolsPanel')) },

@@ -15,6 +15,7 @@ export type PanelId =
   | 'apps'
   | 'audio'
   | 'styles'
+  | 'check'
   // contextual panels opened from the selection toolbar
   | 'font'
   | 'color'

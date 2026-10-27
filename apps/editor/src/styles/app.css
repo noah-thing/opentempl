@@ -2606,3 +2606,41 @@ kbd {
 .brand-style .chips5 {
   width: 120px;
 }
+
+/* ---------- design check ---------- */
+.issues {
+  display: grid;
+  gap: 6px;
+}
+.issue {
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--paper);
+}
+.issue.is-fix {
+  box-shadow: inset 3px 0 0 var(--tomato);
+}
+.issue-text {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.issue-text:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.issue-page {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--sheet);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  vertical-align: 1px;
+}

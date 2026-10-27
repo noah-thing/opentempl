@@ -5,6 +5,7 @@ import { animState } from '../src/render/animate';
 import { charStyles } from '../src/text/layout';
 import { aabb, rotatePoint, snapAngle } from '../src/lib/geom';
 import { makeShape, makeText } from '../src/doc/factory';
+import { checkDesign } from '../src/tools/check';
 
 describe('geometry', () => {
   it('rotates a point around a centre', () => {
@@ -115,5 +116,35 @@ describe('shapes to pen points', () => {
       if (!n) continue;
       expect(penPath(n, true)).not.toContain('NaN');
     }
+  });
+});
+
+describe('design check', () => {
+  const page = (els: import('../src/doc/types').Element[], bg = '#FFFFFF') => ({
+    meta: { id: 'd', title: 't', width: 1080, height: 1080, unit: 'px' as const, createdAt: 0, updatedAt: 0 },
+    pageOrder: ['p'],
+    pages: { p: { id: 'p', name: '', background: { type: 'solid' as const, color: bg }, elementIds: els.map((e) => e.id), notes: '', transition: 'none' as const, duration: 5 } },
+    elements: Object.fromEntries(els.map((e) => [e.id, e])),
+  });
+  it('flags pale text on white and offers ink', () => {
+    const t = makeText({ text: 'Hello', x: 100, y: 100, w: 300, h: 40, fontSize: 20, color: '#DDDDDD' });
+    const issues = checkDesign(page([t]), () => undefined);
+    const c = issues.find((i) => i.kind === 'contrast')!;
+    expect(c).toBeTruthy();
+    expect((c.fix as { patch: { color: string } }).patch.color).toBe('#0B0B0D');
+  });
+  it('reads text against the shape behind it', () => {
+    const s = makeShape('rect', { x: 0, y: 0, w: 600, h: 600, fill: { type: 'solid', color: '#0B0B0D' } });
+    const t = makeText({ text: 'Dark on dark', x: 100, y: 100, w: 300, h: 40, fontSize: 40, color: '#222222' });
+    expect(checkDesign(page([s, t]), () => undefined).some((i) => i.kind === 'contrast')).toBe(true);
+    const ok = makeText({ ...t, id: 't2', color: '#FFFFFF' });
+    expect(checkDesign(page([s, ok]), () => undefined).some((i) => i.kind === 'contrast')).toBe(false);
+  });
+  it('finds things off the page and empty boxes', () => {
+    const off = makeShape('rect', { x: 2000, y: 0, w: 100, h: 100 });
+    const empty = makeText({ text: '  ', x: 10, y: 10, w: 100, h: 40 });
+    const kinds = checkDesign(page([off, empty]), () => undefined).map((i) => i.kind);
+    expect(kinds).toContain('offpage');
+    expect(kinds).toContain('empty');
   });
 });
