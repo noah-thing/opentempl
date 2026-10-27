@@ -44,14 +44,25 @@ export function TopBar() {
     },
     { label: 'Upload photos or videos', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
     {
-      label: 'Import a PDF as a new design (pages as pictures)',
+      label: 'Import a PDF with editable text',
+      icon: 'file',
+      onClick: async () => {
+        const [f] = await pickFiles('.pdf');
+        if (!f) return;
+        editor.toast('Reading the PDF: pages, then every line of text');
+        const { importPdf } = await import('../io/pdfImport');
+        navigate(`/d/${await importPdf(f)}`);
+      },
+    },
+    {
+      label: 'Import a PDF as pictures',
       icon: 'file',
       onClick: async () => {
         const [f] = await pickFiles('.pdf');
         if (!f) return;
         editor.toast('Importing PDF pages');
         const { importPdf } = await import('../io/pdfImport');
-        navigate(`/d/${await importPdf(f)}`);
+        navigate(`/d/${await importPdf(f, { editable: false })}`);
       },
     },
     { separator: true },
