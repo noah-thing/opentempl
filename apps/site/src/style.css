@@ -907,6 +907,34 @@ a {
   border-radius: 8px;
   background: rgba(11, 11, 13, 0.08);
 }
+.dl-desk {
+  position: relative;
+  padding-top: 76px;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.dl-desk:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.8);
+}
+.dl-desk img {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 52px;
+  transition: transform 0.4s var(--ease);
+}
+.dl-desk:hover img {
+  transform: rotate(-8deg) scale(1.08);
+}
+.badge-ink {
+  background: var(--ink);
+  color: #fff;
+}
+.dl-foot {
+  margin: 20px 0 0;
+  font-size: 14px;
+  color: rgba(11, 11, 13, 0.7);
+}
 .dl-code code {
   margin-top: auto;
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;

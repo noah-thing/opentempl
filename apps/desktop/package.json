@@ -16,11 +16,39 @@
   "build": {
     "appId": "app.tavla.desktop",
     "productName": "Tavla",
-    "files": ["main.cjs", "preload.cjs", "app/**/*"],
-    "directories": { "output": "release" },
-    "mac": { "category": "public.app-category.graphics-design", "icon": "icon.png", "identity": null },
-    "win": { "icon": "icon.png" },
-    "linux": { "icon": "icon.png", "category": "Graphics" },
-    "fileAssociations": [{ "ext": "tavla", "name": "Tavla design", "role": "Editor" }]
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "app/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "category": "public.app-category.graphics-design",
+      "icon": "icon.png",
+      "identity": null
+    },
+    "win": {
+      "icon": "icon.png"
+    },
+    "linux": {
+      "icon": "icon.png",
+      "category": "Graphics",
+      "executableName": "tavla",
+      "maintainer": "Noah"
+    },
+    "fileAssociations": [
+      {
+        "ext": "tavla",
+        "name": "Tavla design",
+        "role": "Editor"
+      }
+    ],
+    "electronVersion": "45.0.0"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "^26.18.0"
   }
 }

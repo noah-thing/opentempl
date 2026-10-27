@@ -1,0 +1,11 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+const [,, sel, out, w = '1512'] = process.argv;
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: +w, height: 900 } });
+await page.goto('http://localhost:5182/', { waitUntil: 'networkidle' });
+await page.evaluate(() => document.querySelectorAll('[data-reveal]').forEach((n) => n.classList.add('is-in')));
+const el = await page.$(sel);
+await el.scrollIntoViewIfNeeded();
+await page.waitForTimeout(1200);
+await el.screenshot({ path: out });
+await browser.close();
