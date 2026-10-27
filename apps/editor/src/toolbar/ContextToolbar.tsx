@@ -9,6 +9,7 @@ import { parseSvg } from '../render/ElementView';
 import { SHAPE_KINDS, shapePath } from '../render/shapes';
 import { nearestWeight } from '../fonts/fonts';
 import { Slider } from '../panels/controls';
+import { richCommand } from '../canvas/TextEditor';
 
 export function ContextToolbar() {
   const sel = useUI((s) => s.selection);
@@ -21,7 +22,12 @@ export function ContextToolbar() {
   const allText = els.length > 0 && types.size === 1 && types.has('text');
   return (
     <div className="ctxbar-row">
-      <div className="ctxbar" key={one ? one.type : els.length ? 'multi' : 'page'}>
+      <div
+        className="ctxbar"
+        key={one ? one.type : els.length ? 'multi' : 'page'}
+        // While editing text, toolbar clicks must not steal the text selection.
+        onMouseDown={(e) => editing && (e.target as HTMLElement).tagName !== 'INPUT' && (e.target as HTMLElement).tagName !== 'SELECT' && e.preventDefault()}
+      >
         {!els.length ? (
           <PageTools />
         ) : allText ? (
@@ -207,7 +213,20 @@ function TextTools({ els }: { els: TextElement[]; editing: boolean }) {
   const panel = useUI((s) => s.panel);
   const t = els[0];
   const spacing = usePopover();
-  const setAll = (patch: Partial<TextElement>) => editor.updateSelected(patch as Partial<Element>);
+  // Styling the whole box also clears that property from any styled runs.
+  const setAll = (patch: Partial<TextElement>) =>
+    editor.updateSelected((e) => {
+      if (e.type !== 'text') return null;
+      const keys = Object.keys(patch) as (keyof TextElement)[];
+      const runs = e.runs
+        ?.map((r) => {
+          const n = { ...r } as Record<string, unknown>;
+          for (const k of keys) delete n[k];
+          return n as unknown as typeof r;
+        })
+        .filter((r) => Object.keys(r).length > 2);
+      return { ...patch, runs: runs?.length ? runs : undefined } as Partial<Element>;
+    });
   const size = Math.round(t.fontSize * 10) / 10;
   const bold = t.fontWeight >= 600;
   const aligns: TextElement['align'][] = ['left', 'center', 'right', 'justify'];
@@ -246,13 +265,14 @@ function TextTools({ els }: { els: TextElement[]; editing: boolean }) {
         on={bold}
         onClick={() => {
           const target = bold ? nearestWeight(t.fontFamily, 400) : nearestWeight(t.fontFamily, 700);
+          if (richCommand('bold')) return;
           if (target === t.fontWeight) editor.toast(`${t.fontFamily} comes in one weight only`);
           else setAll({ fontWeight: target });
         }}
       />
-      <TBtn icon="italic" title="Italic (⌘I)" on={t.italic} onClick={() => setAll({ italic: !t.italic })} />
-      <TBtn icon="underline" title="Underline (⌘U)" on={t.underline} onClick={() => setAll({ underline: !t.underline })} />
-      <TBtn icon="strike" title="Strikethrough" on={t.strike} onClick={() => setAll({ strike: !t.strike })} />
+      <TBtn icon="italic" title="Italic (⌘I)" on={t.italic} onClick={() => richCommand('italic') || setAll({ italic: !t.italic })} />
+      <TBtn icon="underline" title="Underline (⌘U)" on={t.underline} onClick={() => richCommand('underline') || setAll({ underline: !t.underline })} />
+      <TBtn icon="strike" title="Strikethrough" on={t.strike} onClick={() => richCommand('strikeThrough') || setAll({ strike: !t.strike })} />
       <TBtn icon="case" title="Uppercase (⌘⇧K)" on={t.uppercase} onClick={() => setAll({ uppercase: !t.uppercase })} />
       <Div />
       <TBtn icon={`align-${t.align}`} title={`Align ${t.align}`} onClick={() => setAll({ align: aligns[(aligns.indexOf(t.align) + 1) % aligns.length] })} />

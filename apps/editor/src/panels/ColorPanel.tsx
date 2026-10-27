@@ -7,6 +7,7 @@ import { Section } from './controls';
 import { useBrand } from './brand';
 import { Icon } from '../ui/icons';
 import { extractPalette } from './palette';
+import { hasRichSelection, richCommand } from '../canvas/TextEditor';
 
 // One colour panel for everything. `colorTarget` says what it edits: text,
 // fill, stroke, line, bg, qr, qrbg, draw, svg:<colour>, chart:<series>.
@@ -56,8 +57,17 @@ function apply(editor: Editor, target: string | null, value: Fill | string) {
     if (id) editor.doc.updatePage(id, { background: fill });
     return;
   }
+  // Colouring selected words while editing makes a run instead of recolouring the box.
+  if (target === 'text' && solid && hasRichSelection()) {
+    richCommand('foreColor', solid);
+    return;
+  }
   editor.updateSelected((el) => {
-    if (target === 'text' && el.type === 'text') return fill.type === 'solid' ? { color: fill.color, gradient: null } : { gradient: fill, color: fill.type === 'linear' || fill.type === 'radial' ? fill.stops[0].color : el.color };
+    if (target === 'text' && el.type === 'text') {
+      const runs = el.runs?.map(({ color: _c, ...r }) => r).filter((r) => Object.keys(r).length > 2);
+      const clean = runs?.length ? runs : undefined;
+      return fill.type === 'solid' ? { color: fill.color, gradient: null, runs: clean } : { gradient: fill, color: fill.type === 'linear' || fill.type === 'radial' ? fill.stops[0].color : el.color, runs: clean };
+    }
     if (target === 'fill' && el.type === 'shape') return { fill };
     if (target === 'stroke' && el.type === 'shape' && solid) return { stroke: { ...(el.stroke ?? { width: 4, dash: 'solid' }), color: solid } };
     if (target === 'stroke' && el.type === 'image' && solid) return { border: { ...(el.border ?? { width: 4, dash: 'solid' }), color: solid } };

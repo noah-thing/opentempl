@@ -47,11 +47,11 @@ export function FindReplace() {
   const replaceOne = () => {
     const h = hits[index % Math.max(1, hits.length)];
     if (!h || !re) return;
-    editor.update(h.el.id, { text: h.el.text.replace(new RegExp(re.source, re.flags.replace('g', '')), replace) } as Partial<TextElement>);
+    editor.update(h.el.id, { text: h.el.text.replace(new RegExp(re.source, re.flags.replace('g', '')), replace), runs: undefined } as Partial<TextElement>);
   };
   const replaceAll = () => {
     if (!re) return;
-    editor.doc.transact(() => hits.forEach((h) => editor.update(h.el.id, { text: h.el.text.replace(re, replace) } as Partial<TextElement>)));
+    editor.doc.transact(() => hits.forEach((h) => editor.update(h.el.id, { text: h.el.text.replace(re, replace), runs: undefined } as Partial<TextElement>)));
     editor.toast(`Replaced ${total} ${total === 1 ? 'match' : 'matches'}`);
   };
 

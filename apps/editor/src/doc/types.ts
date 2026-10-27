@@ -82,6 +82,17 @@ export interface TextEffect {
   direction: number; // degrees
 }
 
+// A styled range inside a text box, [start, end) in characters.
+export interface TextRun {
+  start: number;
+  end: number;
+  fontWeight?: number;
+  italic?: boolean;
+  underline?: boolean;
+  strike?: boolean;
+  color?: string;
+}
+
 export interface TextElement extends BaseElement {
   type: 'text';
   text: string;
@@ -101,6 +112,7 @@ export interface TextElement extends BaseElement {
   effect: TextEffect;
   curve: number; // -100..100, 0 = straight
   role?: 'heading' | 'subheading' | 'body';
+  runs?: TextRun[];
 }
 
 export type ShapeKind =

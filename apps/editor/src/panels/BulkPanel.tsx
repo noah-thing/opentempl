@@ -75,6 +75,7 @@ export default function BulkPanel() {
           const col = mapping[eid];
           if (copy.type === 'text' && col) {
             const v = row[data.header.indexOf(col)] ?? '';
+            copy.runs = undefined;
             copy.text = /\{\{/.test(copy.text) ? copy.text.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, k) => row[data.header.indexOf(k)] ?? '') : v;
           }
           editor.doc.addElement(np, copy);

@@ -455,22 +455,26 @@ function TextView({ el, uid }: { el: TextElement; uid: string }) {
 
   if (el.curve) return <CurvedText el={el} fill={fill} gradId={gradId} font={font} />;
 
-  const lines = (key: string, props: React.SVGProps<SVGTextElement> & { dx0?: number; dy0?: number } = {}) => {
-    const { dx0 = 0, dy0 = 0, ...rest } = props;
+  // One <text> per layer. Every styled segment is placed explicitly, so the
+  // canvas and every export agree on where each word sits. `own` keeps the
+  // colours of runs (the top layer); effect layers paint everything one colour.
+  const lines = (key: string, props: React.SVGProps<SVGTextElement> & { dx0?: number; dy0?: number; own?: boolean } = {}) => {
+    const { dx0 = 0, dy0 = 0, own = false, ...rest } = props;
     return (
       <text key={key} style={font} {...rest} xmlSpace="preserve">
         {layout.lines.map((ln, i) =>
-          ln.words ? (
-            ln.words.map((w, j) => (
-              <tspan key={`${i}-${j}`} x={w.x + dx0} y={ln.y + dy0}>
-                {w.text}
-              </tspan>
-            ))
-          ) : (
-            <tspan key={i} x={ln.x + dx0} y={ln.y + dy0}>
-              {ln.text || ' '}
+          ln.segments.map((sg, j) => (
+            <tspan
+              key={`${i}-${j}`}
+              x={sg.x + dx0}
+              y={ln.y + dy0}
+              fontWeight={sg.style.fontWeight !== el.fontWeight ? sg.style.fontWeight : undefined}
+              fontStyle={sg.style.italic !== el.italic ? (sg.style.italic ? 'italic' : 'normal') : undefined}
+              fill={own && sg.style.color ? sg.style.color : undefined}
+            >
+              {sg.text || (j === 0 ? ' ' : '')}
             </tspan>
-          ),
+          )),
         )}
         {layout.lines.map((ln, i) =>
           ln.prefix ? (
@@ -483,15 +487,18 @@ function TextView({ el, uid }: { el: TextElement; uid: string }) {
     );
   };
 
+  const thick = Math.max(1, el.fontSize * 0.06);
   const decorations = (color: string) =>
-    el.underline || el.strike
-      ? layout.lines.map((ln, i) => (
-          <g key={`d${i}`}>
-            {el.underline ? <rect x={ln.x} y={ln.y + el.fontSize * 0.1} width={ln.width} height={Math.max(1, el.fontSize * 0.06)} fill={color} /> : null}
-            {el.strike ? <rect x={ln.x} y={ln.y - el.fontSize * 0.3} width={ln.width} height={Math.max(1, el.fontSize * 0.06)} fill={color} /> : null}
+    layout.lines.map((ln, i) =>
+      ln.segments.map((sg, j) =>
+        sg.style.underline || sg.style.strike ? (
+          <g key={`d${i}-${j}`} fill={sg.style.color ?? color}>
+            {sg.style.underline ? <rect x={sg.x} y={ln.y + el.fontSize * 0.1} width={sg.width} height={thick} /> : null}
+            {sg.style.strike ? <rect x={sg.x} y={ln.y - el.fontSize * 0.3} width={sg.width} height={thick} /> : null}
           </g>
-        ))
-      : null;
+        ) : null,
+      ),
+    );
 
   const layers: React.ReactNode[] = [];
   switch (fx.kind) {
@@ -543,11 +550,11 @@ function TextView({ el, uid }: { el: TextElement; uid: string }) {
   if (fx.kind === 'hollow' || fx.kind === 'splice') {
     main = lines('main', { fill: fx.kind === 'splice' ? 'none' : 'none', stroke: el.color, strokeWidth: strokeW, strokeLinejoin: 'round' });
   } else if (fx.kind === 'outline') {
-    main = lines('main', { fill, stroke: fx.color, strokeWidth: strokeW * 2, strokeLinejoin: 'round', paintOrder: 'stroke' });
+    main = lines('main', { fill, stroke: fx.color, strokeWidth: strokeW * 2, strokeLinejoin: 'round', paintOrder: 'stroke', own: true });
   } else if (fx.kind === 'neon') {
     main = lines('main', { fill: '#FFFFFF' });
   } else {
-    main = lines('main', { fill });
+    main = lines('main', { fill, own: true });
   }
 
   return (
@@ -579,7 +586,7 @@ function TextView({ el, uid }: { el: TextElement; uid: string }) {
       <rect width={el.w} height={el.h} fill="transparent" />
       {layers}
       {main}
-      {decorations(el.color)}
+      {decorations(fx.kind === 'neon' ? '#FFFFFF' : el.color)}
     </>
   );
 }
