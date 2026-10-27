@@ -40,6 +40,7 @@ export interface PageSvgOptions {
   idPrefix?: string;
   time?: number; // render entrance animations at this moment
   bleed?: number; // extra design units drawn around the page, for print
+  videoFrames?: Record<Id, string>; // video clips: the frame to show, as data URLs
 }
 
 export async function pageSvg(doc: DesignDoc, snap: DesignSnapshot, pageId: Id, opts: PageSvgOptions = {}) {
@@ -59,6 +60,7 @@ export async function pageSvg(doc: DesignDoc, snap: DesignSnapshot, pageId: Id, 
     fontsVersion: fontsVersion(),
     mode: 'export',
     time: opts.time,
+    videoFrame: opts.videoFrames ? (id) => opts.videoFrames![id] : undefined,
     idPrefix: opts.idPrefix ?? `p${snap.pageOrder.indexOf(pageId)}-`,
   };
   const p = opts.transparent ? { ...page, background: { type: 'solid' as const, color: 'transparent' } } : page;

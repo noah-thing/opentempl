@@ -1,0 +1,44 @@
+import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+import fs from 'node:fs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--autoplay-policy=no-user-gesture-required'] });
+const ctx = await browser.newContext({ viewport: { width: 1512, height: 900 }, acceptDownloads: true });
+const page = await ctx.newPage();
+page.on('pageerror', (e) => console.log('pageerror', e.message));
+page.on('console', (m) => m.type() === 'error' && console.log('console', m.text()));
+await page.goto('http://localhost:5181/#/new?format=instagram-post', { waitUntil: 'networkidle' });
+await page.waitForTimeout(2500);
+await page.click('.rail button[title="Uploads"], .rail :text("Uploads")');
+await page.waitForTimeout(500);
+const [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.click('text=Upload files')]);
+await chooser.setFiles('/tmp/clip.mp4');
+await page.waitForTimeout(2500);
+const vid = await page.evaluate(() => Object.values(window.__tavla.s.elements).find((e) => e.type === 'video'));
+console.log('video el', vid && { w: Math.round(vid.w), h: Math.round(vid.h), duration: vid.duration, poster: !!vid.posterId });
+await page.locator('.page-stage').first().screenshot({ path: '/tmp/vid1.png' });
+// select it and play inline
+await page.evaluate((id) => window.__tavla.select([id]), vid.id);
+await page.waitForTimeout(300);
+console.log('ctxbar:', await page.evaluate(() => document.querySelector('.ctxbar')?.textContent));
+await page.click('.ctxbar .tbtn[title="Play"]');
+await page.waitForTimeout(1200);
+console.log('playing video tag', await page.evaluate(() => { const v = document.querySelector('.page-stage video'); return v && { t: v.currentTime.toFixed(2), paused: v.paused }; }));
+await page.click('.ctxbar .tbtn[title="Trim"]');
+await page.waitForTimeout(2500);
+await page.screenshot({ path: '/tmp/vid2.png' });
+// drag the left grip right by 30%
+const bar = await page.locator('.trim-bar').boundingBox();
+const g = await page.locator('.trim-grip.is-a').boundingBox();
+await page.mouse.move(g.x + 6, g.y + 15); await page.mouse.down(); await page.mouse.move(g.x + 6 + bar.width * 0.3, g.y + 15, { steps: 6 }); await page.mouse.up();
+await page.waitForTimeout(1500);
+const v2 = await page.evaluate((id) => window.__tavla.s.elements[id], vid.id);
+console.log('trim', v2.trimStart, v2.trimEnd, 'poster changed', v2.posterId !== vid.posterId);
+await page.keyboard.press('Escape');
+// export mp4
+await page.keyboard.press('Meta+e');
+await page.waitForTimeout(600);
+await page.click('.export-dialog :text("MP4 video"), :text("MP4 video")');
+await page.waitForTimeout(300);
+const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 90000 }), page.click('button:has-text("Download MP4"), button:has-text("Download")')]);
+await dl.saveAs('/tmp/vid-export.mp4');
+console.log('exported');
+await browser.close();

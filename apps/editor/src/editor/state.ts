@@ -55,6 +55,7 @@ export interface EditorState {
   editingTextId: Id | null;
   cropId: Id | null;
   penEditId: Id | null; // a path shape whose points the pen is editing
+  playingVideoId: Id | null; // a clip previewing inline on the canvas
   panel: PanelId;
   colorTarget: string | null; // which property the colour panel edits, e.g. "fill", "text", "stroke", "bg"
   hoverId: Id | null;
@@ -88,6 +89,7 @@ export const initialEditorState: EditorState = {
   editingTextId: null,
   cropId: null,
   penEditId: null,
+  playingVideoId: null,
   panel: 'templates',
   colorTarget: null,
   hoverId: null,

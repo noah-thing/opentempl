@@ -1,7 +1,8 @@
 import type { Editor } from '../editor/Editor';
 import { newId } from '../doc/design';
 import type { Asset, Id } from '../doc/types';
-import { makeSvg } from '../doc/factory';
+import { makeSvg, makeVideo } from '../doc/factory';
+import { grabFrame, loadVideo, putMedia } from './media';
 import { parseSvg } from '../render/ElementView';
 import type { Point } from '../lib/geom';
 import { addUpload } from './uploads';
@@ -87,11 +88,59 @@ export async function importFiles(editor: Editor, files: File[], opts: { at?: Po
       }
       continue;
     }
-    editor.toast(`${file.name} is not an image Tavla can place yet`);
+    if (file.type.startsWith('video/') || /\.(mp4|m4v|mov|webm)$/i.test(file.name)) {
+      await importVideo(editor, file, at);
+      continue;
+    }
+    editor.toast(`${file.name} is not an image or video Tavla can place yet`);
   }
 }
 
-export function pickFiles(accept = 'image/*,.svg'): Promise<File[]> {
+const MAX_VIDEO = 500 * 1024 * 1024;
+
+async function importVideo(editor: Editor, file: File, at?: Point) {
+  if (file.size > MAX_VIDEO) return editor.toast(`${file.name} is over 500 MB. Trim it first, then bring it in.`);
+  editor.toast(`Bringing in ${file.name}`);
+  const url = URL.createObjectURL(file);
+  try {
+    const v = await loadVideo(url);
+    const duration = await realDuration(v);
+    const poster = await prepareImage(await grabFrame(v, Math.min(0.05, duration / 2)), `${file.name} poster`);
+    const mediaId = newId();
+    await putMedia(mediaId, file);
+    editor.doc.addAsset(poster);
+    const el = makeVideo({
+      mediaId,
+      posterId: poster.id,
+      mime: file.type || 'video/mp4',
+      duration,
+      trimEnd: duration,
+      w: v.videoWidth || 640,
+      h: v.videoHeight || 360,
+      name: file.name,
+    } as Parameters<typeof makeVideo>[0]);
+    editor.add([editor.fitToPage(el, 0.7)], { at });
+  } catch {
+    editor.toast(`Could not play ${file.name} in this browser`);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+// Recorded webm files often report an infinite duration until you seek to the end.
+async function realDuration(v: HTMLVideoElement): Promise<number> {
+  if (Number.isFinite(v.duration) && v.duration > 0) return v.duration;
+  await new Promise<void>((resolve) => {
+    v.ondurationchange = () => Number.isFinite(v.duration) && resolve();
+    v.currentTime = 1e9;
+    setTimeout(resolve, 3000);
+  });
+  const d = Number.isFinite(v.duration) ? v.duration : v.currentTime;
+  v.currentTime = 0;
+  return d || 1;
+}
+
+export function pickFiles(accept = 'image/*,.svg,video/*'): Promise<File[]> {
   return new Promise((resolve) => {
     const input = document.createElement('input');
     input.type = 'file';

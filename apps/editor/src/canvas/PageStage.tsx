@@ -31,8 +31,9 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   const elements = useDoc((s) => s.elements);
   const meta = useDoc((s) => s.meta);
   const fontsVersion = useFontsVersion();
-  const { selection, editingTextId, cropId, tool, guides, marquee, hoverId, showGrid, penEditId, activePageId } = useUI((s) => ({
+  const { selection, editingTextId, cropId, tool, guides, marquee, hoverId, showGrid, penEditId, activePageId, playingVideoId } = useUI((s) => ({
     penEditId: s.tool === 'pen' ? s.penEditId : null,
+    playingVideoId: s.playingVideoId,
     activePageId: s.activePageId,
     selection: s.selection,
     editingTextId: s.editingTextId,
@@ -58,8 +59,9 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       fontsVersion,
       mode: 'edit',
       hiddenIds: editingTextId || penEditId ? new Set([editingTextId ?? penEditId!]) : undefined,
+      playing: playingVideoId,
     }),
-    [editor, fontsVersion, editingTextId, penEditId],
+    [editor, fontsVersion, editingTextId, penEditId, playingVideoId],
   );
 
   if (!page) return null;

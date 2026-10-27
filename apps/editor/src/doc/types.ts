@@ -286,7 +286,24 @@ export interface TableElement extends BaseElement {
   radius: number;
 }
 
+// A video clip. Its bytes live in the media store on this device (videos are
+// too heavy for version history and live sync); the design keeps a poster frame.
+export interface VideoElement extends BaseElement {
+  type: 'video';
+  mediaId: Id;
+  posterId: Id | null; // image asset: the frame at trimStart
+  mime: string;
+  duration: number; // seconds, whole clip
+  trimStart: number;
+  trimEnd: number;
+  muted: boolean;
+  volume: number; // 0..1
+  loop: boolean;
+  radius: number;
+}
+
 export type Element =
+  | VideoElement
   | TextElement
   | ShapeElement
   | LineElement

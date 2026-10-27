@@ -10,6 +10,7 @@ import { SHAPE_KINDS, elementPath, shapePath } from '../render/shapes';
 import { nearestWeight } from '../fonts/fonts';
 import { Slider } from '../panels/controls';
 import { richCommand } from '../canvas/TextEditor';
+import { VideoTools } from './VideoTools';
 
 export function ContextToolbar() {
   const sel = useUI((s) => s.selection);
@@ -48,6 +49,8 @@ export function ContextToolbar() {
           <TableTools />
         ) : one?.type === 'qr' ? (
           <QrTools el={one} />
+        ) : one?.type === 'video' ? (
+          <VideoTools el={one} TBtn={TBtn} Div={Div} />
         ) : (
           <MultiTools />
         )}

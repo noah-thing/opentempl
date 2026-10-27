@@ -1,10 +1,11 @@
 // A small promise wrapper around IndexedDB for Tavla's app level data. Each
 // design's content lives in its own y-indexeddb database; this one holds the
-// index of designs, thumbnails, the uploads library, brand kits and versions.
+// index of designs, thumbnails, the uploads library, brand kits, versions and
+// video clips (media).
 
 const DB_NAME = 'tavla';
-const VERSION = 1;
-export type StoreName = 'designs' | 'thumbs' | 'uploads' | 'brand' | 'versions' | 'settings';
+const VERSION = 2;
+export type StoreName = 'designs' | 'thumbs' | 'uploads' | 'brand' | 'versions' | 'settings' | 'media';
 
 let dbp: Promise<IDBDatabase> | null = null;
 
@@ -14,7 +15,7 @@ function open(): Promise<IDBDatabase> {
       const req = indexedDB.open(DB_NAME, VERSION);
       req.onupgradeneeded = () => {
         const db = req.result;
-        for (const s of ['designs', 'thumbs', 'uploads', 'brand', 'versions', 'settings'] as StoreName[])
+        for (const s of ['designs', 'thumbs', 'uploads', 'brand', 'versions', 'settings', 'media'] as StoreName[])
           if (!db.objectStoreNames.contains(s)) db.createObjectStore(s);
       };
       req.onsuccess = () => resolve(req.result);

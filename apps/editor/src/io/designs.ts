@@ -5,6 +5,7 @@ import type { Asset, DesignMeta, DesignSnapshot } from '../doc/types';
 import { db } from './db';
 import { thumbnail } from '../export/render';
 import { readTavlaFile } from '../export/exporters';
+import { putMedia } from './media';
 
 // Design library: every design is its own Y.Doc persisted in IndexedDB, plus a
 // small index entry (title, size, dates) and a thumbnail for the home screen.
@@ -174,10 +175,11 @@ export async function duplicateDesign(id: string): Promise<string | null> {
 }
 
 export async function importTavla(file: File): Promise<string | null> {
-  const bytes = readTavlaFile(new Uint8Array(await file.arrayBuffer()));
-  if (!bytes) return null;
+  const file2 = readTavlaFile(new Uint8Array(await file.arrayBuffer()));
+  if (!file2) return null;
+  await Promise.all(file2.media.map((m) => putMedia(m.id, m.blob)));
   const tmp = new Y.Doc();
-  Y.applyUpdate(tmp, bytes);
+  Y.applyUpdate(tmp, file2.update);
   const doc = new DesignDoc(tmp);
   const snap = doc.toSnapshot();
   const assets: Asset[] = [];

@@ -43,9 +43,9 @@ export default function UploadsPanel() {
         }}
       >
         <Eyes size={56} mood={over ? 'wow' : 'look'} />
-        <div style={{ fontWeight: 600, margin: '8px 0 2px' }}>Drop images here</div>
+        <div style={{ fontWeight: 600, margin: '8px 0 2px' }}>Drop photos and videos here</div>
         <div className="hint" style={{ marginBottom: 12 }}>
-          PNG, JPG, WebP, GIF and SVG. They stay on this device.
+          PNG, JPG, WebP, GIF, SVG, MP4, MOV and WebM. They stay on this device.
         </div>
         <button className="btn btn-ink" onClick={async () => importFiles(editor, await pickFiles())}>
           <Icon name="upload" /> Upload files

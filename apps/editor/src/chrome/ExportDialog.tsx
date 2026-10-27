@@ -13,7 +13,7 @@ const FORMATS: { id: ExportFormat; name: string; note: string }[] = [
   { id: 'pdf', name: 'PDF', note: 'Print and documents, links stay clickable' },
   { id: 'svg', name: 'SVG', note: 'Vector, opens in Figma and Illustrator' },
   { id: 'pptx', name: 'PowerPoint', note: 'Editable slides for PowerPoint, Keynote, Google Slides' },
-  { id: 'video', name: 'MP4 video', note: 'Pages and animations as a video' },
+  { id: 'video', name: 'MP4 video', note: 'Pages, animations and clips, with sound' },
   { id: 'gif', name: 'GIF', note: 'A small looping animation for chats and posts' },
   { id: 'tavla', name: 'Tavla file', note: 'The editable design, to keep or send' },
 ];

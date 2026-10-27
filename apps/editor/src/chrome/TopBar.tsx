@@ -42,7 +42,7 @@ export function TopBar() {
         else editor.toast('That file is not a Tavla design');
       },
     },
-    { label: 'Upload images', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
+    { label: 'Upload photos or videos', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
     {
       label: 'Import a PDF as a new design',
       icon: 'file',

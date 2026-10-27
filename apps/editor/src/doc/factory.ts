@@ -10,6 +10,8 @@ import type {
   ShapeKind,
   SvgElement,
   TableElement,
+  VideoElement,
+  Id,
   TextEffect,
   TextElement,
 } from './types';
@@ -118,6 +120,28 @@ export function makeImage(p: Partial<ImageElement> = {}): ImageElement {
     radius: 0,
     mask: null,
     border: null,
+    ...p,
+  };
+}
+
+export function makeVideo(p: Partial<VideoElement> & { mediaId: Id }): VideoElement {
+  return {
+    ...base,
+    id: newId(),
+    type: 'video',
+    x: 0,
+    y: 0,
+    w: 640,
+    h: 360,
+    posterId: null,
+    mime: 'video/mp4',
+    duration: 0,
+    trimStart: 0,
+    trimEnd: 0,
+    muted: false,
+    volume: 1,
+    loop: true,
+    radius: 0,
     ...p,
   };
 }

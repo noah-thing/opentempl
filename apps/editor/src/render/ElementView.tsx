@@ -12,7 +12,9 @@ import type {
   SvgElement,
   TableElement,
   TextElement,
+  VideoElement,
 } from '../doc/types';
+import { VideoPlayer } from './VideoPlayer';
 import { layoutText } from '../text/layout';
 import { ImageFilterDef, fillDef, fillRef, filtersActive, combinedFilters } from './paint';
 import { useRenderEnv } from './RenderContext';
@@ -99,6 +101,8 @@ function Body({ el, uid }: { el: Element; uid: string }) {
       return <ChartView el={el as ChartElement} />;
     case 'qr':
       return <QrView el={el} />;
+    case 'video':
+      return <VideoView el={el} uid={uid} />;
     case 'table':
       return <TableView el={el} />;
     default:
@@ -197,6 +201,46 @@ function LineView({ el }: { el: LineElement }) {
       <rect x={0} y={0} width={el.w} height={el.h} fill="transparent" />
       {capPath(el.start, 0, y, el.curve ? aStart : Math.PI, el.width, el.color, 's')}
       {capPath(el.end, el.w, y, el.curve ? aEnd : 0, el.width, el.color, 'e')}
+    </>
+  );
+}
+
+// ---------------- video ----------------
+
+function VideoView({ el, uid }: { el: VideoElement; uid: string }) {
+  const env = useRenderEnv();
+  const clipId = `clip-${uid}`;
+  const live = env.mode === 'present' || (env.mode === 'edit' && env.playing === el.id);
+  const frame = env.videoFrame?.(el.id) ?? env.assetUrl(el.posterId);
+  const len = Math.max(0, (el.trimEnd || el.duration) - el.trimStart);
+  const badge = Math.max(14, Math.min(el.w, el.h) * 0.07);
+  return (
+    <>
+      <defs>
+        <clipPath id={clipId}>
+          <path d={shapePath('rect', el.w, el.h, el.radius)} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clipId})`}>
+        <rect width={el.w} height={el.h} fill="#0B0B0D" />
+        {live ? (
+          <foreignObject width={el.w} height={el.h}>
+            <VideoPlayer el={el} />
+          </foreignObject>
+        ) : frame ? (
+          <image href={frame} width={el.w} height={el.h} preserveAspectRatio="xMidYMid slice" />
+        ) : null}
+      </g>
+      {env.mode === 'edit' && !live ? (
+        // A small tag in the editor so a clip never passes for a photo.
+        <g transform={`translate(${badge * 0.6} ${el.h - badge * 1.9})`} pointerEvents="none">
+          <rect width={badge * 4.1} height={badge * 1.3} rx={badge * 0.65} fill="#0B0B0D" fillOpacity={0.72} />
+          <path d={`M${badge * 0.5} ${badge * 0.33} L${badge * 1.1} ${badge * 0.65} L${badge * 0.5} ${badge * 0.97} Z`} fill="#fff" />
+          <text x={badge * 1.45} y={badge * 0.66} dominantBaseline="central" fontSize={badge * 0.66} fontWeight={600} fill="#fff" fontFamily="Host Grotesk, sans-serif">
+            {Math.floor(len / 60)}:{String(Math.floor(len % 60)).padStart(2, '0')}
+          </text>
+        </g>
+      ) : null}
     </>
   );
 }
