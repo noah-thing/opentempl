@@ -51,6 +51,8 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Organise.** Layers panel with drag to restack, hide, lock and rename; group, align, distribute and tidy; numeric position panel; copy and paste style; find and replace; add to every page; alt text.
 
+**Restyle.** Styles recolour the whole design with one of sixteen palettes or five colours taken from a photo, matched by brightness so contrast survives, and swap the fonts for one of twelve pairs.
+
 **Make more.** Magic resize into any format, in place or as a copy. Bulk create: paste a table and get a page per row. Brand kits with logos, colours and fonts. 32 templates. Version history with a snapshot every ten minutes. A command palette on ⌘K with every action.
 
 **Export.** PNG (transparent, up to 4×), JPG, WebP, SVG, PDF for screen or print with live links and bleed, PowerPoint with editable text, MP4 video of pages, animations and clips with their mixed sound (WebCodecs), GIF, multi page ZIP, and the editable `.tavla` file (video clips included).
