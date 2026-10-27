@@ -6,6 +6,7 @@ import { previewFont } from '../fonts/fonts';
 import { FONT_PAIRS, PALETTES, designColors, luminance, paletteFromImage, type FontPair } from '../tools/restyle';
 import { Icon } from '../ui/icons';
 import { Section } from './controls';
+import { useBrandState } from './brand';
 
 // Styles: recolour the design with a palette and swap its fonts for a pair,
 // on this page or every page. Each click is one undo step.
@@ -14,6 +15,7 @@ export default function StylesPanel() {
   const [scope, setScope] = useState<'page' | 'all'>('all');
   const [fromPhoto, setFromPhoto] = useState<string[] | null>(null);
   const [busy, setBusy] = useState(false);
+  const kits = useBrandState().kits;
   const pageId = useUI((s) => s.activePageId);
   const snap = useDoc((s) => s);
   const current = useMemo(() => designColors(snap, scope === 'all' ? snap.pageOrder : pageId ? [pageId] : []), [snap, scope, pageId]);
@@ -71,6 +73,24 @@ export default function StylesPanel() {
             <i key={c} style={{ background: c }} />
           ))}
       </div>
+
+      {kits.length ? (
+        <Section title="Your brand">
+          {kits.map((k) => (
+            <div key={k.id} className="brand-style">
+              <PaletteRow name={k.name} colors={k.colors.slice(0, 6)} onClick={() => palette(k.colors)} />
+              <button
+                className="btn btn-sm btn-outline"
+                disabled={busy}
+                onClick={() => fonts({ name: k.name, heading: k.fonts.heading, headingWeight: 700, body: k.fonts.body })}
+                title={`${k.fonts.heading} and ${k.fonts.body}`}
+              >
+                Use its fonts
+              </button>
+            </div>
+          ))}
+        </Section>
+      ) : null}
 
       <Section title="From a photo">
         {photo ? (

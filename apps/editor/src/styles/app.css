@@ -2593,3 +2593,16 @@ kbd {
   font-size: 11px;
   font-weight: 600;
 }
+.brand-style {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.brand-style .palette-row {
+  flex: 1;
+  min-width: 0;
+}
+.brand-style .chips5 {
+  width: 120px;
+}
