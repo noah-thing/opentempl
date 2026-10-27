@@ -15,6 +15,13 @@ export interface Snapshot extends DesignSnapshot {
   version: number;
 }
 
+// Until a joining peer receives the real metadata, the design reads as an empty square.
+const PENDING_META: DesignMeta = { id: '', title: 'Shared design', width: 1080, height: 1080, unit: 'px', createdAt: 0, updatedAt: 0 };
+
+function readMeta(m: Y.Map<unknown>): DesignMeta {
+  return { ...PENDING_META, ...(m.toJSON() as Partial<DesignMeta>) };
+}
+
 export function newId(): Id {
   return nanoid(10);
 }
@@ -73,7 +80,7 @@ export class DesignDoc {
       this.commit({ pages, elementPage: indexElementPages(pages) });
     });
     this.pageOrder.observe(() => this.commit({ pageOrder: this.pageOrder.toArray() }));
-    this.meta.observe(() => this.commit({ meta: this.meta.toJSON() as DesignMeta }));
+    this.meta.observe(() => this.commit({ meta: readMeta(this.meta) }));
     this.assets.observe(() => this.commit({}));
   }
 
@@ -83,7 +90,7 @@ export class DesignDoc {
     const elements: Record<Id, Element> = {};
     this.elements.forEach((y, id) => (elements[id] = y.toJSON() as Element));
     return {
-      meta: this.meta.toJSON() as DesignMeta,
+      meta: readMeta(this.meta),
       pageOrder: this.pageOrder.toArray(),
       pages,
       elements,

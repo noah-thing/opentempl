@@ -95,7 +95,7 @@ export function Home() {
         <section className="sheets" aria-label="Start a design">
           {SHEETS.map((id, i) => {
             const f = FORMATS.find((x) => x.id === id)!;
-            const s = 108 / Math.max(f.width, f.height);
+            const s = 102 / Math.max(f.width, f.height);
             return (
               <button key={id} className="sheet" onClick={() => navigate(`/new?format=${id}`)} style={{ ['--i' as string]: i }}>
                 <span className="sheet-stage">

@@ -240,7 +240,16 @@ function TextTools({ els }: { els: TextElement[]; editing: boolean }) {
           A<i style={{ background: t.gradient ? fillCss(t.gradient) : t.color }} />
         </span>
       </button>
-      <TBtn icon="bold" title="Bold (⌘B)" on={bold} onClick={() => setAll({ fontWeight: bold ? nearestWeight(t.fontFamily, 400) : nearestWeight(t.fontFamily, 700) })} />
+      <TBtn
+        icon="bold"
+        title="Bold (⌘B)"
+        on={bold}
+        onClick={() => {
+          const target = bold ? nearestWeight(t.fontFamily, 400) : nearestWeight(t.fontFamily, 700);
+          if (target === t.fontWeight) editor.toast(`${t.fontFamily} comes in one weight only`);
+          else setAll({ fontWeight: target });
+        }}
+      />
       <TBtn icon="italic" title="Italic (⌘I)" on={t.italic} onClick={() => setAll({ italic: !t.italic })} />
       <TBtn icon="underline" title="Underline (⌘U)" on={t.underline} onClick={() => setAll({ underline: !t.underline })} />
       <TBtn icon="strike" title="Strikethrough" on={t.strike} onClick={() => setAll({ strike: !t.strike })} />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import { Icon } from '../ui/icons';
+import { useEscape } from '../ui/useEscape';
 import { Eyes } from '../ui/Logo';
 import { exportDesign, type ExportFormat } from '../export/exporters';
 
@@ -31,6 +32,7 @@ export function ExportDialog() {
   const [busy, setBusy] = useState<{ done: number; total: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const close = () => !busy && editor.ui.set({ exportOpen: false });
+  useEscape(close);
 
   const run = async () => {
     setError(null);

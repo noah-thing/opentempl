@@ -35,7 +35,8 @@ export default function PhotosPanel() {
     setError(false);
     const t = setTimeout(async () => {
       try {
-        const r = await fetch(`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=30&page=${page}&mature=false`);
+        const r = await fetch(`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=20&page=${page}&mature=false`);
+        if (!r.ok) throw new Error(`Openverse ${r.status}`);
         const j = await r.json();
         const list: OvResult[] = (j.results ?? []).map((x: Record<string, unknown>) => ({
           id: x.id,
@@ -58,7 +59,7 @@ export default function PhotosPanel() {
   useEffect(() => setPage(1), [q]);
 
   const tile = (item: Extract<LibraryItem, { kind: 'photo' }>, thumb: string, key: string, credit?: string) => (
-    <button key={key} className="tile" style={{ aspectRatio: `${item.w} / ${item.h}` }} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)} title={credit}>
+    <button key={key} className="tile" style={{ aspectRatio: `${item.w} / ${item.h}` }} onMouseDown={(e) => e.preventDefault()} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)} title={credit}>
       <img src={thumb} alt={item.name} loading="lazy" />
       {credit ? <span className="credit">{credit}</span> : null}
     </button>
@@ -104,7 +105,7 @@ export default function PhotosPanel() {
               ),
             )}
           </Masonry>
-          {results.length >= 30 * page ? (
+          {results.length >= 20 * page ? (
             <button className="btn btn-outline btn-block" style={{ marginTop: 12 }} onClick={() => setPage((p) => p + 1)}>
               Load more
             </button>

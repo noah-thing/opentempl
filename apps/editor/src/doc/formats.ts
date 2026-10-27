@@ -29,7 +29,7 @@ export const FORMATS: Format[] = [
   { id: 'a3-poster', name: 'A3 poster', group: 'Print', width: mm(297), height: mm(420), unit: 'mm', note: '297 × 420 mm' },
   { id: 'a5-flyer', name: 'A5 flyer', group: 'Print', width: mm(148), height: mm(210), unit: 'mm', note: '148 × 210 mm' },
   { id: 'letter', name: 'US Letter', group: 'Print', width: 816, height: 1056, note: '8.5 × 11 in' },
-  { id: 'business-card', name: 'Business card', group: 'Print', width: mm(85), height: mm(55), unit: 'mm', note: '85 × 55 mm' },
+  { id: 'business-card', name: 'Business card', group: 'Print', width: 1004, height: 650, unit: 'mm', note: '85 × 55 mm, 300 dpi' },
   { id: 'postcard', name: 'Postcard', group: 'Print', width: mm(148), height: mm(105), unit: 'mm', note: 'A6' },
   { id: 'poster-50x70', name: 'Poster 50 × 70', group: 'Print', width: mm(500), height: mm(700), unit: 'mm' },
   { id: 'logo', name: 'Logo', group: 'Web', width: 500, height: 500 },

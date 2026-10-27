@@ -17,7 +17,7 @@ function step(zoom: number) {
 
 export function Rulers() {
   const editor = useEditor();
-  const show = useUI((s) => s.showRulers);
+  const show = useUI((s) => s.showRulers && s.view === 'scroll');
   const zoom = useUI((s) => s.zoom);
   const active = useUI((s) => s.activePageId);
   const top = useRef<HTMLCanvasElement>(null);

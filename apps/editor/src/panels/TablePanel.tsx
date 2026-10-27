@@ -43,7 +43,7 @@ export default function TablePanel() {
                   <td key={c} style={{ padding: 2 }}>
                     <input
                       className="num"
-                      style={{ width: 96, fontWeight: r === 0 ? 600 : 400 }}
+                      style={{ width: Math.max(52, Math.floor(300 / el.cols)), fontWeight: r === 0 ? 600 : 400, padding: '0 6px' }}
                       value={cell}
                       onChange={(e) => set({ cells: el.cells.map((rr, i) => (i === r ? rr.map((cc, j) => (j === c ? e.target.value : cc)) : rr)) })}
                       onKeyDown={(e) => e.stopPropagation()}

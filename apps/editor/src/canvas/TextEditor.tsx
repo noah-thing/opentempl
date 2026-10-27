@@ -13,6 +13,16 @@ export function TextEditor({ el, zoom }: { el: TextElement; zoom: number }) {
     const node = ref.current!;
     node.innerText = initial.current;
     node.focus();
+    // A second try after the pointer event settles, for boxes made with the text tool.
+    requestAnimationFrame(() => {
+      if (document.activeElement !== node) {
+        node.focus();
+        const r = document.createRange();
+        r.selectNodeContents(node);
+        window.getSelection()?.removeAllRanges();
+        window.getSelection()?.addRange(r);
+      }
+    });
     const range = document.createRange();
     range.selectNodeContents(node);
     const sel = window.getSelection();

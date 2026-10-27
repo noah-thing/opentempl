@@ -1,10 +1,12 @@
 import { useEditor } from '../editor/Editor';
 import { Icon } from '../ui/icons';
+import { useEscape } from '../ui/useEscape';
 import { SHORTCUTS } from '../editor/shortcuts';
 
 export function ShortcutsDialog() {
   const editor = useEditor();
   const close = () => editor.ui.set({ shortcutsOpen: false });
+  useEscape(close);
   const groups = [...new Set(SHORTCUTS.map((s) => s.group))];
   return (
     <div className="scrim" onPointerDown={(e) => e.target === e.currentTarget && close()}>

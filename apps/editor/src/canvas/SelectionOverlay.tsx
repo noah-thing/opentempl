@@ -215,11 +215,13 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
 function QuickBar({ box, zoom, locked }: { box: { x: number; y: number; w: number; h: number; rotation: number }; zoom: number; locked: boolean }) {
   const editor = useEditor();
   const b = aabb(box);
+  // Near the top of the page the bar would sit under the toolbar, so it goes below.
+  const below = b.y * zoom < 90;
   return (
     <div
-      className="quickbar"
+      className={`quickbar ${below ? 'is-below' : ''}`}
       data-overlay-control
-      style={{ left: (b.x + b.w / 2) * zoom, top: b.y * zoom }}
+      style={{ left: (b.x + b.w / 2) * zoom, top: below ? (b.y + b.h) * zoom + 56 : b.y * zoom }}
       onPointerDown={(e) => e.stopPropagation()}
     >
       {locked ? (

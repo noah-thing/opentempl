@@ -3,6 +3,7 @@ import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import type { TextElement } from '../doc/types';
 import { Icon } from '../ui/icons';
+import { useEscape } from '../ui/useEscape';
 
 // Find and replace across every text box in the design. Locked text is skipped.
 export function FindReplace() {
@@ -15,6 +16,7 @@ export function FindReplace() {
   const [caseSensitive, setCase] = useState(false);
   const [index, setIndex] = useState(0);
   const close = () => editor.ui.set({ findOpen: false });
+  useEscape(close);
 
   const re = useMemo(() => {
     if (!find) return null;
@@ -54,7 +56,7 @@ export function FindReplace() {
   };
 
   return (
-    <div className="popover find" style={{ right: 20, top: 64, width: 340 }} onKeyDown={(e) => e.stopPropagation()}>
+    <div className="popover find" style={{ right: 20, bottom: 56, width: 340 }} onKeyDown={(e) => e.stopPropagation()}>
       <div style={{ padding: 14 }} className="stack">
         <div className="row-between">
           <b>Find and replace</b>

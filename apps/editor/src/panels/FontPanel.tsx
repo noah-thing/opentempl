@@ -125,7 +125,7 @@ function FontRow({ family, on, onPick, info }: { family: string; on: boolean; on
       onClick={() => onPick(family)}
     >
       <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{family}</span>
-      {info && info.weights.length > 1 ? <span className="kbd" style={{ fontFamily: 'var(--font)' }}>{info.weights.length}</span> : null}
+      {info && info.weights.length > 1 ? <span className="kbd" style={{ fontFamily: 'var(--font)' }}>{info.weights.length} weights</span> : null}
       {on ? <Icon name="check" /> : null}
     </button>
   );

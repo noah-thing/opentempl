@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { Icon } from '../ui/icons';
+import { useEscape } from '../ui/useEscape';
 import { activeCollab, connectCollab, localName, newRoomKey, setLocalName, usePeers } from '../collab/collab';
 import { exportDesign } from '../export/exporters';
 
@@ -11,6 +12,7 @@ export function ShareDialog() {
   const [room, setRoom] = useState(() => new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room'));
   const [copied, setCopied] = useState(false);
   const close = () => editor.ui.set({ shareOpen: false });
+  useEscape(close);
 
   const start = () => {
     const key = newRoomKey();
@@ -49,7 +51,7 @@ export function ShareDialog() {
           <div style={{ padding: 16, borderRadius: 14, background: 'var(--paper)' }}>
             <div style={{ fontWeight: 600, marginBottom: 4 }}>Design together, live</div>
             <p className="hint" style={{ margin: '0 0 12px' }}>
-              Anyone with the link edits this design with you in real time. Changes travel directly between your browsers, encrypted with the key in the link. No account, no upload to a Tavla server.
+              Anyone with the link edits this design with you in real time. Changes travel directly between your browsers over an encrypted connection. No account, and nothing is stored on a Tavla server.
             </p>
             {room ? (
               <div className="stack">

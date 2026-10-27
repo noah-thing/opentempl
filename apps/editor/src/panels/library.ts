@@ -56,7 +56,9 @@ export async function placePhoto(editor: Editor, item: Extract<LibraryItem, { ki
 export function addLibraryItem(editor: Editor, item: LibraryItem, at?: Point, overId?: Id | null) {
   switch (item.kind) {
     case 'shape': {
-      const s = makeShape(item.shape, { fill: { type: 'solid', color: item.color ?? '#2B3BFF' } });
+      const wide: Partial<Record<string, [number, number]>> = { pill: [360, 140], halfcircle: [320, 160], ticket: [360, 200], speech: [320, 260], arch: [240, 320], arrow: [320, 200], chevron: [300, 200] };
+      const [w, h] = wide[item.shape] ?? [240, 240];
+      const s = makeShape(item.shape, { w, h, fill: { type: 'solid', color: item.color ?? '#2B3BFF' } });
       editor.add([editor.fitToPage(s, 0.3)], { at });
       break;
     }

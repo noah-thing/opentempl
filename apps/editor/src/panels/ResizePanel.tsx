@@ -14,32 +14,54 @@ import { navigate } from '../App';
 export function resizeSnapshot(snap: DesignSnapshot, W: number, H: number, assetSize: (id: string) => { width: number; height: number } | undefined): DesignSnapshot {
   const w0 = snap.meta.width;
   const h0 = snap.meta.height;
-  const fit = Math.min(W / w0, H / h0);
-  const cover = Math.max(W / w0, H / h0);
+  const sx = W / w0;
+  const sy = H / h0;
+  const fit = Math.min(sx, sy);
+  const near = (a: number, b: number) => Math.abs(a - b) <= Math.max(2, Math.min(w0, h0) * 0.01);
+  // Map one axis: an element spanning the page stretches with it, one touching
+  // an edge stays glued to that edge, anything else keeps its relative centre.
+  const axis = (pos: number, size: number, full: number, next: number, scale: number, s: number) => {
+    const spans = size >= full * 0.9;
+    const start = near(pos, 0) || pos < 0;
+    const end = near(pos + size, full) || pos + size > full;
+    if (spans) return { pos: pos * s, size: size * s, stretched: true };
+    const ns = size * scale;
+    if (start && !end) return { pos: pos * scale, size: ns, stretched: false };
+    if (end && !start) return { pos: next - (full - pos - size) * scale - ns, size: ns, stretched: false };
+    const c = ((pos + size / 2) / full) * next;
+    return { pos: c - ns / 2, size: ns, stretched: false };
+  };
   const elements: Record<string, Element> = {};
   for (const [id, el] of Object.entries(snap.elements)) {
-    const fullBleed = el.w >= w0 * 0.9 && el.h >= h0 * 0.9 && !el.rotation;
-    if (fullBleed) {
-      const next = { ...el, x: (el.x / w0) * W, y: (el.y / h0) * H, w: (el.w / w0) * W, h: (el.h / h0) * H } as Element;
-      if (next.type === 'image' && next.assetId) {
-        const size = assetSize(next.assetId);
-        if (size) next.crop = coverCrop(size.width, size.height, next.w, next.h);
-      }
+    if (el.rotation) {
+      const c = { x: ((el.x + el.w / 2) / w0) * W, y: ((el.y + el.h / 2) / h0) * H };
+      const next = { ...el, w: el.w * fit, h: el.h * fit } as Element;
+      next.x = c.x - next.w / 2;
+      next.y = c.y - next.h / 2;
       if (next.type === 'text') next.fontSize = Math.round(next.fontSize * fit * 10) / 10;
       elements[id] = next;
       continue;
     }
-    const cx = ((el.x + el.w / 2) / w0) * W;
-    const cy = ((el.y + el.h / 2) / h0) * H;
-    const w = el.w * fit;
-    const h = el.h * fit;
-    const next = { ...el, x: cx - w / 2, y: cy - h / 2, w, h } as Element;
+    const isText = el.type === 'text';
+    const hx = axis(el.x, el.w, w0, W, fit, sx);
+    const hy = isText ? { ...axis(el.y, el.h, h0, H, fit, fit), stretched: false } : axis(el.y, el.h, h0, H, fit, sy);
+    const next = { ...el, x: hx.pos, y: hy.pos, w: hx.size, h: hy.size } as Element;
+    if (next.type === 'image' && next.assetId && (hx.stretched || hy.stretched)) {
+      const size = assetSize(next.assetId);
+      if (size) next.crop = coverCrop(size.width, size.height, next.w, next.h);
+    } else if (next.type === 'image' && !hx.stretched && !hy.stretched) {
+      // Plain scaling keeps the crop.
+    }
+    if (next.type === 'shape' && (hx.stretched || hy.stretched) && !hx.stretched !== !hy.stretched) {
+      // A band that spans one axis keeps its thickness proportional to the fit.
+      if (hx.stretched) next.h = el.h * fit;
+      if (hy.stretched) next.w = el.w * fit;
+    }
     if (next.type === 'text') next.fontSize = Math.round(next.fontSize * fit * 10) / 10;
     if (next.type === 'line') next.width = next.width * fit;
     if (next.type === 'shape' && next.stroke) next.stroke = { ...next.stroke, width: next.stroke.width * fit };
     elements[id] = next;
   }
-  void cover;
   return { ...snap, meta: { ...snap.meta, width: Math.round(W), height: Math.round(H) }, elements };
 }
 

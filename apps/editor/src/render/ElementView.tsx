@@ -588,11 +588,14 @@ function TextView({ el, uid }: { el: TextElement; uid: string }) {
 // negative bends down.
 export function curvedGeometry(el: Pick<TextElement, 'curve' | 'fontSize'>, textWidth: number) {
   const span = Math.min(Math.abs(el.curve) / 100, 0.98) * Math.PI * 2;
-  const r = Math.max(textWidth / Math.max(span, 0.01), el.fontSize);
+  // Text on the inside of a circle needs extra room so letters do not collide.
+  const inner = el.curve < 0 ? el.fontSize * 0.9 : 0;
+  const r = Math.max(textWidth / Math.max(span, 0.01), el.fontSize) + inner;
   const half = span / 2;
-  const chordW = span >= Math.PI ? 2 * r : 2 * r * Math.sin(half);
-  const sag = r - r * Math.cos(Math.min(half, Math.PI));
-  return { r, span, w: chordW + el.fontSize * 1.2, h: sag + el.fontSize * 1.4 };
+  const outer = r + (el.curve > 0 ? el.fontSize : 0);
+  const chordW = span >= Math.PI ? 2 * outer : 2 * outer * Math.sin(half);
+  const sag = outer - (el.curve > 0 ? r : outer) * Math.cos(Math.min(half, Math.PI));
+  return { r, span, w: chordW + el.fontSize * 0.6, h: sag + el.fontSize * 1.3 };
 }
 
 function CurvedText({ el, fill, gradId, font }: { el: TextElement; fill: string; gradId: string; font: React.CSSProperties }) {
@@ -604,7 +607,7 @@ function CurvedText({ el, fill, gradId, font }: { el: TextElement; fill: string;
   const up = el.curve > 0;
   const cx = el.w / 2;
   // Baseline circle: for an upward curve the text sits on top of the circle.
-  const cy = up ? el.fontSize * 1.0 + r : el.h - el.fontSize * 0.35 - r;
+  const cy = up ? el.fontSize * 1.1 + r : el.h - el.fontSize * 0.35 - r;
   const pathId = `cp-${(env.idPrefix ?? '') + el.id}`;
   const d = up
     ? `M${cx} ${cy + r} A${r} ${r} 0 1 1 ${cx} ${cy - r} A${r} ${r} 0 1 1 ${cx} ${cy + r}`

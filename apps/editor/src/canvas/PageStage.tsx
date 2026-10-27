@@ -76,6 +76,8 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   const createAt = (p: Point, e: React.PointerEvent) => {
     const kind = tool;
     if (kind === 'text') {
+      // Keep the browser from moving focus to the viewport after this press.
+      e.preventDefault();
       const t = makeText({ ...TEXT_PRESETS.subheading, text: '' , w: Math.min(W * 0.6, 900) });
       const placed = editor.add([{ ...t, x: p.x, y: p.y - t.fontSize * 0.6 }], { at: { x: p.x + t.w / 2, y: p.y } });
       if (placed?.[0]) editor.ui.set({ editingTextId: placed[0].id, tool: 'select' });
@@ -136,6 +138,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   const startDraw = (p: Point, e: React.PointerEvent) => {
     const settings = editor.state.draw;
     if (settings.tool === 'eraser') {
+      editor.doc.undo.stopCapturing();
       const erase = (ev: { clientX: number; clientY: number; target: EventTarget | null }) => {
         const node = document.elementFromPoint(ev.clientX, ev.clientY);
         const id = hitId(node);
@@ -314,6 +317,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     e.preventDefault();
     const id = hitId(e.target);
     if (id && !editor.state.selection.includes(id)) editor.select([id]);
+    if (!id) editor.clearSelection();
     window.dispatchEvent(new CustomEvent('tavla:contextmenu', { detail: { x: e.clientX, y: e.clientY, pageId, empty: !id } }));
   };
 

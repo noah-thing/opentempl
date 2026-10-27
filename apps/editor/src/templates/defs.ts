@@ -49,6 +49,19 @@ const PAPER = '#EDEDF0';
 const CREAM = '#F4EFE6';
 const G = UI_FONT;
 
+// Scale a whole template, for print formats designed at screen size.
+function scaled(def: TemplateDef, k: number, size: [number, number]): TemplateDef {
+  const el = (e: Element): Element => {
+    const n = { ...e, x: e.x * k, y: e.y * k, w: e.w * k, h: e.h * k } as Element & Record<string, unknown>;
+    if (n.type === 'text') n.fontSize = e.type === 'text' ? e.fontSize * k : 0;
+    if (n.type === 'line' && e.type === 'line') n.width = e.width * k;
+    if (n.type === 'shape' && e.type === 'shape' && e.stroke) n.stroke = { ...e.stroke, width: e.stroke.width * k };
+    if ('radius' in n && typeof n.radius === 'number') n.radius = n.radius * k;
+    return n as Element;
+  };
+  return { ...def, width: size[0], height: size[1], pages: def.pages.map((p) => ({ ...p, elements: p.elements.map(el) })) };
+}
+
 // ---------- templates ----------
 
 export const DEFS: TemplateDef[] = [
@@ -440,7 +453,7 @@ export const DEFS: TemplateDef[] = [
       },
     ],
   },
-  {
+  scaled({
     id: 'business-card',
     name: 'Business card',
     category: 'Print',
@@ -460,7 +473,7 @@ export const DEFS: TemplateDef[] = [
         ],
       },
     ],
-  },
+  }, 1004 / 321, [1004, 650]),
 ];
 
 void (null as unknown as LineElement | Element);

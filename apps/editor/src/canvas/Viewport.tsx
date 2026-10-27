@@ -5,7 +5,7 @@ import { PageStage } from './PageStage';
 import { Icon } from '../ui/icons';
 import type { Id } from '../doc/types';
 
-export const ZOOM_MIN = 0.05;
+export const ZOOM_MIN = 0.1;
 export const ZOOM_MAX = 8;
 
 export function Viewport() {
@@ -44,6 +44,10 @@ export function Viewport() {
     const onFit = () => {
       editor.ui.set({ autoFit: true });
       fit();
+      requestAnimationFrame(() => {
+        const node = ref.current?.querySelector(`[data-page-wrap="${editor.state.activePageId}"]`) as HTMLElement | null;
+        if (node && ref.current) ref.current.scrollTo({ top: Math.max(0, node.offsetTop - 92), left: 0 });
+      });
     };
     window.addEventListener('tavla:fit', onFit);
     return () => window.removeEventListener('tavla:fit', onFit);
@@ -57,7 +61,7 @@ export function Viewport() {
       if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       const z0 = editor.state.zoom;
-      const z1 = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z0 * Math.exp(-e.deltaY * 0.0085)));
+      const z1 = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z0 * Math.exp(-Math.max(-60, Math.min(60, e.deltaY)) * 0.006)));
       const rect = el.getBoundingClientRect();
       const mx = e.clientX - rect.left + el.scrollLeft;
       const my = e.clientY - rect.top + el.scrollTop;

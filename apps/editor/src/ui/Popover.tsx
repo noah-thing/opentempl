@@ -83,6 +83,7 @@ export interface MenuItem {
   separator?: boolean;
   heading?: string;
   checked?: boolean;
+  row?: { icon: string; title: string; onClick: () => void }[]; // a row of icon buttons
 }
 
 export function Menu({ items, onClose }: { items: MenuItem[]; onClose: () => void }) {
@@ -91,6 +92,23 @@ export function Menu({ items, onClose }: { items: MenuItem[]; onClose: () => voi
       {items.map((it, i) =>
         it.separator ? (
           <div key={i} className="menu-sep" />
+        ) : it.row ? (
+          <div key={i} className="menu-row">
+            {it.label ? <span className="menu-row-label">{it.label}</span> : null}
+            {it.row.map((b) => (
+              <button
+                key={b.title}
+                className="icon-btn"
+                title={b.title}
+                onClick={() => {
+                  b.onClick();
+                  onClose();
+                }}
+              >
+                <Icon name={b.icon} />
+              </button>
+            ))}
+          </div>
         ) : it.heading ? (
           <div key={i} className="menu-label">
             {it.heading}
@@ -122,6 +140,10 @@ export function usePopover() {
     anchor,
     open: (e: React.MouseEvent) => setAnchor((e.currentTarget as HTMLElement).getBoundingClientRect()),
     close: () => setAnchor(null),
-    toggle: (e: React.MouseEvent) => setAnchor((a) => (a ? null : (e.currentTarget as HTMLElement).getBoundingClientRect())),
+    toggle: (e: React.MouseEvent) => {
+      // Read the rect now: React clears currentTarget before a lazy updater runs.
+      const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      setAnchor((a) => (a ? null : r));
+    },
   };
 }

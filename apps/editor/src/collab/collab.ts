@@ -1,11 +1,11 @@
 import { useSyncExternalStore } from 'react';
-import { WebrtcProvider } from 'y-webrtc';
+import { PeerProvider } from './peerProvider';
 import type { Editor } from '../editor/Editor';
 import type { Id } from '../doc/types';
 
-// Live collaboration without accounts or a Tavla server: peers find each other
-// through public y-webrtc signalling and then talk directly. The room key is
-// also the encryption password, so signalling servers never see the design.
+// Live collaboration without accounts or a Tavla server: peers are introduced
+// by the free PeerJS broker and then talk directly over encrypted WebRTC. The
+// broker only ever sees a hash of the room key, never the design.
 
 export interface Peer {
   id: number;
@@ -18,7 +18,6 @@ export interface Peer {
 const COLORS = ['#2B3BFF', '#FF4B39', '#3EDD8A', '#FF3C8E', '#0AA0FF', '#9A5BFF', '#FF9F1A'];
 const ANIMALS = ['Otter', 'Lynx', 'Puffin', 'Moose', 'Seal', 'Hare', 'Crane', 'Fox', 'Owl', 'Elk'];
 
-export const SIGNALING = ['wss://signaling.yjs.dev', 'wss://y-webrtc-signaling-eu.herokuapp.com', 'wss://y-webrtc-signaling-us.herokuapp.com'];
 
 let peers: Peer[] = [];
 const listeners = new Set<() => void>();
@@ -35,7 +34,7 @@ export function usePeers() {
 }
 
 export interface Collab {
-  provider: WebrtcProvider;
+  provider: PeerProvider;
   destroy: () => void;
   setCursor: (c: Peer['cursor']) => void;
 }
@@ -60,7 +59,7 @@ export function setLocalName(n: string) {
 }
 
 export function connectCollab(editor: Editor, room: string): Collab {
-  const provider = new WebrtcProvider(`tavla-${room}`, editor.doc.ydoc, { signaling: SIGNALING, password: room });
+  const provider = new PeerProvider(editor.doc.ydoc, room);
   const aw = provider.awareness;
   const color = COLORS[Math.floor(Math.random() * COLORS.length)];
   aw.setLocalStateField('user', { name: localName(), color });

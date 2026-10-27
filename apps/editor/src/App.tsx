@@ -6,6 +6,7 @@ import { formatById } from './doc/formats';
 import { templateById } from './templates';
 import { Eyes } from './ui/Logo';
 import { IconSheet } from './ui/IconSheet';
+import { ErrorBoundary } from './ui/ErrorBoundary';
 
 // Hash routes: #/ home, #/d/<id> editor, #/new?format=<id>&template=<id>
 function useHash() {
@@ -42,14 +43,14 @@ export function App() {
   const hash = useHash();
   const path = hash.replace(/^#/, '') || '/';
 
-  if (path.startsWith('/join/')) {
-    const [id, q] = path.slice(6).split('?');
-    window.location.replace(`#/d/${id}?${q ?? ''}`);
-    return null;
-  }
-  if (path.startsWith('/d/')) {
-    const id = path.slice(3).split('?')[0];
-    return <EditorScreen key={id} id={id} />;
+  if (path.startsWith('/d/') || path.startsWith('/join/')) {
+    // A join link is a design link with a room key: the editor reads the key from the hash.
+    const id = path.replace(/^\/(d|join)\//, '').split('?')[0];
+    return (
+      <ErrorBoundary key={id}>
+        <EditorScreen id={id} />
+      </ErrorBoundary>
+    );
   }
   if (path === '/icons') return <IconSheet />;
   if (path.startsWith('/new')) return <NewDesign query={path.split('?')[1] ?? ''} />;

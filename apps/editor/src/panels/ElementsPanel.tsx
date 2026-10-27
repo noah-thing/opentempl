@@ -59,7 +59,7 @@ export default function ElementsPanel() {
             return (
               <button key={s.kind} className="shape-tile" title={s.label} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)}>
                 <svg viewBox="0 0 40 40">
-                  <path d={shapePath(s.kind, 40, 40, 4)} fill={item.color} />
+                  <ShapeGlyph kind={s.kind} color={item.color!} />
                 </svg>
               </button>
             );
@@ -173,6 +173,12 @@ export default function ElementsPanel() {
       </Section>
     </>
   );
+}
+
+function ShapeGlyph({ kind, color }: { kind: ShapeKind; color: string }) {
+  const wide: Partial<Record<ShapeKind, [number, number]>> = { pill: [40, 16], halfcircle: [40, 20], ticket: [40, 22], arrow: [40, 26], chevron: [40, 28], arch: [30, 40] };
+  const [w, h] = wide[kind] ?? [40, 40];
+  return <path transform={`translate(${(40 - w) / 2} ${(40 - h) / 2})`} d={shapePath(kind, w, h, 4)} fill={color} />;
 }
 
 function ChartGlyph({ kind }: { kind: ChartElement['kind'] }) {
