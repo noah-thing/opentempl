@@ -20,14 +20,22 @@ export function resizeSnapshot(snap: DesignSnapshot, W: number, H: number, asset
   const near = (a: number, b: number) => Math.abs(a - b) <= Math.max(2, Math.min(w0, h0) * 0.01);
   // Map one axis: an element spanning the page stretches with it, one touching
   // an edge stays glued to that edge, anything else keeps its relative centre.
-  const axis = (pos: number, size: number, full: number, next: number, scale: number, s: number) => {
-    const spans = size >= full * 0.9;
+  const axis = (pos: number, size: number, full: number, next: number, scale: number, s: number, lean: 'start' | 'end' | null = null) => {
+    const spans = size >= full * 0.8;
     const start = near(pos, 0) || pos < 0;
     const end = near(pos + size, full) || pos + size > full;
-    if (spans) return { pos: pos * s, size: size * s, stretched: true };
+    if (spans) {
+      // Margins scale like everything else, so edges stay aligned with neighbours.
+      const l = Math.max(0, pos) > 1 ? pos * scale : pos * s;
+      const r = Math.max(0, full - pos - size) > 1 ? (full - pos - size) * scale : (full - pos - size) * s;
+      return { pos: l, size: next - l - r, stretched: true };
+    }
     const ns = size * scale;
-    if (start && !end) return { pos: pos * scale, size: ns, stretched: false };
-    if (end && !start) return { pos: next - (full - pos - size) * scale - ns, size: ns, stretched: false };
+    const before = pos;
+    const after = full - pos - size;
+    // Glued to an edge, or clearly closer to one side: keep that margin.
+    if ((start && !end) || (!end && (before < after * 0.6 || (lean === 'start' && before <= after)))) return { pos: before * scale, size: ns, stretched: false };
+    if ((end && !start) || (!start && (after < before * 0.6 || (lean === 'end' && after <= before)))) return { pos: next - after * scale - ns, size: ns, stretched: false };
     const c = ((pos + size / 2) / full) * next;
     return { pos: c - ns / 2, size: ns, stretched: false };
   };
@@ -43,7 +51,8 @@ export function resizeSnapshot(snap: DesignSnapshot, W: number, H: number, asset
       continue;
     }
     const isText = el.type === 'text';
-    const hx = axis(el.x, el.w, w0, W, fit, sx);
+    const lean = el.type === 'text' ? (el.align === 'left' ? 'start' : el.align === 'right' ? 'end' : null) : null;
+    const hx = axis(el.x, el.w, w0, W, fit, sx, lean);
     const hy = isText ? { ...axis(el.y, el.h, h0, H, fit, fit), stretched: false } : axis(el.y, el.h, h0, H, fit, sy);
     const next = { ...el, x: hx.pos, y: hy.pos, w: hx.size, h: hy.size } as Element;
     if (next.type === 'image' && next.assetId && (hx.stretched || hy.stretched)) {
