@@ -1044,7 +1044,7 @@ Updated: 2026-11-02
 
 A bold flat colour poster prompt for ChatGPT
 
-A vector illustration built from a few huge flat shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer drew it in a vector tool and sent it to a good printer.
+A flat colour illustration built from a few huge shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer cut the shapes by hand and sent them to a good screen printer.
 
 Signature: objects cropped by the edges at diagonals; tiny scale patterns cut into the hero shapes; dots and bowls as punctuation; type overlapping the artwork; ground colour reused for small info text
 
@@ -1252,7 +1252,7 @@ Updated: 2026-11-02
 
 A cut paper collage poster prompt for ChatGPT
 
-A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled vector doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.
+A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled marker doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.
 
 Signature: starburst behind a cut figure; photo inside the body shape; torn blue tape corners; big yellow sun circle; scribbled doodles on top
 
@@ -1278,7 +1278,7 @@ Updated: 2026-11-02
 
 A screen printed travel poster prompt for ChatGPT
 
-A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a vector illustration printed on cream stock.
+A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a flat colour illustration screen printed on cream stock.
 
 Signature: silhouette framing at both edges; angular facets on mountains and clouds; reflection of the hero in water; cream border like a printed poster; bottom band with red title
 
@@ -1343,7 +1343,7 @@ Updated: 2026-11-02
 
 A blob character poster prompt for ChatGPT
 
-A flat vector character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.
+A flat colour character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.
 
 Signature: giant cropped blob towering; huge googly eyes with heavy brows; tiny character in an armchair; row of mini expressions; hashtag title
 
@@ -1356,7 +1356,7 @@ Updated: 2026-11-02
 
 A holographic Y2K flyer prompt for ChatGPT
 
-A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and vector chrome shapes made of hard reflection bands.
+A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and flat chrome shapes made of hard reflection bands.
 
 Signature: rainbow CD disc; chrome blob; frosted window panels with title bars; four point sparkles; barcode in the corner
 

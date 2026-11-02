@@ -255,7 +255,7 @@ ${faqHtml}
 </article>
 </main>
 ${footer(p.legal)}
-${p.jsCopy ? `<script>${COPY_JS}</script>` : ''}
+${p.jsCopy ? `<script src="/seo/copy.js?v=${UPDATED}" defer></script>` : ''}
 </body>
 </html>
 `;
@@ -780,6 +780,7 @@ ${vibeIds.filter((v) => (byVibe[v] ?? []).length >= 4).map((v) => `- [${vibeMeta
 - [How to make a poster with ChatGPT](${BASE}/guides/make-a-poster-with-chatgpt)
 ${promptLooks.map((l) => `- [${l.name}](${BASE}/prompts/${l.id})`).join('\n')}
 `;
+fs.writeFileSync(path.join(pub, 'seo/copy.js'), COPY_JS + '\n');
 fs.writeFileSync(path.join(pub, 'llms.txt'), llms);
 const full = `# OpenTempl: full text\n\n> ${ENTITY}\n\nThis file holds the text of every page on opentempl.org except the individual prompt pages, which are summarised. Updated ${VARS.updated}.\n\n` +
   pages

@@ -5,6 +5,10 @@ import './styles/night.css';
 import { applyTheme } from './ui/theme';
 import { pingOncePerDay } from './stats/client';
 
+// The font stylesheet loads as print so it never blocks the first paint; the site's
+// content policy refuses inline handlers, so it is switched on from here.
+document.querySelectorAll<HTMLLinkElement>('link[data-late]').forEach((l) => (l.media = 'all'));
+
 applyTheme();
 pingOncePerDay();
 
