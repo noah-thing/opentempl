@@ -470,21 +470,10 @@ async function cropToAspect(blob: Blob, aspect: number): Promise<Blob> {
   return canvas.convertToBlob({ type: 'image/png' });
 }
 
-async function copyImage(url: string) {
-  const blob = await (await fetch(url)).blob();
-  // The clipboard only takes PNG images.
-  const bmp = await createImageBitmap(blob);
-  const c = new OffscreenCanvas(bmp.width, bmp.height);
-  c.getContext('2d')!.drawImage(bmp, 0, 0);
-  const png = await c.convertToBlob({ type: 'image/png' });
-  await navigator.clipboard.write([new ClipboardItem({ 'image/png': png })]);
-}
-
 function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look; brief: Brief; prompt: string; onClose: () => void; onResult: (b: Blob) => void }) {
   const [step, setStep] = useState(0);
   const [note, setNote] = useState<string | null>(null);
   const [drop, setDrop] = useState(false);
-  const images = [...(brief.useLookSample ? [{ name: `${look.name} (style)`, url: sampleUrl(look.id) }] : []), ...brief.refs.map((r) => ({ name: r.name, url: r.url }))];
   // ChatGPT prefills its box from ?q= (it never sends by itself). The clipboard carries a copy too,
   // and is the only route when the link would get too long for the browser.
   const viaUrl = encodeURIComponent(prompt).length < 12000;
@@ -562,36 +551,6 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
               Open ChatGPT
             </button>
           </li>
-          {images.length ? (
-            <li className={step >= 1 ? 'is-on' : ''}>
-              <b>
-                Add the style pictures <span className="opt">Optional</span>
-              </b>
-              <p>For a closer match, copy each one and paste it into ChatGPT’s box with ⌘V (Ctrl V), in this order. Skip it and the prompt still works.</p>
-              <div className="ref-copy">
-                {images.map((im, i) => (
-                  <button
-                    key={im.url}
-                    className="ref-chip"
-                    onClick={async () => {
-                      try {
-                        await copyImage(im.url);
-                        flash(`Picture ${i + 1} copied`);
-                      } catch {
-                        flash('Your browser blocked copying; drag the picture into ChatGPT instead');
-                      }
-                      setStep(Math.max(step, 2));
-                    }}
-                  >
-                    <img src={im.url} alt="" draggable />
-                    <span>
-                      {i + 1}. {im.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </li>
-          ) : null}
           <li className={step >= 1 ? 'is-on' : ''}>
             <b>Send it, then bring the picture back.</b>
             <p>In ChatGPT, right click the finished picture and choose Copy image, then press ⌘V (Ctrl V) here. OpenTempl opens it with Magic layers.</p>

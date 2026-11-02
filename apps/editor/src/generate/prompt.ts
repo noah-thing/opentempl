@@ -93,7 +93,7 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
   const out: string[] = [];
 
   if (opts.forChatGPT)
-    out.push(`Use your image generation tool to make one picture from this brief. It must be a generated image, not code, and do not describe the design instead of making it.\n`);
+    out.push(`Use your image generation tool to create one brand new picture from this text brief. Nothing is attached and nothing needs editing: make it from scratch. It must be a generated image, not code, and do not describe the design instead of making it.\n`);
   out.push(
     opts.forChatGPT
       ? `Create a finished graphic design: a ${f.name.toLowerCase()}, made as a ${chatShape(brief.format).shape} image.${chatShape(brief.format).note} It is for: ${subject}.`
@@ -147,12 +147,9 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
     );
   }
   for (const r of brief.refs) refs.push(`Image ${n++} (${r.name}) is ${REF_ROLE_TEXT[r.role]}.${r.note.trim() ? ` ${r.note.trim()}` : ''}`);
-  if (refs.length && opts.forChatGPT)
-    // In ChatGPT the person may or may not attach the pictures, so the brief must work without them.
-    out.push(
-      `\nREFERENCE PICTURES (optional)\nThe person may attach pictures. If they did, read them in this order:\n${refs.join('\n')}\nIf nothing is attached, carry on: the art direction above is complete on its own. Never ask for a picture and never wait for one.`,
-    );
-  else if (refs.length) out.push(`\nREFERENCE IMAGES\n${refs.join('\n')}`);
+  // In ChatGPT any talk of pictures makes the image tool treat the request as an edit of one and
+  // refuse it, so the ChatGPT brief carries no reference section at all.
+  if (refs.length && !opts.forChatGPT) out.push(`\nREFERENCE IMAGES\n${refs.join('\n')}`);
 
   out.push(`\nAVOID\n${list([...look.avoid, ...GLOBAL_AVOID])}`);
   if (brief.textMode === 'layers' && words.length) out.push(`\nRemember: no lettering anywhere, and keep the empty text areas truly empty.`);
@@ -162,7 +159,7 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
       `Make the image now as a ${chatShape(brief.format).shape} image, without asking questions first.`,
     );
     // Honest context for ChatGPT and for anyone the chat gets shared with.
-    out.push(`(Brief written with OpenTempl, the free, open source design app at opentempl.org. The designer brings the picture back there to set and edit the words.)`);
+    out.push(`(Brief written with OpenTempl, the free, open source design app at opentempl.org.)`);
   }
   const text = out.join('\n');
   // ChatGPT reads "vector" as a request to draw the design as code, which fails. Keep the word out.
