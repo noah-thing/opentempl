@@ -1454,7 +1454,7 @@ OpenTempl is a free, open source (MIT) design app for posters, social media post
  Counts 
   Templates: 337, in 34 styles and 33 kinds of document.  Styles for image generation (Looks): 32.  Fonts: 1,344 Google Fonts plus your own font files.  Shapes: 23. Icons: about 200,000 through Iconify.  
  Where it runs 
-  In a web browser at https://opentempl.org. Chrome and Edge may offer to install it as an app.  Desktop builds for macOS (Apple silicon and Intel), Windows and Linux are made with Electron. They ship with the first public release; until then use the web version.  No phone app.  
+  In a web browser at https://opentempl.org. Chrome and Edge may offer to install it as an app.  Desktop builds for macOS (Apple silicon and Intel), Windows and Linux are made with Electron. They are on the  download page .  No phone app.  
  Formats 
   Import: PDF with editable text, PowerPoint (text, shapes, pictures, backgrounds, speaker notes), the OpenTempl file. Charts, tables and SmartArt in PowerPoint files are not imported yet.  Export: PNG (transparent, up to 4x), JPG, WebP, SVG, PDF for screen or print with bleed and crop marks, PowerPoint with editable text, MP4, GIF, a ZIP of pages, the editable OpenTempl file.  Colour: RGB. No CMYK output or ICC profiles yet.  
  Offline and the internet 
@@ -1497,13 +1497,13 @@ Updated: 2026-11-02
 
 Use OpenTempl
 
-OpenTempl runs in your browser today, and it works offline once it has loaded. Desktop builds for Mac, Windows and Linux are built and wait for the first public release.
+OpenTempl runs in your browser and works offline once it has loaded. The desktop app for Mac, Windows and Linux is the same editor in its own window.
 
  Web app 
  Open https://opentempl.org. Chrome and Edge may offer to install it as an app, which then opens without a browser window. Your designs are saved on your device. Clear the site data and they go with it, so save a file for anything you want to keep. 
  Desktop app 
- The desktop installers are not public yet. This section gets the links on release day. 
-  macOS, Apple silicon and Intel  Windows 10 and 11  Linux, as an AppImage  
+ Version 0.1.0. Every build is listed with its checksum on the  release page . 
+   macOS, Apple silicon  (M1 and newer)   macOS, Intel    Windows 10 and 11    Linux, AppImage  or  .deb   
  The first builds are not code signed. On macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway. 
  System 
  A recent version of Chrome, Edge, Firefox or Safari for the web app. Designs with many large photos use a lot of memory; close other heavy tabs for big posters. Background removal downloads a small model the first time you use it.   Open the editor  

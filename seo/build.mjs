@@ -19,7 +19,9 @@ const linksTs = fs.readFileSync(path.join(root, 'apps/editor/src/links.ts'), 'ut
 const REPO_URL = linksTs.match(/REPO_URL = '([^']+)'/)[1];
 const REPO_PUBLIC = /REPO_PUBLIC = true/.test(linksTs);
 // Flip when the v0.1.0 release is public and the download links resolve.
-const RELEASE_PUBLISHED = false;
+const RELEASE_PUBLISHED = true;
+const VERSION = JSON.parse(fs.readFileSync(path.join(root, 'apps/desktop/package.json'), 'utf8')).version;
+const dl = (file) => `https://github.com/noah-thing/opentempl/releases/download/v${VERSION}/OpenTempl-${VERSION}-${file}`;
 
 const index = JSON.parse(fs.readFileSync(path.join(pub, 'templates/index.json'), 'utf8'));
 const looks = JSON.parse(fs.readFileSync(path.join(pub, 'looks/looks.json'), 'utf8'));
@@ -650,14 +652,14 @@ See also: [the facts page](/facts), [how OpenTempl compares with Canva](/canva-a
 const downloadMd = `---
 slug: download
 title: Download OpenTempl: web app and desktop builds
-meta: Open OpenTempl in your browser now. Desktop builds for Mac, Windows and Linux ship with the first release. Free, MIT licensed, no account.
+meta: Open OpenTempl in your browser, or download the desktop app for Mac, Windows and Linux. Free, MIT licensed, no account.
 h1: Use OpenTempl
 crumb: Download
 kind: download
 cta: Open the editor
 software: yes
 ---
-OpenTempl runs in your browser today, and it works offline once it has loaded. Desktop builds for Mac, Windows and Linux are built and wait for the first public release.
+OpenTempl runs in your browser and works offline once it has loaded. The desktop app for Mac, Windows and Linux is the same editor in its own window.
 
 ## Web app
 
@@ -665,11 +667,12 @@ Open ${BASE}. Chrome and Edge may offer to install it as an app, which then open
 
 ## Desktop app
 
-${RELEASE_PUBLISHED ? '' : 'The desktop installers are not public yet. This section gets the links on release day.'}
+Version ${VERSION}. Every build is listed with its checksum on the [release page](https://github.com/noah-thing/opentempl/releases/tag/v${VERSION}).
 
-- macOS, Apple silicon and Intel
-- Windows 10 and 11
-- Linux, as an AppImage
+- [macOS, Apple silicon](${dl('mac-arm64.dmg')}) (M1 and newer)
+- [macOS, Intel](${dl('mac-x64.dmg')})
+- [Windows 10 and 11](${dl('win-x64.exe')})
+- [Linux, AppImage](${dl('linux-x64.AppImage')}) or [.deb](${dl('linux-x64.deb')})
 
 The first builds are not code signed. On macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway.
 
