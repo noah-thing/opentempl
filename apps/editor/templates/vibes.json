@@ -1,0 +1,172 @@
+{
+  "swiss-grid": {
+    "name": "Swiss grid",
+    "blurb": "Grids, flush left grotesk, numbers that run the page.",
+    "order": 1
+  },
+  "pixel-bitmap": {
+    "name": "Pixel and bitmap",
+    "blurb": "Pixel type, bitmap grids, dot matrix and game sprites.",
+    "order": 2
+  },
+  "tech-mono": {
+    "name": "Tech mono",
+    "blurb": "Black, white and one acid colour on a strict grid.",
+    "order": 3
+  },
+  "asia-poster": {
+    "name": "Seoul and Tokyo",
+    "blurb": "Dense, colourful event posters led by type.",
+    "order": 4
+  },
+  "riso-zine": {
+    "name": "Riso zine",
+    "blurb": "Two inks, misregistration and grain.",
+    "order": 5
+  },
+  "brutalist": {
+    "name": "Brutalist",
+    "blurb": "Raw type, system fonts and blunt layouts.",
+    "order": 6
+  },
+  "bauhaus": {
+    "name": "Bauhaus",
+    "blurb": "Primary colours, circles, squares and diagonals.",
+    "order": 7
+  },
+  "seventies": {
+    "name": "Seventies",
+    "blurb": "Fat type, stripes and warm brown light.",
+    "order": 8
+  },
+  "rave-acid": {
+    "name": "Rave acid",
+    "blurb": "Warped type, acid colour, all night flyers.",
+    "order": 9
+  },
+  "xerox-punk": {
+    "name": "Xerox punk",
+    "blurb": "Photocopy grain, cut letters, gig flyers.",
+    "order": 10
+  },
+  "magazine-cover": {
+    "name": "Magazine",
+    "blurb": "Mastheads, cover lines and one big image.",
+    "order": 11
+  },
+  "quiet-luxury": {
+    "name": "Quiet luxury",
+    "blurb": "Serif, space, cream and black.",
+    "order": 12
+  },
+  "japanese-minimal": {
+    "name": "Japanese minimal",
+    "blurb": "Quiet layouts, vertical type, one red dot.",
+    "order": 13
+  },
+  "nordic-minimal": {
+    "name": "Nordic minimal",
+    "blurb": "Pale, calm and full of air.",
+    "order": 14
+  },
+  "mid-century": {
+    "name": "Mid century",
+    "blurb": "Flat shapes and warm print colours from the fifties.",
+    "order": 15
+  },
+  "botanical-vintage": {
+    "name": "Botanical",
+    "blurb": "Plates, engravings and old labels.",
+    "order": 17
+  },
+  "folk-pattern": {
+    "name": "Folk pattern",
+    "blurb": "Ornament, repeat and hand cut colour.",
+    "order": 18
+  },
+  "hand-drawn": {
+    "name": "Hand drawn",
+    "blurb": "Marker lines, doodles and handwriting.",
+    "order": 19
+  },
+  "collage-scrapbook": {
+    "name": "Collage",
+    "blurb": "Cut paper, tape and torn edges.",
+    "order": 20
+  },
+  "kids-play": {
+    "name": "Kids play",
+    "blurb": "Bright shapes and friendly type for parties and classrooms.",
+    "order": 21
+  },
+  "cute-mascot": {
+    "name": "Mascot",
+    "blurb": "A character carries the message.",
+    "order": 22
+  },
+  "soft-pastel": {
+    "name": "Soft pastel",
+    "blurb": "Pale colour, round shapes, gentle type.",
+    "order": 23
+  },
+  "gradient-aura": {
+    "name": "Aura",
+    "blurb": "Blurred colour fields and quiet type.",
+    "order": 24
+  },
+  "y2k-chrome": {
+    "name": "Y2K chrome",
+    "blurb": "Chrome type, blobs and early web shine.",
+    "order": 25
+  },
+  "dark-tech": {
+    "name": "Dark tech",
+    "blurb": "Night backgrounds, neon and conference energy.",
+    "order": 26
+  },
+  "maximal-pop": {
+    "name": "Maximal pop",
+    "blurb": "Loud colour, everything at once.",
+    "order": 27
+  },
+  "sports-bold": {
+    "name": "Sports",
+    "blurb": "Numbers, club colours and athletic type.",
+    "order": 28
+  },
+  "photo-overlay": {
+    "name": "Photo and type",
+    "blurb": "One strong photo with bold type on top.",
+    "order": 29
+  },
+  "academic": {
+    "name": "Academic",
+    "blurb": "Diagrams, museum posters and scientific plates.",
+    "order": 30
+  },
+  "receipt-utility": {
+    "name": "Receipt",
+    "blurb": "Typewriter, forms, labels and receipts.",
+    "order": 31
+  },
+  "fine-stationery": {
+    "name": "Stationery",
+    "blurb": "Invitations, fine lines and letterpress feel.",
+    "order": 32
+  },
+  "food-menu": {
+    "name": "Menus",
+    "blurb": "Menus, cafe boards and recipe cards.",
+    "order": 33
+  },
+  "earthy-organic": {
+    "name": "Earthy",
+    "blurb": "Clay, soft shapes and natural tones.",
+    "order": 34
+  },
+  "corporate-clean": {
+    "name": "Clean business",
+    "blurb": "Posts and slides for work that still look designed.",
+    "order": 35
+  }
+}

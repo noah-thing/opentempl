@@ -322,7 +322,11 @@ export function parseSvg(svg: string) {
   const w = svg.match(/\swidth\s*=\s*"([\d.]+)/i)?.[1];
   const h = svg.match(/\sheight\s*=\s*"([\d.]+)/i)?.[1];
   const viewBox = vb ?? `0 0 ${w ?? 24} ${h ?? 24}`;
-  const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/i, '').replace(/<\/svg>\s*$/i, '');
+  // Paint set on the root <svg> (fill, stroke...) is inherited by its children: keep it on a wrapping group.
+  const root = svg.match(/<svg([^>]*)>/i)?.[1] ?? '';
+  const paint = [...root.matchAll(/\s((?:fill|stroke|stroke-width|stroke-linecap|stroke-linejoin|stroke-miterlimit|fill-rule|opacity|fill-opacity|stroke-opacity)\s*=\s*"[^"]*")/gi)].map((m) => m[1]);
+  const body = svg.replace(/^[\s\S]*?<svg[^>]*>/i, '').replace(/<\/svg>\s*$/i, '');
+  const inner = paint.length ? `<g ${paint.join(' ')}>${body}</g>` : body;
   const colors = [
     ...new Set(
       [...inner.matchAll(/(?:fill|stroke|stop-color)\s*[:=]\s*"?\s*(#[0-9a-fA-F]{3,8}|currentColor)/g)].map((m) =>

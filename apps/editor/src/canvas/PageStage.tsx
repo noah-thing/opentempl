@@ -16,7 +16,7 @@ import { dropLibraryItem, LIBRARY_MIME } from '../panels/library';
 import { smoothPath } from './draw';
 import { activeCollab, usePeers } from '../collab/collab';
 import { listUploads } from '../io/uploads';
-import { Eyes } from '../ui/Logo';
+import { Sign } from '../ui/Logo';
 import { CommentDraft, CommentPins } from './Comments';
 import { PenLayer } from './PenTool';
 
@@ -78,6 +78,17 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     const node = (target as globalThis.Element | null)?.closest?.('[data-id]');
     const id = node?.getAttribute('data-id') ?? null;
     return id && editor.s.elementPage[id] === pageId ? id : null;
+  };
+  // Locked layers (a paper texture over a whole template, say) let clicks through
+  // to the first unlocked element beneath them; they are only picked when nothing editable is under the pointer.
+  const pickId = (x: number, y: number, target: EventTarget | null): Id | null => {
+    const id = hitId(target);
+    if (!id || !editor.s.elements[id]?.locked) return id;
+    for (const node of document.elementsFromPoint(x, y)) {
+      const below = hitId(node);
+      if (below && !editor.s.elements[below]?.locked) return below;
+    }
+    return id;
   };
 
   // ---------- creation tools ----------
@@ -209,7 +220,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       editor.ui.set({ editingTextId: null });
     }
 
-    let id = hitId(e.target);
+    let id = pickId(e.clientX, e.clientY, e.target);
     if (!id && (e.target as HTMLElement).closest('[data-selection-body]')) id = editor.state.selection[0] ?? null;
     if (!id) {
       // Empty space: marquee selection.
@@ -328,7 +339,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
 
   const onDoubleClick = (e: React.MouseEvent) => {
     // Over a group the selection box sits on top; look through it for the element.
-    let id = hitId(e.target);
+    let id = pickId(e.clientX, e.clientY, e.target);
     if (!id && (e.target as HTMLElement).closest?.('[data-selection-body]')) {
       for (const node of document.elementsFromPoint(e.clientX, e.clientY)) {
         id = hitId(node);
@@ -354,7 +365,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     e.preventDefault();
     // A right click inside the selection box keeps the whole selection.
     const onBox = !!(e.target as HTMLElement).closest?.('[data-selection-body]') && editor.state.selection.length > 0;
-    const id = onBox ? editor.state.selection[0] : hitId(e.target);
+    const id = onBox ? editor.state.selection[0] : pickId(e.clientX, e.clientY, e.target);
     if (id && !editor.state.selection.includes(id)) editor.select([id]);
     if (!id) editor.clearSelection();
     window.dispatchEvent(new CustomEvent('tavla:contextmenu', { detail: { x: e.clientX, y: e.clientY, pageId, empty: !id } }));
@@ -364,7 +375,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     const collab = activeCollab();
     if (collab) collab.setCursor({ pageId, ...toLocal(e.clientX, e.clientY) });
     if (editor.state.dragging || tool !== 'select') return;
-    const id = hitId(e.target);
+    const id = pickId(e.clientX, e.clientY, e.target);
     if (id !== editor.state.hoverId) editor.ui.set({ hoverId: id });
   };
 
@@ -377,7 +388,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       const a = (await listUploads()).find((x) => x.id === upload);
       if (a) {
         if (!editor.doc.getAsset(a.id)) editor.doc.addAsset(a);
-        const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+        const overId = pickId(e.clientX, e.clientY, document.elementFromPoint(e.clientX, e.clientY));
         const over = overId ? editor.s.elements[overId] : null;
         if (over?.type === 'image') editor.replaceImage(over.id, a.id, a.width, a.height);
         else editor.addImageAsset(a.id, a.width, a.height, p);
@@ -386,12 +397,12 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
     }
     const lib = e.dataTransfer.getData(LIBRARY_MIME);
     if (lib) {
-      const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+      const overId = pickId(e.clientX, e.clientY, document.elementFromPoint(e.clientX, e.clientY));
       dropLibraryItem(editor, JSON.parse(lib), p, overId);
       return;
     }
     if (e.dataTransfer.files.length) {
-      const overId = hitId(document.elementFromPoint(e.clientX, e.clientY));
+      const overId = pickId(e.clientX, e.clientY, document.elementFromPoint(e.clientX, e.clientY));
       await importFiles(editor, [...e.dataTransfer.files], { at: p, replaceId: overId });
     }
   };
@@ -422,7 +433,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       <div className="page-overlay">
         {page.elementIds.length === 0 && tool === 'select' && page.background.type === 'solid' ? (
           <div className="empty-sheet" style={{ fontSize: Math.max(13, Math.min(16, W * zoom * 0.024)) }}>
-            <Eyes size={Math.max(40, Math.min(84, W * zoom * 0.11))} />
+            <Sign size={Math.max(40, Math.min(84, W * zoom * 0.11))} />
             <span>An empty sheet. Pick a template, drag a photo in, or press T and start typing.</span>
           </div>
         ) : null}

@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from 'react';
-import { Eyes } from './Logo';
+import { Sign } from './Logo';
 
 // If something in the editor throws while rendering, show a calm card instead of
 // a blank page. Designs are saved continuously, so reloading loses nothing.
@@ -19,7 +19,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { error: E
     return (
       <div style={{ height: '100%', display: 'grid', placeItems: 'center', background: 'var(--paper)', padding: 24 }}>
         <div style={{ display: 'grid', justifyItems: 'center', gap: 14, textAlign: 'center', maxWidth: 420 }}>
-          <Eyes size={96} mood="wow" />
+          <Sign size={96} mood="wow" />
           <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>Something slipped</h2>
           <p className="muted" style={{ margin: 0 }}>
             Your design is saved. Reload and you will be right where you were.

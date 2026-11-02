@@ -3,7 +3,7 @@ import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import { Icon } from '../ui/icons';
 import { useEscape } from '../ui/useEscape';
-import { Eyes } from '../ui/Logo';
+import { Sign } from '../ui/Logo';
 import type { ExportFormat } from '../export/exporters';
 
 const FORMATS: { id: ExportFormat; name: string; note: string }[] = [
@@ -73,7 +73,7 @@ export function ExportDialog() {
         <div className="dialog-body">
           {busy ? (
             <div className="empty" style={{ padding: '36px 0' }}>
-              <Eyes size={84} mood="wow" />
+              <Sign size={84} mood="wow" />
               <h4>
                 Rendering {busy.done} of {busy.total}
               </h4>

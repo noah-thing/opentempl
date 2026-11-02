@@ -1,0 +1,5575 @@
+[
+ {
+  "id": "bold-flat-colour",
+  "name": "Bold Flat Colour",
+  "blurb": "Fat red shapes on emerald, yellow type stacked tight, a Seoul canteen poster.",
+  "vibe": "asia-poster",
+  "tags": [
+   "flat colour",
+   "korean poster",
+   "vector",
+   "bold",
+   "food"
+  ],
+  "medium": "A vector illustration built from a few huge flat shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer drew it in a vector tool and sent it to a good printer.",
+  "palette": {
+   "colors": [
+    "#0E8A5A",
+    "#FF1B1B",
+    "#FFE800",
+    "#F0359A",
+    "#F7B4D0",
+    "#1B4FC4"
+   ],
+   "note": "One saturated ground, one dominant hero colour and one loud type colour, plus small pink and blue accents. For a brand, set the ground to their main colour and make the hero and type the two most contrasting colours available."
+  },
+  "composition": "Two or three oversized objects tilt diagonally across the page and run off the edges, leaving the type to sit across them in a stack. A few small round or bowl shapes scatter in the gaps. The bottom corner stays quiet for small info in a darker tint of the ground.",
+  "typography": "Extra heavy blocky sans or grotesk in a single bright colour, stacked in two to three tight lines and allowed to overlap the illustration. Small info text in a darker tint of the background.",
+  "texture": "Perfectly flat colour with a barely visible paper grain, no gradients, no shadows.",
+  "signature": [
+   "objects cropped by the edges at diagonals",
+   "tiny scale patterns cut into the hero shapes",
+   "dots and bowls as punctuation",
+   "type overlapping the artwork",
+   "ground colour reused for small info text"
+  ],
+  "avoid": [
+   "gradients",
+   "drop shadows",
+   "stock icon style",
+   "3D sheen",
+   "gibberish text",
+   "thin timid type"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Bowlby One",
+    "weight": 400,
+    "upper": true,
+    "color": "#FFE800"
+   },
+   "body": {
+    "font": "Space Grotesk",
+    "weight": 500
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.06,
+     "w": 0.72,
+     "h": 0.3,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.38,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.9,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.06,
+     "w": 0.72,
+     "h": 0.32,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.37,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.88,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.12,
+     "w": 0.72,
+     "h": 0.28,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.4,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.84,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Late night noodle shop opening in Malmö",
+   "headline": "Slurp Season",
+   "subline": "Hand pulled noodles until 2 am",
+   "details": "Open Thu to Sun, Möllevången 12"
+  },
+  "sampleBrief": "A vertical 2:3 poster in bold flat colour vector illustration, for a late night noodle shop. Three giant red noodle bowls seen from above are drawn as flat circles with cream chopsticks, swirled noodle lines in cream and small cut out details, each tilted on a diagonal and cropped by the page edges. Between them sit a few magenta dots and a pink and blue bowl shape as punctuation. The ground is a solid emerald green. Palette: emerald #0E8A5A, red #FF1B1B, yellow #FFE800, magenta #F0359A, pink #F7B4D0, blue #1B4FC4. All shapes are perfectly flat with hard edges, no outlines, no gradients, no shadows. Typography spelled exactly: the headline \"SLURP SEASON\" in extra heavy blocky yellow capitals, stacked on two tight lines in the upper left and overlapping the top of the bowls; the line \"Hand pulled noodles until 2 am\" in small clean sans beneath it; and at the bottom edge in a darker green tint, small text \"Open Thu to Sun, Möllevången 12\". Lighting: none, only flat colour. Texture: the faintest paper grain, crisp as a good offset print. Composition leaves the lower left quiet. Avoid gradients, drop shadows, stock icon style, plastic 3D sheen, lens flare, symmetrical stock composition, thin timid type, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "472807660884759165",
+    "url": "https://www.pinterest.com/pin/472807660884759165/",
+    "img": "https://i.pinimg.com/736x/85/c9/5d/85c95d62ce335fb7dabcdfc6c6011fd9.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "Adam Stone",
+    "authorUrl": "https://www.pinterest.com/stoneykun/"
+   },
+   {
+    "pin": "504403227015802633",
+    "url": "https://www.pinterest.com/pin/504403227015802633/",
+    "img": "https://i.pinimg.com/736x/f1/c9/a8/f1c9a8140c054d23d813d0470c01ca70.jpg",
+    "w": 236,
+    "h": 330,
+    "author": "StudioNein",
+    "authorUrl": "https://www.pinterest.com/jnrsnlo/"
+   },
+   {
+    "pin": "724094446369458580",
+    "url": "https://www.pinterest.com/pin/724094446369458580/",
+    "img": "https://i.pinimg.com/736x/90/ec/89/90ec896c66f3891107ebf5ae23d3d47b.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "Neganova",
+    "authorUrl": "https://www.pinterest.com/neganova1608/"
+   }
+  ]
+ },
+ {
+  "id": "halftone-duotone",
+  "name": "Halftone Duotone",
+  "blurb": "A photographed face or animal in two clashing inks, giant type biting into it.",
+  "vibe": "riso-zine",
+  "tags": [
+   "duotone",
+   "halftone",
+   "photo poster",
+   "pink",
+   "lime"
+  ],
+  "medium": "A photograph converted to a coarse halftone duotone, printed in two fluorescent inks on uncoated paper, with giant condensed type that overprints and multiplies against the picture. It looks like a riso or screen print, not a filter.",
+  "palette": {
+   "colors": [
+    "#F4EFE2",
+    "#3B49E8",
+    "#FF4B3F",
+    "#FF2D87",
+    "#D8F41C"
+   ],
+   "note": "Choose two high chroma inks that clash on purpose, such as blue and red or pink and lime. For a brand, take the main and accent colours as the two inks and set paper to a warm neutral."
+  },
+  "composition": "The photographic subject is cropped tight and large, centred or slightly off, with two or three lines of massive type running across the face and body, left aligned. A small paragraph of text sits in the top right corner and tiny credits in the corners.",
+  "typography": "Heavy condensed or bold grotesk capitals in the second ink, giant, multiplying over the image, with small justified text paragraph in the same ink.",
+  "texture": "Visible halftone dot screen, ink overlap colour, grain, slight blur from the press.",
+  "signature": [
+   "photo as visible halftone dots",
+   "type overprinting the face",
+   "two clashing inks only",
+   "text block top right in the second ink",
+   "corner credits"
+  ],
+  "avoid": [
+   "full colour photography",
+   "smooth gradients",
+   "drop shadows",
+   "glossy finish",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Anton",
+    "weight": 400,
+    "upper": true,
+    "color": "#FF4B3F"
+   },
+   "body": {
+    "font": "Archivo",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.58,
+     "w": 0.88,
+     "h": 0.34,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.52,
+     "y": 0.06,
+     "w": 0.42,
+     "h": 0.14,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.94,
+     "w": 0.9,
+     "h": 0.03,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.57,
+     "w": 0.88,
+     "h": 0.37,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.52,
+     "y": 0.06,
+     "w": 0.42,
+     "h": 0.15,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.92,
+     "w": 0.9,
+     "h": 0.04,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.57,
+     "w": 0.88,
+     "h": 0.31,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.52,
+     "y": 0.12,
+     "w": 0.42,
+     "h": 0.13,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.88,
+     "w": 0.9,
+     "h": 0.04,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Monthly night run club for beginners",
+   "headline": "Run Slow",
+   "subline": "Friendly 5 km night loops with tea after",
+   "details": "First Thursday each month, 19:00, Rålambshovsparken"
+  },
+  "sampleBrief": "A vertical 2:3 halftone duotone poster, printed in two clashing inks on uncoated paper, for a beginners' night running club. A close crop of a runner in glasses and a knit hat, face turned slightly and calm, rendered as a coarse visible halftone dot screen in electric blue ink, with the hat and shoulders filling the lower two thirds. Giant heavy condensed capitals in fluorescent red overprint the face and torso in two stacked lines, multiplying into deep purple where they cross the blue. A small justified text paragraph sits in the top right in red, and tiny credits sit in the corners. Palette: cream paper #F4EFE2, blue ink #3B49E8, red ink #FF4B3F, overlap deep purple. Typography spelled exactly: headline \"RUN SLOW\" in giant condensed capitals in red; the paragraph at top right reads \"Friendly 5 km night loops with tea after\"; at the bottom in tiny red capitals \"First Thursday each month, 19:00, Rålambshovsparken\". Lighting: none, ink only. Texture: halftone dots, press grain, slight blur and misregistration between inks, speckled coverage. Avoid full colour photography, smooth gradients, drop shadows, glossy finish, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "581316264441621095",
+    "url": "https://www.pinterest.com/pin/581316264441621095/",
+    "img": "https://i.pinimg.com/736x/08/d4/f8/08d4f8f9751140000f70484078edac50.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "shermaine mak",
+    "authorUrl": "https://www.pinterest.com/shermainemak/"
+   },
+   {
+    "pin": "208150814022100888",
+    "url": "https://www.pinterest.com/pin/208150814022100888/",
+    "img": "https://i.pinimg.com/736x/9d/76/43/9d7643ee3c4d6fd8871a1f9d280b870f.jpg",
+    "w": 236,
+    "h": 319,
+    "author": "黄",
+    "authorUrl": "https://www.pinterest.com/18fec1405886f21/"
+   }
+  ]
+ },
+ {
+  "id": "pixel-world",
+  "name": "Pixel World",
+  "blurb": "Voxel flowers, dither clouds and chunky dot type float in a cut paper sky.",
+  "vibe": "pixel-bitmap",
+  "tags": [
+   "pixel art",
+   "voxel",
+   "dither",
+   "retro game",
+   "sky"
+  ],
+  "medium": "A pixel art and voxel illustration: chunky cubes with flat three tone shading, dither patterns and dot matrix lettering, composed over a calm sky photograph or flat blue field. It has the precision of game art and the calm of a poster.",
+  "palette": {
+   "colors": [
+    "#8FB8D8",
+    "#EE8DB8",
+    "#9DBB4E",
+    "#F5E9EC",
+    "#F2A64A",
+    "#2A3A52"
+   ],
+   "note": "Sky blue ground with pink, green and cream voxels and one orange spark. For a brand, set the sky or field to the brand colour and the voxel hero to its complement."
+  },
+  "composition": "One hero object, a flower or creature, rises from the lower centre in cubes with floating satellite pieces and tiny sparks, dot matrix title at the top, small body text lower corners. Lots of empty sky around.",
+  "typography": "Dot matrix or pixel capitals in lime or white for the title, small serif or mono lines for details.",
+  "texture": "Hard pixel edges, flat three tone shading per cube, dither gradients, no blur.",
+  "signature": [
+   "voxel object with 3 tone cube shading",
+   "dither gradient clouds",
+   "dot matrix title made of circles",
+   "tiny orange sparks",
+   "calm photographic sky"
+  ],
+  "avoid": [
+   "smooth anti aliased gradients",
+   "plastic 3D sheen",
+   "lens flare",
+   "blurry pixels",
+   "gibberish text",
+   "cluttered sprites"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "slide"
+  ],
+  "type": {
+   "headline": {
+    "font": "Pixelify Sans",
+    "weight": 700,
+    "upper": false,
+    "color": "#F5E9EC"
+   },
+   "body": {
+    "font": "DM Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.04,
+     "w": 0.9,
+     "h": 0.14,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.19,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.9,
+     "w": 0.88,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.04,
+     "w": 0.9,
+     "h": 0.15,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.19,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.88,
+     "w": 0.88,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.1,
+     "w": 0.9,
+     "h": 0.13,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.23,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.84,
+     "w": 0.88,
+     "h": 0.06,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Cozy farming video game launch",
+   "headline": "Turnip Valley",
+   "subline": "Plant, grow and wander in a sleepy village",
+   "details": "Out 12 Sept on PC and Switch"
+  },
+  "sampleBrief": "A vertical 2:3 poster in voxel and pixel art, for the launch of a cozy farming video game. A calm cloudy blue sky #8FB8D8 fills the background. From the lower centre a tall voxel turnip plant rises, built from cubes with flat three tone shading: pale cream bulb #F5E9EC with pink #EE8DB8 top, green #9DBB4E leaves stepping upward like stairs, two tiny orange #F2A64A cross shaped sparks floating nearby, and two small blocky white dither clouds. Hard pixel edges, no smoothing, a few dithered gradients in the clouds. Palette: sky #8FB8D8, pink #EE8DB8, green #9DBB4E, cream #F5E9EC, orange #F2A64A, navy #2A3A52. Typography spelled exactly: headline \"Turnip Valley\" in chunky pixel dot matrix lettering in cream at the top; beneath it in small mono \"Plant, grow and wander in a sleepy village\"; at the bottom in tiny mono \"Out 12 Sept on PC and Switch\". Lighting: flat soft daylight, no cast glow, a gentle cube side shadow. Texture: crisp pixels, dither patterns. Avoid smooth gradients, plastic 3D sheen, lens flare, blurry pixels, symmetrical stock composition, cluttered sprites, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "785455991303075806",
+    "url": "https://www.pinterest.com/pin/785455991303075806/",
+    "img": "https://i.pinimg.com/736x/ff/0a/72/ff0a72123fea6c75cfce4416a0f2c6ad.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "HASHTHETICS",
+    "authorUrl": "https://www.pinterest.com/hashthetics/"
+   },
+   {
+    "pin": "692147036524931623",
+    "url": "https://www.pinterest.com/pin/692147036524931623/",
+    "img": "https://i.pinimg.com/736x/b2/de/90/b2de9060845318f717f7bf3152d1751f.jpg",
+    "w": 236,
+    "h": 332,
+    "author": "daryna.design_",
+    "authorUrl": "https://www.pinterest.com/darii_do/"
+   },
+   {
+    "pin": "499195939972045755",
+    "url": "https://www.pinterest.com/pin/499195939972045755/",
+    "img": "https://i.pinimg.com/736x/70/9d/26/709d26c55dff576eafd6b68032c0be49.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Елена | Графический дизайнер",
+    "authorUrl": "https://www.pinterest.com/RennElen/"
+   },
+   {
+    "pin": "1152780835890102304",
+    "url": "https://www.pinterest.com/pin/1152780835890102304/",
+    "img": "https://i.pinimg.com/736x/78/64/0c/78640c0f42217de67584bac160105b96.jpg",
+    "w": 236,
+    "h": 236,
+    "author": "Best Paired Fonts & Typography Ideas",
+    "authorUrl": "https://www.pinterest.com/randy70tton/"
+   },
+   {
+    "pin": "740560732522217973",
+    "url": "https://www.pinterest.com/pin/740560732522217973/",
+    "img": "https://i.pinimg.com/736x/f4/22/0d/f4220def2131edb850908ebde89eb1d3.jpg",
+    "w": 236,
+    "h": 419,
+    "author": "Kamilla Z. | Captain of Visual Chaos",
+    "authorUrl": "https://www.pinterest.com/aimlessash/"
+   },
+   {
+    "pin": "641551909469513092",
+    "url": "https://www.pinterest.com/pin/641551909469513092/",
+    "img": "https://i.pinimg.com/736x/5f/dc/02/5fdc026d586db014048429ffad729cc0.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Dan Neuenhaus - Graphic Design",
+    "authorUrl": "https://www.pinterest.com/danneuenhaus/"
+   }
+  ]
+ },
+ {
+  "id": "grain-shape-animals",
+  "name": "Grain Shape Animals",
+  "blurb": "Blocky animals built from clean shapes, sprayed with soft grain on warm yellow.",
+  "vibe": "kids-play",
+  "tags": [
+   "animals",
+   "geometric",
+   "airbrush grain",
+   "kids",
+   "festival"
+  ],
+  "medium": "A digital and gouache illustration where an animal is assembled from bold geometric slabs, each filled with a soft speckled airbrush gradient that fades two colours together. The grain looks like sprayed ink on paper.",
+  "palette": {
+   "colors": [
+    "#EAB308",
+    "#E5121E",
+    "#2B3FA8",
+    "#1E7A3A",
+    "#F05A9E",
+    "#2B1B16"
+   ],
+   "note": "Mustard yellow ground with primary red, blue and green shapes and one pink accent. Brand adaptation: keep the warm ground and recolour the shapes in the brand pair, letting grain fade each into the other."
+  },
+  "composition": "One large animal leans diagonally across most of the page, with small companions like a bird or clouds in the open yellow. A row of tiny houses or hills can run along the bottom. Text sits in the clear lower right and along the vertical edge.",
+  "typography": "Clean geometric sans in mixed colours, set at an angle that follows the animal, with colour changes between lines. Small vertical credit text in the margin.",
+  "texture": "Spray grain stipple inside each shape, edges crisp, flat colour elsewhere.",
+  "signature": [
+   "animal made of slabs and wedges",
+   "grain gradient between two colours per shape",
+   "tiny house row at the bottom",
+   "small star and bird companions",
+   "type tilted with the artwork"
+  ],
+  "avoid": [
+   "cute realistic fur",
+   "outlines",
+   "plastic 3D sheen",
+   "stock clipart",
+   "gibberish text",
+   "lens flare"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Outfit",
+    "weight": 800,
+    "upper": false,
+    "color": "#2B3FA8"
+   },
+   "body": {
+    "font": "Outfit",
+    "weight": 500
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.4,
+     "y": 0.76,
+     "w": 0.52,
+     "h": 0.1,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.4,
+     "y": 0.87,
+     "w": 0.52,
+     "h": 0.04,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.93,
+     "w": 0.84,
+     "h": 0.04,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.4,
+     "y": 0.74,
+     "w": 0.52,
+     "h": 0.11,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.4,
+     "y": 0.85,
+     "w": 0.52,
+     "h": 0.04,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.91,
+     "w": 0.84,
+     "h": 0.04,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.4,
+     "y": 0.72,
+     "w": 0.52,
+     "h": 0.09,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.4,
+     "y": 0.82,
+     "w": 0.52,
+     "h": 0.04,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.87,
+     "w": 0.84,
+     "h": 0.04,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Children's theatre weekend at the town library",
+   "headline": "Little Stage Weekend",
+   "subline": "Puppets, stories and a surprise orchestra",
+   "details": "12 to 13 April, Stadsbiblioteket, free entry"
+  },
+  "sampleBrief": "A vertical 2:3 children's festival poster in a geometric grain illustration style, for a library puppet theatre weekend. A tall leaping giraffe built from bold geometric slabs and wedges leans diagonally across the page: neck as a long red wedge, body as a blue slab, legs as green rectangles, a few dark brown spots as rounded blobs. Each shape is filled with a speckled airbrush gradient that fades two colours together, with crisp hard edges. A small pink bird and two pink clouds float in the open space, and a row of five tiny geometric houses runs along the bottom edge. Ground: warm mustard yellow. Palette: mustard #EAB308, red #E5121E, blue #2B3FA8, green #1E7A3A, pink #F05A9E, dark brown #2B1B16. Typography spelled exactly: headline \"Little Stage Weekend\" in friendly bold geometric sans, in blue and red, tilted slightly to follow the giraffe, in the lower right; beneath it \"Puppets, stories and a surprise orchestra\"; and in small dark text along the bottom \"12 to 13 April, Stadsbiblioteket, free entry\". Flat daylight, no cast shadows. Texture: sprayed stipple grain inside shapes. Avoid realistic fur, outlines, plastic 3D sheen, clipart, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "405183297732568328",
+    "url": "https://www.pinterest.com/pin/405183297732568328/",
+    "img": "https://i.pinimg.com/736x/73/63/18/7363183b7b51c35c163a15eb98315759.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "Ezgi Yalınalp",
+    "authorUrl": "https://www.pinterest.com/ezgiyalinalp/"
+   },
+   {
+    "pin": "180918110005724154",
+    "url": "https://www.pinterest.com/pin/180918110005724154/",
+    "img": "https://i.pinimg.com/736x/23/35/7b/23357baa717b24b324262e492f912869.jpg",
+    "w": 236,
+    "h": 329,
+    "author": "// FOURTEENZERONINE",
+    "authorUrl": "https://www.pinterest.com/fourteenzronine/"
+   }
+  ]
+ },
+ {
+  "id": "marker-lettering",
+  "name": "Brush Marker Lettering",
+  "blurb": "Fat pink letters painted with a loaded brush, outlined in electric blue.",
+  "vibe": "hand-drawn",
+  "tags": [
+   "hand lettering",
+   "brush",
+   "neon pink",
+   "club",
+   "paint"
+  ],
+  "medium": "Hand painted lettering in gouache or acrylic with a flat brush on white paper, scanned, with letters filled in fluorescent pink, a heavy blue outline, a few yellow rays and wet edges where the brush dragged.",
+  "palette": {
+   "colors": [
+    "#FFFFFF",
+    "#FF63B5",
+    "#1C3BF0",
+    "#E8F23A",
+    "#E8398D"
+   ],
+   "note": "White ground with hot pink fill, electric blue outline and a lime accent. For a brand, fill letters in the brand brightest colour and outline in its darkest, keep one acid accent."
+  },
+  "composition": "Phrase words fill the whole sheet in stacked rows of different sizes, tilted, touching the edges, with a handwritten script signature line at the bottom. A tiny line of print info sits in the bottom margin.",
+  "typography": "Chunky uneven capitals, painted and not set, with a loopy script sign off. Info line in small neutral sans.",
+  "texture": "Brush streaks, uneven opacity, dry brush edges, paper tooth and paint bumps.",
+  "signature": [
+   "thick blue outline around pink fill",
+   "tilted stacked words filling the sheet",
+   "small yellow ray strokes",
+   "script sign off in blue",
+   "visible brush streaks"
+  ],
+  "avoid": [
+   "clean vector type",
+   "digital drop shadow",
+   "gradients",
+   "3D bevel",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Permanent Marker",
+    "weight": 400,
+    "upper": true,
+    "color": "#FF63B5"
+   },
+   "body": {
+    "font": "Space Grotesk",
+    "weight": 500
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.04,
+     "w": 0.9,
+     "h": 0.66,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.72,
+     "w": 0.8,
+     "h": 0.1,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.92,
+     "w": 0.88,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.04,
+     "w": 0.9,
+     "h": 0.7,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.71,
+     "w": 0.8,
+     "h": 0.11,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.9,
+     "w": 0.88,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.1,
+     "w": 0.9,
+     "h": 0.61,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.69,
+     "w": 0.8,
+     "h": 0.09,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.86,
+     "w": 0.88,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Skate park summer jam for teens",
+   "headline": "Send It",
+   "subline": "Ramps, rails and free pizza",
+   "details": "Sat 19 July, 1 pm, Fryshuset Skatepark"
+  },
+  "sampleBrief": "A vertical 2:3 hand painted lettering poster on white paper, for a teen skate park summer jam. The words \"SEND IT\" are painted huge in stacked tilted rows: each letter a chunky uneven capital filled in fluorescent pink with a thick electric blue outline, touching the edges of the sheet, with a few short lime yellow ray strokes bursting from the corners. Beneath, a loopy blue script line \"Ramps, rails and free pizza\" painted with the same brush. Palette: white paper #FFFFFF, hot pink #FF63B5, electric blue #1C3BF0, lime #E8F23A, deeper pink #E8398D for shadows within the paint. Visible brush streaks, dry brush edges where the paint thins, slight bumps of thicker paint and uneven opacity so white paper peeks through. At the very bottom in small neutral sans: \"Sat 19 July, 1 pm, Fryshuset Skatepark\". Lighting: flat scan, no cast shadows. Texture: paper tooth, brush drag marks, wet edge halos. Typography is painted, not set, and wobbles. Avoid clean vector type, drop shadows, gradients, 3D bevel, lens flare, symmetrical layout, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "577586720934551434",
+    "url": "https://www.pinterest.com/pin/577586720934551434/",
+    "img": "https://i.pinimg.com/736x/fa/f9/7c/faf97c2243f54e13dc53603b9ce9bf39.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "75B",
+    "authorUrl": "https://www.pinterest.com/75brotterdam/"
+   },
+   {
+    "pin": "110056784638743603",
+    "url": "https://www.pinterest.com/pin/110056784638743603/",
+    "img": "https://i.pinimg.com/736x/c8/38/e4/c838e47fb210ada5a0d8554e866be5ed.jpg",
+    "w": 236,
+    "h": 236,
+    "author": "Dimitris Davakis",
+    "authorUrl": "https://www.pinterest.com/DimDav/"
+   }
+  ]
+ },
+ {
+  "id": "riso-market",
+  "name": "Riso Market Scene",
+  "blurb": "Overlapping ink people carry baskets through a market in pink, yellow and teal.",
+  "vibe": "riso-zine",
+  "tags": [
+   "risograph",
+   "illustration",
+   "community",
+   "multi ink",
+   "figures"
+  ],
+  "medium": "A multi ink risograph illustration where each colour is a separate flat layer with a grainy tone, so overlapping shapes make new colours. People and stalls are simplified into chunky overlapping shapes.",
+  "palette": {
+   "colors": [
+    "#FFFDF6",
+    "#FF6FA8",
+    "#FFD83A",
+    "#26B6E8",
+    "#3AA757",
+    "#F0592E"
+   ],
+   "note": "Light paper with pink, yellow, sky blue, green and an orange red accent, all as translucent inks. For a brand, pick four inks including the brand colour and let overlaps do the mixing."
+  },
+  "composition": "A busy scene crowds the full page, with the title tucked top left in the sky of the scene and the info line in pink along the bottom. A striped awning at the top corner, figures diagonal across the middle and a table of produce lower left.",
+  "typography": "Chunky hand cut capitals each letter in a different ink, stacked in three lines, and a small wide spaced caps line for info.",
+  "texture": "Visible riso grain, ink overprints, tiny gaps between inks, paper texture.",
+  "signature": [
+   "translucent ink overlaps",
+   "figures with stripes and dots patterns",
+   "market awning at the edge",
+   "letters in different inks",
+   "tiny squiggles and sparkles"
+  ],
+  "avoid": [
+   "outlines in black",
+   "gradients",
+   "photorealism",
+   "plastic 3D sheen",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Londrina Solid",
+    "weight": 900,
+    "upper": true,
+    "color": "#FF6FA8"
+   },
+   "body": {
+    "font": "Work Sans",
+    "weight": 600
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.62,
+     "h": 0.26,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.3,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.92,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.62,
+     "h": 0.28,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.29,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.9,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.1,
+     "w": 0.62,
+     "h": 0.24,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.33,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.86,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Autumn harvest fair at a community garden",
+   "headline": "Harvest Fair",
+   "subline": "Pickles, apples, honey and a swap table",
+   "details": "Sat 4 Oct, 10 to 15, Kolonilotten Tallkrogen"
+  },
+  "sampleBrief": "A vertical 2:3 multi ink risograph illustration of a busy community harvest fair. Chunky simplified figures overlap across the page: a woman in a yellow patterned coat carrying a basket of red apples, a tall man in a blue shirt reading a price list, a child in green boots running with a jar of pickles, and a stall table lower left with tomatoes, pickle jars and a honey pot. A pink and orange striped awning cuts across the top right corner. Each colour is a flat grainy translucent ink layer so overlaps create new tones. Palette: paper #FFFDF6, pink #FF6FA8, yellow #FFD83A, sky blue #26B6E8, green #3AA757, orange red #F0592E. Typography spelled exactly: the headline \"HARVEST FAIR\" in chunky hand cut capitals, each letter in a different ink, stacked on two lines at top left; beneath it small clean sans \"Pickles, apples, honey and a swap table\"; at the bottom in pink wide spaced capitals \"Sat 4 Oct, 10 to 15, Kolonilotten Tallkrogen\". Tiny squiggles and sparkles in free spaces. Lighting: flat inks, no shadows. Texture: visible riso grain, ink overprints, tiny misregistration gaps, paper fibre. Avoid black outlines, gradients, photorealism, plastic 3D sheen, lens flare, symmetrical stock composition, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "701787554472217900",
+    "url": "https://www.pinterest.com/pin/701787554472217900/",
+    "img": "https://i.pinimg.com/736x/68/5d/6f/685d6f1d2af9f76d03ce2cddc8896883.jpg",
+    "w": 236,
+    "h": 364,
+    "author": "Mad",
+    "authorUrl": "https://www.pinterest.com/MadeleineRuel_/"
+   }
+  ]
+ },
+ {
+  "id": "club-flyer-print",
+  "name": "Club Flyer Print",
+  "blurb": "One blue ink on cream, a DJ inside a globe, old school flyer type.",
+  "vibe": "rave-acid",
+  "tags": [
+   "one colour",
+   "flyer",
+   "DJ",
+   "blue ink",
+   "club"
+  ],
+  "medium": "A one colour print in blue ink on cream paper, with a bold silhouette illustration and wireframe globe, spaced capitals and thin rules. It resembles a 90s club flyer photocopied once.",
+  "palette": {
+   "colors": [
+    "#F1E8D2",
+    "#4B4BC8",
+    "#2A2A7A"
+   ],
+   "note": "Cream paper with one ink in two densities. For a brand, use the brand colour as the single ink and a darker tint for the deep tone."
+  },
+  "composition": "A framed header band at the top, a large circular emblem in the middle with the DJ or subject inside a wireframe globe and a banner arch of title letters on top, then a stack of spaced capitals for the lineup beneath, divided by hairline rules. Margins stay wide and the paper edge is left clean.",
+  "typography": "Wide spaced bold sans capitals for the lineup, a stencil like arched title across the emblem and tiny spaced details line.",
+  "texture": "Ink coverage uneven, speckle, slight blur as if photocopied, paper yellowing.",
+  "signature": [
+   "wireframe globe emblem",
+   "single ink in two densities",
+   "hairline rules between blocks",
+   "arched title banner",
+   "very wide letterspacing"
+  ],
+  "avoid": [
+   "full colour",
+   "gradients",
+   "3D shine",
+   "neon glow",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "flyer",
+   "story",
+   "square"
+  ],
+  "type": {
+   "headline": {
+    "font": "Archivo",
+    "weight": 800,
+    "upper": true,
+    "color": "#4B4BC8"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.08,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.72,
+     "w": 0.8,
+     "h": 0.1,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.88,
+     "w": 0.84,
+     "h": 0.09,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.09,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.71,
+     "w": 0.8,
+     "h": 0.11,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.86,
+     "w": 0.84,
+     "h": 0.1,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.92,
+     "h": 0.07,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.69,
+     "w": 0.8,
+     "h": 0.09,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.83,
+     "w": 0.84,
+     "h": 0.08,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Weekly soul night at a basement bar",
+   "headline": "Soul Thursdays",
+   "subline": "Vinyl only, 7 inch hour at midnight",
+   "details": "Every Thu 22 to 03, Bar Lyra, Götgatan 12"
+  },
+  "sampleBrief": "A vertical 2:3 one colour club flyer printed in blue ink on cream paper, for a weekly soul night. At the top a framed header band with bold wide spaced capitals. In the middle a large circular emblem: a wireframe globe, with the silhouette of a DJ in headphones leaning over two turntables inside it, and an arched banner across the top of the emblem reading the title in stencil like capitals. Beneath, stacked lines of wide spaced capitals separated by hairline rules. Palette: cream paper #F1E8D2, ink blue #4B4BC8, deep blue tint #2A2A7A. Typography spelled exactly: banner and header \"SOUL THURSDAYS\"; the lineup block \"Vinyl only, 7 inch hour at midnight\" in wide spaced bold sans capitals; at the bottom in small monospace \"Every Thu 22 to 03, Bar Lyra, Götgatan 12\". Uneven ink coverage, speckle, slight photocopy blur, light paper yellowing at the edges. Lighting: none, ink only. Avoid full colour, gradients, 3D shine, neon glow, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": []
+ },
+ {
+  "id": "folk-cutout-garden",
+  "name": "Folk Cutout Garden",
+  "blurb": "Hand cut flowers, horses and birds mirrored on black, bright as embroidered cloth.",
+  "vibe": "folk-pattern",
+  "tags": [
+   "folk art",
+   "paper cut",
+   "pattern",
+   "symmetry",
+   "floral"
+  ],
+  "medium": "A paper cut and gouache folk illustration where each motif looks cut with scissors from coloured paper and pasted on a dark ground, with little hand drawn cream details. Mirrored arrangements echo embroidery and quilts.",
+  "palette": {
+   "colors": [
+    "#161412",
+    "#EFE3BC",
+    "#E6382B",
+    "#2E5FBF",
+    "#2FAE4A",
+    "#E8398D"
+   ],
+   "note": "Near black ground with cream, tomato red, cobalt, leaf green and magenta cutouts. For a brand, keep the black ground and recolour red and cobalt to the brand pair."
+  },
+  "composition": "Mirror symmetric arrangement around a central star or checkerboard sunburst with plants rising from the bottom and animals on a top band. Dense but ordered: every motif has black breathing room. Leave a plain band at the top or bottom for the title.",
+  "typography": "Hand drawn rounded capitals in cream, slightly uneven, as if cut from paper, with a small handwritten line beneath.",
+  "texture": "Cut paper edges with tiny irregularities, soft ink speckle and a risograph like grain on coloured shapes.",
+  "signature": [
+   "mirrored plants and birds",
+   "checkerboard or sunburst medallion",
+   "sun face in the top band",
+   "cream doves in corners",
+   "each shape slightly irregular"
+  ],
+  "avoid": [
+   "perfect vector smoothness",
+   "gradients",
+   "glossy 3D",
+   "gibberish text",
+   "random asymmetry",
+   "generic floral clipart"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Londrina Solid",
+    "weight": 900,
+    "upper": true,
+    "color": "#EFE3BC"
+   },
+   "body": {
+    "font": "Karla",
+    "weight": 500
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.1,
+     "y": 0.04,
+     "w": 0.8,
+     "h": 0.16,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.21,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.92,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.1,
+     "y": 0.04,
+     "w": 0.8,
+     "h": 0.17,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.21,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.9,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.1,
+     "y": 0.1,
+     "w": 0.8,
+     "h": 0.15,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.25,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.86,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Midsummer craft market at a community hall",
+   "headline": "Midsommar Marknad",
+   "subline": "Handmade crafts, honey, flowers and folk music",
+   "details": "Sat 21 June, 11 to 17, Folkets Hus"
+  },
+  "sampleBrief": "A vertical 2:3 folk art poster that looks cut from coloured paper and pasted onto black, for a midsummer craft market. A mirror symmetric composition: at the centre a cream sunburst medallion containing a black and cream checkerboard, with a small blue eight pointed star beneath it. From the bottom two green leafy stems curve outward and end in big cobalt blue flowers with tomato red centres. Two small black horses face each other on a band at the top with a red sun with a calm face between them, and two cream doves sit in the lower corners. Palette: near black #161412, cream #EFE3BC, red #E6382B, cobalt #2E5FBF, green #2FAE4A, magenta #E8398D. Every shape has slightly irregular scissor cut edges and a faint ink speckle, with a soft riso grain. Plain dark space is left around each motif. Typography spelled exactly: headline \"MIDSOMMAR MARKNAD\" in hand cut rounded cream capitals across the top band under the horses; beneath it in small hand lettering \"Handmade crafts, honey, flowers and folk music\"; at the bottom in small cream text \"Sat 21 June, 11 to 17, Folkets Hus\". Lighting: flat, no shadows. Avoid perfect vector smoothness, gradients, glossy 3D, lens flare, random asymmetry, generic clipart, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "837528861951632683",
+    "url": "https://www.pinterest.com/pin/837528861951632683/",
+    "img": "https://i.pinimg.com/736x/bb/bf/6c/bbbf6c50e43944f09d877db13a56132e.jpg",
+    "w": 236,
+    "h": 265,
+    "author": "Anna Roberts",
+    "authorUrl": "https://www.pinterest.com/annarobertsdesign/"
+   },
+   {
+    "pin": "190840102949847676",
+    "url": "https://www.pinterest.com/pin/190840102949847676/",
+    "img": "https://i.pinimg.com/736x/36/f1/f6/36f1f6860f6abffb4196c689b2ed4055.jpg",
+    "w": 236,
+    "h": 337,
+    "author": "Pascal Micho",
+    "authorUrl": "https://www.pinterest.com/pascalmicho/"
+   },
+   {
+    "pin": "4603452986934090368",
+    "url": "https://www.pinterest.com/pin/4603452986934090368/",
+    "img": "https://i.pinimg.com/736x/62/8e/e2/628ee234c1a07c1cf583ebbdd95eab70.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Pinterest Preview tvovermind_com",
+    "authorUrl": "https://www.pinterest.com/preview_tvovermind_com/"
+   }
+  ]
+ },
+ {
+  "id": "inflatable-balloon",
+  "name": "Inflatable Type",
+  "blurb": "Puffy letters and balloon animals, taut and glossy, with colour pooling in the folds.",
+  "vibe": "y2k-chrome",
+  "tags": [
+   "inflatable",
+   "balloon",
+   "3D",
+   "glossy",
+   "playful"
+  ],
+  "medium": "A 3D rendered or photographed inflatable look: letters and creatures made of balloon skin or vinyl, with soft reflections, pinch points at the ends and a thin outline of contrast colour. Believable lighting and tiny imperfections.",
+  "palette": {
+   "colors": [
+    "#F6F6F8",
+    "#E64A2E",
+    "#5EC2F5",
+    "#FFE16A",
+    "#FF4FA3"
+   ],
+   "note": "White or pearly inflatable on a bright flat ground with a thick contrast outline. For a brand, use the brand colour as the ground and keep the balloon neutral, or invert them."
+  },
+  "composition": "One big inflatable subject fills most of the frame, cropped slightly, with a thick sticker outline in a contrasting colour. A cluster of text circles or dots sits upper left and details in the bottom band.",
+  "typography": "Typewriter or round mono letters set inside yellow dots, or puffy 3D letters in the same material. Small justified serif details.",
+  "texture": "Rubber skin, subtle seams, finger smudges, soft studio reflections, a little dust.",
+  "signature": [
+   "puffy balloon material with pinch points",
+   "thick coloured sticker outline",
+   "letters inside circles",
+   "bright flat ground",
+   "visible seams and wrinkles"
+  ],
+  "avoid": [
+   "perfectly plastic CGI gloss",
+   "lens flare",
+   "chrome unless asked",
+   "gibberish text",
+   "creepy faces",
+   "dark moody lighting"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Fredoka",
+    "weight": 700,
+    "upper": false,
+    "color": "#FFE16A"
+   },
+   "body": {
+    "font": "Courier Prime",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.55,
+     "h": 0.3,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.83,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.91,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.55,
+     "h": 0.32,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.81,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.89,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.55,
+     "h": 0.28,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.78,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.85,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Bouncy castle rental for children's parties",
+   "headline": "Hoppa Hela Sommaren",
+   "subline": "Castles, slides and balloon arches for your party",
+   "details": "Book now at hoppa.example, 070 123 45 67"
+  },
+  "sampleBrief": "A vertical 2:3 poster of a white balloon animal photographed as a glossy inflatable, for a children's party castle rental. A pearly white balloon dog in a cheerful stance with taut skin, pinch points where each twist ends, soft seams and a few wrinkles, fills most of the frame and is cropped at the bottom. Around it a thick sticker outline in tomato red #E64A2E, on a bright sky blue #5EC2F5 ground. Soft studio reflections of window shapes on the balloon, tiny dust and a faint thumbprint. Large pale yellow #FFE16A dots in the upper left each hold one letter of the headline, set in typewriter style type. Palette: pearl white #F6F6F8, red #E64A2E, blue #5EC2F5, yellow #FFE16A, pink #FF4FA3. Typography spelled exactly: headline \"Hoppa Hela Sommaren\" letters inside yellow circles in the upper left; at the bottom in small typewriter text \"Castles, slides and balloon arches for your party\" and \"Book now at hoppa.example, 070 123 45 67\". Lighting: bright softbox daylight with gentle reflections and soft floor contact shadow. Texture: rubber skin, seams, wrinkles. Avoid perfect plastic CGI gloss, lens flare, chrome, creepy faces, dark lighting, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "63613413482291022",
+    "url": "https://www.pinterest.com/pin/63613413482291022/",
+    "img": "https://i.pinimg.com/736x/c7/6a/d5/c76ad5c6a3d5e932f1894924a233dc29.jpg",
+    "w": 236,
+    "h": 318,
+    "author": "Pauline Mischler",
+    "authorUrl": "https://www.pinterest.com/p0lyn/"
+   },
+   {
+    "pin": "1007750854107976790",
+    "url": "https://www.pinterest.com/pin/1007750854107976790/",
+    "img": "https://i.pinimg.com/736x/58/ee/ef/58eeef44f61b99673a22df278f215df8.jpg",
+    "w": 236,
+    "h": 236,
+    "author": "MokaFONT",
+    "authorUrl": "https://www.pinterest.com/mokafont/"
+   }
+  ]
+ },
+ {
+  "id": "stitch-type",
+  "name": "Stitched Pixel Type",
+  "blurb": "Letters and flowers woven from tiny squares, like a sampler stitched on a screen.",
+  "vibe": "folk-pattern",
+  "tags": [
+   "cross stitch",
+   "pixel",
+   "woven",
+   "knit",
+   "pattern"
+  ],
+  "medium": "A woven or cross stitched textile pattern built from square stitches, with letters, flowers and ornament drawn on a pixel grid and photographed on fabric or laid over a photograph. Each square has thread texture.",
+  "palette": {
+   "colors": [
+    "#EFE7D2",
+    "#7FB04A",
+    "#E9E34B",
+    "#E76F51",
+    "#1B1B1B",
+    "#3C5A9A"
+   ],
+   "note": "Cream or dark ground with two or three thread colours plus black. For a brand, thread the type in the brand colour and keep the pattern in complementary threads."
+  },
+  "composition": "The pixel pattern fills the full sheet as a repeating border or checkerboard medallion, with a title woven as large blocky letters across the middle. Quiet cream rows surround the title for text.",
+  "typography": "Pixel blocky capitals woven from stitches, uniform stroke, set on the grid with no smooth curves.",
+  "texture": "Visible thread twist on each stitch, soft fabric weave, light shadow between stitches.",
+  "signature": [
+   "every letter built from square stitches",
+   "checkerboard medallion",
+   "border of repeating flowers",
+   "thread fibres visible",
+   "pixel grid alignment"
+  ],
+  "avoid": [
+   "smooth vector curves",
+   "gradients",
+   "glossy 3D",
+   "photoreal flowers",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Pixelify Sans",
+    "weight": 700,
+    "upper": true,
+    "color": "#7FB04A"
+   },
+   "body": {
+    "font": "DM Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.12,
+     "y": 0.38,
+     "w": 0.76,
+     "h": 0.2,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.16,
+     "y": 0.6,
+     "w": 0.68,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.9,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.12,
+     "y": 0.37,
+     "w": 0.76,
+     "h": 0.22,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.16,
+     "y": 0.59,
+     "w": 0.68,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.88,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.12,
+     "y": 0.4,
+     "w": 0.76,
+     "h": 0.18,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.16,
+     "y": 0.59,
+     "w": 0.68,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.84,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Monday knitting circle at a community centre",
+   "headline": "Stitch Night",
+   "subline": "Bring yarn, we bring tea",
+   "details": "Mondays 18:00, Fruängens Bibliotek"
+  },
+  "sampleBrief": "A vertical 2:3 poster made entirely of square cross stitches on cream aida fabric, for a Monday knitting circle. A woven border of repeating stitched tulips and diamonds runs around the edge in green, yellow and coral thread, with a checkerboard medallion at the top. In the middle the title is woven in large blocky pixel capitals. Smaller stitched letters carry the lines beneath. Palette: cream fabric #EFE7D2, leaf green #7FB04A, yellow #E9E34B, coral #E76F51, black #1B1B1B, blue #3C5A9A. Each stitch is a small square with visible thread twist and tiny shadows between stitches, with a gentle fabric weave. Typography spelled exactly, all woven from stitches: \"STITCH NIGHT\" across the middle in green; beneath it in smaller blocky letters \"Bring yarn, we bring tea\"; and near the bottom \"Mondays 18:00, Fruängens Bibliotek\". Lighting: soft even daylight on fabric with slight shadow between threads. Texture: thread fibres, fabric weave, a bit of fuzz. Avoid smooth vector curves, gradients, glossy 3D, photoreal flowers, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "534732155760823802",
+    "url": "https://www.pinterest.com/pin/534732155760823802/",
+    "img": "https://i.pinimg.com/736x/1c/46/c8/1c46c8964181117660996ff616f782ed.jpg",
+    "w": 236,
+    "h": 332,
+    "author": "Monika Frauenhofer",
+    "authorUrl": "https://www.pinterest.com/frauenhoferm/"
+   },
+   {
+    "pin": "316096467619552392",
+    "url": "https://www.pinterest.com/pin/316096467619552392/",
+    "img": "https://i.pinimg.com/736x/cd/9d/c7/cd9dc707a96619974cc2d0bfd26d0d5f.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "Andrea Pereg",
+    "authorUrl": "https://www.pinterest.com/andreapereg/"
+   },
+   {
+    "pin": "325948091804008312",
+    "url": "https://www.pinterest.com/pin/325948091804008312/",
+    "img": "https://i.pinimg.com/736x/1c/49/1f/1c491f22bd6b541c674b09b7f8be5c9b.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "James Gilliland",
+    "authorUrl": "https://www.pinterest.com/j_e_gilliland/"
+   }
+  ]
+ },
+ {
+  "id": "grain-glow",
+  "name": "Grain Glow Type",
+  "blurb": "Warped, blurred letters glow like heat, wrapped in coarse grain and one hot colour.",
+  "vibe": "rave-acid",
+  "tags": [
+   "blur",
+   "grain",
+   "club",
+   "glow",
+   "experimental type"
+  ],
+  "medium": "A photocopied rave flyer smeared on purpose: the paper dragged during copying so fluorescent ink type streaks sideways, black stock, heavy grain.",
+  "palette": {
+   "colors": [
+    "#140A0A",
+    "#E8200F",
+    "#FF6A1A",
+    "#FFE14D",
+    "#2A6BFF"
+   ],
+   "note": "A black ground with one heat colour and its glow, or a three colour rainbow warp for daytime. For a brand, use the brand hot colour as the glow and the darkest colour as ground."
+  },
+  "composition": "One huge date or word bleeds into the centre of the frame, warped like it is melting, with a small cluster of lineup lines sharp enough to read set left. A bloom shape glows in the lower right corner. Abundant dark space.",
+  "typography": "Soft blurred heavy grotesk or rounded type for the headline, with sharp small condensed type for details. Warp, mirror and ripple effects on one word only.",
+  "texture": "Dense film grain, noise, blooming halation, no sharp edges on the headline.",
+  "signature": [
+   "melting warped headline",
+   "coarse noise grain",
+   "single heat colour glow",
+   "small sharp lineup text",
+   "dark negative space"
+  ],
+  "avoid": [
+   "neon glow or bloom",
+   "blurry soft focus type",
+   "lens effects",
+   "clean vector type",
+   "drop shadow",
+   "3D bevel",
+   "lens flare streaks",
+   "gibberish lineup names"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Unbounded",
+    "weight": 900,
+    "upper": false,
+    "color": "#E8200F"
+   },
+   "body": {
+    "font": "Space Grotesk",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.15,
+     "w": 0.86,
+     "h": 0.22,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.52,
+     "w": 0.55,
+     "h": 0.16,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.9,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.15,
+     "w": 0.86,
+     "h": 0.24,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.51,
+     "w": 0.55,
+     "h": 0.17,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.88,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.2,
+     "w": 0.86,
+     "h": 0.2,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.52,
+     "w": 0.55,
+     "h": 0.15,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.84,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Sunday night bass music club night",
+   "headline": "Bassline Sundays",
+   "subline": "Resident DJs Nova, Kiri and Tuff",
+   "details": "Sun 22:00 to 04:00, Klubb Vagn, Malmö"
+  },
+  "sampleBrief": "A rave flyer, portrait 2:3, on black paper: the words 'BASSLINE SUNDAYS' printed huge in fluorescent red ink, then run through a photocopier while the sheet was dragged, so the letters smear and streak sideways into motion trails, with heavy toner grain and a few dust specks. Nothing glows; it is ink and copier smear. Small clean white monospaced line near the bottom: 'Resident DJs · Hus, 22 till late · Sun 27 Oct, Slakthuset'. Lots of black.",
+  "refs": [
+   {
+    "pin": "951737333789073518",
+    "url": "https://www.pinterest.com/pin/951737333789073518/",
+    "img": "https://i.pinimg.com/736x/72/49/ff/7249ff8dd3d130f2ceae10cc50d3e09c.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Isaac Bach",
+    "authorUrl": "https://www.pinterest.com/bach3423/"
+   },
+   {
+    "pin": "1134203487420121946",
+    "url": "https://www.pinterest.com/pin/1134203487420121946/",
+    "img": "https://i.pinimg.com/736x/f2/04/0c/f2040c7adc6a389598b83cd0cde91791.jpg",
+    "w": 236,
+    "h": 291,
+    "author": "F",
+    "authorUrl": "https://www.pinterest.com/effeg01/"
+   },
+   {
+    "pin": "607704543502337637",
+    "url": "https://www.pinterest.com/pin/607704543502337637/",
+    "img": "https://i.pinimg.com/736x/bf/18/97/bf1897e99992ddbf7f17d3e6727ef264.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "duartepereira.designs",
+    "authorUrl": "https://www.pinterest.com/duartepereira26/"
+   },
+   {
+    "pin": "84724036733080969",
+    "url": "https://www.pinterest.com/pin/84724036733080969/",
+    "img": "https://i.pinimg.com/736x/8e/9f/c9/8e9fc90128934fdbe3ab3ae969d65e9e.jpg",
+    "w": 236,
+    "h": 294,
+    "author": "connie",
+    "authorUrl": "https://www.pinterest.com/amnesiaonline/"
+   },
+   {
+    "pin": "693835886387410635",
+    "url": "https://www.pinterest.com/pin/693835886387410635/",
+    "img": "https://i.pinimg.com/736x/82/bb/1a/82bb1a96cee8ecb917ba2fb6118e5cf8.jpg",
+    "w": 236,
+    "h": 419,
+    "author": "MAcherry studio | Poster design | Illustration | Web design",
+    "authorUrl": "https://www.pinterest.com/MAcherrystudio/"
+   },
+   {
+    "pin": "1106548570971377784",
+    "url": "https://www.pinterest.com/pin/1106548570971377784/",
+    "img": "https://i.pinimg.com/736x/e0/82/6d/e0826da4656f6130a809752b45a7837a.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "ICKS",
+    "authorUrl": "https://www.pinterest.com/icksdresstoimpress/"
+   },
+   {
+    "pin": "642959284345250923",
+    "url": "https://www.pinterest.com/pin/642959284345250923/",
+    "img": "https://i.pinimg.com/736x/d8/4d/b3/d84db3c7f6e5e92cbfde13ba623b84c9.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "badgrafikk",
+    "authorUrl": "https://www.pinterest.com/badgrafikk/"
+   }
+  ]
+ },
+ {
+  "id": "acid-wire",
+  "name": "Acid Black Wire",
+  "blurb": "Black, white and one acid green, with chrome and mono type on a grid.",
+  "vibe": "tech-mono",
+  "tags": [
+   "acid green",
+   "black",
+   "tech",
+   "wireframe",
+   "mono"
+  ],
+  "medium": "A digital poster with a monochrome image, a liquid chrome or wireframe subject, thin technical lines, plus one acid green colour used for flat fields or glowing outlines. It feels like a robotics conference identity.",
+  "palette": {
+   "colors": [
+    "#050505",
+    "#FFFFFF",
+    "#35F020",
+    "#8F8F8F"
+   ],
+   "note": "Black, white and exactly one acid colour. For a brand, replace the green with the brand colour and keep black and white pure."
+  },
+  "composition": "A strict grid, a tall black plaque with the title near the top centre, a chrome head or mesh object bleeding off the bottom, tiny rotated text in the side margins and a dotted pattern above. Everything else stays flat so the single accent can carry the page.",
+  "typography": "Wide geometric sans capitals and tiny uppercase mono for details, centred, with rotated margin text.",
+  "texture": "Metallic reflections or a wire mesh, slight glow, crisp thin lines, grain optional.",
+  "signature": [
+   "one acid colour only",
+   "chrome or wireframe subject cropped at the bottom",
+   "rotated margin text",
+   "dot pattern columns",
+   "black plaque for the title"
+  ],
+  "avoid": [
+   "multiple accent colours",
+   "lens flare",
+   "soft pastel",
+   "gibberish text",
+   "cartoon shapes",
+   "rounded friendly type"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "slide",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Unbounded",
+    "weight": 700,
+    "upper": true,
+    "color": "#35F020"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.24,
+     "y": 0.22,
+     "w": 0.52,
+     "h": 0.14,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.24,
+     "y": 0.38,
+     "w": 0.52,
+     "h": 0.08,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.92,
+     "w": 0.8,
+     "h": 0.04,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.24,
+     "y": 0.22,
+     "w": 0.52,
+     "h": 0.15,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.24,
+     "y": 0.37,
+     "w": 0.52,
+     "h": 0.09,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.9,
+     "w": 0.8,
+     "h": 0.04,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.24,
+     "y": 0.26,
+     "w": 0.52,
+     "h": 0.13,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.24,
+     "y": 0.4,
+     "w": 0.52,
+     "h": 0.07,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.86,
+     "w": 0.8,
+     "h": 0.04,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Cybersecurity meetup evening",
+   "headline": "Zero Day",
+   "subline": "Talks on breaking and fixing things",
+   "details": "Wed 5 Nov, 18:30, Kista Science Tower"
+  },
+  "sampleBrief": "A vertical 2:3 poster in black, white and a single acid green, for a cybersecurity meetup. The background is flat acid green #35F020. A column of small black dots runs down the centre above a tall black rectangular plaque holding the title and details in green and white. Below the plaque a liquid chrome bust of a head with a smooth featureless face, rendered in green tinted mirror metal with long wavy reflections, rises from the bottom edge and is cropped by it. Tiny rotated text and small triangle icons in the left and right margins. Palette: black #050505, white #FFFFFF, acid green #35F020, grey #8F8F8F. Typography spelled exactly: on the plaque in wide geometric capitals \"ZERO DAY\"; beneath it in small green mono capitals \"Talks on breaking and fixing things\"; along the left margin rotated \"Wed 5 Nov, 18:30, Kista Science Tower\". Lighting: soft studio reflections on the chrome, crisp flat ground. Texture: crisp thin lines, fine glow on metal edges. Avoid multiple accent colours, lens flare, soft pastels, cartoon shapes, rounded friendly type, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "408560997453007161",
+    "url": "https://www.pinterest.com/pin/408560997453007161/",
+    "img": "https://i.pinimg.com/736x/9e/d6/da/9ed6da989626a0dab3cf612df24cd897.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "Madie Braswell",
+    "authorUrl": "https://www.pinterest.com/mhmmadie/"
+   },
+   {
+    "pin": "683984262200245344",
+    "url": "https://www.pinterest.com/pin/683984262200245344/",
+    "img": "https://i.pinimg.com/736x/55/01/d0/5501d0ae19d51e8713e3aad2c21ee171.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "cone^",
+    "authorUrl": "https://www.pinterest.com/theconestudio/"
+   },
+   {
+    "pin": "1138073768357918266",
+    "url": "https://www.pinterest.com/pin/1138073768357918266/",
+    "img": "https://i.pinimg.com/736x/5b/bd/02/5bbd0213995cd3877ee33282bfbb830e.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "paciughestudio",
+    "authorUrl": "https://www.pinterest.com/paciughestudio/"
+   }
+  ]
+ },
+ {
+  "id": "extruded-blocks",
+  "name": "Extruded Block Letters",
+  "blurb": "Giant solid letters as buildings, extruded in flat colour with a clean sunny shadow.",
+  "vibe": "maximal-pop",
+  "tags": [
+   "3D type",
+   "extrusion",
+   "flat colour",
+   "isometric",
+   "poster"
+  ],
+  "medium": "A flat shaded 3D type illustration: letters extruded into solid blocks with two or three face colours and hard cast shadows, rendered clean and matte, then composed on a saturated flat ground like a printed poster.",
+  "palette": {
+   "colors": [
+    "#FFE600",
+    "#1F73D9",
+    "#E8264D",
+    "#B6E04A",
+    "#F7B4C8",
+    "#14141A"
+   ],
+   "note": "One vivid ground and letters in two or three face colours, shadows as a darker tone of the ground. For a brand, ground and one face use brand colours, the other faces complement."
+  },
+  "composition": "Tall extruded words stand like towers at different angles, arranged in a loose cluster across the page. Smaller extruded words and tiny logo blocks fill gaps. Black corner text lines frame the sheet.",
+  "typography": "The artwork is the type: heavy geometric capitals extruded in perspective, plus small bold sans credits at the top and bottom edges.",
+  "texture": "Matte shading with crisp planes, no noise, subtle gradient on side faces.",
+  "signature": [
+   "extruded letters like towers",
+   "three tone face shading",
+   "hard flat cast shadows",
+   "one saturated ground",
+   "tiny type frame in corners"
+  ],
+  "avoid": [
+   "glossy plastic reflections",
+   "bevels and chrome",
+   "lens flare",
+   "dark moody lighting",
+   "gibberish text",
+   "thin letters"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Archivo Black",
+    "weight": 400,
+    "upper": true,
+    "color": "#1F73D9"
+   },
+   "body": {
+    "font": "Archivo",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.12,
+     "w": 0.9,
+     "h": 0.58,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.75,
+     "w": 0.6,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.91,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.12,
+     "w": 0.9,
+     "h": 0.63,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.73,
+     "w": 0.6,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.89,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.17,
+     "w": 0.9,
+     "h": 0.53,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.72,
+     "w": 0.6,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.85,
+     "w": 0.9,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Moving company summer campaign",
+   "headline": "Flytt Express",
+   "subline": "Packed, carried and delivered in one day",
+   "details": "Call 08 123 456, flyttexpress.example"
+  },
+  "sampleBrief": "A vertical 2:3 poster of giant extruded block letters standing like towers on a saturated yellow ground #FFE600, for a moving company. The letters of \"FLYTT EXPRESS\" are heavy geometric capitals extruded in perspective into solid blocks, front faces in blue #1F73D9 and red #E8264D, sides in a darker tone, with hard flat cast shadows in a warm darker yellow falling to the right. A few small cardboard box blocks with tape stripes stack at their base, and a lime #B6E04A block carries a tiny arrow. Palette: yellow #FFE600, blue #1F73D9, red #E8264D, lime #B6E04A, pink #F7B4C8, black #14141A for credits. Clean matte rendering, crisp planes, no noise, no chrome and no gloss. Typography spelled exactly: the extruded headline \"FLYTT EXPRESS\" fills the middle of the page in the cluster of towers; beneath it in bold black sans \"Packed, carried and delivered in one day\"; at the bottom edge \"Call 08 123 456, flyttexpress.example\" in small black capitals. Lighting: bright sun from the upper left, hard shadows, no reflections. Texture: matte, crisp. Avoid glossy plastic reflections, bevels, chrome, lens flare, dark lighting, symmetrical stock composition, thin letters, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "298574650305137657",
+    "url": "https://www.pinterest.com/pin/298574650305137657/",
+    "img": "https://i.pinimg.com/736x/40/52/e3/4052e3af44eaa47e328549b9ae0baffb.jpg",
+    "w": 236,
+    "h": 332,
+    "author": "Maël Mountassir",
+    "authorUrl": "https://www.pinterest.com/maelblackout/"
+   },
+   {
+    "pin": "922675042424584266",
+    "url": "https://www.pinterest.com/pin/922675042424584266/",
+    "img": "https://i.pinimg.com/736x/7a/86/23/7a8623d4a1b6e39d05f62a007fdbb15c.jpg",
+    "w": 236,
+    "h": 185,
+    "author": "Tamim Reza",
+    "authorUrl": "https://www.pinterest.com/tamimreza079/"
+   },
+   {
+    "pin": "626000416996896008",
+    "url": "https://www.pinterest.com/pin/626000416996896008/",
+    "img": "https://i.pinimg.com/736x/8b/c8/d5/8bc8d54a061d56f1b79ea8be0f5980c1.jpg",
+    "w": 236,
+    "h": 132,
+    "author": "Roman Tymchyshyn",
+    "authorUrl": "https://www.pinterest.com/roman4463/"
+   }
+  ]
+ },
+ {
+  "id": "sticker-cartoon",
+  "name": "Sticker Cartoon Pop",
+  "blurb": "Fat outlined cartoon props float on a blue grid, each with a sticker shadow.",
+  "vibe": "maximal-pop",
+  "tags": [
+   "cartoon",
+   "sticker",
+   "outline",
+   "pop",
+   "grid"
+  ],
+  "medium": "A cartoonist's brush ink poster: thick, uneven black brush outlines with flat spot colour fills printed slightly off the lines, on cheap newsprint.",
+  "palette": {
+   "colors": [
+    "#2F6BE3",
+    "#F6C61A",
+    "#E23B3B",
+    "#F58FB8",
+    "#2E9B4A",
+    "#111111"
+   ],
+   "note": "Cobalt blue grid ground with yellow, red, pink and green props, all outlined black. For a brand, put the brand main colour in the grid ground and recolour the hero prop to match the brand accent."
+  },
+  "composition": "One hero prop in the middle, held or pointed at by a cartoon hand, surrounded by three or four smaller labelled objects tilting around it like stickers. Title at the top in outlined chunky letters, a strip of small info at the bottom on white.",
+  "typography": "Chunky outlined lettering in yellow or pink with a black outline and a hard offset shadow, small rounded caps labels on sticker tags.",
+  "texture": "Flat vector with a fine speckled print grain over everything, tiny misregistration of the black line.",
+  "signature": [
+   "thick black outline on every item",
+   "hard offset shadows",
+   "grid backdrop",
+   "hand pointing at the hero",
+   "sticker tags like SOLD OUT"
+  ],
+  "avoid": [
+   "sticker sheet look with white outlines",
+   "faces on food",
+   "glossy vector clip art",
+   "gradients",
+   "soft realistic shadows",
+   "plastic 3D sheen",
+   "thin outlines",
+   "lens flare"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Titan One",
+    "weight": 400,
+    "upper": true,
+    "color": "#F6C61A"
+   },
+   "body": {
+    "font": "Archivo",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.9,
+     "h": 0.16,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.2,
+     "w": 0.7,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.89,
+     "w": 0.88,
+     "h": 0.07,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.9,
+     "h": 0.17,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.2,
+     "w": 0.7,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.87,
+     "w": 0.88,
+     "h": 0.08,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.1,
+     "w": 0.9,
+     "h": 0.15,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.24,
+     "w": 0.7,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.84,
+     "w": 0.88,
+     "h": 0.06,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Burger truck weekly pitch at a brewery car park",
+   "headline": "Smash Friday",
+   "subline": "Double smash burgers, truck number 7",
+   "details": "Every Fri 16 to 22, Brewhouse Yard"
+  },
+  "sampleBrief": "A food truck poster, portrait 2:3, drawn by a cartoonist with a loaded brush in black ink: thick and thin uneven outlines, then three flat spot colours (tomato red #E2412B, mustard #F0B323, pale blue #9CC5E8) printed slightly off the lines, on cheap cream newsprint with visible fibres. The hero is one big, loose, slightly lopsided smash burger with melting cheese, drawn huge and cropped by the right edge, a pickle and a paper tray of fries tucked behind. Hand lettered wobbly brush capitals 'SMASH FRIDAY' across the top, a small line 'Double smash burgers, truck number 7' and at the bottom 'Every Fri 16 to 22, Brewhouse Yard'. No sticker outlines, no faces on food, no glossy shading.",
+  "refs": [
+   {
+    "pin": "700028335864646076",
+    "url": "https://www.pinterest.com/pin/700028335864646076/",
+    "img": "https://i.pinimg.com/736x/d2/07/72/d20772f0477b0c309eaf0165c4bba16d.jpg",
+    "w": 236,
+    "h": 353,
+    "author": "언어",
+    "authorUrl": "https://www.pinterest.com/konan941213/"
+   },
+   {
+    "pin": "1148980923716163123",
+    "url": "https://www.pinterest.com/pin/1148980923716163123/",
+    "img": "https://i.pinimg.com/736x/8c/25/e5/8c25e56b28aff0021644574a91b81737.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Font Palette | Creative Templates",
+    "authorUrl": "https://www.pinterest.com/colorfulfontscreator/"
+   }
+  ]
+ },
+ {
+  "id": "blob-gradient",
+  "name": "Blob Gradient Pop",
+  "blurb": "Soft fluid blobs in blue, pink and orange swirl behind rounded letters.",
+  "vibe": "soft-pastel",
+  "tags": [
+   "blobs",
+   "gradient",
+   "fluid",
+   "festival",
+   "soft"
+  ],
+  "medium": "A digital gradient illustration of fluid, melted blob shapes with glowing inner light, edge noise and a thin outer stroke, composed on a flat saturated field. It feels like an airbrushed risograph.",
+  "palette": {
+   "colors": [
+    "#2B49E8",
+    "#FF86C8",
+    "#FF8A3D",
+    "#8AE6D2",
+    "#F6F0FF"
+   ],
+   "note": "A saturated field with two glowing blob colours and one pale highlight. For a brand, put the brand colour in the field and let the blobs be two adjacent shades."
+  },
+  "composition": "A big cluster of blobs fills the middle two thirds, overlapping, with smaller blobs breaking free. The title overprints the cluster, line up information goes at the bottom edge in small caps on the flat field.",
+  "typography": "Rounded or bubbly heavy letters in white or pale pink, large, overlapping the blobs, and tiny clean caps for details.",
+  "texture": "Soft internal glow, subtle noise grain at the edges, smooth gradients.",
+  "signature": [
+   "melted blob cluster",
+   "glowing inner gradient",
+   "thin light outline",
+   "noise grain at edges",
+   "small blobs escaping"
+  ],
+  "avoid": [
+   "hard edged clip art",
+   "plastic 3D sheen",
+   "lens flare",
+   "muddy colours",
+   "gibberish text",
+   "busy backgrounds"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "slide"
+  ],
+  "type": {
+   "headline": {
+    "font": "Gabarito",
+    "weight": 900,
+    "upper": false,
+    "color": "#F6F0FF"
+   },
+   "body": {
+    "font": "Outfit",
+    "weight": 600
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.05,
+     "w": 0.84,
+     "h": 0.2,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.26,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.9,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.05,
+     "w": 0.84,
+     "h": 0.22,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.25,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.88,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.11,
+     "w": 0.84,
+     "h": 0.18,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.29,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.84,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Open studio week at a ceramics school",
+   "headline": "Clay Week",
+   "subline": "Try the wheel, meet the makers",
+   "details": "3 to 9 Nov, Keramikskolan, Alviks Torg"
+  },
+  "sampleBrief": "A vertical 2:3 poster of fluid melted blob shapes on a saturated field, for an open studio week at a ceramics school. Background: flat electric blue #2B49E8. A big cluster of overlapping glossy soft blobs fills the middle: pink #FF86C8 and orange #FF8A3D with an inner glow, mint #8AE6D2 highlights and a pale #F6F0FF rim light, each blob with a thin soft outline and a few small blobs breaking free upward. Edges carry gentle noise grain, gradients smooth. Typography spelled exactly: headline \"Clay Week\" in heavy bubbly pale white letters overlapping the cluster at the top; beneath it in small white sans \"Try the wheel, meet the makers\"; at the bottom in tiny white capitals \"3 to 9 Nov, Keramikskolan, Alviks Torg\". Lighting: glowing from within, soft bloom on edges, no cast shadows. Texture: fine noise at the edges, airbrushed smoothness. Avoid hard edged clip art, plastic 3D sheen, lens flare, muddy colours, symmetrical stock composition, busy background, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "488710997082574292",
+    "url": "https://www.pinterest.com/pin/488710997082574292/",
+    "img": "https://i.pinimg.com/736x/e8/de/e4/e8dee4bc93d3b52db2e34f259d510c41.jpg",
+    "w": 236,
+    "h": 302,
+    "author": "Friedrich Trede",
+    "authorUrl": "https://www.pinterest.com/friedrichtrede/"
+   },
+   {
+    "pin": "863635666084288820",
+    "url": "https://www.pinterest.com/pin/863635666084288820/",
+    "img": "https://i.pinimg.com/736x/0e/ca/ec/0ecaec42e1bdd348ee07d30aeaf31676.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Samuel Tame",
+    "authorUrl": "https://www.pinterest.com/samueltame433/"
+   },
+   {
+    "pin": "1026750415027719889",
+    "url": "https://www.pinterest.com/pin/1026750415027719889/",
+    "img": "https://i.pinimg.com/736x/91/4c/20/914c2032811e8b6f33b3042cd4d3a025.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "Wlv Sneжok",
+    "authorUrl": "https://www.pinterest.com/kartezXL/"
+   },
+   {
+    "pin": "478014947973521199",
+    "url": "https://www.pinterest.com/pin/478014947973521199/",
+    "img": "https://i.pinimg.com/736x/5e/32/6e/5e326e14c3bdc20277df6bb961462785.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Mr.Roger",
+    "authorUrl": "https://www.pinterest.com/roger19940733/"
+   },
+   {
+    "pin": "518688082102613618",
+    "url": "https://www.pinterest.com/pin/518688082102613618/",
+    "img": "https://i.pinimg.com/736x/3a/ba/d3/3abad3862522fd13914053bc853caf6c.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "Timothy Bray",
+    "authorUrl": "https://www.pinterest.com/timothybray/"
+   }
+  ]
+ },
+ {
+  "id": "sliced-portrait",
+  "name": "Sliced Portrait Cover",
+  "blurb": "A studio face cut into shifting strips under a refined serif masthead.",
+  "vibe": "magazine-cover",
+  "tags": [
+   "magazine",
+   "portrait",
+   "distortion",
+   "bold type",
+   "editorial"
+  ],
+  "medium": "A photographic cover where a studio portrait is physically or digitally manipulated: concentric cuts, strips, torn paper or huge type masking parts of the face. The manipulation looks like cut paper or a layered print, not a filter.",
+  "palette": {
+   "colors": [
+    "#EFEAE0",
+    "#161616",
+    "#E5352A",
+    "#D9C9A8"
+   ],
+   "note": "Mostly neutral photo tones with black type and one red accent. For a brand, use the brand colour for the single accent and the masthead."
+  },
+  "composition": "Masthead across the top in a big serif or grotesk, the face occupying the whole sheet with a visible cut pattern in the middle, one or two cover lines lower left or right in small type, and a small red issue number. The rest of the face is left untouched so the cut reads clearly.",
+  "typography": "Large refined serif masthead, and small tidy sans cover lines in black, with a single red numeral.",
+  "texture": "Fine photographic grain, cut paper edges with soft shadow, slight paper creases.",
+  "signature": [
+   "concentric cut mouth or eyes",
+   "torn strips shifting the face",
+   "masthead partly covered by the head",
+   "single red issue number",
+   "small barcode"
+  ],
+  "avoid": [
+   "airbrushed skin",
+   "plastic 3D sheen",
+   "heavy filters",
+   "lens flare",
+   "gibberish text",
+   "gore"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Playfair Display",
+    "weight": 500,
+    "upper": false,
+    "color": "#161616"
+   },
+   "body": {
+    "font": "Inter",
+    "weight": 500
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.12,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.78,
+     "w": 0.46,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.86,
+     "w": 0.46,
+     "h": 0.08,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.13,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.76,
+     "w": 0.46,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.84,
+     "w": 0.46,
+     "h": 0.09,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.92,
+     "h": 0.11,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.74,
+     "w": 0.46,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.81,
+     "w": 0.46,
+     "h": 0.07,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Independent magazine about neighbourhood people",
+   "headline": "Kvarter",
+   "subline": "Issue 05: the faces of Skanstull",
+   "details": "Out now at Pressbyrån and kvarter.se"
+  },
+  "sampleBrief": "A vertical 2:3 magazine cover where a studio portrait is cut into horizontal strips and shifted, for an independent neighbourhood magazine. A man in his forties with short grey hair, white shirt, neutral expression, shot against a warm cream backdrop. Across his eyes and mouth the photo is cut into thin horizontal strips like layered paper, each strip shifted a little left or right so the features split and ripple, with soft shadows between the paper layers. The masthead sits across the top, partly hidden behind the top of his head. Palette: cream #EFEAE0, ink black #161616, red #E5352A, tan #D9C9A8. Typography spelled exactly: masthead \"Kvarter\" in large refined serif in black across the top; at lower left in small tidy sans \"Issue 05: the faces of Skanstull\" and beneath it \"Out now at Pressbyrån and kvarter.se\"; a single red numeral \"05\" in the lower right and a small barcode. Lighting: soft front studio light, realistic skin texture, natural pores and fine grain. Avoid airbrushed skin, plastic 3D sheen, heavy filters, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": []
+ },
+ {
+  "id": "pop-cutout",
+  "name": "Pop Cutout Collage",
+  "blurb": "A hard cut figure on a red starburst, with tape, tulips and bright paper.",
+  "vibe": "collage-scrapbook",
+  "tags": [
+   "collage",
+   "cutout",
+   "colourful",
+   "paper",
+   "playful"
+  ],
+  "medium": "A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled vector doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.",
+  "palette": {
+   "colors": [
+    "#E8271F",
+    "#F7C41B",
+    "#F2698F",
+    "#2D53A8",
+    "#2E8B4A",
+    "#1E1B18"
+   ],
+   "note": "Saturated paper colours against slightly muted photos, with one red burst as the loudest shape. For a brand, make the burst the brand main colour and use two supporting paper colours."
+  },
+  "composition": "A cut out figure stands centred on a big starburst shape, with a photograph of a different scale breaking through its body, such as flowers across the legs. Coloured paper blocks and torn tape pieces frame the edges and the title sits in a clean band.",
+  "typography": "Bold blocky grotesk in cream or black on cut paper strips, plus hand scribbled marker words in neon lines.",
+  "texture": "Paper fibre, torn tape, subtle shadows, small halftone speckle on photos.",
+  "signature": [
+   "starburst behind a cut figure",
+   "photo inside the body shape",
+   "torn blue tape corners",
+   "big yellow sun circle",
+   "scribbled doodles on top"
+  ],
+  "avoid": [
+   "perfect vector gradients",
+   "plastic 3D sheen",
+   "lens flare",
+   "unrealistic skin smoothing",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Archivo Black",
+    "weight": 400,
+    "upper": true,
+    "color": "#F7C41B"
+   },
+   "body": {
+    "font": "Space Grotesk",
+    "weight": 600
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.9,
+     "h": 0.16,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.2,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.9,
+     "w": 0.9,
+     "h": 0.06,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.03,
+     "w": 0.9,
+     "h": 0.17,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.2,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.88,
+     "w": 0.9,
+     "h": 0.06,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.05,
+     "y": 0.1,
+     "w": 0.9,
+     "h": 0.15,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.05,
+     "y": 0.24,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.05,
+     "y": 0.84,
+     "w": 0.9,
+     "h": 0.06,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "High school spring musical",
+   "headline": "Grease Lightning",
+   "subline": "Spring musical by Year 12 drama",
+   "details": "24 to 26 April, 18:30, Aula Norra"
+  },
+  "sampleBrief": "A vertical 2:3 mixed media collage poster for a high school spring musical, built from hard cut photographs and coloured paper. A teenage performer in a white shirt and light jeans, cut out of a photo with a thin paper edge, leans forward at the centre on a huge jagged red starburst. A second photograph of orange tulips breaks through her legs as if her shorts were a flower bed. Behind her a large yellow sun circle, pink and green paper blocks, torn blue masking tape pieces at the corners, and a tilted stool in the foreground. Marker scribbles in neon lines float on top. Palette: red #E8271F, yellow #F7C41B, pink #F2698F, blue #2D53A8, green #2E8B4A, ink #1E1B18. Typography spelled exactly: headline \"GREASE LIGHTNING\" in bold blocky yellow capitals on a black cut paper strip across the top; beneath it in small white sans \"Spring musical by Year 12 drama\"; at the bottom on a torn cream strip in black \"24 to 26 April, 18:30, Aula Norra\". Lighting: soft studio, gentle shadows under paper layers. Texture: paper fibres, torn tape edges, subtle halftone speckle on photos. Avoid perfect vector gradients, plastic 3D sheen, lens flare, airbrushed skin, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "162481499053998832",
+    "url": "https://www.pinterest.com/pin/162481499053998832/",
+    "img": "https://i.pinimg.com/736x/e2/f9/a4/e2f9a4c220d09f6673f43aab6a8399f7.jpg",
+    "w": 236,
+    "h": 292,
+    "author": "Matt Lehman",
+    "authorUrl": "https://www.pinterest.com/mattlehman/"
+   },
+   {
+    "pin": "710302172514805806",
+    "url": "https://www.pinterest.com/pin/710302172514805806/",
+    "img": "https://i.pinimg.com/736x/9f/88/b2/9f88b26503fb68fe14bb3f2bd39ca5e3.jpg",
+    "w": 236,
+    "h": 354,
+    "author": "sophia chen",
+    "authorUrl": "https://www.pinterest.com/sophiaqinqin3/"
+   },
+   {
+    "pin": "300263500165410895",
+    "url": "https://www.pinterest.com/pin/300263500165410895/",
+    "img": "https://i.pinimg.com/736x/a6/c7/8a/a6c78a7eba9f2c0008598ab0c6f29b52.jpg",
+    "w": 236,
+    "h": 337,
+    "author": "Wheels & Waves",
+    "authorUrl": "https://www.pinterest.com/wheelswaves2/"
+   },
+   {
+    "pin": "66005950780438956",
+    "url": "https://www.pinterest.com/pin/66005950780438956/",
+    "img": "https://i.pinimg.com/736x/60/76/4b/60764b12cd622940274dee558607418f.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "Isabelle",
+    "authorUrl": "https://www.pinterest.com/isakosmo/"
+   }
+  ]
+ },
+ {
+  "id": "psychedelic-lettering",
+  "name": "Psychedelic Lettering",
+  "blurb": "Letters melt into ribbons around a halftone portrait, printed in two hot inks.",
+  "vibe": "seventies",
+  "tags": [
+   "psychedelic",
+   "sixties",
+   "gig poster",
+   "ribbons",
+   "two colour"
+  ],
+  "medium": "A screen printed gig poster with hand drawn flowing lettering and ribbon outlines that run from the title into the hair of a halftone portrait. Two or three inks overprint on kraft or warm grey stock.",
+  "palette": {
+   "colors": [
+    "#C9BFAE",
+    "#E8402A",
+    "#2557D6",
+    "#F2B233",
+    "#17120F"
+   ],
+   "note": "Warm paper stock with vermilion and ultramarine carrying everything, a golden yellow and black as supporting inks. For a brand, choose two contrasting brand colours for the two main inks and keep a neutral warm stock."
+  },
+  "composition": "A circular or oval medallion at the centre holds a halftone photo portrait, framed by fat flowing letters that bend around it. Ribbon lines spill down into a second smaller portrait or motif near the bottom. Info text curves along the ribbons.",
+  "typography": "Melting, bubble shaped hand lettering where letters swell and join, filled with the second ink, and curved small lettering following the ribbon lines.",
+  "texture": "Screen print ink with slight overprint darkening, paper grain, halftone dots in the photo.",
+  "signature": [
+   "letters flowing into ribbon lines",
+   "central medallion with halftone portrait",
+   "vibrating red and blue overprint",
+   "curved info text along ribbons",
+   "kraft stock"
+  ],
+  "avoid": [
+   "clean modern sans",
+   "airbrush gradients",
+   "3D bevel",
+   "neon glow",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "flyer",
+   "story"
+  ],
+  "type": {
+   "headline": {
+    "font": "Oleo Script",
+    "weight": 700,
+    "upper": true,
+    "color": "#E8402A"
+   },
+   "body": {
+    "font": "Josefin Sans",
+    "weight": 600
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.04,
+     "w": 0.86,
+     "h": 0.26,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.64,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.9,
+     "w": 0.8,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.04,
+     "w": 0.86,
+     "h": 0.28,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.63,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.88,
+     "w": 0.8,
+     "h": 0.06,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.1,
+     "w": 0.86,
+     "h": 0.24,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.1,
+     "y": 0.62,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.84,
+     "w": 0.8,
+     "h": 0.06,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "EP release night for a local garage band",
+   "headline": "The Velvet Moths",
+   "subline": "EP release, with special guests",
+   "details": "Fri 9 May, doors 20:00, Pustervik, Gothenburg"
+  },
+  "sampleBrief": "A vertical 2:3 screen printed gig poster in a psychedelic sixties style, for an EP release night. At the centre, an oval medallion holds a high contrast halftone photo of four young musicians in dark jackets, framed by thick flowing hand drawn lettering. The title letters swell, melt and join each other, wrapping around the oval, and long ribbon outlines pour from the lettering down the page into a swirl, ending at a small halftone face and a moth motif near the bottom. Warm grey kraft stock #C9BFAE, inks: vermilion #E8402A, ultramarine #2557D6, a touch of golden yellow #F2B233, black #17120F. The two main inks overprint, giving vibrating edges and darker where they cross. Typography spelled exactly: the title \"THE VELVET MOTHS\" in melting bubble capitals in vermilion, filling the top and wrapping the oval; the line \"EP release, with special guests\" in smaller curved lettering following a ribbon in blue; and at the bottom \"Fri 9 May, doors 20:00, Pustervik, Gothenburg\" in small spaced capitals. Lighting: flat print, no shadows. Texture: screen print ink slightly uneven, visible halftone dots, paper grain. Avoid clean modern sans, airbrush gradients, 3D bevel, neon glow, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "233483561926686239",
+    "url": "https://www.pinterest.com/pin/233483561926686239/",
+    "img": "https://i.pinimg.com/736x/18/72/c0/1872c0c2d81814c27a75c6279ec72f19.jpg",
+    "w": 236,
+    "h": 364,
+    "author": "Luca Blo",
+    "authorUrl": "https://www.pinterest.com/lucalacorte/"
+   },
+   {
+    "pin": "441212094752704671",
+    "url": "https://www.pinterest.com/pin/441212094752704671/",
+    "img": "https://i.pinimg.com/736x/56/5f/d5/565fd58eccfc04ce395d383210f215fc.jpg",
+    "w": 236,
+    "h": 328,
+    "author": "Ray",
+    "authorUrl": "https://www.pinterest.com/rayzett/"
+   },
+   {
+    "pin": "116882552814747933",
+    "url": "https://www.pinterest.com/pin/116882552814747933/",
+    "img": "https://i.pinimg.com/736x/da/04/af/da04af61162ddd4a795bdd3259f804fc.jpg",
+    "w": 236,
+    "h": 364,
+    "author": "Dave Hardy",
+    "authorUrl": "https://www.pinterest.com/davehardy/"
+   },
+   {
+    "pin": "279856564314783531",
+    "url": "https://www.pinterest.com/pin/279856564314783531/",
+    "img": "https://i.pinimg.com/736x/ed/6f/f9/ed6ff9a8d82defa976d3fe1f38973d14.jpg",
+    "w": 236,
+    "h": 336,
+    "author": "Rodrigo Sánchez",
+    "authorUrl": "https://www.pinterest.com/rodrigosansan/"
+   },
+   {
+    "pin": "508554982941727946",
+    "url": "https://www.pinterest.com/pin/508554982941727946/",
+    "img": "https://i.pinimg.com/736x/17/65/c0/1765c02ba574b56bad8aac655ccfacea.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Doreen D",
+    "authorUrl": "https://www.pinterest.com/doreendash/"
+   }
+  ]
+ },
+ {
+  "id": "sunny-travel-poster",
+  "name": "Sunny Travel Poster",
+  "blurb": "Flat cut shapes, palm silhouettes and a bright cream border, a postcard from 1958.",
+  "vibe": "mid-century",
+  "tags": [
+   "travel",
+   "retro",
+   "flat vector",
+   "vintage",
+   "summer"
+  ],
+  "medium": "A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a vector illustration printed on cream stock.",
+  "palette": {
+   "colors": [
+    "#F7EFD2",
+    "#47B0B8",
+    "#4E8F3A",
+    "#2F3B2F",
+    "#D6402B",
+    "#E8A83A"
+   ],
+   "note": "Cream paper, sky teal and leaf green carry the scene, with one hot red for the type band. Replace the teal with a brand colour and keep greens and cream as neutral supports."
+  },
+  "composition": "A single scene seen through a frame of two leaning silhouettes, such as palms or masts, with a big shape in the middle distance and a vehicle or building as the focal point. Foreground shapes frame the sides, water reflects the vehicle, and a clean cream band at the bottom holds the title.",
+  "typography": "Chunky friendly slab or brush capitals for the place name at the top in cream or red, and a bold slab sans for the sponsor line in the bottom band, plus small plain sans for details.",
+  "texture": "Flat ink with tiny misregistration and a soft cream paper grain, no gradients except one sky blend.",
+  "signature": [
+   "silhouette framing at both edges",
+   "angular facets on mountains and clouds",
+   "reflection of the hero in water",
+   "cream border like a printed poster",
+   "bottom band with red title"
+  ],
+  "avoid": [
+   "photorealism",
+   "gradient mesh shine",
+   "lens flare",
+   "clip art palm trees with outlines",
+   "gibberish text",
+   "modern UI icons"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Alfa Slab One",
+    "weight": 400,
+    "upper": true,
+    "color": "#FFF6DD"
+   },
+   "body": {
+    "font": "Josefin Sans",
+    "weight": 600
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.04,
+     "w": 0.84,
+     "h": 0.13,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.18,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.91,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.04,
+     "w": 0.84,
+     "h": 0.14,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.18,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.89,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.1,
+     "w": 0.84,
+     "h": 0.12,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.22,
+     "w": 0.7,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.85,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Summer timetable for a small archipelago ferry line",
+   "headline": "Island Hopping",
+   "subline": "Linnea Ferry Line, every day June to August",
+   "details": "Departs Strömkajen 09:30, 12:00, 16:45"
+  },
+  "sampleBrief": "A vertical 2:3 vintage travel poster in flat screen print style, for a small archipelago ferry line. Scene: a cream and white wooden passenger ferry with a red funnel glides across calm teal water in front of a green pine covered island with sharp angular rock facets, two cream clouds built from stepped shapes, and a single red cabin on the shore. Two dark green leaning pine silhouettes frame the left and right edges. The ferry is reflected beneath it in lighter teal. Palette: cream #F7EFD2, sky teal #47B0B8, leaf green #4E8F3A, deep forest #2F3B2F, signal red #D6402B, sun amber #E8A83A. Flat opaque shapes with hard edges, no outlines, one smooth sky blend only. A cream border surrounds the image and a clean cream band at the bottom holds a red title block. Typography spelled exactly: at the top in chunky cream slab capitals, \"ISLAND HOPPING\"; below it in small plain sans \"Linnea Ferry Line, every day June to August\"; in the bottom band in bold red slab capitals \"LINNEA FERRY LINE\" and in small dark sans \"Departs Strömkajen 09:30, 12:00, 16:45\". Light is flat midday sun, no cast gloss. Texture: faint cream paper grain and a hair of ink misregistration. Avoid photorealism, gradient mesh shine, lens flare, outlined clip art, symmetrical stock composition, extra text, gibberish text.",
+  "refs": [
+   {
+    "pin": "4603171509855504128",
+    "url": "https://www.pinterest.com/pin/4603171509855504128/",
+    "img": "https://i.pinimg.com/736x/28/55/10/2855108f1fdaca09740aea9a31f8c1d6.jpg",
+    "w": 236,
+    "h": 354,
+    "author": "Art of Scooter",
+    "authorUrl": "https://www.pinterest.com/artofscooter/"
+   },
+   {
+    "pin": "231513237088321071",
+    "url": "https://www.pinterest.com/pin/231513237088321071/",
+    "img": "https://i.pinimg.com/736x/0e/be/48/0ebe483c5f6ff8e457457194475507dd.jpg",
+    "w": 236,
+    "h": 472,
+    "author": "Mollie Starr",
+    "authorUrl": "https://www.pinterest.com/mollsteroonie/"
+   },
+   {
+    "pin": "297308012883873209",
+    "url": "https://www.pinterest.com/pin/297308012883873209/",
+    "img": "https://i.pinimg.com/736x/95/a0/41/95a0412049af7d3c8aa711cd30ac7578.jpg",
+    "w": 236,
+    "h": 341,
+    "author": "L o o e",
+    "authorUrl": "https://www.pinterest.com/looe_looe/"
+   }
+  ]
+ },
+ {
+  "id": "riso-two-ink",
+  "name": "Riso Two Ink",
+  "blurb": "A photo split into red and blue ink, grainy and not quite aligned.",
+  "vibe": "riso-zine",
+  "tags": [
+   "risograph",
+   "two colour",
+   "grain",
+   "print",
+   "halftone"
+  ],
+  "medium": "A risograph print in two fluorescent inks, red and blue, layered on uncoated paper. Images are rendered as coarse halftone and stipple, with areas where the inks overlap into deep purple.",
+  "palette": {
+   "colors": [
+    "#F3EEE4",
+    "#2438B8",
+    "#F5412D",
+    "#5B2A86"
+   ],
+   "note": "Cream paper, one blue and one red ink, overlap makes purple. For a brand, choose two inks from the brand palette and describe the overlap as their mix."
+  },
+  "composition": "One strong image fills most of the sheet inside a margin, with a bold shape such as a sun or arch in solid red cutting into it. Text sits small in the margin or large in red over the picture. White paper border shows on all sides.",
+  "typography": "Bold condensed grotesk capitals in red, partly overprinting the image, with small typewriter or grotesk captions in blue.",
+  "texture": "Heavy grain, visible halftone, misregistration between inks, flecks of uneven coverage.",
+  "signature": [
+   "solid red shape cut into blue halftone image",
+   "purple where inks overlap",
+   "visible misregistration",
+   "white paper margins with edition number in pencil",
+   "coarse grain everywhere"
+  ],
+  "avoid": [
+   "clean gradients",
+   "extra colours beyond the two inks",
+   "glossy finish",
+   "photographic smoothness",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "flyer",
+   "story"
+  ],
+  "type": {
+   "headline": {
+    "font": "Barlow Condensed",
+    "weight": 800,
+    "upper": true,
+    "color": "#F5412D"
+   },
+   "body": {
+    "font": "Courier Prime",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.62,
+     "w": 0.84,
+     "h": 0.2,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.83,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.9,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.61,
+     "w": 0.84,
+     "h": 0.22,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.81,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.88,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.6,
+     "w": 0.84,
+     "h": 0.18,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.78,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.08,
+     "y": 0.84,
+     "w": 0.84,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Photo exhibition of harbour mornings by a local photographer",
+   "headline": "Harbour at Dawn",
+   "subline": "Photographs by Elin Brandt",
+   "details": "Open 7 to 30 Nov, Galleri Kajen, Free entry"
+  },
+  "sampleBrief": "A vertical 2:3 risograph print in two fluorescent inks, blue and red, on cream uncoated paper, for a photo exhibition. The image: an early morning harbour with a lone figure walking along a quay between tall brick warehouses, the scene rendered as coarse blue halftone and stipple, while a huge solid red arch shaped sun cuts through the sky and floods the buildings on the right with red halftone. Where red and blue overlap the ink turns deep purple. Paper margin visible around the image on all sides. Palette: paper #F3EEE4, riso blue #2438B8, riso red #F5412D, overlap purple #5B2A86. Misregistration of a pixel or two between inks, heavy grain, flecks of uneven coverage. Typography spelled exactly: headline \"HARBOUR AT DAWN\" in bold condensed grotesk capitals in red overprinting the lower third of the image; below it in small typewriter type, blue, \"Photographs by Elin Brandt\"; at the very bottom \"Open 7 to 30 Nov, Galleri Kajen, Free entry\". A small pencil edition mark \"12/15\" in the corner margin. Lighting: dawn glow expressed only as ink shapes. Avoid clean gradients, extra colours, glossy finish, photographic smoothness, lens flare, symmetrical composition, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "562246334752776474",
+    "url": "https://www.pinterest.com/pin/562246334752776474/",
+    "img": "https://i.pinimg.com/736x/a1/1f/32/a11f3261f3111ccb4e320d4afc6a0c7d.jpg",
+    "w": 236,
+    "h": 300,
+    "author": "Erica Gi",
+    "authorUrl": "https://www.pinterest.com/ericabebu/"
+   },
+   {
+    "pin": "349943833568810868",
+    "url": "https://www.pinterest.com/pin/349943833568810868/",
+    "img": "https://i.pinimg.com/736x/ce/dc/70/cedc70a7b01b60e1a6ccf36532bd30b1.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Julien Jean",
+    "authorUrl": "https://www.pinterest.com/jj3034/"
+   },
+   {
+    "pin": "340444053093418078",
+    "url": "https://www.pinterest.com/pin/340444053093418078/",
+    "img": "https://i.pinimg.com/736x/1b/21/3a/1b213ac5719ed97b785412e3da731a7d.jpg",
+    "w": 236,
+    "h": 337,
+    "author": "Еlena Muraveva",
+    "authorUrl": "https://www.pinterest.com/emurmurr/"
+   }
+  ]
+ },
+ {
+  "id": "oil-pastel-scribble",
+  "name": "Oil Pastel Scribble",
+  "blurb": "A homey scene drawn in waxy crayon on white paper, creases and all.",
+  "vibe": "hand-drawn",
+  "tags": [
+   "crayon",
+   "oil pastel",
+   "children",
+   "homey",
+   "naive"
+  ],
+  "medium": "A hand drawn oil pastel and crayon drawing scanned from white paper, with waxy strokes, visible paper tooth and a folded poster crease. Thin pencil and marker details sit on top of the thick colour.",
+  "palette": {
+   "colors": [
+    "#FFFFFF",
+    "#E0242B",
+    "#1E9A3C",
+    "#E8A24A",
+    "#F0C0C8",
+    "#7A4B2A"
+   ],
+   "note": "White paper, a strong crayon red for the title, a hero green for the main object, small warm accents. For a brand, draw the hero object in the brand colour and keep the red crayon title in the brand accent."
+  },
+  "composition": "One cosy object or scene fills the lower two thirds, drawn cheerfully off proportion, with a tiny shelf or plant above. The title block is huge and sits at the top. Lots of white paper remains around everything.",
+  "typography": "Blocky crayon capitals with waxy texture for the title, and clean plain sans for small labels set as if from a catalogue.",
+  "texture": "Waxy grain, patchy coverage with white gaps, light fold creases and paper tooth.",
+  "signature": [
+   "thick crayon fill with gaps",
+   "wobbly drawn person and furniture",
+   "tiny pencil detailed plants and cups",
+   "fold creases across the poster",
+   "catalogue style labels"
+  ],
+  "avoid": [
+   "digital smoothness",
+   "vector outlines",
+   "gradients",
+   "airbrush",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Chewy",
+    "weight": 400,
+    "upper": true,
+    "color": "#E0242B"
+   },
+   "body": {
+    "font": "Patrick Hand",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.04,
+     "w": 0.84,
+     "h": 0.2,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.26,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.5,
+     "y": 0.88,
+     "w": 0.44,
+     "h": 0.08,
+     "align": "right"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.04,
+     "w": 0.84,
+     "h": 0.22,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.25,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.5,
+     "y": 0.86,
+     "w": 0.44,
+     "h": 0.09,
+     "align": "right"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.08,
+     "y": 0.1,
+     "w": 0.84,
+     "h": 0.18,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.29,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.5,
+     "y": 0.83,
+     "w": 0.44,
+     "h": 0.07,
+     "align": "right"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Sunday cardamom bun morning at a small bakery",
+   "headline": "Bun Day",
+   "subline": "Fresh from the oven, still warm",
+   "details": "Sundays 8 to 12, Rosa's Bageri, Bergsgatan 9"
+  },
+  "sampleBrief": "A vertical 2:3 poster that looks like a hand drawn oil pastel and crayon drawing on white paper, for a Sunday bun morning at a small bakery. A cheerful, slightly off proportion drawing of a big wooden table with a tray of cardamom buns in thick waxy orange and tan crayon, a wobbly child in a pink checked dress reaching for one, and a small green plant on a shelf above with a blue cup drawn in thin pencil and marker. Heavy crayon fill with white gaps showing paper tooth, tiny sketchy details on top. Palette: white paper #FFFFFF, crayon red #E0242B, green #1E9A3C, tan #E8A24A, blush #F0C0C8, brown #7A4B2A, ink #1C1C1C. Typography spelled exactly: headline \"BUN DAY\" in huge blocky waxy red crayon capitals at the top, with a small black marker line beneath, \"Fresh from the oven, still warm\"; at the lower right in clean small catalogue sans \"Sundays 8 to 12, Rosa's Bageri, Bergsgatan 9\". Lighting: even paper white, no shading. Texture: crayon grain, a visible fold crease across the middle and along the sides, light scan shadow at the edges. Avoid digital smoothness, vector outlines, gradients, airbrush, lens flare, perfect symmetry, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "694891417533495048",
+    "url": "https://www.pinterest.com/pin/694891417533495048/",
+    "img": "https://i.pinimg.com/736x/9b/76/54/9b76547a5f27f1f512bfe2c91ba4b19b.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "eden",
+    "authorUrl": "https://www.pinterest.com/edengllm367/"
+   },
+   {
+    "pin": "962714857880380165",
+    "url": "https://www.pinterest.com/pin/962714857880380165/",
+    "img": "https://i.pinimg.com/736x/03/28/21/032821f7bb8d2fd57e7de6e108dc1562.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "❁ art",
+    "authorUrl": "https://www.pinterest.com/ghostintheformofamongoose/"
+   },
+   {
+    "pin": "785385622549546917",
+    "url": "https://www.pinterest.com/pin/785385622549546917/",
+    "img": "https://i.pinimg.com/736x/d7/37/8c/d7378cb537a01710b147b1c7a0d0dcf3.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Spectator",
+    "authorUrl": "https://www.pinterest.com/emanuelegirlanda/"
+   }
+  ]
+ },
+ {
+  "id": "blue-ink-doodle",
+  "name": "Blue Ink Doodle",
+  "blurb": "Crowded biro doodles in cobalt, with plain red grotesk giant over the top.",
+  "vibe": "hand-drawn",
+  "tags": [
+   "doodle",
+   "pen drawing",
+   "cobalt",
+   "cultural poster",
+   "playful"
+  ],
+  "medium": "A dense scribbled pen and felt tip drawing in one blue ink on an off white sheet, scanned, with a huge neutral grotesk set in red over the top. The drawing is deliberately wonky and funny.",
+  "palette": {
+   "colors": [
+    "#F2EFE8",
+    "#1F4FAE",
+    "#D9503C",
+    "#1A1A1A"
+   ],
+   "note": "Off white paper, a single blue for all the drawing and one warm red for the type. For a brand, use the brand main colour for the pen drawing and a contrasting accent for the type."
+  },
+  "composition": "Doodles fill the page edge to edge in a loose crowd, with a few filled shapes for weight. Huge red type sits in the top and bottom bands and a large date or number block crosses the middle, all over the drawing but readable.",
+  "typography": "Large neutral Swiss grotesk in warm red, tight leading, mixed case, the biggest element on the page, with a tiny grid of small credits at the bottom.",
+  "texture": "Biro and felt tip strokes with ink pooling, slight paper grain, no digital polish.",
+  "signature": [
+   "monoline doodle crowd of creatures and objects",
+   "scribble filled black shapes in blue",
+   "speech bubbles with handwritten lines",
+   "giant plain grotesk over the drawing",
+   "tiny credit columns at the bottom"
+  ],
+  "avoid": [
+   "clean vector icons",
+   "gradients",
+   "colourful rainbow palette",
+   "airbrush",
+   "lens flare",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Inter",
+    "weight": 500,
+    "upper": false,
+    "color": "#D9503C"
+   },
+   "body": {
+    "font": "Inter",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.13,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.4,
+     "w": 0.88,
+     "h": 0.2,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.9,
+     "w": 0.92,
+     "h": 0.07,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.92,
+     "h": 0.14,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.39,
+     "w": 0.88,
+     "h": 0.2,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.88,
+     "w": 0.92,
+     "h": 0.08,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.92,
+     "h": 0.12,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.41,
+     "w": 0.88,
+     "h": 0.18,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.84,
+     "w": 0.92,
+     "h": 0.06,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Tuesday open mic comedy night at a cafe",
+   "headline": "Open Mic",
+   "subline": "Every Tuesday",
+   "details": "Doors 19:00, Café Orbit, Drottninggatan 21"
+  },
+  "sampleBrief": "A vertical 2:3 poster made of a dense, funny hand drawn doodle in one cobalt blue ballpoint and felt tip ink on off white paper, for a Tuesday open mic comedy night at a cafe. Loose crowd of wonky creatures and objects fills the sheet edge to edge: a nervous microphone with a face, a coffee cup with arms, a tiny audience of bunnies, a moth, a fish with teeth, a palm tree, a sofa, speech bubbles holding scribbled lines, and a few scribble filled black shapes in blue for weight. Palette: off white paper #F2EFE8, cobalt blue ink #1F4FAE, warm red #D9503C, near black #1A1A1A for tiny credits. Typography spelled exactly, set in large neutral Swiss grotesk in warm red with tight leading over the drawing but clearly readable: at the top \"Open Mic\" in huge mixed case letters; across the middle \"Every Tuesday\" in large red numerals style size; at the bottom in small black text \"Doors 19:00, Café Orbit, Drottninggatan 21\". Lighting: flat scan light, no shading. Texture: ink pooling at stroke ends, slight paper grain, tiny smudges. Avoid clean vector icons, gradients, rainbow palette, airbrush, lens flare, symmetrical composition, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "76420524923137679",
+    "url": "https://www.pinterest.com/pin/76420524923137679/",
+    "img": "https://i.pinimg.com/736x/df/3b/f4/df3bf4d02514c741dc7cb582fd08931f.jpg",
+    "w": 236,
+    "h": 337,
+    "author": "Martina Gostoli🧚🏻‍♀️",
+    "authorUrl": "https://www.pinterest.com/martina_gostoli/"
+   },
+   {
+    "pin": "908108712382149383",
+    "url": "https://www.pinterest.com/pin/908108712382149383/",
+    "img": "https://i.pinimg.com/736x/3d/e3/94/3de3942fc8f1ad33a96ef9eff5e44df4.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "dr.c",
+    "authorUrl": "https://www.pinterest.com/drc_illustration/"
+   },
+   {
+    "pin": "781937554120172265",
+    "url": "https://www.pinterest.com/pin/781937554120172265/",
+    "img": "https://i.pinimg.com/736x/6c/00/9d/6c009d96a69126fdfc053191092f6dff.jpg",
+    "w": 236,
+    "h": 293,
+    "author": "Residency",
+    "authorUrl": "https://www.pinterest.com/ResidencyMerch/"
+   },
+   {
+    "pin": "201395414567427857",
+    "url": "https://www.pinterest.com/pin/201395414567427857/",
+    "img": "https://i.pinimg.com/736x/40/ea/ff/40eaffd9588746cbe1910791a3fd6d7c.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "Lizzy B",
+    "authorUrl": "https://www.pinterest.com/lizzyyyb/"
+   }
+  ]
+ },
+ {
+  "id": "flash-editorial",
+  "name": "Flash Editorial Photo",
+  "blurb": "Direct flash, wet skin, saturated sky and stickers slapped on like a zine.",
+  "vibe": "photo-overlay",
+  "tags": [
+   "flash photo",
+   "fashion",
+   "editorial",
+   "stickers",
+   "Y2K"
+  ],
+  "medium": "A direct on camera flash photograph with hard highlights, slightly oversaturated colour and shiny real skin texture, with graphic stickers and acid type layered on top. It reads like a fashion magazine spread from a night out.",
+  "palette": {
+   "colors": [
+    "#8EC3F0",
+    "#F5E614",
+    "#1B1B1B",
+    "#F0359A",
+    "#7A4FE0",
+    "#FFFFFF"
+   ],
+   "note": "Photo colour is the base; overlays use a hot pink, acid yellow and violet. For a brand, pick one accent from the brand and keep the rest to photo and white."
+  },
+  "composition": "The subject fills the frame in a tight crop, face or garment, with graphic stickers and small badge shapes clustering in the lower half, and one or two huge symbols or letters in the upper left. Quiet sky or wall in the upper right.",
+  "typography": "Oversized outlined bubble capitals, a small mono hashtag line and numbered sticker labels, all in pink, white and black.",
+  "texture": "Flash hotspot, fine film grain, tiny lens dust, crisp sticker edges with slight shadow.",
+  "signature": [
+   "on camera flash look",
+   "badge shaped stickers cluster",
+   "oversized outlined letter in a corner",
+   "registered and copyright symbols as decoration",
+   "pink and yellow accent"
+  ],
+  "avoid": [
+   "airbrushed skin",
+   "studio softbox look",
+   "plastic 3D sheen",
+   "lens flare",
+   "symmetrical stock composition",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square"
+  ],
+  "type": {
+   "headline": {
+    "font": "Climate Crisis",
+    "weight": 400,
+    "upper": true,
+    "color": "#F0359A"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.7,
+     "h": 0.2,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.6,
+     "y": 0.2,
+     "w": 0.36,
+     "h": 0.08,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.92,
+     "w": 0.92,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.03,
+     "w": 0.7,
+     "h": 0.22,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.6,
+     "y": 0.2,
+     "w": 0.36,
+     "h": 0.09,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.9,
+     "w": 0.92,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.7,
+     "h": 0.18,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.6,
+     "y": 0.24,
+     "w": 0.36,
+     "h": 0.07,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.04,
+     "y": 0.86,
+     "w": 0.92,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Second hand clothes market in a basement venue",
+   "headline": "Thrift Night",
+   "subline": "Vintage, denim and one night only",
+   "details": "Sat 8 Nov, 12 to 20, Fållan, Sofia"
+  },
+  "sampleBrief": "A vertical 2:3 direct flash photograph for a second hand clothes market, shot close, on camera flash, hard light. A young person with short dark hair and silver hoop earrings, wearing a faded denim jacket, looks sideways at the camera against a bright saturated blue sky. Skin has real texture, pores, a little sweat sheen, flash hotspots on the nose and collarbone. Layered over the photo: a cluster of graphic badge stickers in the lower half, a black oval with a green star, a pink rounded square with a white star, a yellow circle with the letter R inside a circle, a checkered tile, and a tiny barcode. A huge outlined bubble capital in the upper left corner. Palette: sky blue #8EC3F0, acid yellow #F5E614, black #1B1B1B, hot pink #F0359A, violet #7A4FE0, white #FFFFFF. Typography spelled exactly: headline \"THRIFT NIGHT\" in oversized pink outlined bubble capitals upper left; in small monospace white on a black strip \"Vintage, denim and one night only\"; at the bottom \"Sat 8 Nov, 12 to 20, Fållan, Sofia\". Texture: fine film grain, lens dust, crisp sticker edges with tiny shadow. Avoid airbrushed skin, softbox studio look, plastic 3D sheen, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "1065312486880083273",
+    "url": "https://www.pinterest.com/pin/1065312486880083273/",
+    "img": "https://i.pinimg.com/736x/7b/2a/fb/7b2afbee7970b36e4d3e27441811dbb2.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "T4EMZZZ",
+    "authorUrl": "https://www.pinterest.com/t4emssss___/"
+   }
+  ]
+ },
+ {
+  "id": "blob-mascot",
+  "name": "Blob Mascot",
+  "blurb": "A giant blob with huge eyes looms over tiny angry friends, flat and funny.",
+  "vibe": "cute-mascot",
+  "tags": [
+   "mascot",
+   "character",
+   "flat vector",
+   "funny",
+   "black"
+  ],
+  "medium": "A flat vector character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.",
+  "palette": {
+   "colors": [
+    "#141414",
+    "#F2EFE9",
+    "#8A7CE8",
+    "#2BA391",
+    "#F2564B",
+    "#FFFFFF"
+   ],
+   "note": "Black or off white ground with a purple mascot, teal clothes and a red flame accent. For a brand, recolour the mascot to the brand colour and keep ground neutral."
+  },
+  "composition": "One giant blob fills the top half and is cropped by the edges, staring down, with a small character sitting in an armchair below and a row of three mini characters at the bottom showing different expressions. Clear title or hashtag in the middle.",
+  "typography": "Clean bold sans in white for hashtag or title, tiny pixel or mono text for the line below.",
+  "texture": "Flat colour, tiny paper grain, crisp edges.",
+  "signature": [
+   "giant cropped blob towering",
+   "huge googly eyes with heavy brows",
+   "tiny character in an armchair",
+   "row of mini expressions",
+   "hashtag title"
+  ],
+  "avoid": [
+   "realistic fur",
+   "gradients",
+   "plastic 3D sheen",
+   "lens flare",
+   "scary gore",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Familjen Grotesk",
+    "weight": 700,
+    "upper": true,
+    "color": "#FFFFFF"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.3,
+     "y": 0.46,
+     "w": 0.67,
+     "h": 0.1,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.58,
+     "w": 0.6,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.94,
+     "w": 0.8,
+     "h": 0.03,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.3,
+     "y": 0.45,
+     "w": 0.67,
+     "h": 0.11,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.57,
+     "w": 0.6,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.92,
+     "w": 0.8,
+     "h": 0.04,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.3,
+     "y": 0.47,
+     "w": 0.67,
+     "h": 0.09,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.57,
+     "w": 0.6,
+     "h": 0.04,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.88,
+     "w": 0.8,
+     "h": 0.04,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Children's dentist clinic campaign",
+   "headline": "Brush Buddies",
+   "subline": "Tiny monsters hate clean teeth",
+   "details": "Free kids check up, Tandkliniken Solna"
+  },
+  "sampleBrief": "A vertical 2:3 flat vector mascot poster on a near black ground, for a children's dentist clinic campaign. A giant purple blob monster fills the upper half, cropped by the top and sides, with two huge cartoon eyes with heavy angry brows and a curved row of white sharp teeth, staring downward. Beneath it a small round teal creature in a brown armchair holds a toothbrush, calm and tiny. At the very bottom a row of three mini monsters in teal shirts, each with a different expression, one with flames around it. Palette: near black #141414, off white #F2EFE9, purple #8A7CE8, teal #2BA391, red #F2564B. Flat colour only, thick clean shapes, crisp edges, a tiny paper grain. Typography spelled exactly: in the middle in clean bold white capitals \"BRUSH BUDDIES\"; beneath it in tiny mono \"Tiny monsters hate clean teeth\"; at the bottom in tiny mono \"Free kids check up, Tandkliniken Solna\". Lighting: flat, none. Texture: faint paper grain. Avoid realistic fur, gradients, plastic 3D sheen, lens flare, gore, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "877076096182890107",
+    "url": "https://www.pinterest.com/pin/877076096182890107/",
+    "img": "https://i.pinimg.com/736x/64/bf/9f/64bf9f8c3e9b1d93498a323f4b892f36.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "佳玲",
+    "authorUrl": "https://www.pinterest.com/ljialing179/"
+   },
+   {
+    "pin": "1087197166279286609",
+    "url": "https://www.pinterest.com/pin/1087197166279286609/",
+    "img": "https://i.pinimg.com/736x/92/00/77/9200776b50e768629f008e1e9d811d4d.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "JICAF",
+    "authorUrl": "https://www.pinterest.com/JICAF2023/"
+   }
+  ]
+ },
+ {
+  "id": "object-still-life",
+  "name": "Object Still Life",
+  "blurb": "Plain objects on flat colour, hard lit, crowned by one quiet word.",
+  "vibe": "photo-overlay",
+  "tags": [
+   "still life",
+   "photography",
+   "objects",
+   "studio",
+   "minimal"
+  ],
+  "medium": "A studio still life photograph: real objects arranged or assembled into a shape on a flat coloured backdrop, lit with a hard directional light, with a sharp cast shadow and a quiet single word on the ground. Looks like an advertising shoot, not a render.",
+  "palette": {
+   "colors": [
+    "#E9E4DA",
+    "#D93A2B",
+    "#2F5CB8",
+    "#E9C13A",
+    "#1E1E1E"
+   ],
+   "note": "A flat backdrop colour with the objects in two or three contrasting colours. For a brand, pick the backdrop from the brand colour and let the props be neutral."
+  },
+  "composition": "Objects are assembled in a compact group on the lower two thirds, casting a long shadow, with one big word above and small caption lines at the edges. The backdrop is seamless and clean.",
+  "typography": "Neutral clean grotesk, medium weight, one word large in black or white with tracking, small caption lines in mono.",
+  "texture": "Hard light, crisp shadow edge, fine paper backdrop texture, tiny dust.",
+  "signature": [
+   "objects assembled into one shape",
+   "hard cast shadow",
+   "seamless coloured backdrop",
+   "one large quiet word",
+   "small mono captions"
+  ],
+  "avoid": [
+   "plastic CGI look",
+   "lens flare",
+   "tilt shift blur",
+   "busy props",
+   "gibberish text",
+   "dramatic vignette"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Hanken Grotesk",
+    "weight": 700,
+    "upper": true,
+    "color": "#1E1E1E"
+   },
+   "body": {
+    "font": "DM Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.05,
+     "w": 0.88,
+     "h": 0.16,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.22,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.92,
+     "w": 0.88,
+     "h": 0.04,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.05,
+     "w": 0.88,
+     "h": 0.17,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.22,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.9,
+     "w": 0.88,
+     "h": 0.04,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.11,
+     "w": 0.88,
+     "h": 0.15,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.26,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.86,
+     "w": 0.88,
+     "h": 0.04,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Community bike repair workshop",
+   "headline": "Fix It Together",
+   "subline": "Bring a bike, learn to repair it",
+   "details": "Saturdays 11 to 15, Cykelköket, Hammarby"
+  },
+  "sampleBrief": "A vertical 2:3 studio still life photograph for a community bike repair workshop. On a seamless flat mustard yellow backdrop #E9C13A, real bicycle parts, a wheel, a chain, two wrenches, a bell, a pedal and a tyre lever, are arranged into the shape of a smiling bicycle bell face in the lower two thirds, casting a hard long shadow to the right. Lit with a single hard directional light from the upper left, crisp shadow edge, fine paper backdrop texture, tiny dust specks. Palette: mustard #E9C13A, cream #E9E4DA, red #D93A2B, blue #2F5CB8, black #1E1E1E. Typography spelled exactly: headline \"FIX IT TOGETHER\" in neutral medium weight grotesk capitals with generous tracking across the top in black; beneath it in small monospace \"Bring a bike, learn to repair it\"; at the bottom in tiny monospace \"Saturdays 11 to 15, Cykelköket, Hammarby\". Lighting: hard studio flash from the left. Texture: seamless paper backdrop, crisp edges. Avoid plastic CGI look, lens flare, tilt shift blur, busy props, dramatic vignette, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "1087830485001969354",
+    "url": "https://www.pinterest.com/pin/1087830485001969354/",
+    "img": "https://i.pinimg.com/736x/fd/21/6d/fd216d2a8702ea95d3997fe8bb1ce728.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "lidali",
+    "authorUrl": "https://www.pinterest.com/lidali0411/"
+   },
+   {
+    "pin": "819021882275881579",
+    "url": "https://www.pinterest.com/pin/819021882275881579/",
+    "img": "https://i.pinimg.com/736x/02/f0/79/02f079a408647c76b82f01210783389e.jpg",
+    "w": 236,
+    "h": 236,
+    "author": "Heavy_Reflection_331",
+    "authorUrl": "https://www.pinterest.com/10sing/"
+   },
+   {
+    "pin": "852869248233885594",
+    "url": "https://www.pinterest.com/pin/852869248233885594/",
+    "img": "https://i.pinimg.com/736x/d1/c7/54/d1c754e5f0ed9906d3009c19e5bdaeea.jpg",
+    "w": 236,
+    "h": 317,
+    "author": "DCXJZ",
+    "authorUrl": "https://www.pinterest.com/jimmy8653/"
+   }
+  ]
+ },
+ {
+  "id": "holo-y2k",
+  "name": "Holographic Y2K",
+  "blurb": "Chrome blobs, a rainbow disc and glass windows, a dream of a 2001 desktop.",
+  "vibe": "y2k-chrome",
+  "tags": [
+   "holographic",
+   "iridescent",
+   "chrome",
+   "interface",
+   "glass"
+  ],
+  "medium": "A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and vector chrome shapes made of hard reflection bands.",
+  "palette": {
+   "colors": [
+    "#C9D4F0",
+    "#9B8CF5",
+    "#7FE0E8",
+    "#F2A6D8",
+    "#F4F1FF",
+    "#2B2B3A"
+   ],
+   "note": "Pastel iridescent field of lilac, aqua and pink with silver chrome. For a brand, put the brand colour in the largest gradient band."
+  },
+  "composition": "Big chrome title at the top, a tilted disc and a melted blob in the centre, three semi transparent panels around them carrying small text, sparkle stars and barcodes at the edges. Pastel space stays open around the title for text.",
+  "typography": "Chunky chrome capitals for the headline, black wide grotesk subline, tiny mono labels in the windows.",
+  "texture": "Iridescent gradient, fine grain, crisp window edges, bloom on highlights.",
+  "signature": [
+   "rainbow CD disc",
+   "chrome blob",
+   "frosted window panels with title bars",
+   "four point sparkles",
+   "barcode in the corner"
+  ],
+  "avoid": [
+   "3D rendered chrome blobs",
+   "fake UI windows and CDs",
+   "sparkles and stars",
+   "flat colours",
+   "lens flare streaks",
+   "dark mode",
+   "gibberish text",
+   "brand logos"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "slide"
+  ],
+  "type": {
+   "headline": {
+    "font": "Unbounded",
+    "weight": 800,
+    "upper": true,
+    "color": "auto"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.04,
+     "w": 0.88,
+     "h": 0.16,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.22,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.9,
+     "w": 0.6,
+     "h": 0.07,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.04,
+     "w": 0.88,
+     "h": 0.17,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.22,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.88,
+     "w": 0.6,
+     "h": 0.08,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.1,
+     "w": 0.88,
+     "h": 0.15,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.08,
+     "y": 0.26,
+     "w": 0.84,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.84,
+     "w": 0.6,
+     "h": 0.06,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Nail studio launch",
+   "headline": "Glossy Nails",
+   "subline": "Chrome, jelly and holographic sets",
+   "details": "Grand opening Sat 17 May, Folkungagatan 44"
+  },
+  "sampleBrief": "A flyer, portrait 2:3, printed on holographic foil board so the rainbow sheen shows only in the unprinted areas, with flat neon spot inks on top: hot pink #FF4FB8, electric blue #2F5BFF, black. Chunky hand drawn bubble lettering 'GLOSSY NAILS' fills the top third, outlined in black, filled with flat pink. The hero is one oversized nail polish bottle drawn as flat vector chrome: hard white and blue reflection bands, no 3D render, cropped by the bottom edge. Small line: 'Chrome, jelly and holographic sets' and at the bottom 'Grand opening Sat 17 May, Folkungagatan 46'. No CDs, no UI windows, no sparkles.",
+  "refs": [
+   {
+    "pin": "621144973651653763",
+    "url": "https://www.pinterest.com/pin/621144973651653763/",
+    "img": "https://i.pinimg.com/736x/47/bd/3b/47bd3ba612edff0fce795edfb371feda.jpg",
+    "w": 236,
+    "h": 297,
+    "author": "Mchiarapiano",
+    "authorUrl": "https://www.pinterest.com/mchiarapiano/"
+   },
+   {
+    "pin": "1106126358504683010",
+    "url": "https://www.pinterest.com/pin/1106126358504683010/",
+    "img": "https://i.pinimg.com/736x/f1/e4/37/f1e437edf44af0ff901c487573ce52bc.jpg",
+    "w": 236,
+    "h": 291,
+    "author": "Playyy AI",
+    "authorUrl": "https://www.pinterest.com/playyyai/"
+   },
+   {
+    "pin": "1144899536533965998",
+    "url": "https://www.pinterest.com/pin/1144899536533965998/",
+    "img": "https://i.pinimg.com/736x/0e/6d/d4/0e6dd4be0ad077e06f4823154c64dde5.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Serene Matrix - Epic Concepts",
+    "authorUrl": "https://www.pinterest.com/carmine9023b7/"
+   }
+  ]
+ },
+ {
+  "id": "keycap-type",
+  "name": "Keycap Type",
+  "blurb": "Words spelled on chunky keyboard keys, tilted in isometric rows on pure black.",
+  "vibe": "tech-mono",
+  "tags": [
+   "keycaps",
+   "isometric",
+   "3D",
+   "tech",
+   "playful"
+  ],
+  "medium": "A clean 3D illustration of rounded keycaps in primary colours, arranged in isometric rows, each with a letter printed in black, with thin black outlines and soft matte plastic shading. The poster sits inside a white frame on black.",
+  "palette": {
+   "colors": [
+    "#FFFFFF",
+    "#3B82F0",
+    "#F5381C",
+    "#18C23C",
+    "#F5CC1A",
+    "#E8E0CC"
+   ],
+   "note": "Primary coloured keys on white inside a black outer frame. For a brand, use the brand colour for the key tops and neutral cream for others."
+  },
+  "composition": "Keys cluster on a diagonal in the middle of the white panel, each carrying one letter or word, with tiny mono captions along the edges rotated ninety degrees. The black outer frame gives the poster a presentation look.",
+  "typography": "The keys carry sans capitals; surrounding captions are small mono text, rotated in margins and arrows.",
+  "texture": "Matte plastic, soft occlusion shadows, thin outline, crisp edges.",
+  "signature": [
+   "keys tilted in isometric rows",
+   "one letter per key",
+   "tiny rotated margin captions",
+   "white panel inside black frame",
+   "thin black outlines"
+  ],
+  "avoid": [
+   "glossy chrome",
+   "lens flare",
+   "random symbols as letters",
+   "dark moody scene",
+   "gibberish text",
+   "cluttered desk props"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "slide"
+  ],
+  "type": {
+   "headline": {
+    "font": "Space Grotesk",
+    "weight": 700,
+    "upper": false,
+    "color": "#111111"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.06,
+     "w": 0.46,
+     "h": 0.1,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.17,
+     "w": 0.4,
+     "h": 0.08,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.9,
+     "w": 0.86,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.06,
+     "w": 0.46,
+     "h": 0.11,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.17,
+     "w": 0.4,
+     "h": 0.09,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.88,
+     "w": 0.86,
+     "h": 0.05,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.07,
+     "y": 0.12,
+     "w": 0.46,
+     "h": 0.09,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.07,
+     "y": 0.22,
+     "w": 0.4,
+     "h": 0.07,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.07,
+     "y": 0.84,
+     "w": 0.86,
+     "h": 0.05,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Evening coding bootcamp open house",
+   "headline": "Learn To Code",
+   "subline": "Free intro class, no experience needed",
+   "details": "Thu 13 Feb, 18:00, Skolgatan 5, Umeå"
+  },
+  "sampleBrief": "A vertical 2:3 poster of chunky rounded keyboard keys in isometric rows, inside a white panel framed by a black outer border, for a coding bootcamp open house. Eleven matte plastic keycaps in blue #3B82F0, red #F5381C, green #18C23C, yellow #F5CC1A and cream #E8E0CC are tilted along a diagonal in the middle, each with a bold black sans letter spelling \"LEARN TO CODE\" across two rows, with thin black outlines and soft occlusion shadows. Tiny rotated caption lines in monospace run along the white margins, and small arrow symbols point in. Palette: white #FFFFFF, blue, red, green, yellow, cream, black #000000. Typography spelled exactly: the key letters spell \"LEARN TO CODE\"; headline repeated in clean bold sans \"Learn To Code\" upper left; beneath it \"Free intro class, no experience needed\"; in tiny monospace along the bottom \"Thu 13 Feb, 18:00, Skolgatan 5, Umeå\". Lighting: soft overhead matte lighting with gentle ambient occlusion, no reflections. Texture: smooth matte plastic, crisp edges. Avoid glossy chrome, lens flare, random symbols as letters, cluttered desk props, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "934074778953857496",
+    "url": "https://www.pinterest.com/pin/934074778953857496/",
+    "img": "https://i.pinimg.com/736x/cc/a9/bf/cca9bfb3f3440d252098fe3ce00eaf90.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Teo Gaudet",
+    "authorUrl": "https://www.pinterest.com/gaudet1490/"
+   }
+  ]
+ },
+ {
+  "id": "athlete-giant-type",
+  "name": "Athlete Giant Type",
+  "blurb": "One athlete cut out in front of a word as tall as the wall.",
+  "vibe": "sports-bold",
+  "tags": [
+   "sports",
+   "athlete",
+   "giant type",
+   "photo cutout",
+   "campaign"
+  ],
+  "medium": "A sports campaign poster: a crisp photograph of an athlete cut out and layered between giant type behind and small type in front, graded with strong colour and a flat ground. It looks like a pro studio composite.",
+  "palette": {
+   "colors": [
+    "#F2EBDD",
+    "#E6264A",
+    "#1C6FE0",
+    "#101010",
+    "#E2F23C"
+   ],
+   "note": "One saturated ground, a cream giant word, the athlete in natural colour with one team colour on the kit. For a brand, set the ground to the brand colour and the word to cream."
+  },
+  "composition": "A giant word in cream fills the upper and middle space in big condensed or extended capitals, with the athlete cut out and overlapping the word so the head and arm break in front. A small slogan sits low left and a date or number at the bottom right.",
+  "typography": "Huge heavy extended or condensed capitals, tightly leaded and partly hidden behind the subject, small wide spaced sans for slogans and details.",
+  "texture": "Clean photo with crisp rim light, slight grain on the ground, subtle drop shadow on the floor.",
+  "signature": [
+   "giant word behind the athlete",
+   "limbs break in front of the letters",
+   "perspective tunnel of repeated type",
+   "single colour ground",
+   "tiny slogan and date lines"
+  ],
+  "avoid": [
+   "airbrushed skin",
+   "plastic 3D sheen",
+   "lens flare",
+   "clip art silhouettes",
+   "low resolution faces",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Anton",
+    "weight": 400,
+    "upper": true,
+    "color": "#F2EBDD"
+   },
+   "body": {
+    "font": "Archivo",
+    "weight": 700
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.04,
+     "w": 0.92,
+     "h": 0.34,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.78,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.46,
+     "y": 0.91,
+     "w": 0.48,
+     "h": 0.05,
+     "align": "right"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.04,
+     "w": 0.92,
+     "h": 0.37,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.76,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.46,
+     "y": 0.89,
+     "w": 0.48,
+     "h": 0.05,
+     "align": "right"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.1,
+     "w": 0.92,
+     "h": 0.31,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.06,
+     "y": 0.74,
+     "w": 0.5,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.46,
+     "y": 0.85,
+     "w": 0.48,
+     "h": 0.05,
+     "align": "right"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Women's five a side evening league",
+   "headline": "Kick Off",
+   "subline": "Sign up your team before March",
+   "details": "League starts Tue 4 Mar, Eriksdalshallen"
+  },
+  "sampleBrief": "A vertical 2:3 sports campaign poster in a pro studio composite style, for a women's five a side evening league. A confident woman footballer in a coral red kit, mid stride with the ball at her foot, photographed with crisp rim lighting, cut out against a flat saturated pink red ground. Behind her, a giant cream word fills the upper two thirds in heavy condensed capitals, her raised arm and head break in front of the letters. Subtle floor shadow beneath her feet. Palette: cream #F2EBDD, red pink #E6264A, blue #1C6FE0, black #101010, volt #E2F23C used only on small details of her boots. Typography spelled exactly: giant headline \"KICK OFF\" in cream heavy condensed capitals behind the athlete; at lower left in small wide spaced sans \"Sign up your team before March\"; at lower right \"League starts Tue 4 Mar, Eriksdalshallen\". Lighting: studio key with strong rim light, real skin texture and muscle definition, slight film grain on the ground. Avoid airbrushed skin, plastic 3D sheen, lens flare, clip art silhouettes, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "1101622758877482443",
+    "url": "https://www.pinterest.com/pin/1101622758877482443/",
+    "img": "https://i.pinimg.com/736x/2d/77/1a/2d771a638201e09c535efc7ade96e23d.jpg",
+    "w": 236,
+    "h": 314,
+    "author": "andre pablo",
+    "authorUrl": "https://www.pinterest.com/andrepablo568/"
+   }
+  ]
+ },
+ {
+  "id": "liquid-chrome",
+  "name": "Liquid Chrome Type",
+  "blurb": "Letters melted into mirror metal, blobby and bright, framed by a thin HUD border.",
+  "vibe": "y2k-chrome",
+  "tags": [
+   "chrome",
+   "liquid metal",
+   "3D lettering",
+   "blobs",
+   "Y2K"
+  ],
+  "medium": "A 3D rendered liquid metal lettering: puffy, molten letterforms with mirror chrome material that reflects a pale sky studio, with pinched highlights, rendered on a soft pale ground with a thin interface frame around it.",
+  "palette": {
+   "colors": [
+    "#EAF1F6",
+    "#9FB6CC",
+    "#D8C7C2",
+    "#2B3646",
+    "#FFFFFF"
+   ],
+   "note": "Silver and pale blue with warm pink reflections on a light ground. For a brand, tint the reflections in the brand colour and keep the metal neutral."
+  },
+  "composition": "The title fills the centre as one molten mass in two or three lines, with a thin rounded border frame, small circular icons and a barcode in the corners. Rest of the page is quiet pale gradient.",
+  "typography": "The title itself is the artwork, in molten, puffed letters; small clean sans and mono for corners, plus a compass star ornament above.",
+  "texture": "Mirror reflections with pinched highlights, subtle ground noise, crisp thin frame lines.",
+  "signature": [
+   "puffy molten chrome letters",
+   "pinched mirror highlights",
+   "thin rounded HUD frame",
+   "barcode and QR corner details",
+   "pale gradient ground"
+  ],
+  "avoid": [
+   "flat grey metal",
+   "lens flare streaks",
+   "dark moody lighting",
+   "muddy brown reflections",
+   "gibberish text",
+   "glitter"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "square"
+  ],
+  "type": {
+   "headline": {
+    "font": "Unbounded",
+    "weight": 800,
+    "upper": true,
+    "color": "auto"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.26,
+     "w": 0.64,
+     "h": 0.4,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.68,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.16,
+     "y": 0.92,
+     "w": 0.68,
+     "h": 0.04,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.25,
+     "w": 0.64,
+     "h": 0.43,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.67,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.16,
+     "y": 0.9,
+     "w": 0.68,
+     "h": 0.04,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.29,
+     "w": 0.64,
+     "h": 0.37,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.2,
+     "y": 0.65,
+     "w": 0.6,
+     "h": 0.05,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.16,
+     "y": 0.86,
+     "w": 0.68,
+     "h": 0.04,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Hair studio grand opening",
+   "headline": "Silver Fox",
+   "subline": "Colour, cuts and chrome nails",
+   "details": "Opening Sat 5 Apr, Odengatan 30"
+  },
+  "sampleBrief": "A vertical 2:3 poster featuring molten liquid chrome lettering on a pale gradient ground, for a hair studio opening. The words \"SILVER FOX\" are rendered in puffy, molten, 3D mirror chrome letterforms stacked on two lines in the centre, fused into one mass with pinched highlights and soft pink reflections, reflecting a pale studio sky. Palette: pale ground #EAF1F6, steel blue #9FB6CC, blush reflection #D8C7C2, dark #2B3646, white #FFFFFF. A thin rounded border frame with notched corners surrounds the page, small circular and globe icons sit at the top corners, an eight point star ornament above the title, a QR code at the lower left and a barcode at the bottom centre. Typography spelled exactly: the molten chrome title \"SILVER FOX\"; beneath it in small clean sans \"Colour, cuts and chrome nails\"; at the bottom \"Opening Sat 5 Apr, Odengatan 30\" in tiny monospace. Lighting: bright soft studio dome light with crisp mirror reflections. Texture: fine subtle noise on the ground, crisp frame lines. Avoid flat grey metal, lens flare streaks, dark moody lighting, muddy brown reflections, glitter, symmetrical stock composition, extra or gibberish text.",
+  "refs": [
+   {
+    "pin": "1011902610021634961",
+    "url": "https://www.pinterest.com/pin/1011902610021634961/",
+    "img": "https://i.pinimg.com/736x/6e/34/84/6e34841ac18d5b1dba1e2b4c4585248a.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "Sultage",
+    "authorUrl": "https://www.pinterest.com/sultageanuarbage/"
+   },
+   {
+    "pin": "742038476135486966",
+    "url": "https://www.pinterest.com/pin/742038476135486966/",
+    "img": "https://i.pinimg.com/736x/aa/00/95/aa0095144107de4bd6af9fa07deb48fa.jpg",
+    "w": 236,
+    "h": 334,
+    "author": "Andrés Ramos",
+    "authorUrl": "https://www.pinterest.com/andresvares/"
+   },
+   {
+    "pin": "650559108722228890",
+    "url": "https://www.pinterest.com/pin/650559108722228890/",
+    "img": "https://i.pinimg.com/736x/43/13/cd/4313cd08053f94a964b197bb91c95aff.jpg",
+    "w": 236,
+    "h": 323,
+    "author": "opal mo",
+    "authorUrl": "https://www.pinterest.com/opalmo2784/"
+   },
+   {
+    "pin": "649010996323555953",
+    "url": "https://www.pinterest.com/pin/649010996323555953/",
+    "img": "https://i.pinimg.com/736x/ea/5a/cf/ea5acf178a41ddf6b1374fb8fc0741a6.jpg",
+    "w": 236,
+    "h": 408,
+    "author": "SU LIN",
+    "authorUrl": "https://www.pinterest.com/weisulin110/"
+   },
+   {
+    "pin": "555702041546822865",
+    "url": "https://www.pinterest.com/pin/555702041546822865/",
+    "img": "https://i.pinimg.com/736x/d2/8a/f2/d28af27e0d4da711bc21878f80cbd763.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "Eléna Tissier",
+    "authorUrl": "https://www.pinterest.com/elenatissier/"
+   },
+   {
+    "pin": "788974428494372037",
+    "url": "https://www.pinterest.com/pin/788974428494372037/",
+    "img": "https://i.pinimg.com/736x/5f/82/3e/5f823e381fb7bb4b8ad4db9e9a393f76.jpg",
+    "w": 236,
+    "h": 295,
+    "author": "mindpierced",
+    "authorUrl": "https://www.pinterest.com/rafiktagrapes/"
+   }
+  ]
+ },
+ {
+  "id": "layered-papercut",
+  "name": "Layered Papercut",
+  "blurb": "Stacked paper layers form a glowing valley, lit from below like a tiny theatre.",
+  "vibe": "earthy-organic",
+  "tags": [
+   "papercut",
+   "layered",
+   "paper art",
+   "landscape",
+   "depth"
+  ],
+  "medium": "Real cut paper: five layers of coloured card cut with a craft knife, visible blade edges and small shadows between layers, bold simple shapes.",
+  "palette": {
+   "colors": [
+    "#E9E6EC",
+    "#4A5A7A",
+    "#7A5A72",
+    "#2B3248",
+    "#D8A98A"
+   ],
+   "note": "Cool grey blue and dusty mauve layers with one warm sliver of light. For a brand, make the layers tints and shades of the brand colour, and keep the warm light low."
+  },
+  "composition": "A large curving wave of layers sweeps from the top left diagonally to a small figure or building at the bottom right. A pale near empty ground gives the title space in the top right and body text at the bottom.",
+  "typography": "Light elegant serif headline in black or deep blue sitting on the pale ground, small tidy sans captions beneath, justified paragraph at the bottom left.",
+  "texture": "Soft shadows between layers, subtle fibres, a little glow inside the valley.",
+  "signature": [
+   "dozens of stacked paper layers",
+   "soft inner shadows",
+   "glowing valley",
+   "tiny scene at the end of the wave",
+   "pale empty ground for text"
+  ],
+  "avoid": [
+   "photo realistic mountain scenery",
+   "soft painted gradients",
+   "symmetrical centred valley",
+   "vector flat shapes",
+   "digital blur",
+   "lens flare",
+   "plastic sheen",
+   "gibberish text"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "slide",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Cormorant Garamond",
+    "weight": 500,
+    "upper": false,
+    "color": "#2B3248"
+   },
+   "body": {
+    "font": "Inter",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.46,
+     "y": 0.1,
+     "w": 0.5,
+     "h": 0.18,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.46,
+     "y": 0.3,
+     "w": 0.46,
+     "h": 0.07,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.88,
+     "w": 0.62,
+     "h": 0.08,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.46,
+     "y": 0.1,
+     "w": 0.5,
+     "h": 0.19,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.46,
+     "y": 0.29,
+     "w": 0.46,
+     "h": 0.08,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.86,
+     "w": 0.62,
+     "h": 0.09,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.46,
+     "y": 0.16,
+     "w": 0.5,
+     "h": 0.17,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.46,
+     "y": 0.33,
+     "w": 0.46,
+     "h": 0.06,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.06,
+     "y": 0.83,
+     "w": 0.62,
+     "h": 0.07,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Winter cabin stays under the northern lights",
+   "headline": "Under the Lights",
+   "subline": "Cabins in Abisko, from December to March",
+   "details": "Book at nordlys.example"
+  },
+  "sampleBrief": "A poster made from real cut paper, portrait 2:3: five layers of matte coloured card (dusk blue #3E5A7A, moss #5E7A4E, ochre #C99A3E, rust #A8553A, cream #EFE6D4) cut with a craft knife into big simple rolling hill shapes that sweep diagonally from bottom left, small shadows between layers, the blade edges slightly irregular, one hill pierced with a row of punched holes as stars. A tiny cut paper cabin with a yellow window sits on the highest ridge. The top half is plain cream card with room for type: a large serif 'Under the Lights' and a small line 'Cabins in Abisko, from December to March'. Photographed flat with soft even light.",
+  "refs": [
+   {
+    "pin": "1130966525263785536",
+    "url": "https://www.pinterest.com/pin/1130966525263785536/",
+    "img": "https://i.pinimg.com/736x/12/ce/4a/12ce4a4108237aaace96c7d4d1becc5a.jpg",
+    "w": 236,
+    "h": 333,
+    "author": "BP",
+    "authorUrl": "https://www.pinterest.com/basiliospapavasiliou/"
+   }
+  ]
+ },
+ {
+  "id": "cutout-plant-collage",
+  "name": "Cutout Plant Collage",
+  "blurb": "Cut out real leaves beside tall serif letters, with one wild red leaf.",
+  "vibe": "botanical-vintage",
+  "tags": [
+   "plants",
+   "photo collage",
+   "editorial",
+   "serif",
+   "leaves"
+  ],
+  "medium": "A digital photo collage of cut out plant photographs layered on a white page with thin keylines and small text boxes, as an editorial designer would build in layout software. The photos are real studio shots, hard cut with clean edges.",
+  "palette": {
+   "colors": [
+    "#FFFFFF",
+    "#1C1C1C",
+    "#3E7A3C",
+    "#C8D86A",
+    "#C0301F",
+    "#E8A02E"
+   ],
+   "note": "White ground, black type, natural leaf greens and one fiery red and orange leaf as the surprise. For a brand, make the type colour the brand dark and let a single plant accent echo the brand accent."
+  },
+  "composition": "Two or three huge leaves cross the page from one side, with a narrow vertical or rotated title running up the edge, a pinned grid of tiny text and a small hanging plant inset. White space is generous and leaves bleed off the edges.",
+  "typography": "Elegant high contrast serif capitals, huge and rotated ninety degrees along an edge, with tiny sans body text in thin boxed columns.",
+  "texture": "Clean studio shadows under leaves, subtle paper white, crisp keylines.",
+  "signature": [
+   "rotated giant serif title along the edge",
+   "one saturated red leaf against green ones",
+   "hairline text boxes",
+   "small inset plant photo",
+   "leaves bleeding off the page"
+  ],
+  "avoid": [
+   "watercolour effects",
+   "clip art leaves",
+   "plastic sheen",
+   "lens flare",
+   "gibberish text",
+   "busy green on green"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "flyer"
+  ],
+  "type": {
+   "headline": {
+    "font": "Bodoni Moda",
+    "weight": 500,
+    "upper": true,
+    "color": "#1C1C1C"
+   },
+   "body": {
+    "font": "Inter",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.04,
+     "w": 0.16,
+     "h": 0.7,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.22,
+     "y": 0.06,
+     "w": 0.34,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.22,
+     "y": 0.9,
+     "w": 0.5,
+     "h": 0.07,
+     "align": "left"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.04,
+     "y": 0.04,
+     "w": 0.16,
+     "h": 0.7,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.22,
+     "y": 0.06,
+     "w": 0.34,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.22,
+     "y": 0.88,
+     "w": 0.5,
+     "h": 0.08,
+     "align": "left"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.06,
+     "y": 0.07,
+     "w": 0.18,
+     "h": 0.62,
+     "align": "left"
+    },
+    {
+     "role": "subline",
+     "x": 0.28,
+     "y": 0.09,
+     "w": 0.5,
+     "h": 0.05,
+     "align": "left"
+    },
+    {
+     "role": "details",
+     "x": 0.28,
+     "y": 0.86,
+     "w": 0.6,
+     "h": 0.06,
+     "align": "left"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Pop up plant lending library in a cafe",
+   "headline": "Leaf Library",
+   "subline": "Borrow a houseplant for the season",
+   "details": "Open Wed to Sun, Café Fikon, Sankt Eriksgatan 40"
+  },
+  "sampleBrief": "A vertical 2:3 editorial photo collage poster on a clean white page, for a plant lending library pop up. Real studio photographs of houseplants cut out with crisp edges: a huge glossy green rubber plant leaf and a spiky monstera leaf cross the page from the lower left, a single fiery red and orange croton leaf enters from the upper right, and a small trailing string of pearls sits inside a thin hairline box near the top. Soft contact shadows beneath leaves on the white ground. Palette: white #FFFFFF, ink black #1C1C1C, leaf green #3E7A3C, lime #C8D86A, red #C0301F, amber #E8A02E. A narrow vertical title runs rotated ninety degrees up the left edge in huge elegant high contrast serif capitals reading \"LEAF LIBRARY\". A thin rule grid with tiny sans text boxes near the top: \"Borrow a houseplant for the season\". At the bottom in small clean sans: \"Open Wed to Sun, Café Fikon, Sankt Eriksgatan 40\". Lighting: soft studio daylight from above, gentle shadows. Texture: crisp hairlines, clean white, slight photographic sharpness. Avoid watercolour effects, clip art leaves, plastic sheen, lens flare, symmetrical stock composition, green on green clutter, gibberish or extra text.",
+  "refs": [
+   {
+    "pin": "770537817511765314",
+    "url": "https://www.pinterest.com/pin/770537817511765314/",
+    "img": "https://i.pinimg.com/736x/49/de/c1/49dec12d45fabca0cf799a370f8bbe7a.jpg",
+    "w": 236,
+    "h": 336,
+    "author": "Aiel Garcia-Kaufman",
+    "authorUrl": "https://www.pinterest.com/agarciakaufman/"
+   }
+  ]
+ },
+ {
+  "id": "neon-glow",
+  "name": "Neon Tube Glow",
+  "blurb": "Thin tubes of cold blue light trace logos on black, humming and slightly smeared.",
+  "vibe": "dark-tech",
+  "tags": [
+   "neon",
+   "glow",
+   "dark",
+   "LED",
+   "retro future"
+  ],
+  "medium": "A glowing neon and LED display captured as a photograph of tubes and dot matrix lights on a black screen, with bloom, light haze and a faint reflection. Lines have constant thickness and rounded ends.",
+  "palette": {
+   "colors": [
+    "#02030A",
+    "#2D8CFF",
+    "#9FD4FF",
+    "#F5FBFF",
+    "#1A3FA0"
+   ],
+   "note": "Black with one cold neon colour in two intensities and a white hot core. For a brand, use the brand colour for the tubes and keep the white core."
+  },
+  "composition": "A cluster of tube logos and glyphs fills the middle, with generous black space, a small caption paragraph beneath, and numbers in a bottom row. A dot grid or scan lines optionally in the background.",
+  "typography": "Monoline wide capitals made of tubes or LED dots, with tiny spaced caption text in pale blue below.",
+  "texture": "Bloom and haze around bright lines, soft glow reflection, fine scan line texture.",
+  "signature": [
+   "monoline tube letters with white hot core",
+   "LED dot matrix imagery",
+   "bloom haze",
+   "tiny caption paragraph",
+   "deep black ground"
+  ],
+  "avoid": [
+   "multicolour rainbow neon",
+   "lens flare streaks",
+   "brushed metal",
+   "gibberish text",
+   "chrome",
+   "clip art neon signs"
+  ],
+  "formats": [
+   "poster",
+   "post",
+   "story",
+   "slide",
+   "square"
+  ],
+  "type": {
+   "headline": {
+    "font": "Tilt Neon",
+    "weight": 400,
+    "upper": true,
+    "color": "#9FD4FF"
+   },
+   "body": {
+    "font": "Space Mono",
+    "weight": 400
+   }
+  },
+  "textZones": {
+   "poster": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.14,
+     "w": 0.64,
+     "h": 0.22,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.6,
+     "w": 0.7,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.9,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "post": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.14,
+     "w": 0.64,
+     "h": 0.24,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.59,
+     "w": 0.7,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.88,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ],
+   "story": [
+    {
+     "role": "headline",
+     "x": 0.18,
+     "y": 0.19,
+     "w": 0.64,
+     "h": 0.2,
+     "align": "center"
+    },
+    {
+     "role": "subline",
+     "x": 0.15,
+     "y": 0.59,
+     "w": 0.7,
+     "h": 0.06,
+     "align": "center"
+    },
+    {
+     "role": "details",
+     "x": 0.1,
+     "y": 0.84,
+     "w": 0.8,
+     "h": 0.05,
+     "align": "center"
+    }
+   ]
+  },
+  "example": {
+   "subject": "Retro arcade bar opening",
+   "headline": "Neon Heron",
+   "subline": "Pinball, cocktails and late night games",
+   "details": "Opens Fri 3 Oct, Kungsgatan 27"
+  },
+  "sampleBrief": "A vertical 2:3 poster in a neon tube and LED display style, for a retro arcade bar opening. Pure black ground #02030A. In the middle a bird shaped heron glyph drawn as a monoline neon tube in electric blue #2D8CFF with a white hot core #F5FBFF and soft cold haze, above the name in wide monoline tube capitals. A secondary row of small LED dot matrix icons, a pinball, a joystick and a cocktail glass, sits beneath. A faint dot grid and fine scan lines in the background, light haze and a faint floor reflection. Palette: black, electric blue, pale blue #9FD4FF, white, deep blue #1A3FA0. Typography spelled exactly: headline \"NEON HERON\" in monoline tube capitals in the middle; beneath it in tiny spaced pale blue mono text \"Pinball, cocktails and late night games\"; at the bottom row \"Opens Fri 3 Oct, Kungsgatan 27\". Lighting: the glow is the only light source, bloom around the brightest lines. Texture: haze, bloom, faint scan lines. Avoid rainbow neon, lens flare streaks, brushed metal, chrome, clip art neon signs, symmetrical stock composition, extra or gibberish text.",
+  "refs": []
+ }
+]

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { blended, byScore, loadPackTemplate, loadTemplateIndex, thumbUrl, type TemplateIndex } from '../templates/packs';
 import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import { TEMPLATES, type Template } from '../templates';
@@ -47,7 +48,22 @@ export default function TemplatesPanel() {
   const meta = useDoc((s) => s.meta);
   const [q, setQ] = useState('');
   const [onlyFit, setOnlyFit] = useState(false);
+  const [index, setIndex] = useState<TemplateIndex | null>(null);
+  const [vibe, setVibe] = useState('all');
+  useEffect(() => {
+    loadTemplateIndex().then(setIndex);
+  }, []);
   const ratio = meta.width / meta.height;
+  const vibes = Object.entries(index?.vibes ?? {})
+    .filter(([id]) => index?.templates.some((t) => t.vibe === id))
+    .sort((a, b) => (a[1].order ?? 99) - (b[1].order ?? 99));
+  const libRaw = (index?.templates ?? []).filter(
+    (t) =>
+      (vibe === 'all' || t.vibe === vibe) &&
+      (!q || `${t.name} ${t.category} ${t.tags.join(' ')} ${index?.vibes[t.vibe]?.name ?? ''}`.toLowerCase().includes(q.toLowerCase())) &&
+      (!onlyFit || Math.abs(t.width / t.height - ratio) < 0.05),
+  );
+  const lib = vibe === 'all' && !q ? blended(libRaw) : byScore(libRaw);
   const list = TEMPLATES.filter((t) => (!q || `${t.name} ${t.category}`.toLowerCase().includes(q.toLowerCase())) && (!onlyFit || Math.abs(t.width / t.height - ratio) < 0.05));
   const cats = [...new Set(list.map((t) => t.category))];
   return (
@@ -64,6 +80,43 @@ export default function TemplatesPanel() {
       <p className="hint" style={{ margin: '6px 0 0' }}>
         Any template adapts to your page size. Click to add it.
       </p>
+      {vibes.length ? (
+        <>
+          <div className="panel-section">
+            <h3>Library</h3>
+          </div>
+          <div className="chips" style={{ marginBottom: 10 }}>
+            <button className={`chip ${vibe === 'all' ? 'is-on' : ''}`} onClick={() => setVibe('all')}>
+              Every vibe
+            </button>
+            {vibes.map(([id, v]) => (
+              <button key={id} className={`chip ${vibe === id ? 'is-on' : ''}`} onClick={() => setVibe(id)}>
+                {v.name}
+              </button>
+            ))}
+          </div>
+          <div className="grid-2">
+            {lib.slice(0, vibe === 'all' && !q ? 60 : 400).map((t) => (
+              <button
+                key={t.id}
+                className="tile"
+                style={{ display: 'grid', placeItems: 'center', padding: 8, aspectRatio: '1', cursor: 'pointer' }}
+                title={`${t.name}${t.pages > 1 ? `, ${t.pages} pages` : ''}`}
+                onClick={async () => {
+                  const tpl = await loadPackTemplate(t.id, t.vibe);
+                  if (tpl) applyTemplate(editor, tpl);
+                }}
+              >
+                <img src={thumbUrl(t.id)} alt={t.name} loading="lazy" style={{ maxWidth: '100%', maxHeight: '100%', boxShadow: 'var(--shadow-1)' }} />
+              </button>
+            ))}
+          </div>
+          {vibe === 'all' && !q && lib.length > 60 ? <p className="hint">Pick a vibe or search to see all {lib.length}.</p> : null}
+          <div className="panel-section">
+            <h3>Classics</h3>
+          </div>
+        </>
+      ) : null}
       {cats.map((c) => (
         <div key={c}>
           <div className="panel-section">

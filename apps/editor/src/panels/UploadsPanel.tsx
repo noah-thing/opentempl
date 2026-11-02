@@ -4,7 +4,7 @@ import { importFiles, pickFiles } from '../io/upload';
 import { listUploads, onUploadsChange, removeUpload } from '../io/uploads';
 import type { Asset } from '../doc/types';
 import { Icon } from '../ui/icons';
-import { Eyes } from '../ui/Logo';
+import { Sign } from '../ui/Logo';
 import { Section } from './controls';
 import { addCustomFont, listCustomFonts } from '../fonts/custom';
 
@@ -42,7 +42,7 @@ export default function UploadsPanel() {
           importFiles(editor, [...e.dataTransfer.files]);
         }}
       >
-        <Eyes size={56} mood={over ? 'wow' : 'look'} />
+        <Sign size={56} mood={over ? 'wow' : 'look'} />
         <div style={{ fontWeight: 600, margin: '8px 0 2px' }}>Drop photos and videos here</div>
         <div className="hint" style={{ marginBottom: 12 }}>
           PNG, JPG, WebP, GIF, SVG, MP4, MOV and WebM. They stay on this device.

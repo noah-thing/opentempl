@@ -46,7 +46,7 @@ function assetIds(def: TemplateDef) {
   return [...ids].filter((id) => id.startsWith('lib:'));
 }
 
-function make(def: TemplateDef): Template {
+export function makeTemplate(def: TemplateDef): Template {
   return {
     ...def,
     build: async () => {
@@ -88,8 +88,13 @@ function make(def: TemplateDef): Template {
   };
 }
 
-export const TEMPLATES: Template[] = [...DEFS, ...DEFS2, ...DEFS3].map(make);
+export const TEMPLATES: Template[] = [...DEFS, ...DEFS2, ...DEFS3].map(makeTemplate);
 
 export function templateById(id: string) {
   return TEMPLATES.find((t) => t.id === id);
+}
+
+// Built in templates first, then the packs in public/templates.
+export async function findTemplate(id: string): Promise<Template | undefined> {
+  return templateById(id) ?? (await import('./packs')).loadPackTemplate(id);
 }

@@ -23,7 +23,7 @@ import { onFontsChange, preloadFonts } from '../fonts/fonts';
 import { connectCollab, type Collab } from '../collab/collab';
 import { startAutoVersions } from '../io/versions';
 import { registerCustomFonts } from '../fonts/custom';
-import { Eyes } from '../ui/Logo';
+import { Sign } from '../ui/Logo';
 
 export function EditorScreen({ id }: { id: string }) {
   const [state, setState] = useState<{ open: OpenDesign; editor: Editor } | null>(null);
@@ -72,7 +72,7 @@ export function EditorScreen({ id }: { id: string }) {
     return (
       <div style={{ height: '100%', display: 'grid', placeItems: 'center', background: 'var(--paper)' }}>
         <div style={{ display: 'grid', justifyItems: 'center', gap: 14, textAlign: 'center' }}>
-          <Eyes size={96} mood="wow" />
+          <Sign size={96} mood="wow" />
           <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>This design lives on another device</h2>
           <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>Tavla keeps designs in the browser that made them. Ask for a .tavla file or a live link.</p>
           <button className="btn btn-ink" onClick={() => navigate('/')}>

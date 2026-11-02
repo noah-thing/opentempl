@@ -6,6 +6,8 @@ import { DUOTONES, FILTER_PRESETS, ImageFilterDef } from '../render/paint';
 import { Section, Slider } from './controls';
 import { NO_FILTERS } from '../doc/factory';
 import { removeBackground } from '../tools/removeBackground';
+import { magicLayers } from '../tools/magicLayers';
+import { hasKey } from '../generate/openai';
 import { Icon } from '../ui/icons';
 
 const ADJUST: { key: keyof ImageFilters; label: string; min: number }[] = [
@@ -47,8 +49,24 @@ export default function AdjustPanel() {
         >
           <Icon name="wand" /> {busy ?? 'Remove background'}
         </button>
+        <button
+          className="btn btn-outline btn-block"
+          style={{ marginTop: 8 }}
+          disabled={!!busy || !el.assetId}
+          onClick={async () => {
+            setBusy('Reading the picture');
+            try {
+              await magicLayers(editor, el, { subject: false, repaint: hasKey() }, setBusy);
+            } catch (e) {
+              editor.toast(String((e as Error).message ?? e));
+            }
+            setBusy(null);
+          }}
+        >
+          <Icon name="layers" /> Magic layers
+        </button>
         <p className="hint" style={{ margin: '6px 0 0' }}>
-          Runs on your machine with an open model. The first run downloads it once.
+          Magic layers lifts the words off a picture as editable text boxes and rebuilds what was behind them. Both run on your machine with open models; the first run downloads them once.{hasKey() ? ' With your OpenAI key connected, what was behind the words is repainted by GPT Image.' : ''}
         </p>
       </Section>
       <Section title="Filters" action={f.preset !== 'none' ? <button onClick={() => set({ preset: 'none' })}>Clear</button> : null}>

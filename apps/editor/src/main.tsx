@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import './styles/app.css';
+import './styles/night.css';
 import { applyTheme } from './ui/theme';
 
 applyTheme();

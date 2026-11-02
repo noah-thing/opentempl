@@ -6,3 +6,9 @@ qa/out/
 assets/raw/*.png
 research/rea/*.json
 research/web/
+research/vibes/pins/
+research/lica/
+research/vibes/build/
+apps/editor/templates/shots/
+assets/raw/
+research/vibes/

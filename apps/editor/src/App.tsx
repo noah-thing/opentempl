@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Home } from './home/Home';
 import { EditorScreen } from './editor/EditorScreen';
 import { createDesign } from './io/designs';
 import { formatById } from './doc/formats';
-import { templateById } from './templates';
-import { Eyes } from './ui/Logo';
+import { findTemplate } from './templates';
+import { Sign } from './ui/Logo';
 import { IconSheet } from './ui/IconSheet';
 import { ErrorBoundary } from './ui/ErrorBoundary';
 import { Presenter } from './present/Presenter';
+import { RenderTemplate } from './templates/RenderTemplate';
+
+const Studio = lazy(() => import('./generate/Studio').then((m) => ({ default: m.Studio })));
 
 // Hash routes: #/ home, #/d/<id> editor, #/new?format=<id>&template=<id>
 function useHash() {
@@ -59,6 +62,13 @@ export function App() {
     );
   }
   if (path === '/icons') return <IconSheet />;
+  if (path.startsWith('/generate'))
+    return (
+      <Suspense fallback={<Loading label="Opening the looks" />}>
+        <Studio query={path.split('?')[1] ?? ''} />
+      </Suspense>
+    );
+  if (path.startsWith('/render')) return <RenderTemplate query={path.split('?')[1] ?? ''} />;
   if (path.startsWith('/presenter/')) return <Presenter id={path.slice(11).split('?')[0]} />;
   if (path.startsWith('/new')) return <NewDesign query={path.split('?')[1] ?? ''} />;
   return <Home />;
@@ -67,11 +77,11 @@ export function App() {
 function NewDesign({ query }: { query: string }) {
   useEffect(() => {
     const q = new URLSearchParams(query);
-    const tpl = templateById(q.get('template') ?? '');
     const fmt = formatById(q.get('format') ?? '');
     const w = Number(q.get('w'));
     const h = Number(q.get('h'));
     (async () => {
+      const tpl = q.get('template') ? await findTemplate(q.get('template')!) : undefined;
       let id: string;
       if (tpl) {
         const built = await tpl.build();
@@ -94,7 +104,7 @@ export function Loading({ label }: { label: string }) {
   return (
     <div style={{ height: '100%', display: 'grid', placeItems: 'center', background: 'var(--paper)' }}>
       <div style={{ display: 'grid', justifyItems: 'center', gap: 14, color: 'var(--ink-2)', fontWeight: 500 }}>
-        <Eyes size={72} />
+        <div className="loading-line" />
         {label}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useEditor } from '../editor/Editor';
 import { useDoc, useUI } from '../editor/hooks';
 import { Icon } from '../ui/icons';
-import { Eyes } from '../ui/Logo';
+import { Sign } from '../ui/Logo';
 
 export default function CommentsPanel() {
   const editor = useEditor();
@@ -47,7 +47,7 @@ export default function CommentsPanel() {
         ))
       ) : (
         <div className="empty">
-          <Eyes size={64} />
+          <Sign size={64} />
           <h4>{resolved ? 'Everything is resolved' : 'No comments yet'}</h4>
           <span className="hint">
             {resolved
