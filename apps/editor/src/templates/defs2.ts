@@ -160,7 +160,7 @@ export const DEFS2: TemplateDef[] = [
       {
         background: bg('mesh-pink'),
         elements: [
-          text('Elsa is\nturning 7!', 64, 130, 952, { fontFamily: 'Rubik', fontSize: 170, fontWeight: 800, lineHeight: 0.9, letterSpacing: -30, align: 'center', color: '#FFFFFF', shadow: { x: 0, y: 10, blur: 30, color: 'rgba(160,20,90,0.35)' } }),
+          text('Elsa is\nturning 7', 64, 130, 952, { fontFamily: 'Rubik', fontSize: 170, fontWeight: 800, lineHeight: 0.9, letterSpacing: -30, align: 'center', color: '#FFFFFF', shadow: { x: 0, y: 10, blur: 30, color: 'rgba(160,20,90,0.35)' } }),
           sticker('char-star-yellow', 130, 560, 280, { rotation: -12 }),
           sticker('char-cloud-lilac', 640, 610, 210, { rotation: 8 }),
           sticker('char-circle-mint', 460, 720, 190, { rotation: -4 }),

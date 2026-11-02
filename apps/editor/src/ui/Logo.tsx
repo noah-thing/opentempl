@@ -1,4 +1,4 @@
-// The mark: the matte pixel cloud on its cobalt tile (research/icon/v4/pixel-cloud.png).
+// The mark: a matte pixel cloud on a cobalt tile.
 // The 96 px file covers every size the interface draws it at, up to 3x screens.
 export function Mark({ size = 28 }: { size?: number }) {
   const src = `${import.meta.env.BASE_URL}${size > 32 ? 'mark-512.png' : 'mark-96.png'}`;

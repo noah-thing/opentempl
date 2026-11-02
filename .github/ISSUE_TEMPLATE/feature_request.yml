@@ -1,0 +1,15 @@
+name: Feature request
+description: An idea for something OpenTempl should do.
+body:
+  - type: textarea
+    attributes:
+      label: What you are trying to make
+      description: The design you were working on and where OpenTempl got in the way.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What would help
+  - type: textarea
+    attributes:
+      label: Alternatives you tried

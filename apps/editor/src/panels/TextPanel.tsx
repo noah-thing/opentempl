@@ -48,7 +48,7 @@ export const COMBOS: Combo[] = [
   {
     name: 'Thank you note',
     els: [
-      t({ text: 'thank you!', fontFamily: 'Caveat', fontSize: 110, fontWeight: 700, w: 520, x: 0, y: 0, align: 'center', lineHeight: 1 }),
+      t({ text: 'thank you', fontFamily: 'Caveat', fontSize: 110, fontWeight: 700, w: 520, x: 0, y: 0, align: 'center', lineHeight: 1 }),
       t({ text: 'for coming to our little party', fontFamily: UI_FONT, fontSize: 24, w: 520, x: 0, y: 122, align: 'center' }),
     ],
   },

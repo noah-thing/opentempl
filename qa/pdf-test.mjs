@@ -1,4 +1,4 @@
-import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+import { chromium } from 'playwright';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const maker = await browser.newPage();
 await maker.setContent(`<html><body style="margin:0;font-family:Helvetica,Arial,sans-serif">

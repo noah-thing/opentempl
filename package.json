@@ -2,14 +2,17 @@
   "name": "opentempl",
   "private": true,
   "version": "0.1.0",
-  "description": "OpenTempl, the free, open source Canva alternative for posters, slides and everything in between.",
+  "description": "A free design app for posters, social posts and slides.",
   "license": "MIT",
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "npm run dev -w @opentempl/editor",
     "dev:site": "npm run dev -w @opentempl/site",
     "build": "npm run build -w @opentempl/site && npm run build -w @opentempl/editor",
     "preview": "npx vite preview --outDir dist --port 4173",
-    "typecheck": "npm run typecheck -w @opentempl/editor"
+    "typecheck": "npm run typecheck -w @opentempl/editor",
+    "test": "npm test -w @opentempl/editor"
   }
 }

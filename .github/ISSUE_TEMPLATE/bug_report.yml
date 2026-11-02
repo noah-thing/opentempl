@@ -1,0 +1,30 @@
+name: Bug report
+description: Something does not work the way it should.
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the Resize panel
+        2. Pick Story
+        3. ...
+  - type: dropdown
+    attributes:
+      label: Where are you using OpenTempl
+      options: [opentempl.org, macOS app, Windows app, Linux app, Running from source]
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Browser and version
+      description: For the web app. Chrome, Safari, Firefox or Edge.
+  - type: textarea
+    attributes:
+      label: Anything else
+      description: Screenshots, a short screen recording, or the design file if you can share it.

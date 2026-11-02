@@ -1,7 +1,7 @@
 // End to end: Generate tab with a real OpenAI key (from ~/.config/tavla/openai.key),
 // one picture in editable text mode, then open it as a Magic layers design.
 //   node qa/generate-e2e.mjs [lookId] [quality]     (needs the dev server on :5181)
-import { chromium } from '/Users/noahmalekani/.npm/_npx/9833c18b2d85bc59/node_modules/playwright/index.mjs';
+import { chromium } from 'playwright';
 import fs from 'node:fs';
 import os from 'node:os';
 const out = process.env.OUT || '/tmp/gen-e2e';
