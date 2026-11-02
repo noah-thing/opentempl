@@ -7,6 +7,7 @@ import { Section } from './controls';
 import { Icon } from '../ui/icons';
 import { ensureFont } from '../fonts/fonts';
 import { useBrand } from './brand';
+import { COBALT } from '../doc/colors';
 
 // Font combinations: small compositions of text boxes, each built for a real
 // use (a poster, an invite, a sale) rather than random pairings.
@@ -73,7 +74,7 @@ export const COMBOS: Combo[] = [
   {
     name: 'Hollow headline',
     els: [
-      t({ text: 'MAKE\nNOISE', fontFamily: 'Archivo Black', fontSize: 130, lineHeight: 0.9, w: 560, x: 0, y: 0, align: 'center', color: '#2B3BFF', effect: { kind: 'splice', color: '#FFE600', amount: 40, offset: 50, direction: 45 } }),
+      t({ text: 'MAKE\nNOISE', fontFamily: 'Archivo Black', fontSize: 130, lineHeight: 0.9, w: 560, x: 0, y: 0, align: 'center', color: COBALT, effect: { kind: 'splice', color: '#FFE600', amount: 40, offset: 50, direction: 45 } }),
     ],
   },
   {

@@ -15,6 +15,7 @@ import type {
   TextEffect,
   TextElement,
 } from './types';
+import { COBALT } from './colors';
 
 export const UI_FONT = 'Host Grotesk';
 
@@ -168,11 +169,11 @@ export function makeChart(kind: ChartElement['kind'], p: Partial<ChartElement> =
     h: progress ? 400 : pie ? 400 : 360,
     labels: progress ? ['Done'] : pie ? ['Posters', 'Slides', 'Stickers', 'Other'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     series: progress
-      ? [{ name: 'Progress', values: [72], color: '#2B3BFF' }]
+      ? [{ name: 'Progress', values: [72], color: COBALT }]
       : pie
-        ? [{ name: 'Share', values: [42, 28, 18, 12], color: '#2B3BFF' }]
+        ? [{ name: 'Share', values: [42, 28, 18, 12], color: COBALT }]
         : [
-            { name: 'This year', values: [12, 19, 15, 26, 31, 38], color: '#2B3BFF' },
+            { name: 'This year', values: [12, 19, 15, 26, 31, 38], color: COBALT },
             { name: 'Last year', values: [8, 11, 14, 13, 20, 22], color: '#FF4B39' },
           ],
     fontFamily: UI_FONT,

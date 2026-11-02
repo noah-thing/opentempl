@@ -4,16 +4,16 @@ import type { PanelId } from '../editor/state';
 import { Icon } from '../ui/icons';
 
 const ITEMS: { id: PanelId; label: string; icon: string }[] = [
-  { id: 'templates', label: 'Templates', icon: 'templates' },
-  { id: 'elements', label: 'Elements', icon: 'elements' },
-  { id: 'text', label: 'Text', icon: 'text' },
-  { id: 'photos', label: 'Photos', icon: 'photos' },
-  { id: 'uploads', label: 'Uploads', icon: 'uploads' },
-  { id: 'draw', label: 'Draw', icon: 'draw' },
-  { id: 'audio', label: 'Audio', icon: 'music' },
-  { id: 'brand', label: 'Brand', icon: 'brand' },
-  { id: 'layers', label: 'Layers', icon: 'layers' },
-  { id: 'apps', label: 'Tools', icon: 'apps' },
+  { id: 'templates', label: 'Templates', icon: 'nav-templates' },
+  { id: 'elements', label: 'Elements', icon: 'nav-elements' },
+  { id: 'text', label: 'Text', icon: 'nav-text' },
+  { id: 'photos', label: 'Photos', icon: 'nav-photos' },
+  { id: 'uploads', label: 'Uploads', icon: 'nav-uploads' },
+  { id: 'draw', label: 'Draw', icon: 'nav-draw' },
+  { id: 'audio', label: 'Audio', icon: 'nav-audio' },
+  { id: 'brand', label: 'Brand', icon: 'nav-brand' },
+  { id: 'layers', label: 'Layers', icon: 'nav-layers' },
+  { id: 'apps', label: 'Tools', icon: 'nav-tools' },
 ];
 
 export function Rail() {
@@ -37,8 +37,8 @@ export function Rail() {
       ))}
       <div className="grow" />
       <button className="rail-item" onClick={() => editor.ui.set({ shortcutsOpen: true })}>
-        <Icon name="keyboard" size={20} />
-        Keys
+        <Icon name="nav-shortcuts" size={20} />
+        Shortcuts
       </button>
     </nav>
   );

@@ -3,18 +3,19 @@ import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import { Icon } from '../ui/icons';
 import { useEscape } from '../ui/useEscape';
-import { Sign } from '../ui/Logo';
 import type { ExportFormat } from '../export/exporters';
+import { Subscribe } from '../ui/Subscribe';
+import { exportNoteSeen, isSubscribed, markExportNoteSeen, track } from '../stats/client';
 
 const FORMATS: { id: ExportFormat; name: string; note: string }[] = [
-  { id: 'png', name: 'PNG', note: 'Sharp images, transparent backgrounds' },
+  { id: 'png', name: 'PNG', note: 'Sharp, with transparent backgrounds' },
   { id: 'jpg', name: 'JPG', note: 'Small files for photos' },
   { id: 'webp', name: 'WebP', note: 'Smallest images for the web' },
-  { id: 'pdf', name: 'PDF', note: 'Print and documents, links stay clickable' },
-  { id: 'svg', name: 'SVG', note: 'Vector, opens in Figma and Illustrator' },
-  { id: 'pptx', name: 'PowerPoint', note: 'Editable slides for PowerPoint, Keynote, Google Slides' },
-  { id: 'video', name: 'MP4 video', note: 'Pages, animations and clips, with sound' },
-  { id: 'gif', name: 'GIF', note: 'A small looping animation for chats and posts' },
+  { id: 'pdf', name: 'PDF', note: 'For print, links stay clickable' },
+  { id: 'svg', name: 'SVG', note: 'Vector, opens in Figma' },
+  { id: 'pptx', name: 'PowerPoint', note: 'Editable slides, opens in Keynote' },
+  { id: 'video', name: 'MP4 video', note: 'Pages, animation and sound' },
+  { id: 'gif', name: 'GIF', note: 'A small looping animation' },
   { id: 'tavla', name: 'OpenTempl file', note: 'The editable design, to keep or send' },
 ];
 
@@ -33,6 +34,7 @@ export function ExportDialog() {
   const [bleed, setBleed] = useState(false);
   const [busy, setBusy] = useState<{ done: number; total: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [note, setNote] = useState(false);
   const close = () => !busy && editor.ui.set({ exportOpen: false });
   useEscape(close);
 
@@ -52,8 +54,15 @@ export function ExportDialog() {
         onProgress: (done, total) => setBusy({ done, total }),
       });
       setBusy(null);
-      editor.ui.set({ exportOpen: false });
+      track('export');
       editor.toast('Exported. Check your downloads.');
+      // The email note is offered once per install, right after the first export, and never to someone already on the list.
+      if (exportNoteSeen() || isSubscribed()) {
+        editor.ui.set({ exportOpen: false });
+      } else {
+        markExportNoteSeen();
+        setNote(true);
+      }
     } catch (e) {
       setBusy(null);
       setError(String((e as Error)?.message ?? e));
@@ -71,30 +80,34 @@ export function ExportDialog() {
           </button>
         </div>
         <div className="dialog-body">
-          {busy ? (
+          {note ? (
+            <div style={{ display: 'grid', gap: 16, padding: '8px 0 4px' }}>
+              <p style={{ margin: 0, color: 'var(--ink-2)' }}>Your file is in your downloads.</p>
+              <Subscribe source="export" onDone={() => setTimeout(() => editor.ui.set({ exportOpen: false }), 2200)} />
+              <div>
+                <button className="btn btn-outline" onClick={() => editor.ui.set({ exportOpen: false })}>
+                  Not now
+                </button>
+              </div>
+            </div>
+          ) : busy ? (
             <div className="empty" style={{ padding: '36px 0' }}>
-              <Sign size={84} mood="wow" />
               <h4>
                 Rendering {busy.done} of {busy.total}
               </h4>
-              <div style={{ width: 260, height: 4, background: 'var(--line)', borderRadius: 4, overflow: 'hidden' }}>
+              <div style={{ width: 260, height: 4, background: 'var(--line)', borderRadius: 4, overflow: 'hidden', marginTop: 12 }}>
                 <div style={{ width: `${(busy.done / Math.max(1, busy.total)) * 100}%`, height: '100%', background: 'var(--ink)', transition: 'width .2s' }} />
               </div>
             </div>
           ) : (
             <div className="stack" style={{ gap: 18 }}>
-              <div className="grid-2" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+              <div className="grid-2 format-grid">
                 {FORMATS.map((f) => (
                   <button
                     key={f.id}
                     onClick={() => setFormat(f.id)}
-                    style={{
-                      textAlign: 'left',
-                      padding: '12px 14px',
-                      borderRadius: 12,
-                      boxShadow: format === f.id ? 'inset 0 0 0 2px var(--ink)' : 'inset 0 0 0 1px var(--line)',
-                      background: format === f.id ? 'var(--sheet)' : 'var(--sheet)',
-                    }}
+                    className={`format-card ${format === f.id ? 'is-on' : ''}`}
+                    aria-pressed={format === f.id}
                   >
                     <div style={{ fontWeight: 600 }}>{f.name}</div>
                     <div className="hint">{f.note}</div>
@@ -119,10 +132,10 @@ export function ExportDialog() {
                   <div className="row-between">
                     <span className="label">Size</span>
                     <span className="tabular hint">
-                      {Math.round(meta.width * scale)} × {Math.round(meta.height * scale)} px
+                      {scale}× · {Math.round(meta.width * scale)} × {Math.round(meta.height * scale)} px
                     </span>
                   </div>
-                  <div className="slider-row">
+                  <div className="slider-row is-bare">
                     <input
                       type="range"
                       min={0.25}
@@ -132,9 +145,6 @@ export function ExportDialog() {
                       style={{ ['--fill' as string]: `${((scale - 0.25) / 3.75) * 100}%` }}
                       onChange={(e) => setScale(Number(e.target.value))}
                     />
-                    <span className="tabular" style={{ textAlign: 'right', fontWeight: 500 }}>
-                      {scale}×
-                    </span>
                   </div>
                 </div>
               ) : null}
@@ -146,12 +156,12 @@ export function ExportDialog() {
               ) : null}
               {format === 'jpg' || format === 'webp' ? (
                 <div>
-                  <span className="label">Quality</span>
-                  <div className="slider-row">
+                  <div className="row-between">
+                    <span className="label">Quality</span>
+                    <span className="tabular hint">{Math.round(quality * 100)}</span>
+                  </div>
+                  <div className="slider-row is-bare">
                     <input type="range" min={0.4} max={1} step={0.05} value={quality} style={{ ['--fill' as string]: `${((quality - 0.4) / 0.6) * 100}%` }} onChange={(e) => setQuality(Number(e.target.value))} />
-                    <span className="tabular" style={{ textAlign: 'right', fontWeight: 500 }}>
-                      {Math.round(quality * 100)}
-                    </span>
                   </div>
                 </div>
               ) : null}
@@ -174,12 +184,12 @@ export function ExportDialog() {
                   <button className={`switch ${bleed ? 'is-on' : ''}`} onClick={() => setBleed((b) => !b)} aria-pressed={bleed} />
                 </label>
               ) : null}
-              {error ? <div style={{ color: '#d22b1b' }}>{error}</div> : null}
-              <button className="btn btn-primary btn-block" style={{ height: 44 }} onClick={run}>
+              {error ? <div style={{ color: 'var(--danger)' }}>{error}</div> : null}
+              <button className="btn btn-primary btn-block btn-lg" onClick={run}>
                 <Icon name="download" /> Download {FORMATS.find((f) => f.id === format)?.name}
               </button>
               <p className="hint" style={{ margin: 0 }}>
-                Everything renders on your machine. Nothing is uploaded, no watermark, no paid tier.
+                Rendered on this computer.
               </p>
             </div>
           )}

@@ -5,6 +5,7 @@ import { makeLine, makeShape, makeText, TEXT_PRESETS } from '../doc/factory';
 import { importFiles } from '../io/upload';
 import { prepareImage } from '../io/upload';
 import { addUpload } from '../io/uploads';
+import { COBALT } from '../doc/colors';
 
 export interface Shortcut {
   keys: string; // display form
@@ -209,7 +210,7 @@ export const QUICK = {
   heading: (ed: Editor) => ed.add([makeText({ ...TEXT_PRESETS.heading, w: Math.min(ed.s.meta.width * 0.8, 1400) })]),
   subheading: (ed: Editor) => ed.add([makeText({ ...TEXT_PRESETS.subheading, w: Math.min(ed.s.meta.width * 0.7, 1100) })]),
   body: (ed: Editor) => ed.add([makeText({ ...TEXT_PRESETS.body, w: Math.min(ed.s.meta.width * 0.6, 900) })]),
-  rect: (ed: Editor) => ed.add([makeShape('rect', { fill: { type: 'solid', color: '#2B3BFF' } })]),
+  rect: (ed: Editor) => ed.add([makeShape('rect', { fill: { type: 'solid', color: COBALT } })]),
   circle: (ed: Editor) => ed.add([makeShape('ellipse', { fill: { type: 'solid', color: '#FF4B39' } })]),
   line: (ed: Editor) => ed.add([makeLine({ w: Math.min(ed.s.meta.width * 0.4, 600) })]),
 };

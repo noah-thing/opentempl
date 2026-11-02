@@ -21,9 +21,26 @@ import { useShortcuts } from './shortcuts';
 import { useUI } from './hooks';
 import { onFontsChange, preloadFonts } from '../fonts/fonts';
 import { connectCollab, type Collab } from '../collab/collab';
+import { saveRoom, savedRoom } from '../collab/rooms';
 import { startAutoVersions } from '../io/versions';
 import { registerCustomFonts } from '../fonts/custom';
-import { Sign } from '../ui/Logo';
+
+// The start page can ask for a rail panel to be open when a new design loads.
+const RAIL_PANELS = ['templates', 'elements', 'text', 'photos', 'uploads', 'draw', 'audio', 'brand', 'layers', 'apps'] as const;
+
+function openRequestedPanel(editor: Editor) {
+  let id: string | null = null;
+  try {
+    id = sessionStorage.getItem('opentempl:open-panel');
+    sessionStorage.removeItem('opentempl:open-panel');
+  } catch {
+    return;
+  }
+  const panel = RAIL_PANELS.find((p) => p === id);
+  if (!panel) return;
+  editor.openPanel(panel);
+  if (panel === 'draw') editor.ui.set({ tool: 'draw' });
+}
 
 export function EditorScreen({ id }: { id: string }) {
   const [state, setState] = useState<{ open: OpenDesign; editor: Editor } | null>(null);
@@ -37,7 +54,10 @@ export function EditorScreen({ id }: { id: string }) {
     let stopVersions: (() => void) | null = null;
     (async () => {
       await registerCustomFonts().catch(() => {});
-      const room = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room');
+      // A link carries the room key; a design shared earlier remembers it.
+      const linkRoom = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room');
+      if (linkRoom) saveRoom(id, linkRoom);
+      const room = linkRoom ?? savedRoom(id);
       opened = await openDesign(id, { joining: !!room });
       if (cancelled) {
         opened?.close();
@@ -55,7 +75,17 @@ export function EditorScreen({ id }: { id: string }) {
       preloadFonts(fams).then(() => editor.refitAllText());
       offFonts = onFontsChange(() => editor.refitAllText()) as () => void;
       if (room) collab = connectCollab(editor, room);
+      // A design opened from a link on a new device is empty until the relay delivers it.
+      const fresh = !opened.doc.snapshot.pageOrder.length;
+      if (collab && fresh) {
+        await Promise.race([collab.relayReady, new Promise((r) => setTimeout(r, 6000))]);
+        if (cancelled) return;
+        if (collab.relay?.status === 'gone') editor.toast('The owner stopped sharing this design.');
+        const arrived = Object.values(opened.doc.snapshot.elements).flatMap((el) => ('fontFamily' in el ? [el.fontFamily] : []));
+        preloadFonts(arrived).then(() => editor.refitAllText());
+      }
       stopVersions = startAutoVersions(opened.doc);
+      openRequestedPanel(editor);
       setState({ open: opened, editor });
       document.title = `${opened.doc.snapshot.meta.title} · OpenTempl`;
     })();
@@ -72,9 +102,8 @@ export function EditorScreen({ id }: { id: string }) {
     return (
       <div style={{ height: '100%', display: 'grid', placeItems: 'center', background: 'var(--paper)' }}>
         <div style={{ display: 'grid', justifyItems: 'center', gap: 14, textAlign: 'center' }}>
-          <Sign size={96} mood="wow" />
-          <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>This design lives on another device</h2>
-          <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>OpenTempl keeps designs in the browser that made them. Ask for an .opentempl file or a live link.</p>
+          <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>This design is on another device</h2>
+          <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>Designs stay in the browser that made them. Ask for an .opentempl file or a live link.</p>
           <button className="btn btn-ink" onClick={() => navigate('/')}>
             Back to your designs
           </button>

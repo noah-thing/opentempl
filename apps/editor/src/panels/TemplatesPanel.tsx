@@ -7,6 +7,8 @@ import { TemplatePreview } from '../templates/Preview';
 import { resizeSnapshot } from './ResizePanel';
 import { Search } from './controls';
 import { ensureFont } from '../fonts/fonts';
+import { Icon } from '../ui/icons';
+import { Menu, Popover, usePopover } from '../ui/Popover';
 
 // Applying a template: the template is rescaled to this design's size, then its
 // pages either replace an empty current page or are added after it.
@@ -50,6 +52,7 @@ export default function TemplatesPanel() {
   const [onlyFit, setOnlyFit] = useState(false);
   const [index, setIndex] = useState<TemplateIndex | null>(null);
   const [vibe, setVibe] = useState('all');
+  const vibeMenu = usePopover();
   useEffect(() => {
     loadTemplateIndex().then(setIndex);
   }, []);
@@ -85,16 +88,21 @@ export default function TemplatesPanel() {
           <div className="panel-section">
             <h3>Library</h3>
           </div>
-          <div className="chips" style={{ marginBottom: 10 }}>
-            <button className={`chip ${vibe === 'all' ? 'is-on' : ''}`} onClick={() => setVibe('all')}>
-              Every vibe
-            </button>
-            {vibes.map(([id, v]) => (
-              <button key={id} className={`chip ${vibe === id ? 'is-on' : ''}`} onClick={() => setVibe(id)}>
-                {v.name}
-              </button>
-            ))}
-          </div>
+          <button className="select-btn" aria-haspopup="listbox" onClick={vibeMenu.toggle}>
+            <span>{vibe === 'all' ? 'Every vibe' : index?.vibes[vibe]?.name ?? 'Every vibe'}</span>
+            <Icon name="chevron-down" size={12} />
+          </button>
+          {vibeMenu.anchor ? (
+            <Popover anchor={vibeMenu.anchor} onClose={vibeMenu.close} className="menu menu-scroll" width={vibeMenu.anchor.width}>
+              <Menu
+                onClose={vibeMenu.close}
+                items={[
+                  { label: 'Every vibe', checked: vibe === 'all', onClick: () => setVibe('all') },
+                  ...vibes.map(([id, v]) => ({ label: v.name, checked: vibe === id, onClick: () => setVibe(id) })),
+                ]}
+              />
+            </Popover>
+          ) : null}
           <div className="grid-2">
             {lib.slice(0, vibe === 'all' && !q ? 60 : 400).map((t) => (
               <button

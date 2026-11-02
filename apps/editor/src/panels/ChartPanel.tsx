@@ -3,8 +3,9 @@ import { useDoc, useUI } from '../editor/hooks';
 import type { ChartElement } from '../doc/types';
 import { Section, Toggle, Slider } from './controls';
 import { Icon } from '../ui/icons';
+import { COBALT } from '../doc/colors';
 
-const COLORS = ['#2B3BFF', '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0AA0FF'];
+const COLORS = [COBALT, '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0AA0FF'];
 
 export default function ChartPanel() {
   const editor = useEditor();

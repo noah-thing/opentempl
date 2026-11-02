@@ -2,6 +2,7 @@ import { useSyncExternalStore } from 'react';
 import { db } from '../io/db';
 import type { Asset } from '../doc/types';
 import { UI_FONT } from '../doc/factory';
+import { COBALT } from '../doc/colors';
 
 // Brand kits live on this device and work across every design. Canva keeps
 // these behind its paid plan; in OpenTempl you can have as many as you like.
@@ -17,7 +18,7 @@ export interface BrandKit {
 export const DEFAULT_KIT: BrandKit = {
   id: 'default',
   name: 'My brand',
-  colors: ['#0B0B0D', '#2B3BFF', '#FF4B39', '#FFE600', '#EDEDF0'],
+  colors: ['#0B0B0D', COBALT, '#FF4B39', '#FFE600', '#EDEDF0'],
   fonts: { heading: UI_FONT, subheading: UI_FONT, body: UI_FONT },
   logos: [],
 };

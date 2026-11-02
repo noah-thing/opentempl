@@ -1,7 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Home } from './home/Home';
+import { Start } from './start/Start';
 import { EditorScreen } from './editor/EditorScreen';
 import { createDesign } from './io/designs';
+import { track } from './stats/client';
 import { formatById } from './doc/formats';
 import { findTemplate } from './templates';
 import { Sign } from './ui/Logo';
@@ -12,7 +14,8 @@ import { RenderTemplate } from './templates/RenderTemplate';
 
 const Studio = lazy(() => import('./generate/Studio').then((m) => ({ default: m.Studio })));
 
-// Hash routes: #/ home, #/d/<id> editor, #/new?format=<id>&template=<id>
+// Hash routes: #/ home, #/start sizes and tools, #/templates home at the wall,
+// #/d/<id> editor, #/new?format=<id>&template=<id>
 function useHash() {
   const [hash, setHash] = useState(() => window.location.hash);
   useEffect(() => {
@@ -71,6 +74,8 @@ export function App() {
   if (path.startsWith('/render')) return <RenderTemplate query={path.split('?')[1] ?? ''} />;
   if (path.startsWith('/presenter/')) return <Presenter id={path.slice(11).split('?')[0]} />;
   if (path.startsWith('/new')) return <NewDesign query={path.split('?')[1] ?? ''} />;
+  if (path === '/start') return <Start />;
+  if (path === '/templates') return <Home jump="templates" />;
   return <Home />;
 }
 
@@ -84,6 +89,7 @@ function NewDesign({ query }: { query: string }) {
       const tpl = q.get('template') ? await findTemplate(q.get('template')!) : undefined;
       let id: string;
       if (tpl) {
+        track('template_opened');
         const built = await tpl.build();
         id = await createDesign({ snapshot: built.snapshot, assets: built.assets });
       } else

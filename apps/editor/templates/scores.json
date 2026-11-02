@@ -324,5 +324,17 @@
  "y2k-story-night": 2,
  "y2k-banner-liquid": 2,
  "y2k-flyer-orb": 2,
- "y2k-pin-window": 2
+ "y2k-pin-window": 2,
+ "deck-corporate-clean-pitch": 9,
+ "deck-corporate-clean-project": 8,
+ "deck-corporate-clean-update": 8,
+ "deck-swiss-grid-report": 9,
+ "deck-swiss-grid-talk": 8,
+ "deck-swiss-grid-portfolio": 8,
+ "deck-brutalist-brand": 8,
+ "deck-brutalist-agency": 8,
+ "deck-brutalist-recap": 8,
+ "deck-tech-mono-roadmap": 9,
+ "deck-tech-mono-research": 9,
+ "deck-tech-mono-talk": 8
 }

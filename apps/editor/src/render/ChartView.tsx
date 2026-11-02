@@ -1,8 +1,9 @@
 import type { ChartElement } from '../doc/types';
+import { COBALT } from '../doc/colors';
 
 // Charts are drawn as plain SVG so they scale, export and print like any shape.
 
-const PALETTE = ['#2B3BFF', '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0AA0FF', '#9AA2EA', '#0B0B0D'];
+const PALETTE = [COBALT, '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0AA0FF', '#9AA2EA', '#0B0B0D'];
 
 function niceMax(v: number) {
   if (v <= 0) return 1;

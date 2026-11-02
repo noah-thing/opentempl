@@ -1,4 +1,5 @@
 import type { Fill, ImageFilters } from '../doc/types';
+import { COBALT } from '../doc/colors';
 
 // Gradient and pattern definitions. Each paint gets an id derived from the
 // element id so pages can be stacked into one SVG without collisions.
@@ -144,8 +145,8 @@ export const FILTER_PRESETS: Record<string, Partial<ImageFilters>> = {
 };
 
 export const DUOTONES: [string, string][] = [
-  ['#0B0B0D', '#2B3BFF'],
-  ['#2B3BFF', '#FFE600'],
+  ['#0B0B0D', COBALT],
+  [COBALT, '#FFE600'],
   ['#FF4B39', '#FFE9E2'],
   ['#1B1240', '#FF3C8E'],
   ['#0B3D2E', '#3EDD8A'],

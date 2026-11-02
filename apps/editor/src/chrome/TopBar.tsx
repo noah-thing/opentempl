@@ -5,14 +5,30 @@ import { Icon } from '../ui/icons';
 import { Mark } from '../ui/Logo';
 import { Menu, Popover, usePopover, type MenuItem } from '../ui/Popover';
 import { navigate } from '../App';
-import { duplicateDesign, importDesign } from '../io/designs';
+import { duplicateDesign, importDesign, deleteDesign } from '../io/designs';
 import { pickFiles, importFiles } from '../io/upload';
 import { usePeers } from '../collab/collab';
+import { SyncStatus } from './SyncStatus';
 import { saveVersion } from '../io/versions';
 import { isDark, toggleTheme } from '../ui/theme';
+import { setSharing, sharingOn } from '../stats/client';
+
+// On a phone the bar keeps only what fits; the rest moves into the File menu.
+function useNarrow() {
+  const query = '(max-width: 760px)';
+  const [narrow, setNarrow] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const m = window.matchMedia(query);
+    const on = () => setNarrow(m.matches);
+    m.addEventListener('change', on);
+    return () => m.removeEventListener('change', on);
+  }, []);
+  return narrow;
+}
 
 export function TopBar() {
   const editor = useEditor();
+  const narrow = useNarrow();
   const title = useDoc((s) => s.meta.title);
   const size = useDoc((s) => `${s.meta.width} × ${s.meta.height}`);
   const canUndo = useUndoState();
@@ -20,8 +36,17 @@ export function TopBar() {
   const file = usePopover();
   const peers = usePeers();
 
+  const present = () => editor.ui.set({ presenting: true, presentStart: editor.s.pageOrder.indexOf(editor.state.activePageId ?? '') });
   const fileItems: MenuItem[] = [
-    { label: 'New design', icon: 'plus', onClick: () => navigate('/') },
+    ...(narrow
+      ? [
+          { label: 'Resize', onClick: () => editor.openPanel('resize') },
+          { label: 'Share', onClick: () => editor.ui.set({ shareOpen: true }) },
+          { label: 'Present', onClick: present },
+          { separator: true },
+        ]
+      : []),
+    { label: 'New design', icon: 'plus', onClick: () => navigate('/start') },
     {
       label: 'Make a copy',
       icon: 'duplicate',
@@ -82,17 +107,28 @@ export function TopBar() {
     { separator: true },
     { label: 'Save version', icon: 'history', kbd: '', onClick: async () => (await saveVersion(editor.doc, 'Saved by hand'), editor.toast('Version saved')) },
     { label: 'Version history', icon: 'history', onClick: () => editor.openPanel('history') },
-    { label: 'Resize design', icon: 'resize', onClick: () => editor.openPanel('resize') },
     { label: 'Bulk create from a table', icon: 'bulk', onClick: () => editor.openPanel('bulk') },
     { separator: true },
     { label: 'Show rulers and guides', checked: showRulers, kbd: '⌘⇧R', onClick: () => editor.ui.set({ showRulers: !showRulers }) },
     { label: 'Show layout grid', checked: editor.state.showGrid, kbd: "⌘'", onClick: () => editor.ui.set({ showGrid: !editor.state.showGrid }) },
     { label: 'Snap to guides', checked: editor.state.snap, onClick: () => editor.ui.set({ snap: !editor.state.snap }) },
     { label: 'Dark theme', checked: isDark(), onClick: () => toggleTheme() },
+    { label: 'Share anonymous counts', checked: sharingOn(), onClick: () => setSharing(!sharingOn()) },
     { label: 'Find and replace', icon: 'search', kbd: '⌘F', onClick: () => editor.ui.set({ findOpen: true }) },
     { separator: true },
     { label: 'Download as .opentempl file', icon: 'download', onClick: async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
     { label: 'Keyboard shortcuts', icon: 'keyboard', kbd: '?', onClick: () => editor.ui.set({ shortcutsOpen: true }) },
+    { separator: true },
+    {
+      label: 'Delete this design',
+      icon: 'trash',
+      onClick: async () => {
+        if (!window.confirm(`Delete “${editor.s.meta.title || 'Untitled'}” from this device? This cannot be undone.`)) return;
+        const id = editor.s.meta.id;
+        navigate('/start');
+        await deleteDesign(id);
+      },
+    },
     { label: 'Command palette', icon: 'command', kbd: '⌘K', onClick: () => editor.ui.set({ commandOpen: true }) },
   ];
 
@@ -104,7 +140,7 @@ export function TopBar() {
       <button className="btn" onClick={file.toggle}>
         <span className="btn-label">File</span> <Icon name="chevron-down" size={12} />
       </button>
-      <button className="btn" onClick={() => editor.openPanel('resize')}>
+      <button className="btn topbar-wide" onClick={() => editor.openPanel('resize')}>
         <Icon name="resize" /> <span className="btn-label">Resize</span>
       </button>
       <div className="sep" />
@@ -130,10 +166,11 @@ export function TopBar() {
       <span className="saved">
         <Icon name="check" size={12} /> On this device
       </span>
+      <SyncStatus />
       <div className="spacer" />
       <span className="size-chip">{size}</span>
       {peers.length ? (
-        <div className="row" style={{ gap: 0, marginLeft: 6 }}>
+        <div className="row peers" style={{ gap: 0, marginLeft: 6 }}>
           {peers.slice(0, 4).map((p, i) => (
             <span
               key={p.id}
@@ -158,10 +195,10 @@ export function TopBar() {
         </div>
       ) : null}
       <CommentsButton />
-      <button className="btn" onClick={() => editor.ui.set({ shareOpen: true })}>
+      <button className="btn topbar-wide" onClick={() => editor.ui.set({ shareOpen: true })}>
         <Icon name="users" /> <span className="btn-label">Share</span>
       </button>
-      <button className="btn" onClick={() => editor.ui.set({ presenting: true, presentStart: editor.s.pageOrder.indexOf(editor.state.activePageId ?? '') })}>
+      <button className="btn topbar-wide" onClick={present}>
         <Icon name="play" /> <span className="btn-label">Present</span>
       </button>
       <button className="btn btn-primary" onClick={() => editor.ui.set({ exportOpen: true })}>

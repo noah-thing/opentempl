@@ -9,23 +9,24 @@ import { useBrand } from './brand';
 import { Icon } from '../ui/icons';
 import { extractPalette } from './palette';
 import { hasRichSelection, richCommand, richSelectionColor } from '../canvas/TextEditor';
+import { COBALT } from '../doc/colors';
 
 // One colour panel for everything. `colorTarget` says what it edits: text,
 // fill, stroke, line, bg, qr, qrbg, draw, svg:<colour>, chart:<series>.
 
 const DEFAULT = [
   '#0B0B0D', '#4A4A55', '#8A8A96', '#C9C9D3', '#EDEDF0', '#FFFFFF', 'transparent',
-  '#2B3BFF', '#0AA0FF', '#9AA2EA', '#7B5CFF', '#FF3C8E', '#FF4B39', '#FF9F1A',
+  COBALT, '#0AA0FF', '#9AA2EA', '#7B5CFF', '#FF3C8E', '#FF4B39', '#FF9F1A',
   '#FFE600', '#3EDD8A', '#0E8A5F', '#123B2C', '#5B3A1A', '#F3E2C7', '#FFD8E4',
 ];
 
 const GRADIENTS: GradientStop[][] = [
-  [{ offset: 0, color: '#2B3BFF' }, { offset: 1, color: '#FF3C8E' }],
+  [{ offset: 0, color: COBALT }, { offset: 1, color: '#FF3C8E' }],
   [{ offset: 0, color: '#FF4B39' }, { offset: 1, color: '#FFE600' }],
   [{ offset: 0, color: '#3EDD8A' }, { offset: 1, color: '#0AA0FF' }],
-  [{ offset: 0, color: '#0B0B0D' }, { offset: 1, color: '#2B3BFF' }],
+  [{ offset: 0, color: '#0B0B0D' }, { offset: 1, color: COBALT }],
   [{ offset: 0, color: '#9AA2EA' }, { offset: 1, color: '#FFD8E4' }],
-  [{ offset: 0, color: '#FFE600' }, { offset: 0.5, color: '#FF3C8E' }, { offset: 1, color: '#2B3BFF' }],
+  [{ offset: 0, color: '#FFE600' }, { offset: 0.5, color: '#FF3C8E' }, { offset: 1, color: COBALT }],
   [{ offset: 0, color: '#FFFFFF' }, { offset: 1, color: '#C9C9D3' }],
 ];
 

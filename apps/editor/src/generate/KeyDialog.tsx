@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from '../ui/icons';
 import { getSettings, MODELS, saveSettings, type AiSettings } from './openai';
 
@@ -6,6 +6,11 @@ import { getSettings, MODELS, saveSettings, type AiSettings } from './openai';
 export function KeyDialog({ onClose }: { onClose: () => void }) {
   const [s, setS] = useState<AiSettings>(getSettings());
   const [check, setCheck] = useState<string | null>(null);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
   async function test() {
     setCheck('Checking');
     try {

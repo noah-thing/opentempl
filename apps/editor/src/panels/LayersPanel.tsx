@@ -10,7 +10,7 @@ function describe(el: Element) {
   if (el.name) return el.name;
   switch (el.type) {
     case 'text':
-      return el.text.split('\n')[0].slice(0, 40) || 'Empty text';
+      return el.text.replace(/\s+/g, ' ').trim().slice(0, 80) || 'Empty text';
     case 'shape':
       return el.shape[0].toUpperCase() + el.shape.slice(1);
     case 'image':
@@ -111,7 +111,7 @@ export default function LayersPanel() {
                 }}
               />
             ) : (
-              <span className="name" style={{ opacity: el.hidden ? 0.45 : 1 }}>
+              <span className="name" title={describe(el)} style={{ opacity: el.hidden ? 0.45 : 1 }}>
                 {describe(el)}
                 {el.groupId ? <span className="muted"> · group</span> : null}
               </span>

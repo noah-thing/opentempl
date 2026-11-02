@@ -68,7 +68,8 @@ export function makeTemplate(def: TemplateDef): Template {
         const ids: string[] = [];
         for (const e of tp.elements) {
           const id = newId();
-          elements[id] = { ...structuredClone(e), id };
+          // Nothing in a fresh design starts locked; locking is the person's choice.
+          elements[id] = { ...structuredClone(e), id, locked: false };
           ids.push(id);
         }
         pages[pid] = { id: pid, name: tp.name ?? '', background: tp.background, elementIds: ids, notes: tp.notes ?? '', transition: tp.transition ?? 'none', duration: 5 };

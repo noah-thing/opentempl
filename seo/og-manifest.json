@@ -1,0 +1,399 @@
+{
+ "home": {
+  "h1": "Design that’s free, open and yours.",
+  "kicker": "The free, open source Canva alternative"
+ },
+ "canva-alternative-no-account": {
+  "h1": "Design without making an account",
+  "kicker": "OpenTempl"
+ },
+ "canva-alternative-offline": {
+  "h1": "A Canva alternative that works without internet",
+  "kicker": "OpenTempl"
+ },
+ "canva-alternative": {
+  "h1": "A Canva alternative you can keep, offline and free",
+  "kicker": "OpenTempl"
+ },
+ "canva-pro-free": {
+  "h1": "Canva Pro features you get free in OpenTempl",
+  "kicker": "OpenTempl"
+ },
+ "canva-vs-opentempl": {
+  "h1": "Canva vs OpenTempl",
+  "kicker": "OpenTempl"
+ },
+ "free-canva-alternative": {
+  "h1": "A free Canva alternative with nothing held back",
+  "kicker": "OpenTempl"
+ },
+ "free-instagram-post-maker": {
+  "h1": "Free Instagram post maker",
+  "kicker": "OpenTempl"
+ },
+ "free-menu-maker": {
+  "h1": "Free menu maker",
+  "kicker": "OpenTempl"
+ },
+ "free-poster-maker": {
+  "h1": "Free poster maker",
+  "kicker": "OpenTempl"
+ },
+ "free-presentation-maker": {
+  "h1": "Free presentation maker, offline and without an account",
+  "kicker": "OpenTempl"
+ },
+ "guides-make-a-poster-with-chatgpt": {
+  "h1": "How to make a poster with ChatGPT",
+  "kicker": "OpenTempl"
+ },
+ "open-source-canva": {
+  "h1": "Is there an open source version of Canva?",
+  "kicker": "OpenTempl"
+ },
+ "templates": {
+  "h1": "Templates with a point of view",
+  "kicker": "Templates"
+ },
+ "templates-swiss-grid": {
+  "h1": "Swiss grid templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/swiss-circle-grid.webp"
+ },
+ "templates-pixel-bitmap": {
+  "h1": "Pixel and bitmap templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/pixel-bitmap-word.webp"
+ },
+ "templates-tech-mono": {
+  "h1": "Tech mono templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/tech-assembly-04.webp"
+ },
+ "templates-asia-poster": {
+  "h1": "Seoul and Tokyo templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/asia-kanji-museum.webp"
+ },
+ "templates-riso-zine": {
+  "h1": "Riso zine templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/riso-cutflower-show.webp"
+ },
+ "templates-brutalist": {
+  "h1": "Brutalist templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/brutalist-lookbook.webp"
+ },
+ "templates-bauhaus": {
+  "h1": "Bauhaus templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/bauhaus-room-for-light.webp"
+ },
+ "templates-seventies": {
+  "h1": "Seventies templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/seventies-block-party-flyer.webp"
+ },
+ "templates-rave-acid": {
+  "h1": "Rave acid templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/rave-carousel-night.webp"
+ },
+ "templates-xerox-punk": {
+  "h1": "Xerox punk templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/xerox-copy-of-a-copy.webp"
+ },
+ "templates-magazine-cover": {
+  "h1": "Magazine templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/magazine-verb-wall.webp"
+ },
+ "templates-quiet-luxury": {
+  "h1": "Quiet luxury templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/lux-giant-letter-poster.webp"
+ },
+ "templates-japanese-minimal": {
+  "h1": "Japanese minimal templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/jp-enso-a4.webp"
+ },
+ "templates-nordic-minimal": {
+  "h1": "Nordic minimal templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/nordic-evening-light-post.webp"
+ },
+ "templates-mid-century": {
+  "h1": "Mid century templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/mid-century-chair-exhibition.webp"
+ },
+ "templates-botanical-vintage": {
+  "h1": "Botanical templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/botanical-museum-blue.webp"
+ },
+ "templates-folk-pattern": {
+  "h1": "Folk pattern templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/folk-cross-stitch-poster.webp"
+ },
+ "templates-hand-drawn": {
+  "h1": "Hand drawn templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/hand-playground-club.webp"
+ },
+ "templates-collage-scrapbook": {
+  "h1": "Collage templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/collage-cut-letters.webp"
+ },
+ "templates-kids-play": {
+  "h1": "Kids play templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/kids-big-one.webp"
+ },
+ "templates-cute-mascot": {
+  "h1": "Mascot templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/mascot-grumble-cold-brew.webp"
+ },
+ "templates-soft-pastel": {
+  "h1": "Soft pastel templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/pastel-clay-flyer.webp"
+ },
+ "templates-gradient-aura": {
+  "h1": "Aura templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/aura-block-flyer.webp"
+ },
+ "templates-y2k-chrome": {
+  "h1": "Y2K chrome templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/y2k-desktop-deck.webp"
+ },
+ "templates-dark-tech": {
+  "h1": "Dark tech templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/dark-summit-poster.webp"
+ },
+ "templates-maximal-pop": {
+  "h1": "Maximal pop templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/pop-giant-loud.webp"
+ },
+ "templates-sports-bold": {
+  "h1": "Sports templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/sports-final-score.webp"
+ },
+ "templates-photo-overlay": {
+  "h1": "Photo and type templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/photo-run-club-carousel.webp"
+ },
+ "templates-academic": {
+  "h1": "Academic templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/academic-syllabus.webp"
+ },
+ "templates-receipt-utility": {
+  "h1": "Receipt templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/receipt-market-poster.webp"
+ },
+ "templates-fine-stationery": {
+  "h1": "Stationery templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/stationery-coordinates.webp"
+ },
+ "templates-food-menu": {
+  "h1": "Menus templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/food-menu-noodle-bar.webp"
+ },
+ "templates-earthy-organic": {
+  "h1": "Earthy templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/earthy-flower-share.webp"
+ },
+ "templates-corporate-clean": {
+  "h1": "Clean business templates",
+  "kicker": "Templates",
+  "image": "/seo/img/templates/corporate-stat-post.webp"
+ },
+ "prompts": {
+  "h1": "ChatGPT poster prompts",
+  "kicker": "Templates"
+ },
+ "prompts-bold-flat-colour": {
+  "h1": "A bold flat colour poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/bold-flat-colour-900.webp"
+ },
+ "prompts-halftone-duotone": {
+  "h1": "A halftone duotone poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/halftone-duotone-900.webp"
+ },
+ "prompts-pixel-world": {
+  "h1": "A pixel art poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/pixel-world-900.webp"
+ },
+ "prompts-grain-shape-animals": {
+  "h1": "A grainy gradient animal illustration prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/grain-shape-animals-900.webp"
+ },
+ "prompts-marker-lettering": {
+  "h1": "A hand painted lettering poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/marker-lettering-900.webp"
+ },
+ "prompts-riso-market": {
+  "h1": "A multi ink risograph illustration prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/riso-market-900.webp"
+ },
+ "prompts-club-flyer-print": {
+  "h1": "A 90s club flyer prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/club-flyer-print-900.webp"
+ },
+ "prompts-folk-cutout-garden": {
+  "h1": "A paper cut folk illustration prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/folk-cutout-garden-900.webp"
+ },
+ "prompts-inflatable-balloon": {
+  "h1": "Balloon lettering prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/inflatable-balloon-900.webp"
+ },
+ "prompts-stitch-type": {
+  "h1": "A cross stitch poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/stitch-type-900.webp"
+ },
+ "prompts-grain-glow": {
+  "h1": "A smeared photocopy rave flyer prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/grain-glow-900.webp"
+ },
+ "prompts-acid-wire": {
+  "h1": "An acid green techno poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/acid-wire-900.webp"
+ },
+ "prompts-extruded-blocks": {
+  "h1": "An extruded type poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/extruded-blocks-900.webp"
+ },
+ "prompts-sticker-cartoon": {
+  "h1": "A brush ink cartoon poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/sticker-cartoon-900.webp"
+ },
+ "prompts-blob-gradient": {
+  "h1": "A blob gradient poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/blob-gradient-900.webp"
+ },
+ "prompts-sliced-portrait": {
+  "h1": "A cut portrait cover prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/sliced-portrait-900.webp"
+ },
+ "prompts-pop-cutout": {
+  "h1": "A cut paper collage poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/pop-cutout-900.webp"
+ },
+ "prompts-psychedelic-lettering": {
+  "h1": "A screen printed psychedelic gig poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/psychedelic-lettering-900.webp"
+ },
+ "prompts-sunny-travel-poster": {
+  "h1": "A screen printed travel poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/sunny-travel-poster-900.webp"
+ },
+ "prompts-riso-two-ink": {
+  "h1": "A two ink riso print poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/riso-two-ink-900.webp"
+ },
+ "prompts-oil-pastel-scribble": {
+  "h1": "A crayon and oil pastel poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/oil-pastel-scribble-900.webp"
+ },
+ "prompts-blue-ink-doodle": {
+  "h1": "A blue pen doodle poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/blue-ink-doodle-900.webp"
+ },
+ "prompts-flash-editorial": {
+  "h1": "A night out flash photo editorial prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/flash-editorial-900.webp"
+ },
+ "prompts-blob-mascot": {
+  "h1": "A blob character poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/blob-mascot-900.webp"
+ },
+ "prompts-holo-y2k": {
+  "h1": "A holographic Y2K flyer prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/holo-y2k-900.webp"
+ },
+ "prompts-keycap-type": {
+  "h1": "Keycap typography prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/keycap-type-900.webp"
+ },
+ "prompts-athlete-giant-type": {
+  "h1": "An athlete campaign poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/athlete-giant-type-900.webp"
+ },
+ "prompts-liquid-chrome": {
+  "h1": "Liquid chrome 3D lettering prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/liquid-chrome-900.webp"
+ },
+ "prompts-layered-papercut": {
+  "h1": "A layered papercut poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/layered-papercut-900.webp"
+ },
+ "prompts-cutout-plant-collage": {
+  "h1": "A plant photo collage poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/cutout-plant-collage-900.webp"
+ },
+ "prompts-neon-glow": {
+  "h1": "A neon tube poster prompt for ChatGPT",
+  "kicker": "ChatGPT prompt",
+  "image": "/seo/img/looks/neon-glow-900.webp"
+ },
+ "facts": {
+  "h1": "OpenTempl facts",
+  "kicker": "OpenTempl"
+ },
+ "about": {
+  "h1": "What is OpenTempl",
+  "kicker": "OpenTempl"
+ },
+ "download": {
+  "h1": "Use OpenTempl",
+  "kicker": "OpenTempl"
+ }
+}

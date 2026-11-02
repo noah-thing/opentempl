@@ -1,5 +1,6 @@
 import type { Id } from '../doc/types';
 import type { Rect } from '../lib/geom';
+import { COBALT } from '../doc/colors';
 
 export type Tool = 'select' | 'hand' | 'text' | 'rect' | 'ellipse' | 'line' | 'draw' | 'pen' | 'sticky';
 
@@ -90,7 +91,7 @@ export const initialEditorState: EditorState = {
   zoom: 0.5,
   autoFit: true,
   tool: 'select',
-  draw: { tool: 'pen', color: '#2B3BFF', width: 8 },
+  draw: { tool: 'pen', color: COBALT, width: 8 },
   editingTextId: null,
   cropId: null,
   penEditId: null,

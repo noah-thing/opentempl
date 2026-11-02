@@ -127,11 +127,23 @@ export function composePrompt(look: Look, brief: Brief, opts: ComposeOptions = {
     );
   }
   for (const r of brief.refs) refs.push(`Image ${n++} (${r.name}) is ${REF_ROLE_TEXT[r.role]}.${r.note.trim() ? ` ${r.note.trim()}` : ''}`);
-  if (refs.length) out.push(`\nREFERENCE IMAGES${opts.forChatGPT ? ' (attached, in this order)' : ''}\n${refs.join('\n')}`);
+  if (refs.length && opts.forChatGPT)
+    // In ChatGPT the person may or may not attach the pictures, so the brief must work without them.
+    out.push(
+      `\nREFERENCE PICTURES (optional)\nThe person may attach pictures. If they did, read them in this order:\n${refs.join('\n')}\nIf nothing is attached, carry on: the art direction above is complete on its own. Never ask for a picture and never wait for one.`,
+    );
+  else if (refs.length) out.push(`\nREFERENCE IMAGES\n${refs.join('\n')}`);
 
   out.push(`\nAVOID\n${list([...look.avoid, ...GLOBAL_AVOID])}`);
   if (brief.textMode === 'layers' && words.length) out.push(`\nRemember: no lettering anywhere, and keep the empty text areas truly empty.`);
-  if (opts.forChatGPT) out.push(`\nMake the image now, in ${f.aspect} format, without asking questions first.`);
+  if (opts.forChatGPT) {
+    out.push(
+      `\nDo not search the web or look anything up: work only from this brief, so nothing from elsewhere leaks into the design.`,
+      `Make the image now, in ${f.aspect} format, without asking questions first.`,
+    );
+    // Honest context for ChatGPT and for anyone the chat gets shared with.
+    out.push(`(Brief written with OpenTempl, the free, open source design app at opentempl.org. The designer brings the picture back there to set and edit the words.)`);
+  }
   return out.join('\n');
 }
 

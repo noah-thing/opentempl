@@ -66,9 +66,10 @@ function Div() {
   return <span className="div" />;
 }
 
-function TBtn({ icon, label, title, on, onClick, children }: { icon?: string; label?: string; title?: string; on?: boolean; onClick?: (e: React.MouseEvent) => void; children?: React.ReactNode }) {
+function TBtn({ icon, lead, label, title, on, onClick, children }: { icon?: string; lead?: React.ReactNode; label?: string; title?: string; on?: boolean; onClick?: (e: React.MouseEvent) => void; children?: React.ReactNode }) {
   return (
     <button className={`tbtn ${on ? 'is-on' : ''}`} title={title ?? label} onClick={onClick}>
+      {lead}
       {icon ? <Icon name={icon} /> : null}
       {label ? <span>{label}</span> : null}
       {children}
@@ -177,16 +178,15 @@ function PageTools() {
   const TRANS: PageTransition[] = ['none', 'fade', 'slide', 'zoom', 'flip', 'circle'];
   return (
     <>
-      <Swatch fill={page.background} title="Page background" onClick={() => editor.openPanel('background')} />
-      <TBtn label="Background" onClick={() => editor.openPanel('background')} />
+      <TBtn label="Background" title="Page background" lead={<span className="bg-dot" style={{ background: fillCss(page.background) }} />} onClick={() => editor.openPanel('background')} />
       <Div />
       <TBtn icon="animate" label={page.transition === 'none' ? 'Transition' : `Transition: ${page.transition}`} onClick={pop.toggle} />
       <Div />
       <TBtn icon="palette" label="Styles" onClick={() => editor.openPanel('styles')} />
-      <TBtn icon="resize" label="Resize" onClick={() => editor.openPanel('resize')} />
-      <TBtn icon="ruler" title="Rulers and guides" on={editor.state.showRulers} onClick={() => editor.ui.set({ showRulers: !editor.state.showRulers })} />
-      <TBtn icon="grid" title="Layout grid" on={editor.state.showGrid} onClick={() => editor.ui.set({ showGrid: !editor.state.showGrid })} />
-      <TBtn icon="magnet" title="Snapping" on={editor.state.snap} onClick={() => editor.ui.set({ snap: !editor.state.snap })} />
+      <Div />
+      <TBtn icon="ruler" label="Rulers" title="Rulers and guides" on={editor.state.showRulers} onClick={() => editor.ui.set({ showRulers: !editor.state.showRulers })} />
+      <TBtn icon="grid" label="Grid" title="Layout grid" on={editor.state.showGrid} onClick={() => editor.ui.set({ showGrid: !editor.state.showGrid })} />
+      <TBtn icon="magnet" label="Snap" title="Snap to guides and edges" on={editor.state.snap} onClick={() => editor.ui.set({ snap: !editor.state.snap })} />
       {pop.anchor ? (
         <Popover anchor={pop.anchor} onClose={pop.close} width={280}>
           <div style={{ padding: 14 }} className="stack">

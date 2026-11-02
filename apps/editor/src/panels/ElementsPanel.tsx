@@ -8,6 +8,7 @@ import type { ChartElement, Element, LineElement, ShapeKind } from '../doc/types
 import { Icon } from '../ui/icons';
 import { STICKERS } from './stickers';
 import { searchIcons, iconSvg } from './iconify';
+import { COBALT } from '../doc/colors';
 
 // Collage layouts as fractions of a square: [x, y, w, h].
 const GRIDS: [number, number, number, number][][] = [
@@ -105,7 +106,7 @@ function DeviceGlyph({ d }: { d: Device }) {
   );
 }
 
-const SHAPE_COLORS = ['#2B3BFF', '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0B0B0D', '#9AA2EA', '#0AA0FF'];
+const SHAPE_COLORS = [COBALT, '#FF4B39', '#FFE600', '#3EDD8A', '#FF3C8E', '#0B0B0D', '#9AA2EA', '#0AA0FF'];
 
 export default function ElementsPanel() {
   const editor = useEditor();
@@ -130,7 +131,7 @@ export default function ElementsPanel() {
 
   return (
     <>
-      <Search value={q} onChange={setQ} placeholder="Search 200,000 icons and graphics" />
+      <Search value={q} onChange={setQ} placeholder="Search icons and graphics" />
       <Section title="Shapes" action={<button onClick={() => setAll('shapes')}>See all</button>}>
         <div className="grid-4">
           {SHAPE_KINDS.slice(0, 8).map((s, i) => {
@@ -284,7 +285,7 @@ function ShapeGlyph({ kind, color }: { kind: ShapeKind; color: string }) {
 }
 
 function ChartGlyph({ kind }: { kind: ChartElement['kind'] }) {
-  const c = '#2B3BFF';
+  const c = COBALT;
   const r = '#FF4B39';
   return (
     <svg viewBox="0 0 40 40">

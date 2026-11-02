@@ -171,7 +171,7 @@ export function Present() {
           <Icon name="chevron-left" />
         </button>
         <span className="count">
-          {index + 1} / {order.length}
+          {index + 1} of {order.length}
         </span>
         <button onClick={() => go(1)} title="Next">
           <Icon name="chevron-right" />

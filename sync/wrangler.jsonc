@@ -1,0 +1,12 @@
+{
+	"$schema": "https://unpkg.com/wrangler@4.125.0/config-schema.json",
+	"name": "opentempl-sync",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-08-01",
+	// Nothing is logged, and no payload is ever read by the worker anyway: rooms hold ciphertext.
+	"observability": { "enabled": false },
+	"durable_objects": { "bindings": [{ "name": "ROOMS", "class_name": "Room" }] },
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["Room"] }],
+	// Origins allowed to open a socket: the site, the desktop app, and local development.
+	"vars": { "ALLOWED_ORIGINS": "https://opentempl.org,https://www.opentempl.org,tavla://app" }
+}

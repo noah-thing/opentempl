@@ -1,5 +1,6 @@
 import type { DesignSnapshot, Element, Fill, Id, Page } from '../doc/types';
 import { parseSvg } from '../render/ElementView';
+import { COBALT } from '../doc/colors';
 
 // Restyling a whole design at once: a palette swap that keeps the design's
 // light and dark structure (colours are matched by brightness rank, so text
@@ -14,7 +15,7 @@ export const PALETTES: Palette[] = [
   { name: 'Harbour', colors: ['#0B1F33', '#1F4E6B', '#6FA3B8', '#E7D9C4', '#F6F1E8'] },
   { name: 'Fika', colors: ['#3B2416', '#8A5A3C', '#D9A86C', '#F3E2C7', '#FFF9F0'] },
   { name: 'Midsummer', colors: ['#1D3B2A', '#3E7C4F', '#F2C14E', '#F78764', '#FDF6E3'] },
-  { name: 'Riso', colors: ['#0B0B0D', '#2B3BFF', '#FF4B39', '#FFE600', '#F4F1EA'] },
+  { name: 'Riso', colors: ['#0B0B0D', COBALT, '#FF4B39', '#FFE600', '#F4F1EA'] },
   { name: 'Lingonberry', colors: ['#3A0D12', '#8E1B2C', '#D94A56', '#F2C4C0', '#FBF3F1'] },
   { name: 'Fog', colors: ['#2E3338', '#5C6670', '#9AA5AE', '#D5DBDF', '#F2F4F5'] },
   { name: 'Tram', colors: ['#101010', '#3A3A3A', '#F5C400', '#F2EFE6', '#FFFFFF'] },

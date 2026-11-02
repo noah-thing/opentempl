@@ -12,3 +12,10 @@ research/vibes/build/
 apps/editor/templates/shots/
 assets/raw/
 research/vibes/
+.vercel
+.env*
+
+# working files for previews and hero studies
+research/preview/
+research/hero/shots*/
+research/hero/fal/

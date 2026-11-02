@@ -16,13 +16,20 @@ import { dropLibraryItem, LIBRARY_MIME } from '../panels/library';
 import { smoothPath } from './draw';
 import { activeCollab, usePeers } from '../collab/collab';
 import { listUploads } from '../io/uploads';
-import { Sign } from '../ui/Logo';
 import { CommentDraft, CommentPins } from './Comments';
 import { PenLayer } from './PenTool';
+import { COBALT } from '../doc/colors';
 
 interface Props {
   pageId: Id;
   zoom: number;
+}
+
+// Fingers currently on the screen, so a one finger scroll steps aside for a pinch.
+const fingers = new Set<number>();
+if (typeof window !== 'undefined') {
+  window.addEventListener('pointerdown', (e) => e.pointerType === 'touch' && fingers.add(e.pointerId), true);
+  for (const type of ['pointerup', 'pointercancel'] as const) window.addEventListener(type, (e) => fingers.delete(e.pointerId), true);
 }
 
 export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
@@ -81,12 +88,21 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
   };
   // Locked layers (a paper texture over a whole template, say) let clicks through
   // to the first unlocked element beneath them; they are only picked when nothing editable is under the pointer.
+  // Locked layers, and paper or grain textures blended over the whole page, let clicks through
+  // to what lies under them. A texture is still selectable where nothing else is underneath.
+  const seeThrough = (id: Id) => {
+    const el = editor.s.elements[id];
+    if (!el) return false;
+    if (el.locked) return true;
+    const blended = el.type === 'image' && 'blend' in el && !!el.blend && el.blend !== 'normal';
+    return blended && (el.name === 'Texture' || (el.w >= W * 0.9 && el.h >= H * 0.9));
+  };
   const pickId = (x: number, y: number, target: EventTarget | null): Id | null => {
     const id = hitId(target);
-    if (!id || !editor.s.elements[id]?.locked) return id;
+    if (!id || !seeThrough(id)) return id;
     for (const node of document.elementsFromPoint(x, y)) {
       const below = hitId(node);
-      if (below && !editor.s.elements[below]?.locked) return below;
+      if (below && !seeThrough(below)) return below;
     }
     return id;
   };
@@ -107,7 +123,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
         ? makeLine({ x: p.x, y: p.y - 12, w: 1, h: 24 })
         : kind === 'sticky'
           ? makeShape('rect', { x: p.x, y: p.y, w: 1, h: 1, fill: { type: 'solid', color: '#FFE600' }, radius: 6, shadow: { x: 0, y: 8, blur: 24, color: 'rgba(0,0,0,0.18)' } })
-          : makeShape(kind === 'ellipse' ? 'ellipse' : 'rect', { x: p.x, y: p.y, w: 1, h: 1, fill: { type: 'solid', color: '#2B3BFF' } });
+          : makeShape(kind === 'ellipse' ? 'ellipse' : 'rect', { x: p.x, y: p.y, w: 1, h: 1, fill: { type: 'solid', color: COBALT } });
     editor.doc.undo.stopCapturing();
     editor.doc.addElement(pageId, startEl);
     editor.ui.set({ selection: [startEl.id], activePageId: pageId });
@@ -222,6 +238,30 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
 
     let id = pickId(e.clientX, e.clientY, e.target);
     if (!id && (e.target as HTMLElement).closest('[data-selection-body]')) id = editor.state.selection[0] ?? null;
+
+    // On touch a finger scrolls the page unless it lands on what is already selected, like
+    // Canva: tap to select, then drag. A second finger belongs to the viewport's pinch zoom.
+    if (e.pointerType === 'touch' && !(id && editor.state.selection.includes(id))) {
+      const scroller = (e.currentTarget as HTMLElement).closest('.viewport') as HTMLElement | null;
+      const sl = scroller?.scrollLeft ?? 0;
+      const st = scroller?.scrollTop ?? 0;
+      startDrag(
+        e,
+        (_ev, dx, dy) => {
+          if (!scroller || fingers.size > 1) return;
+          scroller.scrollLeft = sl - dx;
+          scroller.scrollTop = st - dy;
+        },
+        (_ev, moved) => {
+          if (moved) return;
+          if (id) editor.select([id]);
+          else editor.clearSelection();
+        },
+        8,
+      );
+      return;
+    }
+
     if (!id) {
       // Empty space: marquee selection.
       if (!e.shiftKey) editor.clearSelection();
@@ -334,6 +374,8 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
           editor.ui.set({ activePageId: target, selection: moving });
         }
       },
+      // A finger needs a bigger dead zone than a mouse, or a light touch nudges the element.
+      e.pointerType === 'touch' ? 10 : 3,
     );
   };
 
@@ -433,8 +475,7 @@ export const PageStage = memo(function PageStage({ pageId, zoom }: Props) {
       <div className="page-overlay">
         {page.elementIds.length === 0 && tool === 'select' && page.background.type === 'solid' ? (
           <div className="empty-sheet" style={{ fontSize: Math.max(13, Math.min(16, W * zoom * 0.024)) }}>
-            <Sign size={Math.max(40, Math.min(84, W * zoom * 0.11))} />
-            <span>An empty sheet. Pick a template, drag a photo in, or press T and start typing.</span>
+            <span>Empty page. Add a template, drop in a photo, or press T to type.</span>
           </div>
         ) : null}
         {showGrid ? <div className="page-grid" style={{ backgroundSize: `${(W / 12) * zoom}px ${(W / 12) * zoom}px` }} /> : null}

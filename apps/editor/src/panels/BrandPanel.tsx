@@ -8,6 +8,7 @@ import { FONTS, ensureFont } from '../fonts/fonts';
 import { pickFiles, prepareImage } from '../io/upload';
 import { documentColors } from './ColorPanel';
 import type { TextElement } from '../doc/types';
+import { COBALT } from '../doc/colors';
 
 export default function BrandPanel() {
   const editor = useEditor();
@@ -66,7 +67,7 @@ export default function BrandPanel() {
           />
         </div>
       ) : (
-        <button className="btn btn-sm" onClick={() => setEditingName(true)}>
+        <button className="link-btn" onClick={() => setEditingName(true)}>
           Rename kit
         </button>
       )}
@@ -114,7 +115,7 @@ export default function BrandPanel() {
               <input type="color" value={c.slice(0, 7)} style={{ opacity: 0, width: '100%', height: '100%' }} onChange={(e) => updateKit(kit.id, { colors: kit.colors.map((x, j) => (j === i ? e.target.value.toUpperCase() : x)) })} />
             </label>
           ))}
-          <button className="swatch add" title="Add colour" onClick={() => updateKit(kit.id, { colors: [...kit.colors, '#2B3BFF'] })}>
+          <button className="swatch add" title="Add colour" onClick={() => updateKit(kit.id, { colors: [...kit.colors, COBALT] })}>
             <span className="inner">
               <Icon name="plus" size={12} />
             </span>

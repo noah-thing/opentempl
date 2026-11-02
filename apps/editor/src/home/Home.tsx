@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
-import { Sign, Wordmark } from '../ui/Logo';
+import { Wordmark } from '../ui/Logo';
+import { Credit, GitHubLink, SHOW_SOURCE } from '../ui/Credit';
+import { REPO_URL } from '../links';
 import { Icon } from '../ui/icons';
 import { navigate } from '../App';
 import { deleteDesign, duplicateDesign, getThumb, importDesign, listDesigns, onDesignsChange, updateEntry, type DesignEntry } from '../io/designs';
@@ -9,6 +11,8 @@ import { TEMPLATES } from '../templates';
 import { TemplatePreview } from '../templates/Preview';
 import { blended, byScore, loadTemplateIndex, thumbUrl, type TemplateEntry, type TemplateIndex } from '../templates/packs';
 import { loadLooks, sampleUrl, type Look } from '../generate/looks';
+import { Subscribe } from '../ui/Subscribe';
+import { SHOW_USAGE_FROM, useUsage } from '../stats/client';
 import './home.css';
 
 // Home: the hero poster (search, a blank format, or a template from the sentence),
@@ -46,7 +50,7 @@ async function openFile(f: File) {
   }
 }
 
-export function Home() {
+export function Home({ jump }: { jump?: 'templates' } = {}) {
   const [designs, setDesigns] = useState<DesignEntry[] | null>(null);
   const [q, setQ] = useState('');
   const [tq, setTq] = useState('');
@@ -58,8 +62,29 @@ export function Home() {
   const [drop, setDrop] = useState(false);
   const [index, setIndex] = useState<TemplateIndex | null>(null);
   const [looks, setLooks] = useState<Look[]>([]);
+  const usage = useUsage();
   const wallRef = useRef<HTMLElement>(null);
   const [onHero, setOnHero] = useState(true);
+  const [menu, setMenu] = useState(false);
+  const openPicked = async () => {
+    const [f] = await pickFiles('.opentempl,.tavla,.pdf,.pptx');
+    if (f) openFile(f);
+  };
+  const homeRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLElement>(null);
+  // #/templates lands on the wall; the address goes back to #/ so a reload starts at the top.
+  useEffect(() => {
+    if (jump !== 'templates' || !index) return;
+    requestAnimationFrame(() => wallRef.current?.scrollIntoView());
+    window.history.replaceState(null, '', '#/');
+  }, [jump, index]);
+  useEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const ro = new ResizeObserver(() => homeRef.current?.style.setProperty('--bar', `${bar.offsetHeight}px`));
+    ro.observe(bar);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     document.title = 'OpenTempl';
@@ -79,21 +104,25 @@ export function Home() {
   const vibeOrder = Object.entries(index?.vibes ?? {})
     .filter(([id]) => index?.templates.some((t) => t.vibe === id))
     .sort((a, b) => (a[1].order ?? 99) - (b[1].order ?? 99));
-  const cats = ['All', ...vibeOrder.map(([id]) => id), 'classics'];
-  const catName = (c: string) => (c === 'All' ? 'Every vibe' : c === 'classics' ? 'Classics' : index?.vibes[c]?.name ?? c);
+  const cats = ['All', 'presentations', ...vibeOrder.map(([id]) => id), 'classics'];
+  const catName = (c: string) => (c === 'All' ? 'Every vibe' : c === 'presentations' ? 'Presentations' : c === 'classics' ? 'Classics' : index?.vibes[c]?.name ?? c);
   const query = tq.trim().toLowerCase();
   const matching = (index?.templates ?? []).filter(
     (t) =>
-      (tplFilter === 'All' || t.vibe === tplFilter) &&
+      (tplFilter === 'All' || t.vibe === tplFilter || (tplFilter === 'presentations' && t.formatId === 'slides')) &&
       (!query || `${t.name} ${t.category} ${t.tags.join(' ')} ${index?.vibes[t.vibe]?.name ?? ''}`.toLowerCase().includes(query)),
   );
-  const packTpls = useMemo(() => (tplFilter === 'All' ? blended(matching) : byScore(matching)), [index, tplFilter, query]);
+  const packTpls = useMemo(
+    () => (tplFilter === 'All' ? blended(matching) : tplFilter === 'presentations' ? [...byScore(matching)].sort((a, b) => (b.pages >= 10 ? 1 : 0) - (a.pages >= 10 ? 1 : 0)) : byScore(matching)),
+    [index, tplFilter, query],
+  );
   const classics = tplFilter === 'classics' || (tplFilter === 'All' && !query) ? TEMPLATES : [];
   const total = index?.templates.length ?? 0;
 
   return (
     <div
       className="home"
+      ref={homeRef}
       onDragOver={(e) => {
         e.preventDefault();
         setDrop(true);
@@ -107,9 +136,9 @@ export function Home() {
         if (f) openFile(f);
       }}
     >
-      <header className={`home-top ${onHero ? 'is-on-hero' : ''}`}>
+      <header ref={barRef} className={`home-top ${onHero ? 'is-on-hero' : ''}`}>
         <a className="home-brand" href="#/" aria-label="OpenTempl home">
-          <Wordmark size={21} tone="lime" />
+          <Wordmark size={21} />
         </a>
         <nav className="home-nav">
           <button onClick={() => wallRef.current?.scrollIntoView({ behavior: 'smooth' })}>Templates</button>
@@ -117,18 +146,32 @@ export function Home() {
           <button onClick={() => document.getElementById('your-designs')?.scrollIntoView({ behavior: 'smooth' })}>Your designs</button>
         </nav>
         <div className="grow" />
-        <button
-          className="btn btn-outline"
-          onClick={async () => {
-            const [f] = await pickFiles('.opentempl,.tavla,.pdf,.pptx');
-            if (f) openFile(f);
-          }}
-        >
+        <span className="home-gh">
+          <GitHubLink />
+        </span>
+        <button className="btn btn-outline home-open" onClick={openPicked}>
           <Icon name="folder" /> Open a file
         </button>
-        <a className="btn btn-outline" href="https://github.com/noah-thing/opentempl" target="_blank" rel="noreferrer">
-          Source
+        <a className="btn btn-primary" href="#/start">
+          Start designing
         </a>
+        <button className="home-menu-btn" aria-label="Menu" aria-expanded={menu} onClick={() => setMenu((m) => !m)}>
+          <Icon name={menu ? 'close' : 'menu'} />
+        </button>
+        {menu ? (
+          <nav className="home-sheet" onClick={() => setMenu(false)}>
+            <button onClick={() => wallRef.current?.scrollIntoView({ behavior: 'smooth' })}>Templates</button>
+            <a href="#/generate">Generate</a>
+            <button onClick={() => document.getElementById('your-designs')?.scrollIntoView({ behavior: 'smooth' })}>Your designs</button>
+            <button onClick={openPicked}>Open a file</button>
+            {SHOW_SOURCE ? (
+              <a href={REPO_URL} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            ) : null}
+          </nav>
+        ) : null}
+
       </header>
 
       <section className="hero">
@@ -145,18 +188,15 @@ export function Home() {
                 Posters, posts, slides and menus. {total || 'Hundreds of'} templates, an editor that runs on your computer, and nothing behind a paywall.
               </p>
               <div className="hero-actions">
-                <button className="hero-btn" onClick={() => wallRef.current?.scrollIntoView({ behavior: 'smooth' })}>
+                <a className="hero-btn" href="#/start">
+                  Start designing
+                </a>
+                <button className="hero-btn is-ghost" onClick={() => wallRef.current?.scrollIntoView({ behavior: 'smooth' })}>
                   Browse templates
                 </button>
-                <button
-                  className="hero-btn is-ghost"
-                  onClick={async () => {
-                    const [f] = await pickFiles('.opentempl,.tavla,.pdf,.pptx');
-                    if (f) openFile(f);
-                  }}
-                >
-                  Open a file
-                </button>
+              </div>
+              <div className="hero-credit">
+                <Credit />
               </div>
             </div>
             <PosterBloom looks={looks} />
@@ -208,6 +248,7 @@ export function Home() {
               <span className="hero-n">02</span>
               <b>{total || 'Hundreds of'} templates</b>
               <span>In {vibeOrder.length || 'many'} vibes, from Swiss grids to pixel art. Every part can be changed.</span>
+              {usage && usage.installs30d >= SHOW_USAGE_FROM ? <span>Used by {usage.installs30d.toLocaleString('en')} people this month.</span> : null}
             </div>
             <div className="hero-col">
               <span className="hero-n">03</span>
@@ -248,10 +289,7 @@ export function Home() {
               ))}
             </div>
           ) : (
-            <div className="home-empty">
-              <Sign size={28} />
-              <p>{q ? `Nothing called “${q}”. Try another word.` : 'Nothing yet. Start from a format or a template, or drop an .opentempl file, a PDF or a PowerPoint anywhere on this page.'}</p>
-            </div>
+            <p className="home-none">{q ? `Nothing called “${q}”.` : 'No designs yet. Start from a template below, or drop a file anywhere on this page.'}</p>
           )}
         </section>
 
@@ -260,10 +298,10 @@ export function Home() {
             <div className="home-section-head">
               <div>
                 <h2>Generate</h2>
-                <p className="muted">Looks too rich for a template. Pick one, say what it is for, and get it made in that look with your own words.</p>
+                <p className="muted">Thirty two styles taken from real print work. Pick one, say what it is for, and it is made in that style with your own words.</p>
               </div>
-              <a className="btn btn-outline" href="#/generate">
-                Open Generate
+              <a className="text-link" href="#/generate">
+                All styles
               </a>
             </div>
             <div className="looks-strip">
@@ -321,8 +359,14 @@ export function Home() {
         </section>
 
         <footer className="home-foot">
-          <Wordmark size={15} tone="lime" />
+          <div className="home-foot-sub">
+            <Subscribe source="footer" />
+          </div>
+          <Wordmark size={15} />
           <span>Free and open source. Everything you make stays on this computer.</span>
+          <span className="grow" />
+          <GitHubLink label />
+          <Credit />
         </footer>
       </main>
       {drop ? (

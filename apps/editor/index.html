@@ -3,19 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OpenTempl</title>
-    <meta name="description" content="OpenTempl is the free, open source Canva alternative, for posters, slides, videos and everything in between. Your files stay on your machine." />
+    <title>OpenTempl: free open source Canva alternative</title>
+    <meta name="description" content="OpenTempl is a free, open source design app for posters, social posts and slides. Works offline, no account, 337 templates in 34 styles." />
+    <link rel="canonical" href="https://opentempl.org/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OpenTempl" />
+    <meta property="og:title" content="OpenTempl: free open source Canva alternative" />
+    <meta property="og:description" content="Design posters, posts and slides from 337 templates. Works offline, no account, no paywall." />
+    <meta property="og:url" content="https://opentempl.org/" />
+    <meta property="og:image" content="https://opentempl.org/seo/og/home.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OpenTempl: Design that is free, open and yours" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" sizes="64x64" href="./favicon-64.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./app-icon.png" />
-    <meta name="theme-color" content="#EDEDF0" />
+    <meta name="theme-color" content="#0c0c0e" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://i.pinimg.com" crossorigin />
+    <link rel="preload" href="./looks/hero-bloom.json" as="fetch" crossorigin />
+    <link rel="preload" href="https://i.pinimg.com/736x/9d/76/43/9d7643ee3c4d6fd8871a1f9d280b870f.jpg" as="image" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" /></noscript>
+    <style>
+      /* Shown until the editor mounts over it. Same cobalt and type as the app's home so nothing flashes. */
+      html,body{margin:0;background:#0c0c0e;color:#f2f1ec;font-family:"Host Grotesk",system-ui,sans-serif}
+      .ssr a{color:#8fa2ff}
+      .ssr p{margin:0}
+      .ssr-hero{background:#2131f5;color:#f6f5f0;padding:96px clamp(16px,4vw,56px) 72px}
+      .ssr-hero h1{margin:0;max-width:9.5em;font-size:clamp(48px,6.4vw,100px);line-height:.92;letter-spacing:-.045em;font-weight:500}
+      .ssr-hero p{max-width:400px;margin-top:28px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.86)}
+      .ssr-hero a{display:inline-block;margin:28px 10px 0 0;padding:14px 22px;border-radius:2px;background:#fff;color:#0c0c0e;text-decoration:none;font-weight:500}
+      .ssr-main{max-width:760px;margin:0 auto;padding:56px 20px 80px;line-height:1.6}
+      .ssr-main h2{margin:44px 0 0;font-size:26px;letter-spacing:-.03em;font-weight:500}
+      .ssr-main h3{margin:22px 0 0;font-size:18px;font-weight:500}
+      .ssr-main p,.ssr-main dd{margin:12px 0 0;color:#cfcfd6}
+      .ssr-main dl{margin:20px 0 0}
+      .ssr-main dt{margin-top:14px;color:#6c6c75;font-size:13px}
+      .ssr-main dd{margin-left:0}
+      .ssr-main ul{padding-left:20px;color:#cfcfd6}
+    </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://opentempl.org/#website","url":"https://opentempl.org/","name":"OpenTempl","inLanguage":"en","publisher":{"@id":"https://opentempl.org/#org"}},{"@type":"Organization","@id":"https://opentempl.org/#org","name":"OpenTempl","url":"https://opentempl.org/","logo":"https://opentempl.org/mark-512.png","founder":{"@id":"https://opentempl.org/#noah"},"sameAs":["https://x.com/fsconfig"]},{"@type":"Person","@id":"https://opentempl.org/#noah","name":"Noah","url":"https://x.com/fsconfig","sameAs":["https://x.com/fsconfig","https://github.com/noah-thing"]},{"@type":"SoftwareApplication","@id":"https://opentempl.org/#app","name":"OpenTempl","alternateName":["Open Templ"],"url":"https://opentempl.org/","image":"https://opentempl.org/app-icon-512.png","description":"OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account.","applicationCategory":"DesignApplication","operatingSystem":"Web browser; macOS, Windows and Linux desktop builds","isAccessibleForFree":true,"license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@id":"https://opentempl.org/#noah"},"publisher":{"@id":"https://opentempl.org/#org"},"mainEntityOfPage":"https://opentempl.org/about","featureList":["337 templates in 34 styles","Drag and drop editor for posters, social posts, stories, slides, menus and invitations","Works offline after the first load","No account","Background removal that runs on your computer","Import PDF and PowerPoint, export PNG, SVG, PDF, PowerPoint, MP4 and GIF","Live editing through a share link, synced through an end to end encrypted relay","Optional image generation with your own OpenAI key"]},{"@type":"WebPage","@id":"https://opentempl.org/#page","url":"https://opentempl.org/","name":"OpenTempl: free open source Canva alternative","isPartOf":{"@id":"https://opentempl.org/#website"},"about":{"@id":"https://opentempl.org/#app"},"dateModified":"2026-11-02","inLanguage":"en"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is OpenTempl?","acceptedAnswer":{"@type":"Answer","text":"OpenTempl is a free, open source (MIT) design app for posters, social media posts, slides, menus and invitations, with 337 templates in 34 styles. It works offline and needs no account. It is an alternative to Canva."}},{"@type":"Question","name":"Is OpenTempl really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. There is no paid plan, trial or watermark, and every export format is included. If you use the optional Generate tab, OpenAI charges you directly for images, because it uses your own OpenAI key."}},{"@type":"Question","name":"Is there an open source version of Canva?","acceptedAnswer":{"@type":"Answer","text":"OpenTempl is an open source design app for the same kind of work: posters, social posts, slides and printables, with templates. It is not a copy of Canva and it is not made by Canva. Penpot is another open source option, aimed more at interface design for product teams."}},{"@type":"Question","name":"Does OpenTempl work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. After it has loaded once you can create, edit and export designs without internet. Fonts you have not used yet, icon and stock photo search, live sessions and the first download of the background removal model need a connection."}},{"@type":"Question","name":"Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"No. There is nothing to sign up for or sign in to. Designs are saved on your device."}},{"@type":"Question","name":"How is OpenTempl different from Canva?","acceptedAnswer":{"@type":"Answer","text":"OpenTempl works offline, needs no account, has no paid tier and is open source. Canva has a much larger template and stock library, phone apps and team tools. OpenTempl is not affiliated with Canva."}}]}]}</script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="ssr">
+        <section class="ssr-hero">
+          <h1>Design that’s free, open and yours.</h1>
+          <p>Posters, posts, slides and menus. 337 templates, an editor that runs on your computer, and nothing behind a paywall.</p>
+          <a href="/templates">Browse templates</a><a href="/canva-alternative">Canva alternative</a>
+        </section>
+        <div class="ssr-main">
+          <h2>What OpenTempl is</h2>
+          <p>OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account. It is an alternative to Canva for people who make their own designs and want to keep the files.</p>
+          <dl>
+            <dt>Price</dt><dd>Free. No paid plan, trial or watermark.</dd>
+            <dt>Templates</dt><dd>337 templates in 34 styles, from Swiss grid and riso zine to brutalist, Bauhaus and Y2K. <a href="/templates">Browse the styles</a>.</dd>
+            <dt>Offline and accounts</dt><dd>Works offline after the first load. No account. Designs are saved on your device.</dd>
+            <dt>Import and export</dt><dd>Opens PowerPoint and PDF files. Exports PNG, SVG, PDF with bleed, PowerPoint, MP4 and GIF.</dd>
+            <dt>Generate</dt><dd>Optional images in 32 styles with your own OpenAI key. OpenAI bills you; OpenTempl takes nothing.</dd>
+            <dt>Licence</dt><dd>MIT. Made by <a href="https://x.com/fsconfig">Noah</a> in Stockholm. Not affiliated with Canva.</dd>
+          </dl>
+          <h2>Where it falls short</h2>
+          <p>No team workspaces, no phone app and no CMYK output yet. A library of 337 templates, not millions. Version 0.1, one maintainer.</p>
+          <h2>Questions</h2>
+          <div class="ssr-qa"><h3>What is OpenTempl?</h3><p>OpenTempl is a free, open source (MIT) design app for posters, social media posts, slides, menus and invitations, with 337 templates in 34 styles. It works offline and needs no account. It is an alternative to Canva.</p></div><div class="ssr-qa"><h3>Is OpenTempl really free?</h3><p>Yes. There is no paid plan, trial or watermark, and every export format is included. If you use the optional Generate tab, OpenAI charges you directly for images, because it uses your own OpenAI key.</p></div><div class="ssr-qa"><h3>Is there an open source version of Canva?</h3><p>OpenTempl is an open source design app for the same kind of work: posters, social posts, slides and printables, with templates. It is not a copy of Canva and it is not made by Canva. Penpot is another open source option, aimed more at interface design for product teams.</p></div><div class="ssr-qa"><h3>Does OpenTempl work offline?</h3><p>Yes. After it has loaded once you can create, edit and export designs without internet. Fonts you have not used yet, icon and stock photo search, live sessions and the first download of the background removal model need a connection.</p></div><div class="ssr-qa"><h3>Do I need an account?</h3><p>No. There is nothing to sign up for or sign in to. Designs are saved on your device.</p></div><div class="ssr-qa"><h3>How is OpenTempl different from Canva?</h3><p>OpenTempl works offline, needs no account, has no paid tier and is open source. Canva has a much larger template and stock library, phone apps and team tools. OpenTempl is not affiliated with Canva.</p></div>
+          <h2>Guides</h2>
+          <ul>
+            <li><a href="/canva-alternative">Canva alternative</a>, <a href="/open-source-canva">open source Canva</a>, <a href="/free-canva-alternative">free Canva alternative</a></li>
+            <li><a href="/canva-alternative-offline">Offline</a>, <a href="/canva-alternative-no-account">no account</a>, <a href="/canva-pro-free">Canva Pro features</a>, <a href="/canva-vs-opentempl">Canva vs OpenTempl</a></li>
+            <li><a href="/free-poster-maker">Poster maker</a>, <a href="/free-instagram-post-maker">Instagram posts</a>, <a href="/free-presentation-maker">presentations</a>, <a href="/free-menu-maker">menus</a></li>
+            <li><a href="/prompts">ChatGPT poster prompts</a> and <a href="/guides/make-a-poster-with-chatgpt">how to make a poster with ChatGPT</a></li>
+            <li><a href="/facts">Facts</a>, <a href="/about">About</a>, <a href="/download">Download</a></li>
+          </ul>
+          <p>OpenTempl is not affiliated with Canva. Canva is a trademark of its owner.</p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

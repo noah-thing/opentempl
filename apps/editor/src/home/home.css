@@ -1,5 +1,11 @@
 /* Home runs dark whatever the editor theme is: the templates are the colour here. */
+html,
+body {
+  overscroll-behavior: none;
+}
 .home {
+  overflow-x: clip;
+  overscroll-behavior: none;
   --paper: #0c0c0e;
   --paper-2: #121215;
   --sheet: #17171a;
@@ -127,6 +133,9 @@
   gap: 10px;
 }
 .hero-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   height: 46px;
   padding: 0 22px;
   border-radius: 2px;
@@ -294,7 +303,7 @@
 .hero-n {
   display: block;
   margin-bottom: 10px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.72);
   font-variant-numeric: tabular-nums;
 }
 .hero-blanks {
@@ -330,12 +339,13 @@
 }
 
 /* The top bar turns clear over the blue. */
+/* Over the hero the bar takes the hero's own blue, so it is solid without a visible edge. */
 .home-top.is-on-hero {
   --ink: #fff;
   --ink-2: rgba(255, 255, 255, 0.82);
   --line: rgba(255, 255, 255, 0.4);
   --hover: rgba(255, 255, 255, 0.14);
-  background: transparent;
+  background: #2131f5;
   box-shadow: none;
 }
 .home-top.is-on-hero .btn-outline {
@@ -517,17 +527,20 @@
 }
 
 /* The template wall */
+/* Sticks right under the top bar (its height is measured into --bar), and its
+   background runs out to both window edges so nothing shows around it. */
 .chips.vibe-chips {
   position: sticky;
-  top: 66px;
+  top: var(--bar, 64px);
   z-index: 5;
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 10px 0;
-  margin: -10px 0 8px;
+  padding: 12px 0;
+  margin: -12px 0 8px;
   background: var(--paper);
-  mask-image: linear-gradient(to right, #000 92%, transparent);
+  box-shadow: 0 0 0 100vmax var(--paper), 0 1px 0 100vmax var(--line-2);
+  clip-path: inset(0 -100vmax -1px);
 }
 .vibe-chips .chip {
   flex: none;
@@ -567,11 +580,14 @@
   box-shadow: 0 26px 44px -22px rgba(0, 0, 0, 0.95);
 }
 .wall-live {
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  border-radius: var(--r-2);
-  background: var(--paper-2);
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.wall-live svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .wall-meta {
   display: grid;
@@ -588,10 +604,44 @@
   color: var(--ink-3);
 }
 
+/* Made by Noah: quiet grey until hovered, the same credit as on OpenRoll and OpenCursor. */
+.credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.credit img {
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.credit span {
+  display: inline-flex;
+  align-items: center;
+  white-space: pre;
+}
+.credit b {
+  font-weight: 500;
+  color: var(--ink-2);
+  transition: color 0.15s;
+}
+.credit-badge {
+  margin: 0 4px 0 3px;
+}
+.credit:hover {
+  color: var(--ink-2);
+}
+.credit:hover b {
+  color: var(--ink);
+}
 .home-foot {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
+  row-gap: 4px;
   padding: 28px 0 8px;
   border-top: 1px solid var(--line-2);
   color: var(--ink-3);
@@ -613,12 +663,191 @@
 }
 
 @media (max-width: 900px) {
-  .home-nav {
+  .home-nav button:last-child {
     display: none;
+  }
+  .home-brand {
+    margin-right: 4px;
   }
 }
 @media (max-width: 560px) {
   .home-top .btn-outline:last-child {
     display: none;
+  }
+}
+
+#your-designs {
+  padding-top: 72px;
+}
+.home-none {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 14px;
+}
+.text-link {
+  color: var(--ink-2);
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+}
+.text-link:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+.home-foot .home-brand,
+.home-foot > span:first-child {
+  color: var(--ink);
+}
+
+/* On the blue bar the primary button turns white, so it is never blue on blue. */
+.home-top.is-on-hero .btn-primary {
+  color: #0c0c0e;
+  background: #fff;
+}
+.home-top a.btn-primary {
+  text-decoration: none;
+}
+.hero-credit {
+  margin-top: 28px;
+  font-size: 13px;
+}
+.hero-credit .credit,
+.hero-credit .credit b {
+  color: rgba(255, 255, 255, 0.78);
+}
+.hero-credit .credit:hover,
+.hero-credit .credit:hover b {
+  color: #fff;
+}
+.hero-credit .credit img {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- phones ---------- */
+
+.home-menu-btn {
+  display: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  border-radius: 8px;
+  color: var(--ink);
+}
+.home-sheet {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: grid;
+  padding: 8px clamp(16px, 4vw, 56px) 16px;
+  background: inherit;
+  box-shadow: 0 1px 0 var(--line-2);
+}
+.home-top.is-on-hero .home-sheet {
+  background: #2131f5;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.home-sheet a,
+.home-sheet button {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-2);
+  font-size: 17px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ink);
+  text-decoration: none;
+}
+.home-top.is-on-hero .home-sheet a,
+.home-top.is-on-hero .home-sheet button {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.home-sheet > :last-child {
+  border-bottom: 0;
+}
+@media (max-width: 720px) {
+  .home-top {
+    gap: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .home-top .home-nav,
+  .home-top .home-open {
+    display: none;
+  }
+  .home-top .home-menu-btn {
+    display: grid;
+    flex: none;
+    min-width: 40px;
+  }
+  .home-brand {
+    margin-right: 0;
+  }
+  .home-top .btn-primary {
+    flex: none;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 13.5px;
+  }
+  /* The poster needs room to read; on a phone the words carry the hero. */
+  .bloom {
+    display: none;
+  }
+  .hero {
+    min-height: 0;
+  }
+  .hero-in {
+    padding-top: 96px;
+  }
+  .hero-top {
+    display: block;
+  }
+  .hero-copy h1 {
+    font-size: clamp(44px, 13vw, 60px);
+  }
+  .hero-copy p {
+    margin: 20px 0 24px;
+  }
+  .hero-base {
+    margin-top: 48px;
+  }
+  .home-foot {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .home-foot .grow {
+    display: none;
+  }
+}
+
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.gh-link:hover {
+  color: var(--ink);
+}
+.home-gh .gh-link {
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--ink-2);
+}
+.home-gh .gh-link:hover {
+  background: var(--hover);
+}
+.home-foot .gh-link {
+  margin-right: 12px;
+}
+@media (max-width: 720px) {
+  .home-gh .gh-link {
+    width: 34px;
+    height: 34px;
   }
 }

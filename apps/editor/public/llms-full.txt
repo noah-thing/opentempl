@@ -1,0 +1,1517 @@
+# OpenTempl: full text
+
+> OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account.
+
+This file holds the text of every page on opentempl.org except the individual prompt pages, which are summarised. Updated November 2026.
+
+---
+
+# Canva alternative with no account or login
+
+URL: https://opentempl.org/canva-alternative-no-account
+Updated: 2026-11-02
+
+Design without making an account
+
+Open OpenTempl and start. There is nothing to sign up for, no email to give and no login to remember. Your designs are saved on your device. It is not affiliated with Canva.
+
+ What no account means 
+ There is no OpenTempl account. The app does not know who you are, so it has no profile to keep, no sign in screen and no trial that ends. Starting a live session with someone works from a link, not from accounts. 
+ When this matters 
+  School and work computers where signing up is blocked.  Kids and classrooms, where nobody should hand an email address to a design tool.  Quick jobs: a poster for tonight, a menu for tomorrow.  People who would rather not be in yet another database.  
+ The trade offs 
+ No account also means no cloud. Your designs live on the device where you made them. 
+  Nothing syncs between your phone, laptop and desktop.  In the web version, clearing your browser data removes your designs. Export the OpenTempl file for anything you want to keep.  To work on another computer, move the file.  If you want to share a design with someone else live, start a session and send the link. It runs directly between browsers and is encrypted with a key in the link.  
+ Back up your work 
+ Export an OpenTempl file from the File menu. It holds the whole design, with its pictures and video clips, and opens on any computer with OpenTempl. Version history keeps a snapshot every ten minutes inside the app. 
+ What does need a key 
+ The Generate tab makes images with your own OpenAI key. The key stays on your device. That is the one place an account exists, and it is yours with OpenAI, not with OpenTempl.   Open the editor  
+
+Is my data collected?
+There is no OpenTempl account, and no OpenTempl server stores your designs. Fonts load from Google Fonts. The facts page lists exactly what needs a connection.
+
+Can I collaborate without accounts?
+Yes. Start a live session and send the link. Both people edit at once, and each sees the other's cursor.
+
+How do I move designs to another computer?
+Export the OpenTempl file, copy it over, and open it there.
+
+---
+
+# Canva alternative that works offline | OpenTempl
+
+URL: https://opentempl.org/canva-alternative-offline
+Updated: 2026-11-02
+
+A Canva alternative that works without internet
+
+OpenTempl is a design app that loads once and then works without a connection. You can create a new poster, post or slide deck, edit it and export it, all offline. It is free, open source and has no account to sign in to. It is not affiliated with Canva.
+
+ How it works 
+ The editor runs on your device, and your designs are saved there while you work. After the first load, the app is kept for offline use. Chrome and Edge may offer to install it as an app, so it starts like any other. The desktop builds for Mac, Windows and Linux carry the whole editor with them. 
+ Any design can also be saved as an OpenTempl file, an editable file you can copy, back up and email. The export formats are PNG, JPG, WebP, SVG, PDF, PowerPoint, MP4 and GIF, and none of them need a connection. 
+ Canva and offline 
+ Canva has an offline editing feature. Its help centre says the desktop app and Android support it, and iOS does not. You mark designs as available offline while you are connected, then edit them offline. You can edit existing designs only, not create new ones. Videos show as still images and uploads need a connection. Canva's help pages give 14 days in one article and 7 days in others as the time you can stay offline before you reconnect. 
+ So the difference is simple. In Canva you prepare for offline. In OpenTempl, offline is how the app works. The Canva details come from its help centre as read in October 2026; check the current pages, because they change. 
+ What still needs a connection 
+ Be ready for these: 
+  The first load, and updates.  Fonts you have not used before. OpenTempl offers 1,344 Google Fonts and fetches each one the first time you use it, then keeps it. Fonts you have used stay available offline. Your own font files always work.  Searching icons and stock photos, which come from online libraries.  Background removal the first time. The app downloads a small model once, then removal runs on your computer.  Live sessions with other people.  The Generate tab, which calls OpenAI with your own key.  
+ Everything else works without a network. 
+ Where offline matters 
+ A teacher making handouts on a train. A cafe owner with weak wifi who needs tomorrow's menu printed. A student on a school computer that blocks sign ups. Anyone who wants a design to stay on their computer until they decide to share it. 
+ What you give up 
+ OpenTempl does not sync designs between devices. If you work on two computers, move the file yourself. The web version stores designs in your browser, so clearing your browser data removes them; export an OpenTempl file for anything you care about. The desktop app is the safer home for your work.   Open the editor  
+
+Can I create a new design offline?
+Yes. Once the app has loaded, you can start a new design from any template with no connection.
+
+Do fonts work offline?
+Fonts you have already used do. A font you have never used needs one online load first. Fonts you add from your own files always work.
+
+Where are my files stored?
+On your device, in the app's storage and in any OpenTempl file you save. No OpenTempl server holds them.
+
+Does it sync between devices?
+No. Copy the file to move a design.
+
+Is Canva available offline?
+Partly. Canva can edit designs you chose in advance while offline, for a limited time. See the section above.
+
+---
+
+# Canva alternative: free, open source, works offline
+
+URL: https://opentempl.org/canva-alternative
+Updated: 2026-11-02
+
+A Canva alternative you can keep, offline and free
+
+OpenTempl is a free, open source design app for posters, social posts, slides, menus and invitations. It works offline, needs no account and has no paid tier. It is not affiliated with Canva.
+
+ If you are looking for a Canva alternative, the useful question is what you use Canva for. For making your own posters, posts and slides, OpenTempl does the job and you keep the files. For team workspaces, huge stock libraries and phone apps, it does not, and Canva is the better tool. 
+ Who should switch 
+ Switch if you: 
+  make posters, Instagram posts, flyers, menus or slides for yourself, a small business, a club or a class  want to open the app without logging in  work on a train, in a classroom with poor wifi or on a computer that blocks sign ups  want transparent PNG, SVG or print PDF without paying  would rather have a file you own than a design stored in someone else's account  like templates with a strong visual style, not only the clean corporate kind  
+ Stay with Canva if you: 
+  share folders and brand approvals with a team  need millions of stock photos, videos and music tracks  design mostly on your phone  rely on Canva's AI writing or scheduling tools  
+ What you get 
+   Templates.  337 across 34 styles, from Swiss grid and riso zine to brutalist, Bauhaus and Y2K.  Browse them .   A real editor.  Pages, smart guides that show the spacing, 23 shapes, a vector pen, charts, tables, QR codes, curved text, 1,344 Google Fonts and your own font files.   Photo tools.  Crop, masks, filters, adjustment sliders and background removal that runs on your computer.   Resize and repeat.  Magic resize into any format, bulk create from a pasted table, brand kits.   Import.  PowerPoint and PDF files, with editable text.   Export.  PNG including transparent, JPG, WebP, SVG, PDF for screen or print, PowerPoint, MP4 and GIF.   Live editing.  Share a link and edit together, with each other's cursors and selections.   Images from your own OpenAI key.  32 styles in the Generate tab. OpenAI bills you.  
+ OpenTempl next to other Canva alternatives 
+       OpenTempl  Penpot  Polotno Studio  Inkscape  Canva      Open source  Yes, MIT  Yes, MPL 2.0  No, the SDK is a commercial product  Yes, GPL  No    Works offline  Yes  Only if you self host  Not claimed  Yes  Limited, see below    Account needed  No  Yes, or self host  No  No  Yes    Built around templates  Yes  No, it is a design and prototyping tool  Yes  No, it is a vector editor  Yes    Price  Free  Free, with paid team plans  Studio is free, the SDK is paid  Free  Free plan and paid plans     
+ Sources: Penpot's comparison page and media kit, Polotno's Canva alternative page, Canva's help centre, read in November 2026. Plans and licences change, so check each project before you decide. 
+ Is it better than Canva? 
+ It depends on the job. OpenTempl is better in these ways: 
+  It works offline from the first minute and creates new designs offline. Canva's offline mode edits designs you marked ahead of time, for a limited period.  You do not need an account.  The files are yours, in an editable OpenTempl file and in open formats.  Exports that Canva keeps behind a paid plan, such as transparent PNG and SVG, are free. See  Canva Pro features in OpenTempl .  It is open source.  
+ Canva is better in these ways: 
+  The template and stock library is far larger.  It has phone apps.  It has team workspaces, comments, approvals and brand controls at company scale.  It has AI tools and a content planner built in.  It has years of polish and a very large user base. OpenTempl is at version 0.1.  
+ Moving your Canva work over 
+ In Canva, download a design as PDF or PowerPoint. Open the file in OpenTempl. PowerPoint files keep their text, shapes, pictures and notes. PDF text becomes editable text boxes. Fonts that are not available get a close match, and complex effects can flatten, so check the result before you rely on it. There is no direct Canva import.   Open the editor  
+
+Is OpenTempl a Canva clone?
+No. It is a separate editor written from scratch, with its own templates and its own look. It does not use Canva's code, content or servers.
+
+Is OpenTempl better than Canva?
+For working offline, owning your files and exporting without a paid plan, yes. For templates and stock at scale, phone apps and team features, no. The lists above give both sides.
+
+Can I import Canva designs?
+Download the design from Canva as PDF or PowerPoint and open that file in OpenTempl. There is no direct Canva import.
+
+Is there a catch?
+It is a young project by one maker. There is no cloud sync and no phone app, and the desktop installers are not code signed yet. The Generate tab uses your own OpenAI account, which costs money for each image.
+
+Which Canva Pro features are free in OpenTempl?
+Background removal, magic resize, brand kits, bulk create, transparent PNG, SVG export, print PDF with bleed, version history and custom fonts. See the list.
+
+---
+
+# Canva Pro features for free: what OpenTempl includes
+
+URL: https://opentempl.org/canva-pro-free
+Updated: 2026-11-02
+
+Canva Pro features you get free in OpenTempl
+
+Canva keeps several of its most used tools on paid plans. OpenTempl includes an equivalent of each one for free, with no trial and no sign in. OpenTempl is a separate app written from scratch. It does not use or unlock anything from Canva, and it is not affiliated with Canva.
+
+ The list 
+ The Canva column reflects Canva's own help and pricing pages as read in October 2026. Plans change, so check canva.com/pricing for today's terms. 
+     Feature  On Canva  In OpenTempl      Transparent background PNG  Paid plan  Free, up to 4x size    SVG export  Paid plan  Free    Print PDF with bleed and crop marks  Paid plan  Free    Custom fonts  Paid plan to upload  Free. Add any font file, plus 1,344 Google Fonts    Brand kit  One kit with three colours on the free plan, more on paid plans  Free. Logos, colours and fonts    Version history  Paid plan  Free. A snapshot every ten minutes    Background remover  Paid plan  Free, runs on your computer    Magic resize  Paid plan  Free    Bulk create  Paid plan, with row limits  Free     
+ How each one works 
+  Background removal.  Select a photo and press Remove background. The cut out runs in the app with an open model (BiRefNet lite, MIT licence), so your photo is not uploaded for it. The first use downloads the model once. 
+  Magic resize.  Choose a format, such as a story, a poster or a slide, and OpenTempl lays the design out again. Do it in place or keep a copy. 
+  Brand kit.  Save your logos, colours and fonts once and apply them to any design. 
+  Bulk create.  Paste rows from a spreadsheet and get one page for each row. Good for name badges, product cards and menus. 
+  Version history.  The app saves a snapshot every ten minutes. Go back to one when you break something. 
+  Print PDF.  Choose print, set the bleed and get crop marks. OpenTempl does not do CMYK colour or ICC profiles yet, so if your print shop needs CMYK, convert the PDF in a prepress tool. 
+ What Canva Pro has that OpenTempl does not 
+  A far larger library of premium templates, photos, video and music.  Phone apps.  AI writing, image editing and design tools built in. OpenTempl has only the Generate tab, which uses your own OpenAI key and costs money for each image.  Team workspaces, approvals and brand controls at company scale.  Content scheduling and publishing to social networks.  CMYK colour for print.    Open the editor  
+
+Is OpenTempl a hacked or cracked version of Canva Pro?
+No. It does not use Canva's code, servers or content. It is a separate open source app.
+
+Do I need a Canva account to use OpenTempl?
+No, and you do not need an OpenTempl account either.
+
+Can students and teachers use it free?
+Everyone uses it free. There are no tiers.
+
+Will these features become paid later?
+The code is MIT licensed, so the version you have stays free and open whatever happens next.
+
+---
+
+# Canva vs OpenTempl: an honest comparison
+
+URL: https://opentempl.org/canva-vs-opentempl
+Updated: 2026-11-02
+
+Canva vs OpenTempl
+
+Canva is the large, polished default for design on the web. OpenTempl is a small, free, open source app that works offline. This page sets them side by side, including where Canva is better. OpenTempl is not affiliated with Canva. The Canva details come from its help and pricing pages as read in October 2026; check canva.com for today's terms.
+
+ Side by side 
+       Canva  OpenTempl      Price  Free plan, paid plans for more tools and exports  Free, no paid plan    Licence  Proprietary  MIT, open source    Account  Needed  Not needed    Works offline  Edit designs you marked in advance, for a limited time  Yes, and new designs too    Where your files live  In your Canva account  On your device, plus an editable file you keep    Templates  A very large library  337 in 34 styles    Stock photos, video, music  Very large library, some behind a paid plan  Built in photos and objects, plus Openverse and Iconify search    Transparent PNG, SVG, print PDF  Paid plan  Free    Background remover, magic resize, bulk create  Paid plan  Free    AI tools  Built in, metered  Optional Generate tab with your own OpenAI key    Import  Several formats  PowerPoint and PDF, with editable text    Real time editing with others  Yes, with accounts and team features  Yes, from a link, peer to peer    Team features  Workspaces, approvals, brand controls  None    Phone apps  Yes  No    Publishing and scheduling  Yes  No    CMYK for print  On paid plans  Not yet     
+ Pick Canva if 
+  You work in a team that shares folders, comments and approvals.  You need a huge stock library, or video and music tracks.  You make designs on your phone.  You want built in AI writing and a content planner.  You want the most polished, most documented tool, with years behind it.  
+ Pick OpenTempl if 
+  You want to open an app and start, with no account.  You work offline, or on a computer that blocks sign ups.  You want transparent PNG, SVG and print PDF without a plan.  You want files you own, in a format you can keep and open source code behind it.  You like templates with a clear visual style: Swiss grid, riso, brutalist, Bauhaus, Y2K.  
+ What each does better 
+ Canva is better at scale: more templates, more stock, more people, more tools around the editor. OpenTempl is better at independence: it runs without a network, without an account and without a paid plan, and the exports are not held back. For one person making a poster, a post or a deck, that can be the whole decision. For a company with brand rules and ten people editing the same files, it cannot. 
+ See also:  Canva alternatives compared ,  the offline question  and  Canva Pro features in OpenTempl .   Open the editor  
+
+Is OpenTempl better than Canva?
+For working offline, keeping your files and exporting without a paid plan, yes. For templates, stock, phone apps and teams, Canva is better.
+
+Can I move from Canva?
+Download a design from Canva as PDF or PowerPoint and open it in OpenTempl. Check the result, because fonts and effects may change. There is no direct import.
+
+Does OpenTempl have Canva's templates?
+No. It has its own 337 templates, made for OpenTempl.
+
+Does OpenTempl copy Canva?
+No. It is a separate editor written from scratch.
+
+---
+
+# Free Canva alternative with no watermark or paywall
+
+URL: https://opentempl.org/free-canva-alternative
+Updated: 2026-11-02
+
+A free Canva alternative with nothing held back
+
+OpenTempl is free in the plain sense: no trial, no watermark, no locked exports and no account. The licence is MIT. It is not affiliated with Canva.
+
+ What free means here 
+  No paid plan, now or inside the app. There is nothing to unlock.  No watermark on anything you export.  No ads and no sign up.  The one thing that costs money is optional. If you use the Generate tab, you paste your own OpenAI key and OpenAI bills you for the images. Skip it and you pay nothing.  
+ Exports you do not pay for 
+ PNG, with a transparent background and up to 4x size. JPG and WebP. SVG. PDF for screen, or for print with bleed and crop marks. PowerPoint with editable text. MP4 video of your pages and animations. GIF. A ZIP of all pages. The editable OpenTempl file. 
+ How a free project pays for itself 
+ OpenTempl is a project by one person, Noah, and there is no paid plan behind it. The MIT licence means the version you download stays free and open even if the project changes direction. 
+ Free options compared 
+ Canva has a free plan, and it is generous. It also has paid plans that add some exports and tools, and it needs an account. Browser tools such as Polotno Studio are free and need no sign up, but they run online. Desktop editors such as Inkscape and GIMP are free and open source, but they are not built around templates. OpenTempl sits between them: templates and a simple editor, installed and offline, free and open. 
+  See how it compares in detail , or  read about the Canva Pro features it includes . 
+ Limits 
+ There are no team workspaces, no phone app and 337 templates, not millions. The desktop installers are not code signed yet.   Open the editor  
+
+Is there a watermark?
+No.
+
+Is there a free trial that ends?
+No. There is no paid plan to end up on.
+
+Will it become paid?
+The code is MIT licensed, so the version you have stays free and open whatever happens next.
+
+Is it safe to use?
+It runs in your browser or as a desktop app, and your designs stay on your device. The desktop installers are unsigned for now, so your system will ask you to confirm the first launch.
+
+---
+
+# Free Instagram post and story maker, no sign up
+
+URL: https://opentempl.org/free-instagram-post-maker
+Updated: 2026-11-02
+
+Free Instagram post maker
+
+Make Instagram posts, stories and carousels in OpenTempl without an account or a watermark. Start from a template or a blank 4:5 post, 1:1 square or 9:16 story, and export a PNG or JPG at full size.
+
+ Sizes 
+  Post, 4:5 portrait, 1080 by 1350 pixels  Square post, 1:1, 1080 by 1080  Story and reel cover, 9:16, 1080 by 1920  
+ Instagram changes what it supports, so check its current specs. Magic resize turns a finished post into a story, or the other way round, in place or as a copy. 
+ Make a post 
+  Pick a size and a style. Soft and quiet:  soft pastel ,  Nordic minimal ,  quiet luxury . Loud:  Y2K chrome ,  maximal pop ,  aura .  Swap the words and the photo. Remove a background if the subject should sit on colour.  Save your colours, fonts and logo as a brand kit so every post matches.  Export a PNG or JPG.  
+ Carousels and series 
+ A carousel is a design with several pages. Export a ZIP of all pages and upload them in order. For a series, such as one card per product, use bulk create: paste a table and get a page for every row. 
+ What it does not do 
+ OpenTempl does not schedule or publish to Instagram. You export the image and post it yourself. 
+ Pictures made with AI 
+ The  prompt gallery  has copy and paste ChatGPT prompts for posts in 32 styles. The Generate tab in OpenTempl uses the same styles with your own OpenAI key.   Open the editor  
+
+What size is an Instagram post?
+A 4:5 portrait post is 1080 by 1350 pixels and a square post is 1080 by 1080. Check Instagram's current guidance, because it changes.
+
+Can I make a carousel?
+Yes. Add pages to a design and export a ZIP of all pages.
+
+Can I schedule posts?
+No. OpenTempl makes the image; you post it.
+
+Is there a watermark?
+No.
+
+---
+
+# Free menu maker: restaurant and cafe menu templates
+
+URL: https://opentempl.org/free-menu-maker
+Updated: 2026-11-02
+
+Free menu maker
+
+Design a menu, a cafe board or a recipe card in OpenTempl and export a print ready PDF with bleed and crop marks. No account, no watermark, and it works offline.
+
+ Start from a menu 
+ The  menus and food templates  cover cafe boards, restaurant menus and recipe cards. Other styles work for a menu too:  quiet luxury  for a dinner,  Nordic minimal  for a coffee bar,  seventies  for a diner. 
+ Make it yours 
+  Pick a template and a page size. A4 and A5 are common; type your own for a tall board.  Edit the dishes and prices. Paste a table from a spreadsheet to build a chart or a list, or use bulk create for one page per item, such as a table card per dish.  Set your brand colours and fonts with a brand kit.  Add a QR code that links to your site or an online menu.  Export the print PDF with bleed and crop marks, or a PNG for a screen.  
+ What it does not do 
+ OpenTempl is a design tool. It does not host a QR menu for you, take orders or print. You export the file and take it to a print shop or your own printer. It works in RGB; ask your printer about CMYK.   Open the editor  
+
+Can I add a QR code?
+Yes. Add a QR code element and type the address it should open.
+
+What size should a menu be?
+Common sizes are A4, A5 and a tall DL card. Ask your printer which they prefer.
+
+Can I print at a copy shop?
+Yes. Export the print PDF with bleed and crop marks and take it in.
+
+---
+
+# Free poster maker: no watermark, no account
+
+URL: https://opentempl.org/free-poster-maker
+Updated: 2026-11-02
+
+Free poster maker
+
+Make a poster in OpenTempl without an account, without a watermark and without paying. Start from one of 337 templates in 34 styles, or from a blank A3, A4 or custom page, and export a PNG or a print PDF with bleed and crop marks.
+
+ Make a poster in five steps 
+  Open the editor and pick a size. A3 portrait is the usual poster; A4, square and landscape are there too, and you can type your own.  Choose a style.  Swiss grid  for order,  riso zine  for ink and grain,  Seoul and Tokyo  for dense colour,  brutalist  for blunt type. All 34 are on the  templates page .  Replace the words and the picture. Double click text to edit. Drop a photo onto a frame and drag inside it to crop. Remove a photo's background if you need to.  Check it. The design check flags text that does not stand out from what is behind it, text that is too small, photos that will print soft and anything that sits off the page.  Export. PNG for screens, PDF for print, SVG if you want to keep editing in a vector tool.  
+ For print 
+ Choose the print PDF and set the bleed. OpenTempl adds the extra edge and crop marks that print shops ask for. Photos need enough pixels for the size you print, and the design check tells you when one does not. OpenTempl works in RGB; it has no CMYK output yet, so if your printer requires CMYK, ask whether they convert for you. 
+ What is included 
+ No watermark. Transparent PNG up to 4x. SVG. 1,344 Google Fonts plus your own font files. Curved text and ten text effects. Charts, QR codes and 200,000 icons. Version history. All free. 
+ Posters from an image prompt 
+ If you want a picture made by an image model first, the  prompt gallery  has copy and paste prompts for ChatGPT in 32 styles, including  halftone ,  risograph  and  Y2K .   Open the editor  
+
+Is there a watermark?
+No.
+
+What resolution can I export?
+PNG up to 4x the page size. At A3 that is a large file. PDF keeps text and vectors sharp at any size.
+
+Can I print it at a shop?
+Yes. Export the print PDF with bleed and crop marks and take it in. Ask whether they need CMYK.
+
+Can I use my own fonts?
+Yes. Add any font file, and it works offline.
+
+Does it work offline?
+Yes, after it has loaded once. See what needs a connection.
+
+---
+
+# Free presentation maker that opens PowerPoint files
+
+URL: https://opentempl.org/free-presentation-maker
+Updated: 2026-11-02
+
+Free presentation maker, offline and without an account
+
+OpenTempl makes slides you design yourself, opens PowerPoint files, and presents them with speaker notes. It is free, it works offline and it needs no account. It is not an AI deck generator: you choose the layout and write the words.
+
+ What you can do 
+  Start from a slide template or a blank 16:9 page. Styles that suit decks:  corporate clean ,  dark tech ,  academic ,  Swiss grid .  Open a .pptx file. Text stays editable with its bold and coloured words. Shapes, pictures, backgrounds, theme colours, fonts and speaker notes come across.  Add charts from a pasted spreadsheet, tables, icons, photos and video clips.  Animate with page transitions and entrance animations.  Present full screen with autoplay, or with the presenter view and notes on a second screen.  Export PowerPoint with editable text, PDF, MP4 video or GIF.  
+ What does not come across 
+ Charts, tables and SmartArt in PowerPoint files are not imported yet. Fonts that are not available get a close match, for example Calibri comes in as Carlito. Check the slides after you open them. 
+ Why use it offline 
+ You can present from a laptop with no wifi, with the deck and its fonts already on the machine. Open it once while connected so the fonts you use are stored.   Open the editor  
+
+Can I open a .pptx file?
+Yes. Slides, text, shapes, pictures, backgrounds and notes open. Charts, tables and SmartArt do not yet.
+
+Does it support speaker notes?
+Yes, in the editor and in presenter view.
+
+Can I present offline?
+Yes, once the app has loaded and you have used the fonts at least once while online.
+
+Does it write slides with AI?
+No. The Generate tab makes images with your own OpenAI key; it does not write a deck.
+
+---
+
+# How to make a poster with ChatGPT: 5 steps and prompts
+
+URL: https://opentempl.org/guides/make-a-poster-with-chatgpt
+Updated: 2026-11-02
+
+How to make a poster with ChatGPT
+
+You can make a poster with ChatGPT's image creation in a few minutes. The picture comes out better, and the words come out more reliably, if you decide a few things first. This guide goes through them and links to copy and paste prompts.
+
+ 1. Write the words first 
+ Decide the headline, one supporting line and the small details (date, place, price). Keep them short. Image models draw letters as pictures, so long text goes wrong more often than short text. Read your own words twice. A typo in your prompt is copied into the poster. 
+ 2. Pick a style 
+ &quot;A poster for a gig&quot; gives you the same generic picture as everyone else. A named style gives you a point of view: a risograph print, a halftone duotone, a papercut, Y2K chrome. The  prompt gallery  has 32 styles, each with a sample, so you can see what you will get before you ask. 
+ 3. Paste a prompt and change three things 
+ Open a style page, copy the prompt, and paste it into ChatGPT with image creation on. Change the subject, the words in quotes and, if you like, the colours. The prompts name the format, such as A3 portrait or a 4:5 post, so the layout fits. 
+ 4. Fix one thing at a time 
+ If the result is close, ask for one change: &quot;make the dots coarser&quot;, &quot;move the headline lower&quot;, &quot;use a warmer red&quot;. Several changes at once make the model redo everything. 
+ 5. Check the words and finish 
+ Read every letter. If a word is wrong, you can ask again, or you can use the picture as the background and set the words yourself. In  OpenTempl , the Generate tab with your own OpenAI key can leave empty room for the words, so you add them as live text and fix a typo in a second. 
+ Before you print 
+ Check the size and the resolution. A picture from an image model may be smaller than your print size. Leave room for the margin, and ask the printer about bleed. OpenTempl's print PDF adds bleed and crop marks; see the  poster maker . 
+ Limits to know 
+  Results vary, and the same prompt gives a different picture each time.  Free ChatGPT accounts have limits on image creation that change, so check your own account.  Exact placement is hard to control. Treat the image as artwork and place the text yourself when it matters.  Read OpenAI's current terms before you use an image commercially.  
+
+Is it free to make a poster with ChatGPT?
+It depends on your ChatGPT plan and its current limits for image creation. The prompts on this site and OpenTempl are free.
+
+Why is the text on my poster wrong?
+Image models draw letters as pictures and sometimes get them wrong. Use short words, put them in quotes and check the result, or add the words afterwards in an editor.
+
+What size should I ask for?
+Name the format in the prompt. A3 portrait suits a poster, 4:5 portrait suits an Instagram post and 9:16 suits a story.
+
+Can I print the result?
+Yes, if it has enough pixels for the print size. Check the resolution, and ask your printer about bleed.
+
+Can I edit the poster afterwards?
+Yes. Open the image in an editor such as OpenTempl and add or change the text, colours and layout.
+
+---
+
+# Open source Canva alternative: OpenTempl (MIT)
+
+URL: https://opentempl.org/open-source-canva
+Updated: 2026-11-02
+
+Is there an open source version of Canva?
+
+Canva is not open source. A few open source projects cover part of what it does, and OpenTempl covers the part most people mean: designing posters, social posts, slides, menus and invitations from templates.
+
+ OpenTempl is MIT licensed, works offline, needs no account and has 337 templates in 34 styles. It is not affiliated with Canva. 
+ What open source means here 
+ MIT licensed. The source repository is private today and opens at launch. The MIT licence lets you use OpenTempl for any purpose, read how it works, change it, share your changes and ship your own version. 
+ Two kinds of files inside the app carry their own terms. The photos, voxel objects, characters and textures in the built in library were made for OpenTempl and are free to use for anything. Icons from Iconify and photos from Openverse keep the licences they came with. 
+ Open source tools that replace parts of Canva 
+     Tool  Licence  Best for  Templates  Offline      OpenTempl  MIT  Posters, social posts, slides, menus, invitations  337 in 34 styles  Yes    Penpot  MPL 2.0  Interface design and prototyping with developers  Libraries, not poster templates  Self hosted, or in the browser    Doory  Open source  A self hosted design editor with live editing  Basic  Self hosted    HyCanvas  AGPL 3.0  A self hostable editor with your own AI key  Basic  Self hosted    Inkscape  GPL  Vector illustration and logos  Few  Yes    GIMP  GPL  Photo editing  No  Yes    Graphite  Open source  Node based vector and raster art  No  Runs in the browser     
+ Read from each project's own page and from directory listings in November 2026. Licences, features and activity change, so look at the repositories before you decide. Doory and HyCanvas are young projects. 
+ Penpot is the one most lists name first. It is a good tool, built for teams who design apps and websites, closer to Figma than to Canva. If you want to lay out an event poster in ten minutes, OpenTempl is closer to what you wanted. 
+ Run it yourself 
+ Build instructions ship with the repository on the day it opens. Until then, the web version at opentempl.org runs from static files with nothing to install. 
+ There is no OpenTempl server to host. The web version is static files, and live sessions between people go directly from browser to browser. 
+ Help build it 
+ Open items today include PowerPoint import of charts, tables and SmartArt, kerning and ligature controls, CMYK aware print PDFs, a plugin API, code signed installers and an optional self hosted sync server. Until the repository opens, send feedback to Noah on  X . 
+ Limits 
+ OpenTempl is at version 0.1 and has one maintainer. It has no team workspaces, no phone app, no cloud sync and a library of 337 templates. If you need those, use a hosted tool.   Open the editor  
+
+Is Canva open source?
+No. Canva is proprietary software.
+
+Is there an open source version of Canva?
+There is no official one. OpenTempl is an independent open source design app for the same kind of work. Penpot is an open source design tool aimed at product teams.
+
+What licence does OpenTempl use?
+The MIT licence. Library photos, objects and textures made for OpenTempl are free for any use. Iconify icons and Openverse photos keep their own licences.
+
+Can I self host OpenTempl?
+The web app is static files, so you can serve it from any web server. There is no OpenTempl backend to run. A self hosted sync server for several devices is a future item, not a feature today.
+
+Does OpenTempl collect my data?
+There are no accounts and no OpenTempl server that stores your designs. Fonts load from Google Fonts, and live sessions use a signalling service so two computers can find each other. The facts page lists what needs a connection.
+
+Is this the same as OpenTemplate.org or other projects with similar names?
+No. OpenTempl is a design app. It is unrelated to template engines such as Total.js OpenTemplates or the OpenOffice template site OpenTemplate.org.
+
+---
+
+# 337 free design templates in 34 styles
+
+URL: https://opentempl.org/templates
+Updated: 2026-11-02
+
+Templates with a point of view
+
+337 templates in 34 styles, for posters, social posts, stories, slides, menus, invitations and business cards. Each style is its own world, with its own type, colour and layout habits. Open one in OpenTempl and change anything.
+
+     Swiss grid  Grids, flush left grotesk, numbers that run the page.  28 templates       Pixel and bitmap  Pixel type, bitmap grids, dot matrix and game sprites.  22 templates       Tech mono  Black, white and one acid colour on a strict grid.  13 templates       Seoul and Tokyo  Dense, colourful event posters led by type.  12 templates       Riso zine  Two inks, misregistration and grain.  15 templates       Brutalist  Raw type, system fonts and blunt layouts.  15 templates       Bauhaus  Primary colours, circles, squares and diagonals.  8 templates       Seventies  Fat type, stripes and warm brown light.  10 templates       Rave acid  Warped type, acid colour, all night flyers.  9 templates       Xerox punk  Photocopy grain, cut letters, gig flyers.  12 templates       Magazine  Mastheads, cover lines and one big image.  8 templates       Quiet luxury  Serif, space, cream and black.  5 templates       Japanese minimal  Quiet layouts, vertical type, one red dot.  6 templates       Nordic minimal  Pale, calm and full of air.  6 templates       Mid century  Flat shapes and warm print colours from the fifties.  9 templates       Botanical  Plates, engravings and old labels.  6 templates       Folk pattern  Ornament, repeat and hand cut colour.  5 templates       Hand drawn  Marker lines, doodles and handwriting.  8 templates       Collage  Cut paper, tape and torn edges.  9 templates       Kids play  Bright shapes and friendly type for parties and classrooms.  6 templates       Mascot  A character carries the message.  5 templates       Soft pastel  Pale colour, round shapes, gentle type.  5 templates       Aura  Blurred colour fields and quiet type.  7 templates       Y2K chrome  Chrome type, blobs and early web shine.  8 templates       Dark tech  Night backgrounds, neon and conference energy.  12 templates       Maximal pop  Loud colour, everything at once.  16 templates       Sports  Numbers, club colours and athletic type.  12 templates       Photo and type  One strong photo with bold type on top.  8 templates       Academic  Diagrams, museum posters and scientific plates.  6 templates       Receipt  Typewriter, forms, labels and receipts.  6 templates       Stationery  Invitations, fine lines and letterpress feel.  7 templates       Menus  Menus, cafe boards and recipe cards.  9 templates       Earthy  Clay, soft shapes and natural tones.  5 templates       Clean business  Posts and slides for work that still look designed.  19 templates      Start from a template  
+
+---
+
+# Swiss grid templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/swiss-grid
+Updated: 2026-11-02
+
+Swiss grid templates
+
+The International Typographic Style from 1950s Switzerland: a visible grid, flush left sans serif type, numbers and one strong image. It suits conference posters, annual reports and anything with a lot to say in a clear order.
+
+     Circle grid poster       Giant ampersand poster       Annual numbers deck       Month calendar       Rules carousel       Cropped word poster       Hairline index sheet       Halftone sphere poster       Lecture poster       Blue lineup story       Outline numerals poster       Overprint cross      Open the editor   Good for  Try this style in the  poster maker  or the  presentation maker .   All 34 styles  
+
+What can I make with the Swiss grid templates?
+There are 28 Swiss grid templates in OpenTempl: 11 event, 6 presentation, 4 poster, 1 calendar, 1 programme, 1 business card, 1 banner, 1 thumbnail, 1 invitation, 1 carousel. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Pixel and bitmap templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/pixel-bitmap
+Updated: 2026-11-02
+
+Pixel and bitmap templates
+
+Pixel type, bitmap grids, dot matrix and game sprites. Good for game nights, indie releases, hack events and anyone who grew up near a CRT screen.
+
+     Bitmap word       Eye mosaic       Hourglass story       Annual report poster       Dissolving block       Dot matrix colour poster       Face poster       Focus pull poster       Game night poster       LED strips poster       Pixel mask cover       Maze poster      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Pixel World .   All 34 styles  
+
+What can I make with the Pixel and bitmap templates?
+There are 22 Pixel and bitmap templates in OpenTempl: 12 event, 5 business, 4 social, 1 food. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Tech mono templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/tech-mono
+Updated: 2026-11-02
+
+Tech mono templates
+
+Black, white and one acid colour on a strict grid, set in monospaced type. Fits meetups, developer events, product launches and slides for technical talks.
+
+     Assembly manual page       Dot matrix poster       Stepped blocks poster       Lime log post       Node story       Blueprint spec poster       Release card       Ring diagram poster       Systems review deck       Mono business card      Open the editor   Good for  Try this style in the  presentation maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Acid Black Wire ,  Keycap Type .   All 34 styles  
+
+What can I make with the Tech mono templates?
+There are 13 Tech mono templates in OpenTempl: 4 presentation, 4 poster, 1 event, 1 post, 1 story, 1 business card, 1 social. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Seoul and Tokyo templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/asia-poster
+Updated: 2026-11-02
+
+Seoul and Tokyo templates
+
+Dense, colourful event posters led by type, in the manner of Seoul and Tokyo street posters and club flyers. Works for festivals, pop ups and gigs where every inch has a job.
+
+     Paper exhibition poster       Night market poster       Ramen crawl carousel       Izakaya menu       Club night story       Rice ball menu card       Ceramics fair poster       Season end sale flyer       Summer school poster       Design week deck       Open call banner       City pop radio post      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Bold Flat Colour .   All 34 styles  
+
+What can I make with the Seoul and Tokyo templates?
+There are 12 Seoul and Tokyo templates in OpenTempl: 5 event, 2 social, 1 food, 1 menu, 1 presentation, 1 retail, 1 email. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Riso zine templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/riso-zine
+Updated: 2026-11-02
+
+Riso zine templates
+
+Two inks, slight misregistration and grain: the look of a risograph print or a photocopied zine. Right for gig posters, zine covers, markets and school events.
+
+     Cut paper flowers carousel       Fish fair poster       Pool story       Plant swap poster       Flower market, printed poppies       Poppy print carousel       Recipe zine, tomatoes       Fish menu, two pages       Evening walks poster       Zine cover, duotone       Night swim lineup story       Pool club slides      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Halftone Duotone ,  Riso Market Scene ,  Riso Two Ink .   All 34 styles  
+
+What can I make with the Riso zine templates?
+There are 15 Riso zine templates in OpenTempl: 6 event, 3 social, 2 presentation, 2 food, 1 publishing, 1 business. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Brutalist templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/brutalist
+Updated: 2026-11-02
+
+Brutalist templates
+
+Raw type, system fonts and blunt layouts that do not apologise. Use it for art shows, club nights and anything that should not look polite.
+
+     Lookbook carousel       Giant numeral poster       Concrete and red       Four letter block       Price list       Red arrow story       Lecture schedule       Split slab flyer       Staircase poster       Cropped word cover       Redacted statement       Report slides      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .   All 34 styles  
+
+What can I make with the Brutalist templates?
+There are 15 Brutalist templates in OpenTempl: 6 social, 4 presentation, 3 event, 1 notice, 1 menu. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Bauhaus templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/bauhaus
+Updated: 2026-11-02
+
+Bauhaus templates
+
+Primary colours, circles, squares and diagonals from the German school of the 1920s. Strong for exhibition posters, workshops and music events.
+
+     Letter grid poster       Checker warp poster       Open studio dot grid       Sun and blocks poster       Design basics carousel       Tube lines story       Lecture series flyer       Workshop deck      Open the editor   Good for  Try this style in the  poster maker .   All 34 styles  
+
+What can I make with the Bauhaus templates?
+There are 8 Bauhaus templates in OpenTempl: 4 event, 3 social, 1 presentation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Seventies templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/seventies
+Updated: 2026-11-02
+
+Seventies templates
+
+Fat type, stripes and warm brown light. Suits record nights, cafes, vintage markets and invitations that want some warmth.
+
+     Block party flyer       Radial record sleeve       Sun festival story       City arches poster       Hello announcement       Tips carousel       Diner menu       Ribbon thumbnail       Summer sessions square       Annual update deck      Open the editor   Good for  Try this style in the  poster maker  or the  menu maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Psychedelic Lettering .   All 34 styles  
+
+What can I make with the Seventies templates?
+There are 10 Seventies templates in OpenTempl: 4 event, 3 social, 1 music, 1 menu, 1 presentation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Rave acid templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/rave-acid
+Updated: 2026-11-02
+
+Rave acid templates
+
+Warped type, acid colour and all night flyers. Built for club nights, afterparties and anything that looks better printed at three in the morning.
+
+     Night schedule carousel       Warped word poster       Smiley flyer       Hot number flyer       Lineup story       Pixel glitch post       Mix video cover       Ticket header       Boxed info flyer      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Club Flyer Print ,  Grain Glow Type .   All 34 styles  
+
+What can I make with the Rave acid templates?
+There are 9 Rave acid templates in OpenTempl: 6 event, 3 social. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Xerox punk templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/xerox-punk
+Updated: 2026-11-02
+
+Xerox punk templates
+
+Photocopy grain, cut out letters and the attitude of a gig flyer. Suits band posters, student nights and protest notices.
+
+     Generation loss poster       Marked up manifesto       Two ink poster       Zine cover       Demo tape cover       Gig flyer       How to carousel       Tear off tab flyer       Cut and paste card       Press kit slides       Video thumbnail       Swap meet banner      Open the editor   Good for  Try this style in the  poster maker .   All 34 styles  
+
+What can I make with the Xerox punk templates?
+There are 12 Xerox punk templates in OpenTempl: 4 event, 3 social, 1 publication, 1 notice, 1 presentation, 1 music, 1 business card. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Magazine templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/magazine-cover
+Updated: 2026-11-02
+
+Magazine templates
+
+Mastheads, cover lines and one big image. Use it for newsletters, portfolios, lookbooks and event programmes that want to feel published.
+
+     Type only cover       Giant letter cover       Hand lettered cover       Food quarterly cover       Sliced portrait cover       Issue pages set       Science journal cover       Glossy portrait cover      Open the editor   Good for  Try this style in the  poster maker  or the  presentation maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Sliced Portrait Cover .   All 34 styles  
+
+What can I make with the Magazine templates?
+There are 8 Magazine templates in OpenTempl: 8 magazine. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Quiet luxury templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/quiet-luxury
+Updated: 2026-11-02
+
+Quiet luxury templates
+
+Serif type, space, cream and black. For brand announcements, menus, invitations and anything that should speak quietly.
+
+     Fashion house poster, giant letter       Atelier notes, three posts       Private viewing invitation       Business card, embossed cotton       Fragrance story, aquatint      Open the editor   Good for  Try this style in the  Instagram post maker  or the  menu maker .   All 34 styles  
+
+What can I make with the Quiet luxury templates?
+There are 5 Quiet luxury templates in OpenTempl: 2 social, 1 poster, 1 invitation, 1 business card. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Japanese minimal templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/japanese-minimal
+Updated: 2026-11-02
+
+Japanese minimal templates
+
+Quiet layouts, vertical type and one red dot. For exhibitions, tea rooms, workshops and calm announcements.
+
+     Practice poster, ink circle       Mist and hills poster       Moon viewing post       Exhibition poster, red disc       Tea house menu, two pages       Studio deck, the space between      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .   All 34 styles  
+
+What can I make with the Japanese minimal templates?
+There are 6 Japanese minimal templates in OpenTempl: 3 poster, 1 menu, 1 presentation, 1 social. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Nordic minimal templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/nordic-minimal
+Updated: 2026-11-02
+
+Nordic minimal templates
+
+Pale colours, calm layouts and a lot of air. Good for studios, cafes, wellness classes and small shop posts.
+
+     Product post, split title       Four objects poster       Opening hours flyer       Exhibition poster, big lowercase       Annual report deck       Month calendar post      Open the editor   Good for  Try this style in the  Instagram post maker  or the  poster maker .   All 34 styles  
+
+What can I make with the Nordic minimal templates?
+There are 6 Nordic minimal templates in OpenTempl: 2 social, 2 poster, 1 flyer, 1 presentation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Mid century templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/mid-century
+Updated: 2026-11-02
+
+Mid century templates
+
+Flat shapes and warm print colours from the 1950s. For vintage markets, family events, travel and home brands.
+
+     Chair exhibition poster       Seaside travel poster       Quartet record sleeve       Lamps after dark poster       Slow train story       Atomic home exhibition       City guide carousel       Garden party invitation       Coffee bar menu      Open the editor   Good for  Try this style in the  poster maker  or the  menu maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Sunny Travel Poster .   All 34 styles  
+
+What can I make with the Mid century templates?
+There are 9 Mid century templates in OpenTempl: 4 event, 2 social, 1 music, 1 menu, 1 invitation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Botanical templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/botanical-vintage
+Updated: 2026-11-02
+
+Botanical templates
+
+Plates, engravings and old labels. Suits plant shops, garden clubs, apothecary style branding and invitations.
+
+     Herbarium exhibition, blue ink       Farmers market woodtype poster       Plant sale price cards       Cyanotype field notes, 3 posts       Seed packet, front and back       Specimen label card      Open the editor   Good for  Try this style in the  poster maker  or the  menu maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Cutout Plant Collage .   All 34 styles  
+
+What can I make with the Botanical templates?
+There are 6 Botanical templates in OpenTempl: 3 poster, 2 social, 1 print. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Folk pattern templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/folk-pattern
+Updated: 2026-11-02
+
+Folk pattern templates
+
+Ornament, repeat and hand cut colour taken from folk art. For midsummer, markets, handmade brands and seasonal invitations.
+
+     Cross stitch poster       Folk tiles with vertical title       Folk birds invitation, two sides       Folk night market story       Folk holiday postcard      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Folk Cutout Garden ,  Stitched Pixel Type .   All 34 styles  
+
+What can I make with the Folk pattern templates?
+There are 5 Folk pattern templates in OpenTempl: 2 social, 1 poster, 1 invitation, 1 cards. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Hand drawn templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/hand-drawn
+Updated: 2026-11-02
+
+Hand drawn templates
+
+Marker lines, doodles and handwriting. Friendly for classes, bake sales, kids events and community notices.
+
+     Playground club poster       Slow Sunday poster       Open mic with red loop       Doodle faces carousel       Ink flowers invite       Walk route poster       Scribbled wine list       Sketchbook pitch deck      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Brush Marker Lettering ,  Oil Pastel Scribble ,  Blue Ink Doodle .   All 34 styles  
+
+What can I make with the Hand drawn templates?
+There are 8 Hand drawn templates in OpenTempl: 4 event, 1 food, 1 social, 1 invitation, 1 presentation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Collage templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/collage-scrapbook
+Updated: 2026-11-02
+
+Collage templates
+
+Cut paper, tape and torn edges. For zines, school projects, flea markets and personal invitations.
+
+     Cut word note       Cut paper poster       Cut paper card       Torn paper story       Sticky note wall       Polaroid spread       Paper layers portrait       Travel journal carousel       Index of small things      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Pop Cutout Collage .   All 34 styles  
+
+What can I make with the Collage templates?
+There are 9 Collage templates in OpenTempl: 5 social, 3 event, 1 business card. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Kids play templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/kids-play
+Updated: 2026-11-02
+
+Kids play templates
+
+Bright shapes and friendly type for parties and classrooms. For birthdays, school events and children’s activities.
+
+     First birthday post       Twin birthday post       Building blocks day poster       Second birthday invite       Fruit party invite       Sports day story      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Grain Shape Animals .   All 34 styles  
+
+What can I make with the Kids play templates?
+There are 6 Kids play templates in OpenTempl: 4 invitation, 2 event. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Mascot templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/cute-mascot
+Updated: 2026-11-02
+
+Mascot templates
+
+A character carries the message. For small shops, clubs and social posts that need a face.
+
+     Grumpy mascot product poster       Newsletter with beet       Announcement story with blob       Hiring banner with cup       Meet the crew slides      Open the editor   Good for  Try this style in the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Blob Mascot .   All 34 styles  
+
+What can I make with the Mascot templates?
+There are 5 Mascot templates in OpenTempl: 2 social, 1 presentation, 1 marketing, 1 business. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Soft pastel templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/soft-pastel
+Updated: 2026-11-02
+
+Soft pastel templates
+
+Pale colour, round shapes and gentle type. For baby showers, beauty and wellness posts and spring events.
+
+     Workshop flyer, hands in clay       Cafe menu, two pages       Big number story       Product launch, three squares       Open studio post, soft field      Open the editor   Good for  Try this style in the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Blob Gradient Pop .   All 34 styles  
+
+What can I make with the Soft pastel templates?
+There are 5 Soft pastel templates in OpenTempl: 3 social, 1 menu, 1 event. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Aura templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/gradient-aura
+Updated: 2026-11-02
+
+Aura templates
+
+Blurred colour fields with quiet type. For wellness, music releases, event posts and stories.
+
+     Symposium flyer, gradient blocks       Festival poster, two discs       Video thumbnail, lagoon glow       Business card, grain field       Horizon story, first light       Invitation, warm orb       Panorama carousel, four posts      Open the editor   Good for  Try this style in the  Instagram post maker .   All 34 styles  
+
+What can I make with the Aura templates?
+There are 7 Aura templates in OpenTempl: 2 event, 2 social, 1 invitation, 1 youtube, 1 business card. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Y2K chrome templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/y2k-chrome
+Updated: 2026-11-02
+
+Y2K chrome templates
+
+Chrome type, blobs and early web shine from around the year 2000. For club nights, fashion drops and nostalgic posts.
+
+     Desktop window deck       Liquid email header       Chrome star poster       Orb flyer       Holo business card       Holo heart post       Window notice pin       Chrome night story      Open the editor   Good for  Try this style in the  Instagram post maker  or the  poster maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Inflatable Type ,  Holographic Y2K ,  Liquid Chrome Type .   All 34 styles  
+
+What can I make with the Y2K chrome templates?
+There are 8 Y2K chrome templates in OpenTempl: 3 social, 2 event, 1 business, 1 presentation, 1 marketing. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Dark tech templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/dark-tech
+Updated: 2026-11-02
+
+Dark tech templates
+
+Night backgrounds, neon and conference energy. For developer events, launches, esports and slides on a dark screen.
+
+     Summit poster       Dither statement       Launch story       Speaker announcement       Tech video thumbnail       Event ticket       Blog share card       Numbered carousel       Ring stats post       Spec sheet       Horizon cover       Roadmap deck      Open the editor   Good for  Try this style in the  presentation maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Neon Tube Glow .   All 34 styles  
+
+What can I make with the Dark tech templates?
+There are 12 Dark tech templates in OpenTempl: 7 social, 3 business, 2 event. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Maximal pop templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/maximal-pop
+Updated: 2026-11-02
+
+Maximal pop templates
+
+Loud colour and everything at once. For sales, festivals, student events and posts that need to be seen from across a room.
+
+     Giant word square       Bento festival poster       Blob sticker post       Birthday invite       Lineup bars post       Bakery menu       Seven ideas pin       Sale burst flyer       Stair chips poster       Tile mosaic poster       Five tips carousel       Supper club stories      Open the editor   Good for  Try this style in the  Instagram post maker  or the  poster maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Extruded Block Letters ,  Sticker Cartoon Pop .   All 34 styles  
+
+What can I make with the Maximal pop templates?
+There are 16 Maximal pop templates in OpenTempl: 7 social, 4 event, 1 marketing, 1 presentation, 1 food, 1 business, 1 invitation. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Sports templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/sports-bold
+Updated: 2026-11-02
+
+Sports templates
+
+Numbers, club colours and athletic type. For match days, team signups, tournaments and training schedules.
+
+     Final score       Round results carousel       Run club poster       Fixtures of the week       Race day bib       Club membership flyer       Starting eleven story       Matchday pitch poster       Player of the month       Open tryouts story       Match ticket       Season launch cover      Open the editor   Good for  Try this style in the  poster maker  or the  Instagram post maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Athlete Giant Type .   All 34 styles  
+
+What can I make with the Sports templates?
+There are 12 Sports templates in OpenTempl: 4 social, 2 event, 2 poster, 2 story, 1 flyer, 1 cover. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Photo and type templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/photo-overlay
+Updated: 2026-11-02
+
+Photo and type templates
+
+One strong photo with bold type on top. For travel, events, news and any post where the picture is the point.
+
+     Run club carousel       Film night poster       Rotated dates story       Blue duotone poster       Field notes collage       Skate video thumbnail       Window portrait poster       Landscape serif poster      Open the editor   Good for  Try this style in the  Instagram post maker  or the  poster maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Flash Editorial Photo .   All 34 styles  
+
+What can I make with the Photo and type templates?
+There are 8 Photo and type templates in OpenTempl: 4 event, 3 social, 1 youtube. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Academic templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/academic
+Updated: 2026-11-02
+
+Academic templates
+
+Diagrams, museum posters and scientific plates. For lectures, symposia, school projects and research slides.
+
+     Course syllabus       Conference poster, cells       Lecture poster, orbits       Concept map poster       Research talk deck       Museum plate poster      Open the editor   Good for  Try this style in the  poster maker  or the  presentation maker .   All 34 styles  
+
+What can I make with the Academic templates?
+There are 6 Academic templates in OpenTempl: 4 event, 1 presentation, 1 education. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Receipt templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/receipt-utility
+Updated: 2026-11-02
+
+Receipt templates
+
+Typewriter type, forms, labels and receipts. For shop notices, price lists, zines and design that looks like an artefact.
+
+     Receipt poster, market stall       Price list on a receipt       Shipping label story       Ingredients label poster       Line up as a receipt, 3 posts       Invoice, tight grid      Open the editor   Good for  Try this style in the  poster maker  or the  menu maker .   All 34 styles  
+
+What can I make with the Receipt templates?
+There are 6 Receipt templates in OpenTempl: 2 poster, 2 social, 1 business, 1 print. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Stationery templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/fine-stationery
+Updated: 2026-11-02
+
+Stationery templates
+
+Invitations, fine lines and a letterpress feel. For weddings, dinners, announcements and thank you cards.
+
+     Coordinates announcement       Supper invitation, inked table       Dinner menu on cotton paper       Save the date, stacked names       Wreath wedding invitation, two sides       Place cards, tent fold sheet       Business card, inked monogram      Open the editor   Good for  Try this style in the  poster maker .   All 34 styles  
+
+What can I make with the Stationery templates?
+There are 7 Stationery templates in OpenTempl: 6 invitation, 1 stationery. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Menus templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/food-menu
+Updated: 2026-11-02
+
+Menus templates
+
+Menus, cafe boards and recipe cards. For restaurants, pop ups, bake sales and market stalls.
+
+     Noodle bar menu, two pages       Cafe menu, rotated name       Diner menu poster       Drinks menu block grid       Special of the day story       Menu in colour cards       Weekly lunch board       Wine list, two pages       Digital menu board      Open the editor   Good for  Try this style in the  menu maker .   All 34 styles  
+
+What can I make with the Menus templates?
+There are 9 Menus templates in OpenTempl: 9 menu. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Earthy templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/earthy-organic
+Updated: 2026-11-02
+
+Earthy templates
+
+Clay, soft shapes and natural tones. For ceramics, farm shops, yoga and slow living brands.
+
+     Flower share, cut paper blooms       Open studio, giant cropped letters       Wine fair poster, cut paper grapes       Seed library, torn paper collage       Pottery course, 3 slides      Open the editor   Good for  Try this style in the  Instagram post maker  or the  menu maker .  Prompts in this style  To make a picture in this style with ChatGPT, copy a prompt:  Layered Papercut .   All 34 styles  
+
+What can I make with the Earthy templates?
+There are 5 Earthy templates in OpenTempl: 2 poster, 2 social, 1 slides. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# Clean business templates: posters, posts and slides
+
+URL: https://opentempl.org/templates/corporate-clean
+Updated: 2026-11-02
+
+Clean business templates
+
+Posts and slides for work that still look designed. For team updates, pitches, reports and company announcements.
+
+     Big stat post       Funding announcement       Quarterly report       Conference invitation       Open roles post       Case study carousel       Customer quote       Investor update deck       Seed pitch deck       Product one pager       Project proposal       Webinar banner      Open the editor   Good for  Try this style in the  presentation maker  or the  Instagram post maker .   All 34 styles  
+
+What can I make with the Clean business templates?
+There are 19 Clean business templates in OpenTempl: 7 social, 5 presentation, 2 report, 2 print, 1 story, 1 banner, 1 event. Every one opens in the editor, so you can change the words, colours, fonts and photos.
+
+---
+
+# ChatGPT poster prompts: 31 styles to copy
+
+URL: https://opentempl.org/prompts
+Updated: 2026-11-02
+
+ChatGPT poster prompts
+
+Pick a style, copy the prompt, paste it into ChatGPT. Every style has a sample image, its palette, three versions for common jobs (a gig poster, an Instagram post, a menu) and notes on what to change. 31 styles so far.
+
+     Bold Flat Colour  Fat red shapes on emerald, yellow type stacked tight, a Seoul canteen poster.       Halftone Duotone  A photographed face or animal in two clashing inks, giant type biting into it.       Pixel World  Voxel flowers, dither clouds and chunky dot type float in a cut paper sky.       Grain Shape Animals  Blocky animals built from clean shapes, sprayed with soft grain on warm yellow.       Brush Marker Lettering  Fat pink letters painted with a loaded brush, outlined in electric blue.       Riso Market Scene  Overlapping ink people carry baskets through a market in pink, yellow and teal.       Club Flyer Print  One blue ink on cream, a DJ inside a globe, old school flyer type.       Folk Cutout Garden  Hand cut flowers, horses and birds mirrored on black, bright as embroidered cloth.       Inflatable Type  Puffy letters and balloon animals, taut and glossy, with colour pooling in the folds.       Stitched Pixel Type  Letters and flowers woven from tiny squares, like a sampler stitched on a screen.       Grain Glow Type  Warped, blurred letters glow like heat, wrapped in coarse grain and one hot colour.       Acid Black Wire  Black, white and one acid green, with chrome and mono type on a grid.       Extruded Block Letters  Giant solid letters as buildings, extruded in flat colour with a clean sunny shadow.       Sticker Cartoon Pop  Fat outlined cartoon props float on a blue grid, each with a sticker shadow.       Blob Gradient Pop  Soft fluid blobs in blue, pink and orange swirl behind rounded letters.       Sliced Portrait Cover  A studio face cut into shifting strips under a refined serif masthead.       Pop Cutout Collage  A hard cut figure on a red starburst, with tape, tulips and bright paper.       Psychedelic Lettering  Letters melt into ribbons around a halftone portrait, printed in two hot inks.       Sunny Travel Poster  Flat cut shapes, palm silhouettes and a bright cream border, a postcard from 1958.       Riso Two Ink  A photo split into red and blue ink, grainy and not quite aligned.       Oil Pastel Scribble  A homey scene drawn in waxy crayon on white paper, creases and all.       Blue Ink Doodle  Crowded biro doodles in cobalt, with plain red grotesk giant over the top.       Flash Editorial Photo  Direct flash, wet skin, saturated sky and stickers slapped on like a zine.       Blob Mascot  A giant blob with huge eyes looms over tiny angry friends, flat and funny.       Holographic Y2K  Chrome blobs, a rainbow disc and glass windows, a dream of a 2001 desktop.       Keycap Type  Words spelled on chunky keyboard keys, tilted in isometric rows on pure black.       Athlete Giant Type  One athlete cut out in front of a word as tall as the wall.       Liquid Chrome Type  Letters melted into mirror metal, blobby and bright, framed by a thin HUD border.       Layered Papercut  Stacked paper layers form a glowing valley, lit from below like a tiny theatre.       Cutout Plant Collage  Cut out real leaves beside tall serif letters, with one wild red leaf.       Neon Tube Glow  Thin tubes of cold blue light trace logos on black, humming and slightly smeared.     How to make a poster with ChatGPT 
+ Decide the words first and keep them short. Pick a style so the picture has a point of view. Paste the prompt, change the subject and the words, and send it. Ask for one change at a time. Check every word before you save the file. The  full guide  goes through it step by step. 
+ How these prompts are built 
+ Each prompt names a medium, a palette with colour values, a composition, a texture, the exact words to draw and a list of things to keep out. Specific prompts give you more of what you meant. They come from the same written art directions that OpenTempl's Generate tab uses, one for each style. 
+ About the words on the poster 
+ Image models sometimes misspell. Every prompt here includes your words in quotes, and each page tells you to read the result. If you want to fix a word without making the picture again, OpenTempl can leave room for the words and set them as live text on top of the image. 
+ Make it in OpenTempl 
+ OpenTempl is a free, open source design app that works offline and needs no account. Its Generate tab uses these styles with your own OpenAI key. OpenAI charges you for the images you make, and OpenTempl takes nothing.   Open the Generate tab  
+
+What is the best ChatGPT prompt for a poster?
+One that names the style, the colours, the layout and the exact words. The prompts on these pages do all four, and they leave room to change the subject and the text.
+
+Why does ChatGPT misspell my poster text?
+Image models draw letters as pictures, and they sometimes get them wrong. Keep the words short, put them in quotes and check the result. In OpenTempl you can add the words as live text instead.
+
+Can I use the images commercially?
+That depends on the terms of the service that made the image. Read OpenAI's current terms before you use an image for work.
+
+Do the prompts work in Gemini or Midjourney?
+They are plain text, so you can try them there. Results differ from tool to tool.
+
+Is it free?
+The prompts and OpenTempl are free. Making images costs whatever your AI account charges.
+
+---
+
+# Flat vector poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/bold-flat-colour
+Updated: 2026-11-02
+
+A bold flat colour poster prompt for ChatGPT
+
+A vector illustration built from a few huge flat shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer drew it in a vector tool and sent it to a good printer.
+
+Signature: objects cropped by the edges at diagonals; tiny scale patterns cut into the hero shapes; dots and bowls as punctuation; type overlapping the artwork; ground colour reused for small info text
+
+---
+
+# Halftone poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/halftone-duotone
+Updated: 2026-11-02
+
+A halftone duotone poster prompt for ChatGPT
+
+A photograph converted to a coarse halftone duotone, printed in two fluorescent inks on uncoated paper, with giant condensed type that overprints and multiplies against the picture. It looks like a riso or screen print, not a filter.
+
+Signature: photo as visible halftone dots; type overprinting the face; two clashing inks only; text block top right in the second ink; corner credits
+
+---
+
+# Pixel art poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/pixel-world
+Updated: 2026-11-02
+
+A pixel art poster prompt for ChatGPT
+
+A pixel art and voxel illustration: chunky cubes with flat three tone shading, dither patterns and dot matrix lettering, composed over a calm sky photograph or flat blue field. It has the precision of game art and the calm of a poster.
+
+Signature: voxel object with 3 tone cube shading; dither gradient clouds; dot matrix title made of circles; tiny orange sparks; calm photographic sky
+
+---
+
+# Geometric animal poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/grain-shape-animals
+Updated: 2026-11-02
+
+A grainy gradient animal illustration prompt for ChatGPT
+
+A digital and gouache illustration where an animal is assembled from bold geometric slabs, each filled with a soft speckled airbrush gradient that fades two colours together. The grain looks like sprayed ink on paper.
+
+Signature: animal made of slabs and wedges; grain gradient between two colours per shape; tiny house row at the bottom; small star and bird companions; type tilted with the artwork
+
+---
+
+# Brush lettering poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/marker-lettering
+Updated: 2026-11-02
+
+A hand painted lettering poster prompt for ChatGPT
+
+Hand painted lettering in gouache or acrylic with a flat brush on white paper, scanned, with letters filled in fluorescent pink, a heavy blue outline, a few yellow rays and wet edges where the brush dragged.
+
+Signature: thick blue outline around pink fill; tilted stacked words filling the sheet; small yellow ray strokes; script sign off in blue; visible brush streaks
+
+---
+
+# Risograph illustration prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/riso-market
+Updated: 2026-11-02
+
+A multi ink risograph illustration prompt for ChatGPT
+
+A multi ink risograph illustration where each colour is a separate flat layer with a grainy tone, so overlapping shapes make new colours. People and stalls are simplified into chunky overlapping shapes.
+
+Signature: translucent ink overlaps; figures with stripes and dots patterns; market awning at the edge; letters in different inks; tiny squiggles and sparkles
+
+---
+
+# Club flyer prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/club-flyer-print
+Updated: 2026-11-02
+
+A 90s club flyer prompt for ChatGPT
+
+A one colour print in blue ink on cream paper, with a bold silhouette illustration and wireframe globe, spaced capitals and thin rules. It resembles a 90s club flyer photocopied once.
+
+Signature: wireframe globe emblem; single ink in two densities; hairline rules between blocks; arched title banner; very wide letterspacing
+
+---
+
+# Folk art poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/folk-cutout-garden
+Updated: 2026-11-02
+
+A paper cut folk illustration prompt for ChatGPT
+
+A paper cut and gouache folk illustration where each motif looks cut with scissors from coloured paper and pasted on a dark ground, with little hand drawn cream details. Mirrored arrangements echo embroidery and quilts.
+
+Signature: mirrored plants and birds; checkerboard or sunburst medallion; sun face in the top band; cream doves in corners; each shape slightly irregular
+
+---
+
+# Inflatable text prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/inflatable-balloon
+Updated: 2026-11-02
+
+Balloon lettering prompt for ChatGPT
+
+A 3D rendered or photographed inflatable look: letters and creatures made of balloon skin or vinyl, with soft reflections, pinch points at the ends and a thin outline of contrast colour. Believable lighting and tiny imperfections.
+
+Signature: puffy balloon material with pinch points; thick coloured sticker outline; letters inside circles; bright flat ground; visible seams and wrinkles
+
+---
+
+# Cross stitch pixel type prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/stitch-type
+Updated: 2026-11-02
+
+A cross stitch poster prompt for ChatGPT
+
+A woven or cross stitched textile pattern built from square stitches, with letters, flowers and ornament drawn on a pixel grid and photographed on fabric or laid over a photograph. Each square has thread texture.
+
+Signature: every letter built from square stitches; checkerboard medallion; border of repeating flowers; thread fibres visible; pixel grid alignment
+
+---
+
+# Photocopy rave flyer prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/grain-glow
+Updated: 2026-11-02
+
+A smeared photocopy rave flyer prompt for ChatGPT
+
+A photocopied rave flyer smeared on purpose: the paper dragged during copying so fluorescent ink type streaks sideways, black stock, heavy grain.
+
+Signature: melting warped headline; coarse noise grain; single heat colour glow; small sharp lineup text; dark negative space
+
+---
+
+# Chrome wireframe poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/acid-wire
+Updated: 2026-11-02
+
+An acid green techno poster prompt for ChatGPT
+
+A digital poster with a monochrome image, a liquid chrome or wireframe subject, thin technical lines, plus one acid green colour used for flat fields or glowing outlines. It feels like a robotics conference identity.
+
+Signature: one acid colour only; chrome or wireframe subject cropped at the bottom; rotated margin text; dot pattern columns; black plaque for the title
+
+---
+
+# 3d block letters poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/extruded-blocks
+Updated: 2026-11-02
+
+An extruded type poster prompt for ChatGPT
+
+A flat shaded 3D type illustration: letters extruded into solid blocks with two or three face colours and hard cast shadows, rendered clean and matte, then composed on a saturated flat ground like a printed poster.
+
+Signature: extruded letters like towers; three tone face shading; hard flat cast shadows; one saturated ground; tiny type frame in corners
+
+---
+
+# Cartoon ink poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/sticker-cartoon
+Updated: 2026-11-02
+
+A brush ink cartoon poster prompt for ChatGPT
+
+A cartoonist's brush ink poster: thick, uneven black brush outlines with flat spot colour fills printed slightly off the lines, on cheap newsprint.
+
+Signature: thick black outline on every item; hard offset shadows; grid backdrop; hand pointing at the hero; sticker tags like SOLD OUT
+
+---
+
+# Gradient blob poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/blob-gradient
+Updated: 2026-11-02
+
+A blob gradient poster prompt for ChatGPT
+
+A digital gradient illustration of fluid, melted blob shapes with glowing inner light, edge noise and a thin outer stroke, composed on a flat saturated field. It feels like an airbrushed risograph.
+
+Signature: melted blob cluster; glowing inner gradient; thin light outline; noise grain at edges; small blobs escaping
+
+---
+
+# Sliced portrait poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/sliced-portrait
+Updated: 2026-11-02
+
+A cut portrait cover prompt for ChatGPT
+
+A photographic cover where a studio portrait is physically or digitally manipulated: concentric cuts, strips, torn paper or huge type masking parts of the face. The manipulation looks like cut paper or a layered print, not a filter.
+
+Signature: concentric cut mouth or eyes; torn strips shifting the face; masthead partly covered by the head; single red issue number; small barcode
+
+---
+
+# Collage poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/pop-cutout
+Updated: 2026-11-02
+
+A cut paper collage poster prompt for ChatGPT
+
+A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled vector doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.
+
+Signature: starburst behind a cut figure; photo inside the body shape; torn blue tape corners; big yellow sun circle; scribbled doodles on top
+
+---
+
+# Psychedelic gig poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/psychedelic-lettering
+Updated: 2026-11-02
+
+A screen printed psychedelic gig poster prompt for ChatGPT
+
+A screen printed gig poster with hand drawn flowing lettering and ribbon outlines that run from the title into the hair of a halftone portrait. Two or three inks overprint on kraft or warm grey stock.
+
+Signature: letters flowing into ribbon lines; central medallion with halftone portrait; vibrating red and blue overprint; curved info text along ribbons; kraft stock
+
+---
+
+# Vintage travel poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/sunny-travel-poster
+Updated: 2026-11-02
+
+A screen printed travel poster prompt for ChatGPT
+
+A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a vector illustration printed on cream stock.
+
+Signature: silhouette framing at both edges; angular facets on mountains and clouds; reflection of the hero in water; cream border like a printed poster; bottom band with red title
+
+---
+
+# Risograph poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/riso-two-ink
+Updated: 2026-11-02
+
+A two ink riso print poster prompt for ChatGPT
+
+A risograph print in two fluorescent inks, red and blue, layered on uncoated paper. Images are rendered as coarse halftone and stipple, with areas where the inks overlap into deep purple.
+
+Signature: solid red shape cut into blue halftone image; purple where inks overlap; visible misregistration; white paper margins with edition number in pencil; coarse grain everywhere
+
+---
+
+# Oil pastel poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/oil-pastel-scribble
+Updated: 2026-11-02
+
+A crayon and oil pastel poster prompt for ChatGPT
+
+A hand drawn oil pastel and crayon drawing scanned from white paper, with waxy strokes, visible paper tooth and a folded poster crease. Thin pencil and marker details sit on top of the thick colour.
+
+Signature: thick crayon fill with gaps; wobbly drawn person and furniture; tiny pencil detailed plants and cups; fold creases across the poster; catalogue style labels
+
+---
+
+# Pen doodle poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/blue-ink-doodle
+Updated: 2026-11-02
+
+A blue pen doodle poster prompt for ChatGPT
+
+A dense scribbled pen and felt tip drawing in one blue ink on an off white sheet, scanned, with a huge neutral grotesk set in red over the top. The drawing is deliberately wonky and funny.
+
+Signature: monoline doodle crowd of creatures and objects; scribble filled black shapes in blue; speech bubbles with handwritten lines; giant plain grotesk over the drawing; tiny credit columns at the bottom
+
+---
+
+# Flash photo editorial prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/flash-editorial
+Updated: 2026-11-02
+
+A night out flash photo editorial prompt for ChatGPT
+
+A direct on camera flash photograph with hard highlights, slightly oversaturated colour and shiny real skin texture, with graphic stickers and acid type layered on top. It reads like a fashion magazine spread from a night out.
+
+Signature: on camera flash look; badge shaped stickers cluster; oversized outlined letter in a corner; registered and copyright symbols as decoration; pink and yellow accent
+
+---
+
+# Mascot poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/blob-mascot
+Updated: 2026-11-02
+
+A blob character poster prompt for ChatGPT
+
+A flat vector character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.
+
+Signature: giant cropped blob towering; huge googly eyes with heavy brows; tiny character in an armchair; row of mini expressions; hashtag title
+
+---
+
+# Y2k poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/holo-y2k
+Updated: 2026-11-02
+
+A holographic Y2K flyer prompt for ChatGPT
+
+A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and vector chrome shapes made of hard reflection bands.
+
+Signature: rainbow CD disc; chrome blob; frosted window panels with title bars; four point sparkles; barcode in the corner
+
+---
+
+# Keycap 3d illustration prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/keycap-type
+Updated: 2026-11-02
+
+Keycap typography prompt for ChatGPT
+
+A clean 3D illustration of rounded keycaps in primary colours, arranged in isometric rows, each with a letter printed in black, with thin black outlines and soft matte plastic shading. The poster sits inside a white frame on black.
+
+Signature: keys tilted in isometric rows; one letter per key; tiny rotated margin captions; white panel inside black frame; thin black outlines
+
+---
+
+# Sports poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/athlete-giant-type
+Updated: 2026-11-02
+
+An athlete campaign poster prompt for ChatGPT
+
+A sports campaign poster: a crisp photograph of an athlete cut out and layered between giant type behind and small type in front, graded with strong colour and a flat ground. It looks like a pro studio composite.
+
+Signature: giant word behind the athlete; limbs break in front of the letters; perspective tunnel of repeated type; single colour ground; tiny slogan and date lines
+
+---
+
+# Liquid chrome text prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/liquid-chrome
+Updated: 2026-11-02
+
+Liquid chrome 3D lettering prompt for ChatGPT
+
+A 3D rendered liquid metal lettering: puffy, molten letterforms with mirror chrome material that reflects a pale sky studio, with pinched highlights, rendered on a soft pale ground with a thin interface frame around it.
+
+Signature: puffy molten chrome letters; pinched mirror highlights; thin rounded HUD frame; barcode and QR corner details; pale gradient ground
+
+---
+
+# Paper cut poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/layered-papercut
+Updated: 2026-11-02
+
+A layered papercut poster prompt for ChatGPT
+
+Real cut paper: five layers of coloured card cut with a craft knife, visible blade edges and small shadows between layers, bold simple shapes.
+
+Signature: dozens of stacked paper layers; soft inner shadows; glowing valley; tiny scene at the end of the wave; pale empty ground for text
+
+---
+
+# Botanical collage poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/cutout-plant-collage
+Updated: 2026-11-02
+
+A plant photo collage poster prompt for ChatGPT
+
+A digital photo collage of cut out plant photographs layered on a white page with thin keylines and small text boxes, as an editorial designer would build in layout software. The photos are real studio shots, hard cut with clean edges.
+
+Signature: rotated giant serif title along the edge; one saturated red leaf against green ones; hairline text boxes; small inset plant photo; leaves bleeding off the page
+
+---
+
+# Neon sign poster prompt for ChatGPT, copy and paste
+
+URL: https://opentempl.org/prompts/neon-glow
+Updated: 2026-11-02
+
+A neon tube poster prompt for ChatGPT
+
+A glowing neon and LED display captured as a photograph of tubes and dot matrix lights on a black screen, with bloom, light haze and a faint reflection. Lines have constant thickness and rounded ends.
+
+Signature: monoline tube letters with white hot core; LED dot matrix imagery; bloom haze; tiny caption paragraph; deep black ground
+
+---
+
+# OpenTempl facts: licence, features and limits
+
+URL: https://opentempl.org/facts
+Updated: 2026-11-02
+
+OpenTempl facts
+
+OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account. This page lists what can be checked, with the date. Last updated November 2026.
+
+ Identity 
+  Name: OpenTempl. Written as one word, capital O and T. Also called the free open source Canva alternative.  Maker: Noah, in Stockholm. Independent project.  Made by Noah on X .  Website: https://opentempl.org  Licence: MIT. The source repository is private today and opens at launch. This page changes the day it does.  Price: free. No paid plan, no trial, no ads.  Not affiliated with Canva or OpenAI.  
+ Counts 
+  Templates: 337, in 34 styles and 33 kinds of document.  Styles for image generation (Looks): 32.  Fonts: 1,344 Google Fonts plus your own font files.  Shapes: 23. Icons: about 200,000 through Iconify.  
+ Where it runs 
+  In a web browser at https://opentempl.org. Chrome and Edge may offer to install it as an app.  Desktop builds for macOS (Apple silicon and Intel), Windows and Linux are made with Electron. They ship with the first public release; until then use the web version.  No phone app.  
+ Formats 
+  Import: PDF with editable text, PowerPoint (text, shapes, pictures, backgrounds, speaker notes), the OpenTempl file. Charts, tables and SmartArt in PowerPoint files are not imported yet.  Export: PNG (transparent, up to 4x), JPG, WebP, SVG, PDF for screen or print with bleed and crop marks, PowerPoint with editable text, MP4, GIF, a ZIP of pages, the editable OpenTempl file.  Colour: RGB. No CMYK output or ICC profiles yet.  
+ Offline and the internet 
+  The app opens and edits without a connection after it has loaded once. New designs can be made offline.  Designs are saved on your device, in the browser or the desktop app. There is no OpenTempl account and no OpenTempl server that stores your designs.  Needs a connection: the first load, Google Fonts you have not used before (they are cached after first use), icon search, stock photo search (Openverse), the first use of background removal (it downloads a model once), live sessions with other people, and the Generate tab.  Fonts load from Google Fonts. The static pages on this site load no third party fonts or scripts.  Live sessions go directly between browsers and are encrypted with a key in the link. A signalling service helps the two computers find each other.  Generate: you paste your own OpenAI key. It is kept on your device and your prompt goes to OpenAI. OpenAI bills your account. OpenTempl charges nothing.  
+ What it does not do 
+  No team workspaces, approvals or brand controls at company scale.  No cloud sync between devices. Move the file yourself.  No phone app.  No scheduling or publishing to social networks.  No CMYK output.  A library of 337 templates, not millions.  Version 0.1. One maintainer. Desktop installers are not code signed yet.  
+ Not the same as 
+ OpenTempl is a design app. It is unrelated to the Total.js OpenTemplates engine, the OpenTemplate PHP engine, or OpenTemplate.org, the OpenOffice template site. 
+
+---
+
+# What is OpenTempl? Free open source design app
+
+URL: https://opentempl.org/about
+Updated: 2026-11-02
+
+What is OpenTempl
+
+OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account.
+
+ It makes posters, Instagram posts and stories, slides, menus, flyers, invitations and business cards. You start from one of 337 templates or a blank page, drag things where you want them, and export when it looks right. It opens PowerPoint and PDF files, and it exports PNG, SVG, PDF, PowerPoint, MP4 and GIF. 
+ Why it exists 
+ Noah wanted a design tool he could open on a train without logging in, one that left him with files he owns and did not hold exports behind a plan. So he built one. It is a separate editor written from scratch, with its own templates, its own look and its own renderer. It is not a copy of Canva and it uses nothing from Canva. 
+ What makes it different 
+  It works offline and creates new designs offline.  There is no account to make and no paid tier.  337 templates in 34 styles, each drawn as its own world: Swiss grid, riso zine, brutalist, Bauhaus, Seoul and Tokyo event posters, pixel art, Y2K chrome and more.  The exports other tools keep behind a paid plan are included: transparent PNG, SVG, print PDF with bleed and crop marks.  It is MIT licensed. The source repository opens at launch.  
+ Who makes it 
+ OpenTempl is made by  Noah , in Stockholm. It is a one person project. Feedback and bug reports go to the repository once it is open, or to Noah on X. 
+ What comes next 
+ PowerPoint import of charts, tables and SmartArt. Kerning and ligature controls. CMYK aware print PDFs. A plugin API. Code signed installers. An optional self hosted sync server for people who want designs on several devices. These are plans, not promises with dates. 
+ The name 
+ OpenTempl is short for open templates. The app is unrelated to other projects with similar names, such as the Total.js OpenTemplates engine or OpenTemplate.org. 
+ See also:  the facts page ,  how OpenTempl compares with Canva  and  the prompt gallery . 
+
+---
+
+# Download OpenTempl: web app and desktop builds
+
+URL: https://opentempl.org/download
+Updated: 2026-11-02
+
+Use OpenTempl
+
+OpenTempl runs in your browser today, and it works offline once it has loaded. Desktop builds for Mac, Windows and Linux are built and wait for the first public release.
+
+ Web app 
+ Open https://opentempl.org. Chrome and Edge may offer to install it as an app, which then opens without a browser window. Your designs are saved on your device. Clear the site data and they go with it, so save a file for anything you want to keep. 
+ Desktop app 
+ The desktop installers are not public yet. This section gets the links on release day. 
+  macOS, Apple silicon and Intel  Windows 10 and 11  Linux, as an AppImage  
+ The first builds are not code signed. On macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway. 
+ System 
+ A recent version of Chrome, Edge, Firefox or Safari for the web app. Designs with many large photos use a lot of memory; close other heavy tabs for big posters. Background removal downloads a small model the first time you use it.   Open the editor  
+
+Is it free?
+Yes. There is no paid plan, trial or watermark. The licence is MIT.
+
+Do I need an account?
+No.
+
+Does it work offline?
+Yes, after it has loaded once. Fonts you have not used before, icon search, stock photos and live sessions need a connection. See the offline page.
+
+Where are my files?
+On your device. Export the editable OpenTempl file to keep a copy or move a design to another computer.

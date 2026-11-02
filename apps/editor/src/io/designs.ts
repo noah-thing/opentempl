@@ -6,6 +6,8 @@ import { db } from './db';
 import { thumbnail } from '../export/render';
 import { readTavlaFile } from '../export/tavlaFile';
 import { putMedia } from './media';
+import { track } from '../stats/client';
+import { forgetRoom } from '../collab/rooms';
 
 // Design library: every design is its own Y.Doc persisted in IndexedDB, plus a
 // small index entry (title, size, dates) and a thumbnail for the home screen.
@@ -42,6 +44,7 @@ export async function getThumb(id: string): Promise<Blob | undefined> {
 }
 
 export async function createDesign(init: { snapshot?: DesignSnapshot; assets?: Asset[]; meta?: Partial<DesignMeta> }): Promise<string> {
+  track('design_created');
   const id = newId();
   const ydoc = new Y.Doc();
   const doc = new DesignDoc(ydoc);
@@ -161,6 +164,7 @@ export async function deleteDesign(id: string) {
   await db.del('designs', id);
   await db.del('thumbs', id);
   indexedDB.deleteDatabase(dbName(id));
+  forgetRoom(id);
   notify();
 }
 

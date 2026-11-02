@@ -5,6 +5,9 @@ import { cloneElements } from '../doc/design';
 import { assetFromUrl } from '../io/upload';
 import type { Point } from '../lib/geom';
 import { unionRects, aabb } from '../lib/geom';
+import { reportDownload } from './unsplash';
+import { track } from '../stats/client';
+import { COBALT } from '../doc/colors';
 
 // Items in side panels are draggable onto pages and clickable to add. They are
 // described as plain data so drag and drop can carry them in dataTransfer.
@@ -14,7 +17,7 @@ export const LIBRARY_MIME = 'application/x-tavla-item';
 export type LibraryItem =
   | { kind: 'shape'; shape: ShapeKind; color?: string }
   | { kind: 'svg'; svg: string; name: string; w?: number; h?: number; source?: string }
-  | { kind: 'photo'; url: string; credit?: string; name: string; w: number; h: number }
+  | { kind: 'photo'; url: string; credit?: string; name: string; w: number; h: number; download?: string }
   | { kind: 'elements'; elements: Element[] } // combos, text presets, frames, stickers built from elements
   | { kind: 'text'; patch: Partial<import('../doc/types').TextElement> };
 
@@ -35,6 +38,7 @@ export async function placePhoto(editor: Editor, item: Extract<LibraryItem, { ki
   let p = photoCache.get(item.url);
   if (!p) {
     p = assetFromUrl(item.url, item.name, item.credit);
+    if (item.download) reportDownload(item.download);
     photoCache.set(item.url, p);
   }
   try {
@@ -46,6 +50,7 @@ export async function placePhoto(editor: Editor, item: Extract<LibraryItem, { ki
       editor.replaceImage(target.id, asset.id, asset.width, asset.height);
       editor.select([target.id]);
     } else editor.addImageAsset(asset.id, asset.width, asset.height, at);
+    track('photo_placed');
     editor.ui.set({ toast: null });
   } catch {
     photoCache.delete(item.url);
@@ -58,7 +63,7 @@ export function addLibraryItem(editor: Editor, item: LibraryItem, at?: Point, ov
     case 'shape': {
       const wide: Partial<Record<string, [number, number]>> = { pill: [360, 140], halfcircle: [320, 160], ticket: [360, 200], speech: [320, 260], arch: [240, 320], arrow: [320, 200], chevron: [300, 200] };
       const [w, h] = wide[item.shape] ?? [240, 240];
-      const s = makeShape(item.shape, { w, h, fill: { type: 'solid', color: item.color ?? '#2B3BFF' } });
+      const s = makeShape(item.shape, { w, h, fill: { type: 'solid', color: item.color ?? COBALT } });
       editor.add([editor.fitToPage(s, 0.3)], { at });
       break;
     }

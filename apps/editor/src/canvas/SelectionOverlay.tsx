@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { Element, Id, LineElement } from '../doc/types';
 import { makeLine } from '../doc/factory';
 import { useEditor } from '../editor/Editor';
@@ -28,6 +28,7 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
   const editor = useEditor();
   const selection = useUI((s) => s.selection);
   const dragging = useUI((s) => s.dragging);
+  const hoverId = useUI((s) => s.hoverId);
   const els = useDoc((s) => selection.map((id) => s.elements[id]).filter(Boolean) as Element[]);
   const [live, setLive] = useState<string | null>(null);
   if (!els.length) return null;
@@ -283,11 +284,12 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
               { side: 'bottom', x: b.x + b.w / 2, y: b.y + b.h, dx: 0, dy: 1 },
               { side: 'left', x: b.x, y: b.y + b.h / 2, dx: -1, dy: 0 },
             ];
+            const near = !!hoverId && selection.includes(hoverId);
             return spots.map((s) => (
               <div
                 key={s.side}
                 data-overlay-control
-                className="connect-dot"
+                className={`connect-dot ${near ? 'is-near' : ''}`}
                 title="Drag to connect"
                 style={{ left: s.x * z + s.dx * 20, top: s.y * z + s.dy * 20 }}
                 onPointerDown={onConnect}
@@ -303,13 +305,39 @@ export function SelectionOverlay({ pageId, zoom, toLocal }: Props) {
 function QuickBar({ box, zoom, locked, lifted }: { box: { x: number; y: number; w: number; h: number; rotation: number }; zoom: number; locked: boolean; lifted: boolean }) {
   const editor = useEditor();
   const b = aabb(box);
-  // Near the top of the page the bar would sit under the toolbar, so it goes below.
-  const below = b.y * zoom < 90;
+  const ref = useRef<HTMLDivElement>(null);
+  const [below, setBelow] = useState(false);
+  const [tick, setTick] = useState(0);
+  // Connect dots sit just outside the box, so the bar clears them when they can show.
+  const gap = lifted ? 36 : 12;
+
+  useEffect(() => {
+    const bump = () => setTick((t) => t + 1);
+    window.addEventListener('scroll', bump, true);
+    window.addEventListener('resize', bump);
+    return () => {
+      window.removeEventListener('scroll', bump, true);
+      window.removeEventListener('resize', bump);
+    };
+  }, []);
+
+  // Flip under the selection when the bar would run into the page toolbar or leave the viewport.
+  useLayoutEffect(() => {
+    const el = ref.current;
+    const origin = el?.offsetParent?.getBoundingClientRect();
+    if (!el || !origin) return;
+    const toolbar = document.querySelector('.ctxbar')?.getBoundingClientRect();
+    const limit = Math.max(toolbar?.bottom ?? 0, 0) + 8;
+    const top = origin.top + b.y * zoom - gap - el.offsetHeight;
+    setBelow(top < limit);
+  }, [b.x, b.y, b.w, b.h, zoom, gap, tick]);
+
   return (
     <div
+      ref={ref}
       className={`quickbar ${below ? 'is-below' : ''}`}
       data-overlay-control
-      style={{ left: (b.x + b.w / 2) * zoom, top: below ? (b.y + b.h) * zoom + (lifted ? 78 : 56) : b.y * zoom - (lifted ? 20 : 0) }}
+      style={{ left: (b.x + b.w / 2) * zoom, top: below ? (b.y + b.h) * zoom + (lifted ? 78 : 56) : b.y * zoom - gap }}
       onPointerDown={(e) => e.stopPropagation()}
     >
       {locked ? (

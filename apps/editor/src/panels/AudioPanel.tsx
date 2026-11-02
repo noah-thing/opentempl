@@ -4,7 +4,6 @@ import { useEditor } from '../editor/Editor';
 import { startDrag, useDoc } from '../editor/hooks';
 import { formatTime, mediaUrl } from '../io/media';
 import { importSoundtrack, pickFiles } from '../io/upload';
-import { Sign } from '../ui/Logo';
 import { Icon } from '../ui/icons';
 import { Section, Slider } from './controls';
 import { TONES, renderTone } from '../tools/tones';
@@ -41,7 +40,6 @@ export default function AudioPanel() {
             if (f) await importSoundtrack(editor, f);
           }}
         >
-          <Sign size={56} mood={over ? 'wow' : 'look'} />
           <div style={{ fontWeight: 600, margin: '8px 0 2px' }}>Drop a song or a voice over</div>
           <div className="hint" style={{ marginBottom: 12 }}>
             MP3, M4A, WAV, OGG or FLAC. It plays under every page when you present, and goes into MP4 exports.

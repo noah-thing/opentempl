@@ -3,6 +3,7 @@ import { useDoc, useUI } from '../editor/hooks';
 import type { Element, TextEffectKind, TextElement } from '../doc/types';
 import { Section, Slider } from './controls';
 import { Swatch } from '../toolbar/ContextToolbar';
+import { COBALT } from '../doc/colors';
 
 const TEXT_FX: { kind: TextEffectKind; label: string; style: React.CSSProperties }[] = [
   { kind: 'none', label: 'None', style: {} },
@@ -10,7 +11,7 @@ const TEXT_FX: { kind: TextEffectKind; label: string; style: React.CSSProperties
   { kind: 'lift', label: 'Lift', style: { textShadow: '0 6px 10px rgba(0,0,0,.28)' } },
   { kind: 'hollow', label: 'Hollow', style: { color: 'transparent', WebkitTextStroke: '1.5px #0B0B0D' } },
   { kind: 'splice', label: 'Splice', style: { color: 'transparent', WebkitTextStroke: '1.5px #0B0B0D', textShadow: '3px 3px 0 #FFE600' } },
-  { kind: 'outline', label: 'Outline', style: { WebkitTextStroke: '4px #2B3BFF', paintOrder: 'stroke' } as React.CSSProperties },
+  { kind: 'outline', label: 'Outline', style: { WebkitTextStroke: `4px ${COBALT}`, paintOrder: 'stroke' } as React.CSSProperties },
   { kind: 'echo', label: 'Echo', style: { textShadow: '3px 2px 0 rgba(11,11,13,.45), 6px 4px 0 rgba(11,11,13,.2)' } },
   { kind: 'glitch', label: 'Glitch', style: { textShadow: '-3px 0 #00E5FF, 3px 0 #FF2BD6' } },
   { kind: 'neon', label: 'Neon', style: { color: '#fff', textShadow: '0 0 4px #FF3C8E, 0 0 10px #FF3C8E, 0 0 18px #FF3C8E' } },
@@ -20,7 +21,7 @@ const TEXT_FX: { kind: TextEffectKind; label: string; style: React.CSSProperties
 const DEFAULT_COLOR: Partial<Record<TextEffectKind, string>> = {
   shadow: '#0B0B0D',
   splice: '#FFE600',
-  outline: '#2B3BFF',
+  outline: COBALT,
   echo: '#0B0B0D',
   neon: '#FF3C8E',
   highlight: '#FFE600',

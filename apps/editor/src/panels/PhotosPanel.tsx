@@ -1,124 +1,133 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { addLibraryItem, dragProps, type LibraryItem } from './library';
-import { Search, Section } from './controls';
-import { LIBRARY_PHOTOS } from './photos';
+import { Search } from './controls';
+import { creditLine, fetchPhotos, insertSrc, UnsplashError, withUtm, type UnsplashPhoto } from './unsplash';
 
-// Photos: OpenTempl's own library first, then Openverse, a search over 700 million
-// openly licensed images run by WordPress. No account, no key.
-
-interface OvResult {
-  id: string;
-  url: string;
-  thumbnail: string;
-  title: string;
-  creator?: string;
-  license: string;
-  width?: number;
-  height?: number;
-}
+// Photos come live from Unsplash through the /api/unsplash proxy.
+// public/library/photos/ stays on disk because templates still use those files; the panel no longer lists them.
 
 const SUGGEST = ['coffee', 'mountains', 'city night', 'flowers', 'texture', 'ocean', 'concert', 'food', 'portrait', 'forest'];
 
+type Status = 'loading' | 'ready' | 'not_connected' | 'failed';
+
 export default function PhotosPanel() {
   const editor = useEditor();
-  const [q, setQ] = useState('');
-  const [results, setResults] = useState<OvResult[] | null>(null);
+  const [q, setQuery] = useState('');
+  const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [status, setStatus] = useState<Status>('loading');
+
+  // Changing the search always restarts at page one, in the same render.
+  const setQ = (v: string) => {
+    setQuery(v);
+    setPage(1);
+  };
 
   useEffect(() => {
-    if (!q.trim()) {
-      setResults(null);
-      return;
-    }
-    setError(false);
+    const ctl = new AbortController();
+    // Typing waits for a pause; paging and the first view go straight out.
     const t = setTimeout(async () => {
+      if (page === 1) setStatus('loading');
       try {
-        const r = await fetch(`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=20&page=${page}&mature=false`);
-        if (!r.ok) throw new Error(`Openverse ${r.status}`);
-        const j = await r.json();
-        const list: OvResult[] = (j.results ?? []).map((x: Record<string, unknown>) => ({
-          id: x.id,
-          url: x.url,
-          thumbnail: x.thumbnail,
-          title: x.title,
-          creator: x.creator,
-          license: `${String(x.license).toUpperCase()} ${x.license_version ?? ''}`.trim(),
-          width: x.width,
-          height: x.height,
-        }));
-        setResults((prev) => (page > 1 && prev ? [...prev, ...list] : list));
-      } catch {
-        setError(true);
-        setResults([]);
+        const r = await fetchPhotos(q, page, ctl.signal);
+        setPhotos((prev) => {
+          if (page === 1) return r.photos;
+          const seen = new Set(prev.map((p) => p.id));
+          return [...prev, ...r.photos.filter((p) => !seen.has(p.id))];
+        });
+        setHasMore(r.hasMore);
+        setStatus('ready');
+      } catch (e) {
+        if (ctl.signal.aborted) return;
+        if (page === 1) setPhotos([]);
+        setHasMore(false);
+        setStatus(e instanceof UnsplashError ? e.kind : 'failed');
       }
-    }, 280);
-    return () => clearTimeout(t);
+    }, q && page === 1 ? 300 : 0);
+    return () => {
+      clearTimeout(t);
+      ctl.abort();
+    };
   }, [q, page]);
-  useEffect(() => setPage(1), [q]);
 
-  const tile = (item: Extract<LibraryItem, { kind: 'photo' }>, thumb: string, key: string, credit?: string) => (
-    <button key={key} className="tile" style={{ aspectRatio: `${item.w} / ${item.h}` }} onMouseDown={(e) => e.preventDefault()} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)} title={credit}>
-      <img src={thumb} alt={item.name} loading="lazy" />
-      {credit ? <span className="credit">{credit}</span> : null}
-    </button>
-  );
+  const columns = useMemo(() => {
+    const cols: { items: UnsplashPhoto[]; height: number }[] = [{ items: [], height: 0 }, { items: [], height: 0 }];
+    for (const p of photos) {
+      const c = cols[0].height <= cols[1].height ? cols[0] : cols[1];
+      c.items.push(p);
+      c.height += p.h / p.w;
+    }
+    return cols;
+  }, [photos]);
+
+  const tile = (p: UnsplashPhoto) => {
+    const item: LibraryItem = { kind: 'photo', url: insertSrc(p), name: p.alt, w: p.w, h: p.h, credit: creditLine(p), download: p.download };
+    return (
+      <div key={p.id} className="photo-tile">
+        <button className="tile" style={{ aspectRatio: `${p.w} / ${p.h}`, background: p.color }} onMouseDown={(e) => e.preventDefault()} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)} title={p.alt}>
+          <img src={p.urls.small} alt={p.alt} loading="lazy" draggable={false} />
+        </button>
+        <span className="photo-credit">
+          Photo by{' '}
+          <a href={withUtm(p.user.url)} target="_blank" rel="noreferrer">
+            {p.user.name}
+          </a>{' '}
+          on{' '}
+          <a href={withUtm(p.link)} target="_blank" rel="noreferrer">
+            Unsplash
+          </a>
+        </span>
+      </div>
+    );
+  };
 
   return (
     <>
-      <Search value={q} onChange={setQ} placeholder="Search 700 million open photos" />
+      <Search value={q} onChange={setQ} placeholder="Search free photos" />
       {!q ? (
-        <>
-          <div className="chips" style={{ margin: '10px 0 0' }}>
-            {SUGGEST.map((s) => (
-              <button key={s} className="chip" onClick={() => setQ(s)}>
-                {s}
-              </button>
-            ))}
-          </div>
-          <Section title="OpenTempl library">
-            <p className="hint" style={{ margin: '-2px 0 8px' }}>
-              Made for OpenTempl. Free for anything, no credit needed.
-            </p>
-            <Masonry>{LIBRARY_PHOTOS.map((p) => tile({ kind: 'photo', url: p.url, name: p.name, w: p.w, h: p.h, credit: 'OpenTempl library' }, p.thumb, p.url))}</Masonry>
-          </Section>
-        </>
-      ) : results === null ? (
-        <div className="hint" style={{ marginTop: 12 }}>
-          Searching
+        <div className="chips" style={{ margin: '10px 0 0' }}>
+          {SUGGEST.map((s) => (
+            <button key={s} className="chip" onClick={() => setQ(s)}>
+              {s}
+            </button>
+          ))}
         </div>
-      ) : error ? (
-        <div className="empty">
-          <h4>Openverse did not answer</h4>
-          <span className="hint">Check your connection and try again.</span>
-        </div>
+      ) : null}
+      {status === 'not_connected' ? (
+        <p className="hint" style={{ marginTop: 14 }}>
+          Photos are not connected yet.
+        </p>
+      ) : status === 'failed' ? (
+        <p className="hint" style={{ marginTop: 14 }}>
+          Photos could not load. Check your connection.
+        </p>
+      ) : status === 'loading' ? (
+        <p className="hint" style={{ marginTop: 14 }}>
+          Loading photos
+        </p>
+      ) : photos.length === 0 ? (
+        <p className="hint" style={{ marginTop: 14 }}>
+          No photos for that search.
+        </p>
       ) : (
         <>
-          <Masonry>
-            {results.map((r) =>
-              tile(
-                { kind: 'photo', url: r.url, name: r.title, w: r.width ?? 4, h: r.height ?? 3, credit: `${r.title} by ${r.creator ?? 'unknown'}, ${r.license}, via Openverse` },
-                r.thumbnail,
-                r.id,
-                `${r.creator ?? 'Unknown'} · ${r.license}`,
-              ),
-            )}
-          </Masonry>
-          {results.length >= 20 * page ? (
-            <button className="btn btn-outline btn-block" style={{ marginTop: 12 }} onClick={() => setPage((p) => p + 1)}>
-              Load more
+          <div className="photo-cols">
+            {columns.map((c, i) => (
+              <div key={i}>{c.items.map(tile)}</div>
+            ))}
+          </div>
+          {hasMore ? (
+            <button className="btn btn-outline btn-block" style={{ marginTop: 12 }} onClick={() => setPage((n) => n + 1)}>
+              More photos
             </button>
           ) : null}
           <p className="hint" style={{ marginTop: 12 }}>
-            Openverse photos keep their Creative Commons licences. OpenTempl saves the credit with each photo you place.
+            Free photos from Unsplash. OpenTempl saves the photographer's credit with each photo you place.
           </p>
         </>
       )}
     </>
   );
-}
-
-function Masonry({ children }: { children: React.ReactNode }) {
-  return <div style={{ columns: 2, columnGap: 8, marginTop: 10 }}>{Array.isArray(children) ? children.map((c, i) => <div key={i} style={{ breakInside: 'avoid', marginBottom: 8 }}>{c}</div>) : children}</div>;
 }

@@ -129,6 +129,7 @@ export default function ResizePanel() {
           {FORMATS.filter((f) => f.group === g).map((f) => (
             <button
               key={f.id}
+              title={f.note}
               className="menu-item"
               style={{ height: 40, background: picked === f.id ? 'var(--cobalt-soft)' : undefined }}
               onClick={() => {
@@ -141,7 +142,7 @@ export default function ResizePanel() {
                 <span style={{ width: (f.width / Math.max(f.width, f.height)) * 20, height: (f.height / Math.max(f.width, f.height)) * 20, boxShadow: 'inset 0 0 0 1.5px var(--ink)', borderRadius: 2 }} />
               </span>
               <span style={{ flex: 1 }}>{f.name}</span>
-              <span className="kbd">{f.note ?? `${f.width} × ${f.height}`}</span>
+              <span className="kbd tabular">{Math.round(f.width)} × {Math.round(f.height)} px</span>
             </button>
           ))}
         </Section>

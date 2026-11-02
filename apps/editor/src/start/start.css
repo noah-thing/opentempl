@@ -1,0 +1,181 @@
+.start-head {
+  padding: clamp(40px, 8vh, 88px) 0 32px;
+}
+.start-head h1 {
+  margin: 0;
+  font-size: clamp(40px, 4.6vw, 64px);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+.start-head p {
+  max-width: 520px;
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.start-block {
+  margin-bottom: 64px;
+}
+.start-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Sizes: a quiet grid, each format drawn to scale in the same box. */
+.start-sizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+  gap: 12px;
+}
+.start-size {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: left;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.start-size:hover {
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.start-size b {
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink);
+}
+.start-size > span:last-child {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.start-frame {
+  display: grid;
+  place-items: center;
+  height: 84px;
+}
+.start-shape {
+  display: block;
+  border-radius: 2px;
+  background: var(--sheet-2);
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+  transition: box-shadow 0.15s;
+}
+.start-size:hover .start-shape {
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+.start-custom {
+  grid-column: span 2;
+  gap: 10px;
+}
+.start-custom b {
+  margin-top: 0;
+}
+.start-wh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+.start-wh input {
+  width: 64px;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.start-wh input:focus {
+  outline: none;
+  border-color: var(--ink-3);
+}
+.start-custom .btn {
+  justify-self: start;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 6px;
+}
+
+/* Templates: one row of real covers for the chosen kind of thing. */
+.start-templates {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+.start-tpl {
+  flex: none;
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+.start-tpl img {
+  display: block;
+  height: 220px;
+  width: auto;
+  border-radius: 4px;
+  background: var(--sheet);
+  transition: transform 0.25s var(--ease);
+}
+.start-tpl:hover img {
+  transform: translateY(-3px);
+}
+.start-tpl span {
+  max-width: 180px;
+  overflow: hidden;
+  font-size: 13px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Tools: a plain list in columns, icon and one line each. */
+.start-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0 32px;
+  border-top: 1px solid var(--line-2);
+}
+.start-tool {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-2);
+  text-align: left;
+  color: var(--ink-3);
+}
+.start-tool svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--ink-2);
+}
+.start-tool span {
+  display: grid;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.start-tool b {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.start-tool:hover b {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

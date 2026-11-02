@@ -38,9 +38,9 @@ export function ContextMenu() {
         { separator: true },
         sel.length > 1
           ? editor.isGrouped()
-            ? { label: 'Ungroup', icon: 'ungroup', kbd: '⇧⌘G', onClick: () => editor.ungroup() }
-            : { label: 'Group', icon: 'group', kbd: '⌘G', onClick: () => editor.group() }
-          : { label: sel[0].locked ? 'Unlock' : 'Lock', icon: sel[0].locked ? 'unlock' : 'lock', kbd: '⇧⌘L', onClick: () => editor.toggleLock() },
+            ? { label: 'Ungroup', kbd: '⇧⌘G', onClick: () => editor.ungroup() }
+            : { label: 'Group', kbd: '⌘G', onClick: () => editor.group() }
+          : { label: sel[0].locked ? 'Unlock' : 'Lock', kbd: '⇧⌘L', onClick: () => editor.toggleLock() },
         ...(editor.canCombine()
           ? [
               {
@@ -68,7 +68,6 @@ export function ContextMenu() {
               { separator: true },
               {
                 label: 'Set image as background',
-                icon: 'background',
                 onClick: () => {
                   const img = one as ImageElement;
                   editor.doc.transact(() => {
@@ -77,20 +76,20 @@ export function ContextMenu() {
                   });
                 },
               },
-              { label: 'Crop', icon: 'crop', onClick: () => editor.ui.set({ cropId: one.id }) },
+              { label: 'Crop', onClick: () => editor.ui.set({ cropId: one.id }) },
             ]
           : []),
-        { label: 'Add link', icon: 'link', onClick: () => promptLink(editor) },
-        { label: 'Add to every page', icon: 'page', disabled: editor.s.pageOrder.length < 2, onClick: () => editor.addToAllPages() },
+        { label: 'Add link', onClick: () => promptLink(editor) },
+        ...(editor.s.pageOrder.length > 1 ? [{ label: 'Add to every page', onClick: () => editor.addToAllPages() }] : []),
       ]
     : [
         { label: 'Paste', kbd: '⌘V', onClick: () => editor.paste() },
         { label: 'Select all', kbd: '⌘A', onClick: () => editor.selectAll() },
         { separator: true },
-        { label: 'Page background', icon: 'background', onClick: () => editor.openPanel('background') },
-        { label: 'Add page', icon: 'page-add', onClick: () => editor.addPage(at.pageId) },
-        { label: 'Duplicate page', icon: 'duplicate', onClick: () => editor.duplicatePage(at.pageId) },
-        { label: 'Delete page', icon: 'trash', danger: true, disabled: editor.s.pageOrder.length < 2, onClick: () => editor.deletePage(at.pageId) },
+        { label: 'Page background', onClick: () => editor.openPanel('background') },
+        { label: 'Add page', onClick: () => editor.addPage(at.pageId) },
+        { label: 'Duplicate page', onClick: () => editor.duplicatePage(at.pageId) },
+        { label: 'Delete page', icon: 'trash', danger: true, disabled: editor.s.pageOrder.length < 2, hint: 'A design needs at least one page', onClick: () => editor.deletePage(at.pageId) },
       ];
 
   return (

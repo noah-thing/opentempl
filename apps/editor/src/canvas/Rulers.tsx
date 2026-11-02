@@ -65,7 +65,7 @@ export function Rulers() {
           // Selection extent in cobalt.
           const b = editor.bounds();
           if (b && editor.state.selection.length && editor.s.elementPage[editor.state.selection[0]] === editor.state.activePageId) {
-            ctx.fillStyle = 'rgba(43,59,255,0.18)';
+            ctx.fillStyle = 'rgba(33,49,245,0.18)';
             if (horizontal) ctx.fillRect(origin + b.x * z, 0, b.w * z, SIZE);
             else ctx.fillRect(0, origin + b.y * z, SIZE, b.h * z);
           }

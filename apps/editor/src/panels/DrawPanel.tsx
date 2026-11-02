@@ -5,6 +5,7 @@ import type { DrawSettings } from '../editor/state';
 import { Icon } from '../ui/icons';
 import { Section, Slider } from './controls';
 import { useBrand } from './brand';
+import { COBALT } from '../doc/colors';
 
 const TOOLS: { id: DrawSettings['tool']; label: string; icon: string }[] = [
   { id: 'pen', label: 'Pen', icon: 'pen' },
@@ -13,7 +14,7 @@ const TOOLS: { id: DrawSettings['tool']; label: string; icon: string }[] = [
   { id: 'glow', label: 'Glow pen', icon: 'glow' },
   { id: 'eraser', label: 'Eraser', icon: 'eraser' },
 ];
-const COLORS = ['#0B0B0D', '#FFFFFF', '#2B3BFF', '#0AA0FF', '#FF4B39', '#FF3C8E', '#FFE600', '#3EDD8A', '#9AA2EA', '#7B5CFF', '#FF9F1A', '#8A8A96', '#123B2C', '#F3E2C7'];
+const COLORS = ['#0B0B0D', '#FFFFFF', COBALT, '#0AA0FF', '#FF4B39', '#FF3C8E', '#FFE600', '#3EDD8A', '#9AA2EA', '#7B5CFF', '#FF9F1A', '#8A8A96', '#123B2C', '#F3E2C7'];
 
 export default function DrawPanel() {
   const editor = useEditor();

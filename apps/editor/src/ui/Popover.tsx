@@ -84,6 +84,7 @@ export interface MenuItem {
   onClick?: () => void;
   danger?: boolean;
   disabled?: boolean;
+  hint?: string; // why a row is unavailable
   separator?: boolean;
   heading?: string;
   checked?: boolean;
@@ -122,6 +123,7 @@ export function Menu({ items, onClose }: { items: MenuItem[]; onClose: () => voi
             key={i}
             className={`menu-item ${it.danger ? 'is-danger' : ''}`}
             disabled={it.disabled}
+            title={it.disabled ? it.hint : undefined}
             onClick={() => {
               it.onClick?.();
               onClose();

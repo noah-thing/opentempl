@@ -20,6 +20,7 @@ self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  if (url.pathname.startsWith('/api/')) return;
   const sameOrigin = url.origin === self.location.origin;
   const fonts = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
   if (!sameOrigin && !fonts) return;

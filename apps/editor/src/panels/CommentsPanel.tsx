@@ -1,7 +1,6 @@
 import { useEditor } from '../editor/Editor';
 import { useDoc, useUI } from '../editor/hooks';
 import { Icon } from '../ui/icons';
-import { Sign } from '../ui/Logo';
 
 export default function CommentsPanel() {
   const editor = useEditor();
@@ -47,12 +46,11 @@ export default function CommentsPanel() {
         ))
       ) : (
         <div className="empty">
-          <Sign size={64} />
           <h4>{resolved ? 'Everything is resolved' : 'No comments yet'}</h4>
           <span className="hint">
             {resolved
               ? `${resolved} resolved ${resolved === 1 ? 'thread is' : 'threads are'} tucked away. Turn on Show resolved to see ${resolved === 1 ? 'it' : 'them'}.`
-              : 'Pin notes on a page for yourself or for whoever you share the design with.'}
+              : 'Pin a note anywhere on a page.'}
           </span>
         </div>
       )}

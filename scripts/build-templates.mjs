@@ -56,15 +56,21 @@ function coverCrop(iw, ih, w, h) {
 }
 
 const only = process.argv.slice(2);
-const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.mjs') && (!only.length || only.includes(f.replace(/\.mjs$/, ''))));
+// A vibe can span several files: swiss-grid.mjs plus swiss-grid.decks.mjs and so on,
+// so separate builders never edit the same file. All of them go into one pack.
+const byVibe = new Map();
+for (const f of fs.readdirSync(srcDir).filter((f) => f.endsWith('.mjs')).sort()) {
+  const vibe = f.split('.')[0];
+  if (only.length && !only.includes(vibe)) continue;
+  byVibe.set(vibe, [...(byVibe.get(vibe) ?? []), f]);
+}
 const problems = [];
 const ids = new Set();
 
-for (const f of files) {
-  const vibe = f.replace(/\.mjs$/, '');
-  let list;
+for (const [vibe, parts] of byVibe) {
+  let list = [];
   try {
-    list = (await import(pathToFileURL(path.join(srcDir, f)).href + '?t=' + Date.now())).default;
+    for (const f of parts) list = list.concat((await import(pathToFileURL(path.join(srcDir, f)).href + '?t=' + Date.now())).default);
   } catch (e) {
     problems.push(`${vibe}: does not load: ${e.message}`);
     continue;

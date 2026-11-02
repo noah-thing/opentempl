@@ -1,0 +1,78 @@
+/* The email form. It borrows the page's tokens, so the same markup sits on the dark home footer and in the export dialog. */
+.subscribe {
+  display: grid;
+  gap: 8px;
+  max-width: 440px;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.subscribe label {
+  color: var(--ink);
+  font-weight: 500;
+}
+.subscribe-row {
+  display: flex;
+  gap: 8px;
+}
+.subscribe input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  box-shadow: none;
+}
+.subscribe input::placeholder {
+  color: var(--ink-3);
+}
+.subscribe input:focus-visible {
+  border-color: var(--ink-3);
+}
+.subscribe input[aria-invalid] {
+  border-color: var(--danger, #e5484d);
+}
+.subscribe button {
+  flex: none;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.subscribe button:hover:not(:disabled) {
+  background: var(--hover);
+}
+.subscribe button:disabled {
+  color: var(--ink-3);
+  cursor: default;
+}
+.subscribe-fine,
+.subscribe-err,
+.subscribe-line {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.subscribe-err {
+  color: var(--danger, #e5484d);
+}
+.subscribe-line {
+  max-width: 440px;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.home-foot-sub {
+  flex: 1 0 100%;
+  padding-bottom: 12px;
+}

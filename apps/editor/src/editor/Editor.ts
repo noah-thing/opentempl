@@ -14,6 +14,7 @@ import { luminance, recolor, refont, type FontPair } from '../tools/restyle';
 import { initialEditorState, type EditorState, type PanelId } from './state';
 import { localName } from '../collab/collab';
 import type { Comment } from '../doc/types';
+import { COBALT } from '../doc/colors';
 
 const CLIP_PREFIX = 'tavla/elements:';
 
@@ -626,7 +627,7 @@ export class Editor {
 }
 
 export function commentColor(name: string) {
-  const colors = ['#2B3BFF', '#FF4B39', '#0E8A5F', '#FF3C8E', '#0AA0FF', '#7B5CFF'];
+  const colors = [COBALT, '#FF4B39', '#0E8A5F', '#FF3C8E', '#0AA0FF', '#7B5CFF'];
   let h = 0;
   for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   return colors[h % colors.length];

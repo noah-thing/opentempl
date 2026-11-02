@@ -2,33 +2,52 @@ import { useState } from 'react';
 import { useEditor } from '../editor/Editor';
 import { Icon } from '../ui/icons';
 import { useEscape } from '../ui/useEscape';
-import { activeCollab, connectCollab, localName, newRoomKey, setLocalName, usePeers } from '../collab/collab';
+import { activeCollab, chosenName, connectCollab, localName, newRoomKey, setLocalName, usePeers, useSyncStatus } from '../collab/collab';
+import { forgetRoom, savedRoom, saveRoom } from '../collab/rooms';
+import { syncLabel } from './SyncStatus';
 
 export function ShareDialog() {
   const editor = useEditor();
   const peers = usePeers();
-  const [name, setName] = useState(localName());
-  const [room, setRoom] = useState(() => new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room'));
+  const [name, setName] = useState(chosenName());
+  const designId = editor.s.meta.id;
+  const [room, setRoom] = useState(() => new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('room') ?? savedRoom(designId));
   const [copied, setCopied] = useState(false);
+  const [stopping, setStopping] = useState(false);
+  const status = useSyncStatus();
   const close = () => editor.ui.set({ shareOpen: false });
   useEscape(close);
+
+  const copy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1600);
+  };
+  const link = (key: string) => `${window.location.origin}${window.location.pathname}#/join/${designId}?room=${key}`;
 
   const start = () => {
     const key = newRoomKey();
     const base = window.location.hash.split('?')[0];
     window.history.replaceState(null, '', `${window.location.pathname}${base}?room=${key}`);
+    saveRoom(designId, key);
     if (!activeCollab()) connectCollab(editor, key);
     setRoom(key);
+    copy(link(key));
   };
-  const stop = () => {
-    activeCollab()?.destroy();
+  const stop = async () => {
+    setStopping(true);
+    const deleted = await activeCollab()?.stopSharing();
+    forgetRoom(designId);
     const base = window.location.hash.split('?')[0];
     window.history.replaceState(null, '', `${window.location.pathname}${base}`);
     setRoom(null);
-    editor.toast('Live session ended. The design stays on this device.');
+    setStopping(false);
+    editor.toast(
+      deleted === false
+        ? 'Sharing stopped here. The relay was out of reach, so its encrypted copy goes after 90 days without use.'
+        : 'Sharing stopped and the encrypted copy is deleted. The design stays on this device.',
+    );
   };
-  const link = room ? `${window.location.origin}${window.location.pathname}#/join/${editor.s.meta.id}?room=${room}` : '';
-
   return (
     <div className="scrim" onPointerDown={(e) => e.target === e.currentTarget && close()}>
       <div className="dialog" role="dialog" aria-label="Share">
@@ -41,11 +60,13 @@ export function ShareDialog() {
         <div className="dialog-body stack" style={{ gap: 18 }}>
           <div>
             <div className="label" style={{ marginBottom: 6 }}>
-              Your name on other people's screens
+              Your name
             </div>
             <div className="field">
               <input
                 value={name}
+                placeholder="Your name"
+                maxLength={32}
                 onChange={(e) => {
                   setName(e.target.value);
                   setLocalName(e.target.value || 'Guest');
@@ -53,41 +74,39 @@ export function ShareDialog() {
                 onKeyDown={(e) => e.stopPropagation()}
               />
             </div>
+            {name ? null : <p className="hint" style={{ margin: '6px 0 0' }}>Others see you as {localName()} until you add one.</p>}
           </div>
-          <div style={{ padding: 16, borderRadius: 14, background: 'var(--paper)' }}>
-            <div style={{ fontWeight: 600, marginBottom: 4 }}>Design together, live</div>
-            <p className="hint" style={{ margin: '0 0 12px' }}>
-              Anyone with the link edits this design with you in real time. Changes travel directly between your browsers over an encrypted connection. No account, and nothing is stored on a OpenTempl server.
+          <div className="share-card">
+            <div className="share-card-title">Share a link</div>
+            <p className="hint share-card-text">
+              Anyone with this link can edit. Changes sync through an encrypted relay, so they arrive even when you're offline. The relay can't read your design.
             </p>
             {room ? (
               <div className="stack">
                 <div className="field">
-                  <input readOnly value={link} title={link} onFocus={(e) => e.target.select()} />
-                  <button
-                    className="btn btn-sm btn-ink"
-                    onClick={() => {
-                      navigator.clipboard.writeText(link);
-                      setCopied(true);
-                      setTimeout(() => setCopied(false), 1600);
-                    }}
-                  >
+                  <input readOnly value={link(room)} title={link(room)} onFocus={(e) => e.target.select()} />
+                  <button className="btn btn-sm btn-ink" onClick={() => copy(link(room))}>
                     {copied ? 'Copied' : 'Copy link'}
                   </button>
                 </div>
-                <div className="hint">{peers.length ? `${peers.length} other ${peers.length === 1 ? 'person' : 'people'} here: ${peers.map((p) => p.name).join(', ')}` : 'Waiting for someone to open the link. Keep this tab open while you work together.'}</div>
-                <button className="btn btn-sm btn-outline" style={{ alignSelf: 'flex-start' }} onClick={stop}>
-                  Stop sharing
+                <div className="hint">
+                  {status ? `${syncLabel(status)}. ` : ''}
+                  {peers.length ? `${peers.length} other ${peers.length === 1 ? 'person' : 'people'} here now: ${peers.map((p) => p.name).join(', ')}.` : 'Nobody else is here right now.'}
+                </div>
+                <button className="btn btn-outline" style={{ alignSelf: 'flex-start' }} onClick={stop} disabled={stopping}>
+                  {stopping ? 'Stopping' : 'Stop sharing'}
                 </button>
+                <p className="hint" style={{ margin: 0 }}>Stopping deletes the encrypted copy on the relay. Everyone keeps the version already on their device.</p>
               </div>
             ) : (
-              <button className="btn btn-primary" onClick={start}>
-                <Icon name="users" /> Start a live session
+              <button className="btn btn-outline" onClick={start}>
+                <Icon name="link" /> Copy link
               </button>
             )}
           </div>
-          <div style={{ padding: 16, borderRadius: 14, boxShadow: 'inset 0 0 0 1px var(--line)' }}>
-            <div style={{ fontWeight: 600, marginBottom: 4 }}>Send a copy</div>
-            <p className="hint" style={{ margin: '0 0 12px' }}>An .opentempl file holds every page, photo and font choice. The other person opens it from File, Open.</p>
+          <div className="share-card">
+            <div className="share-card-title">Send a copy</div>
+            <p className="hint share-card-text">An .opentempl file holds every page, photo and font choice. The other person opens it from the File menu.</p>
             <button
               className="btn btn-outline"
               onClick={async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' })}

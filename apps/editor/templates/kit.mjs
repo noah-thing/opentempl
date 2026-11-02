@@ -129,7 +129,7 @@ export function frame(x, y, w, h, p = {}) {
 }
 // A texture laid over everything: img('tex/paper.jpg', ...) with a blend mode.
 export function overlay(path, W, H, blend = 'multiply', opacity = 1, p = {}) {
-  return img(path, 0, 0, W, H, { blend, opacity, locked: true, name: 'Texture', ...p });
+  return img(path, 0, 0, W, H, { blend, opacity, name: 'Texture', ...p });
 }
 
 // Inline vector art: one <svg> with a viewBox. Colours in it can be recoloured in the editor.

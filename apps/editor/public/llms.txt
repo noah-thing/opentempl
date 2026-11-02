@@ -1,0 +1,111 @@
+# OpenTempl
+
+> OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account. It is a free alternative to Canva for people who make their own posters, social posts and slides and want to keep the files.
+
+Key facts:
+
+- Price: free. No subscription, no account, no watermark, no paid tier.
+- Licence: MIT. The source repository is private until launch.
+- Made by Noah (https://x.com/fsconfig) in Stockholm. Independent project, not affiliated with Canva or OpenAI.
+- 337 templates in 34 styles (Swiss grid, riso zine, brutalist, Bauhaus, Seoul and Tokyo event posters, pixel art, Y2K chrome and more).
+- Works offline after the first load and creates new designs offline. Designs are saved on your device. Fonts, icon search, stock photos and live sessions need a connection.
+- Imports PDF and PowerPoint. Exports PNG (transparent), JPG, WebP, SVG, PDF (print with bleed and crop marks), PowerPoint, MP4 and GIF.
+- Generate tab: images in 32 styles with your own OpenAI key. OpenAI bills the user.
+- Runs in the browser at https://opentempl.org; desktop builds for macOS, Windows and Linux ship with the first release.
+- Not the same as the Total.js OpenTemplates engine, the OpenTemplate PHP engine or OpenTemplate.org.
+- Does not have: team workspaces, a phone app, cloud sync, CMYK output.
+
+## Start here
+
+- [Home](https://opentempl.org/): the editor and 337 templates
+- [OpenTempl facts: licence, features and limits](https://opentempl.org/facts): Verified facts about OpenTempl: licence, price, template count, formats, what needs internet and what it does not do. Dated.
+- [What is OpenTempl? Free open source design app](https://opentempl.org/about): OpenTempl is a free, open source design app made by Noah in Stockholm. What it is, why it exists, the licence and what comes next.
+- [Download OpenTempl: web app and desktop builds](https://opentempl.org/download): Open OpenTempl in your browser now. Desktop builds for Mac, Windows and Linux ship with the first release. Free, MIT licensed, no account.
+
+## Compare and decide
+
+- [Canva alternative: free, open source, works offline](https://opentempl.org/canva-alternative): A Canva alternative that works offline, needs no account and costs nothing. What it does, what it lacks, and who should switch.
+- [Open source Canva alternative: OpenTempl (MIT)](https://opentempl.org/open-source-canva): Looking for an open source version of Canva? OpenTempl is an MIT licensed design app with 337 templates. Compared with Penpot and others.
+- [Free Canva alternative with no watermark or paywall](https://opentempl.org/free-canva-alternative): OpenTempl is free: no watermark, no paid export, no trial. Transparent PNG, SVG, print PDF and PowerPoint included. What free means here.
+- [Canva Pro features for free: what OpenTempl includes](https://opentempl.org/canva-pro-free): Background remover, magic resize, brand kit, bulk create, transparent PNG, SVG export and version history. All free in OpenTempl.
+- [Canva alternative that works offline | OpenTempl](https://opentempl.org/canva-alternative-offline): Open OpenTempl once and design posters, posts and slides without internet. Create new designs offline, not just edit old ones.
+- [Canva alternative with no account or login](https://opentempl.org/canva-alternative-no-account): Open OpenTempl and start designing. No sign up, no email, no login, no trial. Posters, posts and slides saved on your own device.
+- [Canva vs OpenTempl: an honest comparison](https://opentempl.org/canva-vs-opentempl): Canva vs OpenTempl compared on price, offline use, accounts, templates, exports and teams. Where Canva wins and where OpenTempl does.
+- [Free poster maker: no watermark, no account](https://opentempl.org/free-poster-maker): Make posters in 34 styles from 337 templates. Download PNG, PDF with bleed or SVG. Free, works offline, nothing to sign up for.
+- [Free Instagram post and story maker, no sign up](https://opentempl.org/free-instagram-post-maker): Square posts, 4:5 posts, stories and carousels from templates. Free, no watermark, no account. Exports PNG or JPG at full size.
+- [Free presentation maker that opens PowerPoint files](https://opentempl.org/free-presentation-maker): Make slides with designer templates. Open .pptx files, present with notes, export PowerPoint or PDF. Free, offline, no account.
+- [Free menu maker: restaurant and cafe menu templates](https://opentempl.org/free-menu-maker): Design a menu, cafe board or recipe card from free templates. Export a print ready PDF with bleed. No account, no watermark, works offline.
+
+## Templates
+
+- [All templates](https://opentempl.org/templates): 337 templates in 34 styles
+- [Swiss grid](https://opentempl.org/templates/swiss-grid)
+- [Pixel and bitmap](https://opentempl.org/templates/pixel-bitmap)
+- [Tech mono](https://opentempl.org/templates/tech-mono)
+- [Seoul and Tokyo](https://opentempl.org/templates/asia-poster)
+- [Riso zine](https://opentempl.org/templates/riso-zine)
+- [Brutalist](https://opentempl.org/templates/brutalist)
+- [Bauhaus](https://opentempl.org/templates/bauhaus)
+- [Seventies](https://opentempl.org/templates/seventies)
+- [Rave acid](https://opentempl.org/templates/rave-acid)
+- [Xerox punk](https://opentempl.org/templates/xerox-punk)
+- [Magazine](https://opentempl.org/templates/magazine-cover)
+- [Quiet luxury](https://opentempl.org/templates/quiet-luxury)
+- [Japanese minimal](https://opentempl.org/templates/japanese-minimal)
+- [Nordic minimal](https://opentempl.org/templates/nordic-minimal)
+- [Mid century](https://opentempl.org/templates/mid-century)
+- [Botanical](https://opentempl.org/templates/botanical-vintage)
+- [Folk pattern](https://opentempl.org/templates/folk-pattern)
+- [Hand drawn](https://opentempl.org/templates/hand-drawn)
+- [Collage](https://opentempl.org/templates/collage-scrapbook)
+- [Kids play](https://opentempl.org/templates/kids-play)
+- [Mascot](https://opentempl.org/templates/cute-mascot)
+- [Soft pastel](https://opentempl.org/templates/soft-pastel)
+- [Aura](https://opentempl.org/templates/gradient-aura)
+- [Y2K chrome](https://opentempl.org/templates/y2k-chrome)
+- [Dark tech](https://opentempl.org/templates/dark-tech)
+- [Maximal pop](https://opentempl.org/templates/maximal-pop)
+- [Sports](https://opentempl.org/templates/sports-bold)
+- [Photo and type](https://opentempl.org/templates/photo-overlay)
+- [Academic](https://opentempl.org/templates/academic)
+- [Receipt](https://opentempl.org/templates/receipt-utility)
+- [Stationery](https://opentempl.org/templates/fine-stationery)
+- [Menus](https://opentempl.org/templates/food-menu)
+- [Earthy](https://opentempl.org/templates/earthy-organic)
+- [Clean business](https://opentempl.org/templates/corporate-clean)
+
+## Prompts for ChatGPT
+
+- [Prompt gallery](https://opentempl.org/prompts): 31 copy and paste image prompts for posters, posts and menus
+- [How to make a poster with ChatGPT](https://opentempl.org/guides/make-a-poster-with-chatgpt)
+- [Bold Flat Colour](https://opentempl.org/prompts/bold-flat-colour)
+- [Halftone Duotone](https://opentempl.org/prompts/halftone-duotone)
+- [Pixel World](https://opentempl.org/prompts/pixel-world)
+- [Grain Shape Animals](https://opentempl.org/prompts/grain-shape-animals)
+- [Brush Marker Lettering](https://opentempl.org/prompts/marker-lettering)
+- [Riso Market Scene](https://opentempl.org/prompts/riso-market)
+- [Club Flyer Print](https://opentempl.org/prompts/club-flyer-print)
+- [Folk Cutout Garden](https://opentempl.org/prompts/folk-cutout-garden)
+- [Inflatable Type](https://opentempl.org/prompts/inflatable-balloon)
+- [Stitched Pixel Type](https://opentempl.org/prompts/stitch-type)
+- [Grain Glow Type](https://opentempl.org/prompts/grain-glow)
+- [Acid Black Wire](https://opentempl.org/prompts/acid-wire)
+- [Extruded Block Letters](https://opentempl.org/prompts/extruded-blocks)
+- [Sticker Cartoon Pop](https://opentempl.org/prompts/sticker-cartoon)
+- [Blob Gradient Pop](https://opentempl.org/prompts/blob-gradient)
+- [Sliced Portrait Cover](https://opentempl.org/prompts/sliced-portrait)
+- [Pop Cutout Collage](https://opentempl.org/prompts/pop-cutout)
+- [Psychedelic Lettering](https://opentempl.org/prompts/psychedelic-lettering)
+- [Sunny Travel Poster](https://opentempl.org/prompts/sunny-travel-poster)
+- [Riso Two Ink](https://opentempl.org/prompts/riso-two-ink)
+- [Oil Pastel Scribble](https://opentempl.org/prompts/oil-pastel-scribble)
+- [Blue Ink Doodle](https://opentempl.org/prompts/blue-ink-doodle)
+- [Flash Editorial Photo](https://opentempl.org/prompts/flash-editorial)
+- [Blob Mascot](https://opentempl.org/prompts/blob-mascot)
+- [Holographic Y2K](https://opentempl.org/prompts/holo-y2k)
+- [Keycap Type](https://opentempl.org/prompts/keycap-type)
+- [Athlete Giant Type](https://opentempl.org/prompts/athlete-giant-type)
+- [Liquid Chrome Type](https://opentempl.org/prompts/liquid-chrome)
+- [Layered Papercut](https://opentempl.org/prompts/layered-papercut)
+- [Cutout Plant Collage](https://opentempl.org/prompts/cutout-plant-collage)
+- [Neon Tube Glow](https://opentempl.org/prompts/neon-glow)

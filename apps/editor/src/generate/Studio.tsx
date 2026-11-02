@@ -10,6 +10,7 @@ import { composePrompt, emptyBrief, type Brief, type RefRole, type TextMode } fr
 import { generateImages, getSettings, hasKey, onSettingsChange } from './openai';
 import { designFromImage, type LayerChoice } from './build';
 import { KeyDialog } from './KeyDialog';
+import { track } from '../stats/client';
 import './studio.css';
 
 // #/generate: the Looks gallery and the brief. A Look is an art direction; the
@@ -42,6 +43,8 @@ interface Result {
 export function Studio({ query }: { query: string }) {
   const [looks, setLooks] = useState<Look[] | null>(null);
   const [lookId, setLookId] = useState<string | null>(() => new URLSearchParams(query).get('look'));
+  // A link to another look while Generate is already open only changes the hash.
+  useEffect(() => setLookId(new URLSearchParams(query).get('look')), [query]);
   const [family, setFamily] = useState('All');
   const [brief, setBrief] = useState<Brief>(emptyBrief());
   const [promptEdit, setPromptEdit] = useState<string | null>(null);
@@ -93,6 +96,7 @@ export function Studio({ query }: { query: string }) {
     try {
       const images = [...(brief.useLookSample ? [sampleUrl(look.id), ...styleRefs(look).map((r) => r.img)] : []), ...brief.refs.map((r) => r.url)];
       const blobs = await generateImages({ prompt, format: brief.format, images, n, signal: abort.current.signal });
+      track('generate_used');
       setResults((rs) => [...blobs.map((blob) => ({ id: crypto.randomUUID(), url: URL.createObjectURL(blob), blob, lookId: look.id, brief: { ...brief } })), ...rs]);
     } catch (e) {
       if ((e as Error).name !== 'AbortError') setError((e as Error).message);
@@ -125,11 +129,11 @@ export function Studio({ query }: { query: string }) {
     <div className="studio">
       <header className="studio-top">
         <a className="home-brand" href="#/">
-          <Wordmark size={21} tone="lime" />
+          <Wordmark size={21} />
         </a>
         <span className="studio-crumb">Generate</span>
-        <button className={`btn ${keyed ? 'btn-outline' : 'btn-primary'}`} onClick={() => setKeyOpen(true)}>
-          <Icon name="sparkle" /> {keyed ? `OpenAI connected · ${getSettings().model.replace('gpt-image-', 'GPT Image ')}` : 'Connect OpenAI'}
+        <button className="btn btn-outline" onClick={() => setKeyOpen(true)}>
+          {keyed ? `OpenAI key · ${getSettings().model.replace('gpt-image-', 'GPT Image ')}` : 'OpenAI key'}
         </button>
       </header>
 
@@ -141,7 +145,7 @@ export function Studio({ query }: { query: string }) {
             <div className="chips">
               {families.map((f) => (
                 <button key={f} className={`chip ${family === f ? 'is-on' : ''}`} onClick={() => setFamily(f)}>
-                  {f === 'All' ? 'Every look' : f}
+                  {f === 'All' ? 'Every look' : f[0].toUpperCase() + f.slice(1)}
                 </button>
               ))}
             </div>
@@ -348,11 +352,12 @@ export function Studio({ query }: { query: string }) {
             </details>
 
             <div className="actions">
-              <div className="row">
-                <button className="btn btn-primary big" disabled={!!busy} onClick={run}>
-                  <Icon name="sparkle" /> {keyed ? 'Generate' : 'Connect OpenAI to generate'}
-                </button>
-                {keyed ? (
+              {/* Without a key, ChatGPT is the way in, so it leads; with a key, making it here leads. */}
+              {keyed ? (
+                <div className="row">
+                  <button className="btn btn-primary big" disabled={!!busy} onClick={run}>
+                    Generate
+                  </button>
                   <select value={n} onChange={(e) => setN(Number(e.target.value))} title="How many versions">
                     {[1, 2, 3, 4].map((x) => (
                       <option key={x} value={x}>
@@ -360,12 +365,20 @@ export function Studio({ query }: { query: string }) {
                       </option>
                     ))}
                   </select>
-                ) : null}
-              </div>
-              <button className="btn btn-outline big" onClick={() => setChatgpt(true)}>
-                Make it in ChatGPT instead
+                </div>
+              ) : null}
+              <button className={`btn big chatgpt-btn ${keyed ? 'btn-outline' : 'btn-primary'}`} onClick={() => {
+                  setChatgpt(true);
+                  track('chatgpt_used');
+                }}>
+                Make it in ChatGPT <span className="free-tag">Free</span>
               </button>
-              <small>With your own OpenAI key the picture is made here and opens as layers. In ChatGPT you paste, send, and bring the picture back.</small>
+              {!keyed ? (
+                <button className="btn btn-outline big" disabled={!!busy} onClick={run}>
+                  Use your OpenAI key
+                </button>
+              ) : null}
+              <small>ChatGPT is free: send the prompt there and bring the picture back. With your own OpenAI key it is made right here and opens as layers.</small>
             </div>
           </aside>
         ) : null}
@@ -459,10 +472,47 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
     setNote(s);
     setTimeout(() => setNote(null), 2200);
   };
-  const take = (files: FileList | File[]) => {
+  const take = async (files: FileList | File[]) => {
     const f = [...files].find((x) => x.type.startsWith('image/'));
     if (f) onResult(f);
+    return !!f;
   };
+  // A picture dragged straight out of ChatGPT arrives as a link; it can only be fetched when it is public.
+  const fromUrl = async (url: string) => {
+    if (!/^https?:/.test(url.trim())) return false;
+    try {
+      const r = await fetch(url.trim());
+      const blob = await r.blob();
+      if (!r.ok || !blob.type.startsWith('image/')) return false;
+      onResult(blob);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  const pasteNow = async () => {
+    try {
+      for (const item of await navigator.clipboard.read()) {
+        const type = item.types.find((t) => t.startsWith('image/'));
+        if (type) return onResult(await item.getType(type));
+      }
+      flash('No picture on the clipboard yet. In ChatGPT, right click it and choose Copy image');
+    } catch {
+      flash('Press ⌘V (Ctrl V) to paste the picture');
+    }
+  };
+  // ⌘V anywhere while this dialog is open.
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      const files = [...(e.clipboardData?.files ?? [])];
+      if (files.some((f) => f.type.startsWith('image/'))) {
+        e.preventDefault();
+        take(files);
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
+  });
   return (
     <div className="scrim" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="dialog chatgpt">
@@ -493,8 +543,10 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
           </li>
           {images.length ? (
             <li className={step >= 1 ? 'is-on' : ''}>
-              <b>Attach the reference pictures, in this order.</b>
-              <p>Copy one, click in ChatGPT’s box and paste with ⌘V (Ctrl V), then the next.</p>
+              <b>
+                Add the style pictures <span className="opt">Optional</span>
+              </b>
+              <p>For a closer match, copy each one and paste it into ChatGPT’s box with ⌘V (Ctrl V), in this order. Skip it and the prompt still works.</p>
               <div className="ref-copy">
                 {images.map((im, i) => (
                   <button
@@ -520,24 +572,31 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
             </li>
           ) : null}
           <li className={step >= 1 ? 'is-on' : ''}>
-            <b>Send, then bring the picture back.</b>
-            <p>Download it from ChatGPT and drop it here. OpenTempl opens it with Magic layers.</p>
-            <label
+            <b>Send it, then bring the picture back.</b>
+            <p>In ChatGPT, right click the finished picture and choose Copy image, then press ⌘V (Ctrl V) here. OpenTempl opens it with Magic layers.</p>
+            <div
               className={`dropzone ${drop ? 'is-over' : ''}`}
               onDragOver={(e) => {
                 e.preventDefault();
                 setDrop(true);
               }}
               onDragLeave={() => setDrop(false)}
-              onDrop={(e) => {
+              onDrop={async (e) => {
                 e.preventDefault();
                 setDrop(false);
-                take(e.dataTransfer.files);
+                if (!(await take(e.dataTransfer.files)) && !(await fromUrl(e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text/plain'))))
+                  flash('That came over as a link. Copy the picture in ChatGPT instead, then press ⌘V here');
               }}
             >
-              <input type="file" accept="image/*" hidden onChange={(e) => e.target.files && take(e.target.files)} />
-              Drop the picture here, or click to choose it
-            </label>
+              <button className="btn btn-primary" onClick={pasteNow}>
+                Paste picture
+              </button>
+              <label className="btn btn-outline">
+                <input type="file" accept="image/*" hidden onChange={(e) => e.target.files && take(e.target.files)} />
+                Choose a file
+              </label>
+              <span>or drop a downloaded picture here</span>
+            </div>
           </li>
         </ol>
         <details className="prompt">

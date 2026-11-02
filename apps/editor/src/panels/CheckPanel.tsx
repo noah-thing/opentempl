@@ -3,7 +3,6 @@ import type { Element } from '../doc/types';
 import { useEditor } from '../editor/Editor';
 import { useDoc } from '../editor/hooks';
 import { checkDesign, type Issue, type IssueKind } from '../tools/check';
-import { Sign } from '../ui/Logo';
 import { Icon } from '../ui/icons';
 import { Section } from './controls';
 
@@ -44,9 +43,8 @@ export default function CheckPanel() {
   if (!issues.length)
     return (
       <div className="empty">
-        <Sign size={64} mood="wow" />
         <h4>Nothing to fix</h4>
-        <span className="hint">Every text reads against its background, nothing is too small, every photo is sharp enough and has alt text.</span>
+        <span className="hint">Text is readable, photos are sharp and have alt text.</span>
       </div>
     );
 
