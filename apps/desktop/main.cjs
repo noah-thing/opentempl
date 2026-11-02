@@ -1,6 +1,6 @@
 // OpenTempl desktop. Serves the built editor from a private tavla:// origin so
 // designs saved in IndexedDB stay put between launches, and opens .tavla files.
-const { app, BrowserWindow, protocol, net, shell, Menu } = require('electron');
+const { app, BrowserWindow, protocol, net, shell, Menu, session } = require('electron');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const fs = require('node:fs');
@@ -31,20 +31,29 @@ function createWindow() {
     },
   });
   win.loadURL('tavla://app/index.html');
-  // Links leave the app for the real browser.
+  // Links leave the app for the real browser, and only web and mail links: a design
+  // could otherwise point the system at a file or a custom scheme.
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^https?:/.test(url)) shell.openExternal(url);
+    if (external(url)) shell.openExternal(url);
     return { action: 'deny' };
   });
   win.webContents.on('will-navigate', (e, url) => {
-    if (!url.startsWith('tavla://')) {
-      e.preventDefault();
-      shell.openExternal(url);
-    }
+    if (url.startsWith('tavla://app/')) return;
+    e.preventDefault();
+    if (external(url)) shell.openExternal(url);
   });
+  win.webContents.on('will-attach-webview', (e) => e.preventDefault());
   win.webContents.on('did-finish-load', () => {
     if (pendingFile) openFile(pendingFile);
   });
+}
+
+function external(url) {
+  try {
+    return ['https:', 'http:', 'mailto:'].includes(new URL(url).protocol);
+  } catch {
+    return false;
+  }
 }
 
 function openFile(file) {
@@ -63,10 +72,14 @@ app.on('open-file', (e, file) => {
 });
 
 app.whenReady().then(() => {
+  // The editor needs the clipboard for copy and paste and fullscreen for presenting; nothing else.
+  const allowed = new Set(['clipboard-sanitized-write', 'clipboard-read', 'fullscreen']);
+  session.defaultSession.setPermissionRequestHandler((_wc, permission, done) => done(allowed.has(permission)));
+  session.defaultSession.setPermissionCheckHandler((_wc, permission) => allowed.has(permission));
   protocol.handle('tavla', (req) => {
     const { pathname } = new URL(req.url);
     const target = path.normalize(path.join(APP_DIR, decodeURIComponent(pathname)));
-    if (!target.startsWith(APP_DIR)) return new Response('Not found', { status: 404 });
+    if (!target.startsWith(APP_DIR + path.sep)) return new Response('Not found', { status: 404 });
     const file = fs.existsSync(target) && fs.statSync(target).isFile() ? target : path.join(APP_DIR, 'index.html');
     return net.fetch(pathToFileURL(file).toString());
   });
