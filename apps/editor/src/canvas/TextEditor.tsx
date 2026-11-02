@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import type { TextElement, TextRun } from '../doc/types';
 import { useEditor } from '../editor/Editor';
+import { safeColor } from '../render/safe';
 
 // Editing happens in a contenteditable styled exactly like the SVG text, so the
 // words do not jump when you start or stop typing. It is rich: select a word
@@ -84,11 +85,12 @@ function toHtml(el: TextElement) {
     const st: string[] = [];
     for (const r of el.runs) {
       if (r.start <= a && r.end >= b) {
-        if (r.fontWeight !== undefined) st.push(`font-weight:${r.fontWeight}`);
+        if (r.fontWeight !== undefined && /^\d{3}$|^(normal|bold)$/.test(String(r.fontWeight))) st.push(`font-weight:${r.fontWeight}`);
         if (r.italic !== undefined) st.push(`font-style:${r.italic ? 'italic' : 'normal'}`);
         const deco = [r.underline ? 'underline' : '', r.strike ? 'line-through' : ''].filter(Boolean).join(' ');
         if (r.underline !== undefined || r.strike !== undefined) st.push(`text-decoration:${deco || 'none'}`);
-        if (r.color) st.push(`color:${r.color}`);
+        const color = safeColor(r.color);
+        if (color) st.push(`color:${color}`);
       }
     }
     html += st.length ? `<span style="${st.join(';')}">${part}</span>` : part;

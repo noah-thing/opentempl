@@ -6,6 +6,7 @@ import { grabFrame, loadVideo, putMedia } from './media';
 import { parseSvg } from '../render/ElementView';
 import type { Point } from '../lib/geom';
 import { addUpload } from './uploads';
+import { sanitizeSvg as cleanSvg } from '../render/safe';
 
 const MAX_SIDE = 3200;
 
@@ -36,25 +37,13 @@ export async function prepareImage(blob: Blob, name = 'image'): Promise<Asset> {
 }
 
 export function sanitizeSvg(svg: string): string | null {
-  const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
-  const root = doc.documentElement;
-  if (!root || root.nodeName.toLowerCase() !== 'svg' || doc.querySelector('parsererror')) return null;
-  root.querySelectorAll('script, foreignObject, iframe, object, embed').forEach((n) => n.remove());
-  const walk = (el: globalThis.Element) => {
-    for (const attr of [...el.attributes]) {
-      const n = attr.name.toLowerCase();
-      if (n.startsWith('on')) el.removeAttribute(attr.name);
-      if ((n === 'href' || n === 'xlink:href') && !attr.value.startsWith('#') && !attr.value.startsWith('data:image/')) el.removeAttribute(attr.name);
-    }
-    [...el.children].forEach(walk);
-  };
-  walk(root);
-  if (!root.getAttribute('viewBox')) {
-    const w = parseFloat(root.getAttribute('width') || '0');
-    const h = parseFloat(root.getAttribute('height') || '0');
-    if (w && h) root.setAttribute('viewBox', `0 0 ${w} ${h}`);
-  }
-  return new XMLSerializer().serializeToString(root);
+  const clean = cleanSvg(svg);
+  if (!clean) return null;
+  const root = clean.match(/^\s*<svg([^>]*)>/i)?.[1] ?? '';
+  if (/\sviewBox=/i.test(root)) return clean;
+  const w = parseFloat(root.match(/\swidth="([\d.]+)/i)?.[1] ?? '0');
+  const h = parseFloat(root.match(/\sheight="([\d.]+)/i)?.[1] ?? '0');
+  return w && h ? clean.replace(/<svg/i, `<svg viewBox="0 0 ${w} ${h}"`) : clean;
 }
 
 export async function importFiles(editor: Editor, files: File[], opts: { at?: Point; replaceId?: Id | null } = {}) {

@@ -7,6 +7,7 @@ import { pageAnimationLength } from '../render/animate';
 import { Icon } from '../ui/icons';
 import { presentChannel } from './Presenter';
 import { mediaUrl } from '../io/media';
+import { safeLink } from '../render/safe';
 
 export function Present() {
   const editor = useEditor();
@@ -151,7 +152,7 @@ export function Present() {
   const onClick = (e: React.MouseEvent) => {
     // Links on elements open; anything else advances.
     const id = (e.target as globalThis.Element).closest?.('[data-id]')?.getAttribute('data-id');
-    const link = id ? elements[id]?.link : undefined;
+    const link = id ? safeLink(elements[id]?.link) : null;
     if (link) {
       window.open(link, '_blank', 'noopener');
       return;

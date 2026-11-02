@@ -21,6 +21,7 @@ import { useRenderEnv } from './RenderContext';
 import { elementPath, shapePath } from './shapes';
 import { ChartView } from './ChartView';
 import { animState } from './animate';
+import { safeColor, sanitizeSvg } from './safe';
 
 export const ElementView = memo(function ElementView({ el }: { el: Element }) {
   const env = useRenderEnv();
@@ -315,9 +316,10 @@ function EmptyFrame({ w, h }: { w: number; h: number }) {
 
 const svgCache = new Map<string, { viewBox: string; inner: string; colors: string[] }>();
 
-export function parseSvg(svg: string) {
-  let hit = svgCache.get(svg);
+export function parseSvg(raw: string) {
+  let hit = svgCache.get(raw);
   if (hit) return hit;
+  const svg = sanitizeSvg(raw) ?? '<svg viewBox="0 0 24 24"></svg>';
   const vb = svg.match(/viewBox\s*=\s*"([^"]+)"/i)?.[1];
   const w = svg.match(/\swidth\s*=\s*"([\d.]+)/i)?.[1];
   const h = svg.match(/\sheight\s*=\s*"([\d.]+)/i)?.[1];
@@ -335,7 +337,7 @@ export function parseSvg(svg: string) {
     ),
   ];
   hit = { viewBox, inner, colors };
-  svgCache.set(svg, hit);
+  svgCache.set(raw, hit);
   return hit;
 }
 
@@ -343,13 +345,14 @@ function SvgView({ el }: { el: SvgElement }) {
   const parsed = parseSvg(el.svg);
   const inner = useMemo(() => {
     let out = parsed.inner;
-    for (const [from, to] of Object.entries(el.colors)) {
-      if (from === 'currentColor') continue;
+    for (const [from, raw] of Object.entries(el.colors)) {
+      const to = safeColor(raw);
+      if (!to || !/^#[0-9a-f]{3,8}$/i.test(from)) continue;
       out = out.replace(new RegExp(from.replace('#', '#?') + '(?![0-9a-fA-F])', 'gi'), to);
     }
     return out;
   }, [parsed.inner, el.colors]);
-  const current = el.colors.currentColor ?? '#0B0B0D';
+  const current = safeColor(el.colors.currentColor) ?? '#0B0B0D';
   return (
     <svg
       width={el.w}

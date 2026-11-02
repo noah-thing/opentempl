@@ -6,6 +6,7 @@ import { canvasToBlob, pageSvg, rasterize, renderPageBlob } from './render';
 import { renderAnimationVideo } from './video';
 import { renderGif } from './gif';
 import { writeTavlaFile } from './tavlaFile';
+import { safeLink } from '../render/safe';
 
 export type ExportFormat = 'png' | 'jpg' | 'webp' | 'pdf' | 'svg' | 'tavla' | 'video' | 'gif' | 'pptx';
 
@@ -102,7 +103,8 @@ export async function exportDesign(doc: DesignDoc, opts: ExportOptions) {
       const off = (slug + bleed) * 0.75;
       for (const id of snap.pages[pages[i]].elementIds) {
         const el = snap.elements[id];
-        if (el?.link) pdf.link(off + el.x * 0.75, off + el.y * 0.75, el.w * 0.75, el.h * 0.75, { url: el.link });
+        const url = safeLink(el?.link);
+        if (el && url) pdf.link(off + el.x * 0.75, off + el.y * 0.75, el.w * 0.75, el.h * 0.75, { url });
       }
       progress(i + 1);
     }
