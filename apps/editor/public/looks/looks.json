@@ -7,11 +7,10 @@
   "tags": [
    "flat colour",
    "korean poster",
-   "vector",
    "bold",
    "food"
   ],
-  "medium": "A vector illustration built from a few huge flat shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer drew it in a vector tool and sent it to a good printer.",
+  "medium": "A flat colour illustration built from a few huge shapes in saturated inks, printed as a poster with perfect hard edges and tiny cut out details in cream. It looks like a designer cut the shapes by hand and sent them to a good screen printer.",
   "palette": {
    "colors": [
     "#0E8A5A",
@@ -146,7 +145,7 @@
    "subline": "Hand pulled noodles until 2 am",
    "details": "Open Thu to Sun, Möllevången 12"
   },
-  "sampleBrief": "A vertical 2:3 poster in bold flat colour vector illustration, for a late night noodle shop. Three giant red noodle bowls seen from above are drawn as flat circles with cream chopsticks, swirled noodle lines in cream and small cut out details, each tilted on a diagonal and cropped by the page edges. Between them sit a few magenta dots and a pink and blue bowl shape as punctuation. The ground is a solid emerald green. Palette: emerald #0E8A5A, red #FF1B1B, yellow #FFE800, magenta #F0359A, pink #F7B4D0, blue #1B4FC4. All shapes are perfectly flat with hard edges, no outlines, no gradients, no shadows. Typography spelled exactly: the headline \"SLURP SEASON\" in extra heavy blocky yellow capitals, stacked on two tight lines in the upper left and overlapping the top of the bowls; the line \"Hand pulled noodles until 2 am\" in small clean sans beneath it; and at the bottom edge in a darker green tint, small text \"Open Thu to Sun, Möllevången 12\". Lighting: none, only flat colour. Texture: the faintest paper grain, crisp as a good offset print. Composition leaves the lower left quiet. Avoid gradients, drop shadows, stock icon style, plastic 3D sheen, lens flare, symmetrical stock composition, thin timid type, gibberish or extra text.",
+  "sampleBrief": "A vertical 2:3 poster in bold flat colour flat illustration, for a late night noodle shop. Three giant red noodle bowls seen from above are drawn as flat circles with cream chopsticks, swirled noodle lines in cream and small cut out details, each tilted on a diagonal and cropped by the page edges. Between them sit a few magenta dots and a pink and blue bowl shape as punctuation. The ground is a solid emerald green. Palette: emerald #0E8A5A, red #FF1B1B, yellow #FFE800, magenta #F0359A, pink #F7B4D0, blue #1B4FC4. All shapes are perfectly flat with hard edges, no outlines, no gradients, no shadows. Typography spelled exactly: the headline \"SLURP SEASON\" in extra heavy blocky yellow capitals, stacked on two tight lines in the upper left and overlapping the top of the bowls; the line \"Hand pulled noodles until 2 am\" in small clean sans beneath it; and at the bottom edge in a darker green tint, small text \"Open Thu to Sun, Möllevången 12\". Lighting: none, only flat colour. Texture: the faintest paper grain, crisp as a good offset print. Composition leaves the lower left quiet. Avoid gradients, drop shadows, stock icon style, plastic 3D sheen, lens flare, symmetrical stock composition, thin timid type, gibberish or extra text.",
   "refs": [
    {
     "pin": "472807660884759165",
@@ -753,7 +752,7 @@
    "visible brush streaks"
   ],
   "avoid": [
-   "clean vector type",
+   "clean digital type",
    "digital drop shadow",
    "gradients",
    "3D bevel",
@@ -865,7 +864,7 @@
    "subline": "Ramps, rails and free pizza",
    "details": "Sat 19 July, 1 pm, Fryshuset Skatepark"
   },
-  "sampleBrief": "A vertical 2:3 hand painted lettering poster on white paper, for a teen skate park summer jam. The words \"SEND IT\" are painted huge in stacked tilted rows: each letter a chunky uneven capital filled in fluorescent pink with a thick electric blue outline, touching the edges of the sheet, with a few short lime yellow ray strokes bursting from the corners. Beneath, a loopy blue script line \"Ramps, rails and free pizza\" painted with the same brush. Palette: white paper #FFFFFF, hot pink #FF63B5, electric blue #1C3BF0, lime #E8F23A, deeper pink #E8398D for shadows within the paint. Visible brush streaks, dry brush edges where the paint thins, slight bumps of thicker paint and uneven opacity so white paper peeks through. At the very bottom in small neutral sans: \"Sat 19 July, 1 pm, Fryshuset Skatepark\". Lighting: flat scan, no cast shadows. Texture: paper tooth, brush drag marks, wet edge halos. Typography is painted, not set, and wobbles. Avoid clean vector type, drop shadows, gradients, 3D bevel, lens flare, symmetrical layout, extra or gibberish text.",
+  "sampleBrief": "A vertical 2:3 hand painted lettering poster on white paper, for a teen skate park summer jam. The words \"SEND IT\" are painted huge in stacked tilted rows: each letter a chunky uneven capital filled in fluorescent pink with a thick electric blue outline, touching the edges of the sheet, with a few short lime yellow ray strokes bursting from the corners. Beneath, a loopy blue script line \"Ramps, rails and free pizza\" painted with the same brush. Palette: white paper #FFFFFF, hot pink #FF63B5, electric blue #1C3BF0, lime #E8F23A, deeper pink #E8398D for shadows within the paint. Visible brush streaks, dry brush edges where the paint thins, slight bumps of thicker paint and uneven opacity so white paper peeks through. At the very bottom in small neutral sans: \"Sat 19 July, 1 pm, Fryshuset Skatepark\". Lighting: flat scan, no cast shadows. Texture: paper tooth, brush drag marks, wet edge halos. Typography is painted, not set, and wobbles. Avoid clean digital type, drop shadows, gradients, 3D bevel, lens flare, symmetrical layout, extra or gibberish text.",
   "refs": [
    {
     "pin": "577586720934551434",
@@ -1229,7 +1228,7 @@
    "each shape slightly irregular"
   ],
   "avoid": [
-   "perfect vector smoothness",
+   "perfectly smooth digital edges",
    "gradients",
    "glossy 3D",
    "gibberish text",
@@ -1341,7 +1340,7 @@
    "subline": "Handmade crafts, honey, flowers and folk music",
    "details": "Sat 21 June, 11 to 17, Folkets Hus"
   },
-  "sampleBrief": "A vertical 2:3 folk art poster that looks cut from coloured paper and pasted onto black, for a midsummer craft market. A mirror symmetric composition: at the centre a cream sunburst medallion containing a black and cream checkerboard, with a small blue eight pointed star beneath it. From the bottom two green leafy stems curve outward and end in big cobalt blue flowers with tomato red centres. Two small black horses face each other on a band at the top with a red sun with a calm face between them, and two cream doves sit in the lower corners. Palette: near black #161412, cream #EFE3BC, red #E6382B, cobalt #2E5FBF, green #2FAE4A, magenta #E8398D. Every shape has slightly irregular scissor cut edges and a faint ink speckle, with a soft riso grain. Plain dark space is left around each motif. Typography spelled exactly: headline \"MIDSOMMAR MARKNAD\" in hand cut rounded cream capitals across the top band under the horses; beneath it in small hand lettering \"Handmade crafts, honey, flowers and folk music\"; at the bottom in small cream text \"Sat 21 June, 11 to 17, Folkets Hus\". Lighting: flat, no shadows. Avoid perfect vector smoothness, gradients, glossy 3D, lens flare, random asymmetry, generic clipart, gibberish or extra text.",
+  "sampleBrief": "A vertical 2:3 folk art poster that looks cut from coloured paper and pasted onto black, for a midsummer craft market. A mirror symmetric composition: at the centre a cream sunburst medallion containing a black and cream checkerboard, with a small blue eight pointed star beneath it. From the bottom two green leafy stems curve outward and end in big cobalt blue flowers with tomato red centres. Two small black horses face each other on a band at the top with a red sun with a calm face between them, and two cream doves sit in the lower corners. Palette: near black #161412, cream #EFE3BC, red #E6382B, cobalt #2E5FBF, green #2FAE4A, magenta #E8398D. Every shape has slightly irregular scissor cut edges and a faint ink speckle, with a soft riso grain. Plain dark space is left around each motif. Typography spelled exactly: headline \"MIDSOMMAR MARKNAD\" in hand cut rounded cream capitals across the top band under the horses; beneath it in small hand lettering \"Handmade crafts, honey, flowers and folk music\"; at the bottom in small cream text \"Sat 21 June, 11 to 17, Folkets Hus\". Lighting: flat, no shadows. Avoid perfectly smooth digital edges, gradients, glossy 3D, lens flare, random asymmetry, generic clipart, gibberish or extra text.",
   "refs": [
    {
     "pin": "837528861951632683",
@@ -1575,7 +1574,7 @@
    "pixel grid alignment"
   ],
   "avoid": [
-   "smooth vector curves",
+   "smooth digital curves",
    "gradients",
    "glossy 3D",
    "photoreal flowers",
@@ -1687,7 +1686,7 @@
    "subline": "Bring yarn, we bring tea",
    "details": "Mondays 18:00, Fruängens Bibliotek"
   },
-  "sampleBrief": "A vertical 2:3 poster made entirely of square cross stitches on cream aida fabric, for a Monday knitting circle. A woven border of repeating stitched tulips and diamonds runs around the edge in green, yellow and coral thread, with a checkerboard medallion at the top. In the middle the title is woven in large blocky pixel capitals. Smaller stitched letters carry the lines beneath. Palette: cream fabric #EFE7D2, leaf green #7FB04A, yellow #E9E34B, coral #E76F51, black #1B1B1B, blue #3C5A9A. Each stitch is a small square with visible thread twist and tiny shadows between stitches, with a gentle fabric weave. Typography spelled exactly, all woven from stitches: \"STITCH NIGHT\" across the middle in green; beneath it in smaller blocky letters \"Bring yarn, we bring tea\"; and near the bottom \"Mondays 18:00, Fruängens Bibliotek\". Lighting: soft even daylight on fabric with slight shadow between threads. Texture: thread fibres, fabric weave, a bit of fuzz. Avoid smooth vector curves, gradients, glossy 3D, photoreal flowers, lens flare, symmetrical stock composition, extra or gibberish text.",
+  "sampleBrief": "A vertical 2:3 poster made entirely of square cross stitches on cream aida fabric, for a Monday knitting circle. A woven border of repeating stitched tulips and diamonds runs around the edge in green, yellow and coral thread, with a checkerboard medallion at the top. In the middle the title is woven in large blocky pixel capitals. Smaller stitched letters carry the lines beneath. Palette: cream fabric #EFE7D2, leaf green #7FB04A, yellow #E9E34B, coral #E76F51, black #1B1B1B, blue #3C5A9A. Each stitch is a small square with visible thread twist and tiny shadows between stitches, with a gentle fabric weave. Typography spelled exactly, all woven from stitches: \"STITCH NIGHT\" across the middle in green; beneath it in smaller blocky letters \"Bring yarn, we bring tea\"; and near the bottom \"Mondays 18:00, Fruängens Bibliotek\". Lighting: soft even daylight on fabric with slight shadow between threads. Texture: thread fibres, fabric weave, a bit of fuzz. Avoid smooth digital curves, gradients, glossy 3D, photoreal flowers, lens flare, symmetrical stock composition, extra or gibberish text.",
   "refs": [
    {
     "pin": "534732155760823802",
@@ -1755,7 +1754,7 @@
    "neon glow or bloom",
    "blurry soft focus type",
    "lens effects",
-   "clean vector type",
+   "clean digital type",
    "drop shadow",
    "3D bevel",
    "lens flare streaks",
@@ -2314,7 +2313,7 @@
   },
   "composition": "One hero prop in the middle, held or pointed at by a cartoon hand, surrounded by three or four smaller labelled objects tilting around it like stickers. Title at the top in outlined chunky letters, a strip of small info at the bottom on white.",
   "typography": "Chunky outlined lettering in yellow or pink with a black outline and a hard offset shadow, small rounded caps labels on sticker tags.",
-  "texture": "Flat vector with a fine speckled print grain over everything, tiny misregistration of the black line.",
+  "texture": "Flat colour with a fine speckled print grain over everything, tiny misregistration of the black line.",
   "signature": [
    "thick black outline on every item",
    "hard offset shadows",
@@ -2325,7 +2324,7 @@
   "avoid": [
    "sticker sheet look with white outlines",
    "faces on food",
-   "glossy vector clip art",
+   "glossy clip art",
    "gradients",
    "soft realistic shadows",
    "plastic 3D sheen",
@@ -2813,7 +2812,7 @@
    "paper",
    "playful"
   ],
-  "medium": "A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled vector doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.",
+  "medium": "A bright mixed media collage of hard cut photographs, coloured paper shapes, scribbled marker doodles and tape, assembled digitally to look like cut paper. Photos are slightly desaturated and the paper is saturated.",
   "palette": {
    "colors": [
     "#E8271F",
@@ -2836,7 +2835,7 @@
    "scribbled doodles on top"
   ],
   "avoid": [
-   "perfect vector gradients",
+   "perfect digital gradients",
    "plastic 3D sheen",
    "lens flare",
    "unrealistic skin smoothing",
@@ -2947,7 +2946,7 @@
    "subline": "Spring musical by Year 12 drama",
    "details": "24 to 26 April, 18:30, Aula Norra"
   },
-  "sampleBrief": "A vertical 2:3 mixed media collage poster for a high school spring musical, built from hard cut photographs and coloured paper. A teenage performer in a white shirt and light jeans, cut out of a photo with a thin paper edge, leans forward at the centre on a huge jagged red starburst. A second photograph of orange tulips breaks through her legs as if her shorts were a flower bed. Behind her a large yellow sun circle, pink and green paper blocks, torn blue masking tape pieces at the corners, and a tilted stool in the foreground. Marker scribbles in neon lines float on top. Palette: red #E8271F, yellow #F7C41B, pink #F2698F, blue #2D53A8, green #2E8B4A, ink #1E1B18. Typography spelled exactly: headline \"GREASE LIGHTNING\" in bold blocky yellow capitals on a black cut paper strip across the top; beneath it in small white sans \"Spring musical by Year 12 drama\"; at the bottom on a torn cream strip in black \"24 to 26 April, 18:30, Aula Norra\". Lighting: soft studio, gentle shadows under paper layers. Texture: paper fibres, torn tape edges, subtle halftone speckle on photos. Avoid perfect vector gradients, plastic 3D sheen, lens flare, airbrushed skin, symmetrical stock composition, extra or gibberish text.",
+  "sampleBrief": "A vertical 2:3 mixed media collage poster for a high school spring musical, built from hard cut photographs and coloured paper. A teenage performer in a white shirt and light jeans, cut out of a photo with a thin paper edge, leans forward at the centre on a huge jagged red starburst. A second photograph of orange tulips breaks through her legs as if her shorts were a flower bed. Behind her a large yellow sun circle, pink and green paper blocks, torn blue masking tape pieces at the corners, and a tilted stool in the foreground. Marker scribbles in neon lines float on top. Palette: red #E8271F, yellow #F7C41B, pink #F2698F, blue #2D53A8, green #2E8B4A, ink #1E1B18. Typography spelled exactly: headline \"GREASE LIGHTNING\" in bold blocky yellow capitals on a black cut paper strip across the top; beneath it in small white sans \"Spring musical by Year 12 drama\"; at the bottom on a torn cream strip in black \"24 to 26 April, 18:30, Aula Norra\". Lighting: soft studio, gentle shadows under paper layers. Texture: paper fibres, torn tape edges, subtle halftone speckle on photos. Avoid perfect digital gradients, plastic 3D sheen, lens flare, airbrushed skin, symmetrical stock composition, extra or gibberish text.",
   "refs": [
    {
     "pin": "162481499053998832",
@@ -3189,11 +3188,11 @@
   "tags": [
    "travel",
    "retro",
-   "flat vector",
+   "flat colour",
    "vintage",
    "summer"
   ],
-  "medium": "A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a vector illustration printed on cream stock.",
+  "medium": "A screen printed travel poster made from flat opaque shapes in six or seven inks, with hard edges and a few sharp highlight facets. It looks like a flat colour illustration screen printed on cream stock.",
   "palette": {
    "colors": [
     "#F7EFD2",
@@ -3570,7 +3569,7 @@
   ],
   "avoid": [
    "digital smoothness",
-   "vector outlines",
+   "clean digital outlines",
    "gradients",
    "airbrush",
    "lens flare",
@@ -3681,7 +3680,7 @@
    "subline": "Fresh from the oven, still warm",
    "details": "Sundays 8 to 12, Rosa's Bageri, Bergsgatan 9"
   },
-  "sampleBrief": "A vertical 2:3 poster that looks like a hand drawn oil pastel and crayon drawing on white paper, for a Sunday bun morning at a small bakery. A cheerful, slightly off proportion drawing of a big wooden table with a tray of cardamom buns in thick waxy orange and tan crayon, a wobbly child in a pink checked dress reaching for one, and a small green plant on a shelf above with a blue cup drawn in thin pencil and marker. Heavy crayon fill with white gaps showing paper tooth, tiny sketchy details on top. Palette: white paper #FFFFFF, crayon red #E0242B, green #1E9A3C, tan #E8A24A, blush #F0C0C8, brown #7A4B2A, ink #1C1C1C. Typography spelled exactly: headline \"BUN DAY\" in huge blocky waxy red crayon capitals at the top, with a small black marker line beneath, \"Fresh from the oven, still warm\"; at the lower right in clean small catalogue sans \"Sundays 8 to 12, Rosa's Bageri, Bergsgatan 9\". Lighting: even paper white, no shading. Texture: crayon grain, a visible fold crease across the middle and along the sides, light scan shadow at the edges. Avoid digital smoothness, vector outlines, gradients, airbrush, lens flare, perfect symmetry, gibberish or extra text.",
+  "sampleBrief": "A vertical 2:3 poster that looks like a hand drawn oil pastel and crayon drawing on white paper, for a Sunday bun morning at a small bakery. A cheerful, slightly off proportion drawing of a big wooden table with a tray of cardamom buns in thick waxy orange and tan crayon, a wobbly child in a pink checked dress reaching for one, and a small green plant on a shelf above with a blue cup drawn in thin pencil and marker. Heavy crayon fill with white gaps showing paper tooth, tiny sketchy details on top. Palette: white paper #FFFFFF, crayon red #E0242B, green #1E9A3C, tan #E8A24A, blush #F0C0C8, brown #7A4B2A, ink #1C1C1C. Typography spelled exactly: headline \"BUN DAY\" in huge blocky waxy red crayon capitals at the top, with a small black marker line beneath, \"Fresh from the oven, still warm\"; at the lower right in clean small catalogue sans \"Sundays 8 to 12, Rosa's Bageri, Bergsgatan 9\". Lighting: even paper white, no shading. Texture: crayon grain, a visible fold crease across the middle and along the sides, light scan shadow at the edges. Avoid digital smoothness, clean digital outlines, gradients, airbrush, lens flare, perfect symmetry, gibberish or extra text.",
   "refs": [
    {
     "pin": "694891417533495048",
@@ -3745,7 +3744,7 @@
    "tiny credit columns at the bottom"
   ],
   "avoid": [
-   "clean vector icons",
+   "clean digital icons",
    "gradients",
    "colourful rainbow palette",
    "airbrush",
@@ -3856,7 +3855,7 @@
    "subline": "Every Tuesday",
    "details": "Doors 19:00, Café Orbit, Drottninggatan 21"
   },
-  "sampleBrief": "A vertical 2:3 poster made of a dense, funny hand drawn doodle in one cobalt blue ballpoint and felt tip ink on off white paper, for a Tuesday open mic comedy night at a cafe. Loose crowd of wonky creatures and objects fills the sheet edge to edge: a nervous microphone with a face, a coffee cup with arms, a tiny audience of bunnies, a moth, a fish with teeth, a palm tree, a sofa, speech bubbles holding scribbled lines, and a few scribble filled black shapes in blue for weight. Palette: off white paper #F2EFE8, cobalt blue ink #1F4FAE, warm red #D9503C, near black #1A1A1A for tiny credits. Typography spelled exactly, set in large neutral Swiss grotesk in warm red with tight leading over the drawing but clearly readable: at the top \"Open Mic\" in huge mixed case letters; across the middle \"Every Tuesday\" in large red numerals style size; at the bottom in small black text \"Doors 19:00, Café Orbit, Drottninggatan 21\". Lighting: flat scan light, no shading. Texture: ink pooling at stroke ends, slight paper grain, tiny smudges. Avoid clean vector icons, gradients, rainbow palette, airbrush, lens flare, symmetrical composition, gibberish or extra text.",
+  "sampleBrief": "A vertical 2:3 poster made of a dense, funny hand drawn doodle in one cobalt blue ballpoint and felt tip ink on off white paper, for a Tuesday open mic comedy night at a cafe. Loose crowd of wonky creatures and objects fills the sheet edge to edge: a nervous microphone with a face, a coffee cup with arms, a tiny audience of bunnies, a moth, a fish with teeth, a palm tree, a sofa, speech bubbles holding scribbled lines, and a few scribble filled black shapes in blue for weight. Palette: off white paper #F2EFE8, cobalt blue ink #1F4FAE, warm red #D9503C, near black #1A1A1A for tiny credits. Typography spelled exactly, set in large neutral Swiss grotesk in warm red with tight leading over the drawing but clearly readable: at the top \"Open Mic\" in huge mixed case letters; across the middle \"Every Tuesday\" in large red numerals style size; at the bottom in small black text \"Doors 19:00, Café Orbit, Drottninggatan 21\". Lighting: flat scan light, no shading. Texture: ink pooling at stroke ends, slight paper grain, tiny smudges. Avoid clean digital icons, gradients, rainbow palette, airbrush, lens flare, symmetrical composition, gibberish or extra text.",
   "refs": [
    {
     "pin": "76420524923137679",
@@ -4063,11 +4062,11 @@
   "tags": [
    "mascot",
    "character",
-   "flat vector",
+   "flat colour",
    "funny",
    "black"
   ],
-  "medium": "A flat vector character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.",
+  "medium": "A flat colour character illustration with thick clean shapes: oversized black or colour blob figures with huge cartoon eyes, tiny sharp teeth and little flame or sparkle accents, composed with strong scale contrast. It looks like a brand mascot sheet made into a poster.",
   "palette": {
    "colors": [
     "#141414",
@@ -4202,7 +4201,7 @@
    "subline": "Tiny monsters hate clean teeth",
    "details": "Free kids check up, Tandkliniken Solna"
   },
-  "sampleBrief": "A vertical 2:3 flat vector mascot poster on a near black ground, for a children's dentist clinic campaign. A giant purple blob monster fills the upper half, cropped by the top and sides, with two huge cartoon eyes with heavy angry brows and a curved row of white sharp teeth, staring downward. Beneath it a small round teal creature in a brown armchair holds a toothbrush, calm and tiny. At the very bottom a row of three mini monsters in teal shirts, each with a different expression, one with flames around it. Palette: near black #141414, off white #F2EFE9, purple #8A7CE8, teal #2BA391, red #F2564B. Flat colour only, thick clean shapes, crisp edges, a tiny paper grain. Typography spelled exactly: in the middle in clean bold white capitals \"BRUSH BUDDIES\"; beneath it in tiny mono \"Tiny monsters hate clean teeth\"; at the bottom in tiny mono \"Free kids check up, Tandkliniken Solna\". Lighting: flat, none. Texture: faint paper grain. Avoid realistic fur, gradients, plastic 3D sheen, lens flare, gore, symmetrical stock composition, extra or gibberish text.",
+  "sampleBrief": "A vertical 2:3 flat flat mascot poster on a near black ground, for a children's dentist clinic campaign. A giant purple blob monster fills the upper half, cropped by the top and sides, with two huge cartoon eyes with heavy angry brows and a curved row of white sharp teeth, staring downward. Beneath it a small round teal creature in a brown armchair holds a toothbrush, calm and tiny. At the very bottom a row of three mini monsters in teal shirts, each with a different expression, one with flames around it. Palette: near black #141414, off white #F2EFE9, purple #8A7CE8, teal #2BA391, red #F2564B. Flat colour only, thick clean shapes, crisp edges, a tiny paper grain. Typography spelled exactly: in the middle in clean bold white capitals \"BRUSH BUDDIES\"; beneath it in tiny mono \"Tiny monsters hate clean teeth\"; at the bottom in tiny mono \"Free kids check up, Tandkliniken Solna\". Lighting: flat, none. Texture: faint paper grain. Avoid realistic fur, gradients, plastic 3D sheen, lens flare, gore, symmetrical stock composition, extra or gibberish text.",
   "refs": [
    {
     "pin": "877076096182890107",
@@ -4413,7 +4412,7 @@
    "interface",
    "glass"
   ],
-  "medium": "A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and vector chrome shapes made of hard reflection bands.",
+  "medium": "A Y2K club flyer printed in flat neon spot inks over holographic foil board, with chunky hand drawn bubble lettering and flat chrome shapes made of hard reflection bands.",
   "palette": {
    "colors": [
     "#C9D4F0",
@@ -4550,7 +4549,7 @@
    "subline": "Chrome, jelly and holographic sets",
    "details": "Grand opening Sat 17 May, Folkungagatan 44"
   },
-  "sampleBrief": "A flyer, portrait 2:3, printed on holographic foil board so the rainbow sheen shows only in the unprinted areas, with flat neon spot inks on top: hot pink #FF4FB8, electric blue #2F5BFF, black. Chunky hand drawn bubble lettering 'GLOSSY NAILS' fills the top third, outlined in black, filled with flat pink. The hero is one oversized nail polish bottle drawn as flat vector chrome: hard white and blue reflection bands, no 3D render, cropped by the bottom edge. Small line: 'Chrome, jelly and holographic sets' and at the bottom 'Grand opening Sat 17 May, Folkungagatan 46'. No CDs, no UI windows, no sparkles.",
+  "sampleBrief": "A flyer, portrait 2:3, printed on holographic foil board so the rainbow sheen shows only in the unprinted areas, with flat neon spot inks on top: hot pink #FF4FB8, electric blue #2F5BFF, black. Chunky hand drawn bubble lettering 'GLOSSY NAILS' fills the top third, outlined in black, filled with flat pink. The hero is one oversized nail polish bottle drawn as flat flat chrome: hard white and blue reflection bands, no 3D render, cropped by the bottom edge. Small line: 'Chrome, jelly and holographic sets' and at the bottom 'Grand opening Sat 17 May, Folkungagatan 46'. No CDs, no UI windows, no sparkles.",
   "refs": [
    {
     "pin": "621144973651653763",
@@ -5140,7 +5139,7 @@
    "photo realistic mountain scenery",
    "soft painted gradients",
    "symmetrical centred valley",
-   "vector flat shapes",
+   "flat digital shapes",
    "digital blur",
    "lens flare",
    "plastic sheen",

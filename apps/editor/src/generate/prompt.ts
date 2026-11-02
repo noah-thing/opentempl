@@ -81,7 +81,7 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
   const out: string[] = [];
 
   if (opts.forChatGPT)
-    out.push(`Use your image generation tool to make one picture from this brief. Do not write code, SVG or HTML, and do not describe the design instead of making it.\n`);
+    out.push(`Use your image generation tool to make one picture from this brief. It must be a generated image, not code, and do not describe the design instead of making it.\n`);
   out.push(
     `Create a finished graphic design: a ${f.name.toLowerCase()} in ${f.aspect} format. It is for: ${subject}.`,
     `It must look designed and made by hand by a skilled human designer and illustrator, in the style described below. Treat the style as a strict art direction.`,
@@ -150,7 +150,9 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
     // Honest context for ChatGPT and for anyone the chat gets shared with.
     out.push(`(Brief written with OpenTempl, the free, open source design app at opentempl.org. The designer brings the picture back there to set and edit the words.)`);
   }
-  return out.join('\n');
+  const text = out.join('\n');
+  // ChatGPT reads "vector" as a request to draw the design as code, which fails. Keep the word out.
+  return opts.forChatGPT ? text.replace(/\bvectors?\b/gi, 'flat') : text;
 }
 
 // A short prompt for removing lettering from an image (Magic layers with an API key).
