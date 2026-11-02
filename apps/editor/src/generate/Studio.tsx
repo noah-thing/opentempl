@@ -466,8 +466,9 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
   const [note, setNote] = useState<string | null>(null);
   const [drop, setDrop] = useState(false);
   const images = [...(brief.useLookSample ? [{ name: `${look.name} (style)`, url: sampleUrl(look.id) }] : []), ...brief.refs.map((r) => ({ name: r.name, url: r.url }))];
-  // ChatGPT fills its box from ?q= but never sends by itself. Very long prompts go by clipboard instead.
-  const viaUrl = encodeURIComponent(prompt).length < 7000;
+  // The prompt always travels by clipboard into a fresh chat. Prefilling through chatgpt.com/?q=
+  // looked smoother, but ChatGPT's image tool failed on messages that arrived that way while the
+  // same text pasted by hand worked.
   const flash = (s: string) => {
     setNote(s);
     setTimeout(() => setNote(null), 2200);
@@ -524,21 +525,22 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
         </div>
         <ol className="steps">
           <li className={step >= 0 ? 'is-on' : ''}>
-            <b>Open ChatGPT with the prompt.</b>
-            <p>{viaUrl ? 'A new chat opens with the prompt already in the box. Don’t send it yet.' : 'The prompt is long, so it goes on your clipboard: paste it into a new chat. Don’t send it yet.'}</p>
+            <b>Copy the prompt and open ChatGPT.</b>
+            <p>The prompt goes on your clipboard and a new chat opens. Click in ChatGPT’s box and paste with ⌘V (Ctrl V). Don’t send it yet if you want to add the style pictures.</p>
             <button
               className="btn btn-primary"
               onClick={async () => {
-                if (viaUrl) window.open(`https://chatgpt.com/?q=${encodeURIComponent(prompt)}`, '_blank', 'noopener');
-                else {
+                try {
                   await navigator.clipboard.writeText(prompt);
-                  window.open('https://chatgpt.com/', '_blank', 'noopener');
-                  flash('Prompt copied');
+                  flash('Prompt copied. Paste it into the new chat');
+                } catch {
+                  flash('Copy the prompt from “See or copy the prompt” below');
                 }
+                window.open('https://chatgpt.com/', '_blank', 'noopener');
                 setStep(1);
               }}
             >
-              Open ChatGPT
+              Copy prompt and open ChatGPT
             </button>
           </li>
           {images.length ? (
