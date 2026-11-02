@@ -5,7 +5,11 @@
   "version": "0.1.0",
   "description": "OpenTempl desktop: the free design tool, offline, in its own window.",
   "main": "main.cjs",
-  "author": "Noah",
+  "author": {
+    "name": "Noah",
+    "email": "261804785+noah-thing@users.noreply.github.com",
+    "url": "https://x.com/fsconfig"
+  },
   "license": "MIT",
   "scripts": {
     "start": "electron .",
@@ -38,7 +42,7 @@
       "icon": "icon.png",
       "category": "Graphics",
       "executableName": "opentempl",
-      "maintainer": "Noah",
+      "maintainer": "Noah <261804785+noah-thing@users.noreply.github.com>",
       "artifactName": "${productName}-${version}-linux-x64.${ext}"
     },
     "fileAssociations": [
@@ -70,5 +74,6 @@
   "devDependencies": {
     "electron": "45.0.0",
     "electron-builder": "^26.18.0"
-  }
+  },
+  "homepage": "https://opentempl.org"
 }
