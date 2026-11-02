@@ -70,12 +70,18 @@ export interface ComposeOptions {
   forChatGPT?: boolean; // adds a line asking it to make the image now, and how references were attached
 }
 
-export function composePrompt(look: Look, brief: Brief, opts: ComposeOptions = {}): string {
+export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions = {}): string {
+  // In ChatGPT, "leave space for text added later" pushes it to draw the design as code (SVG)
+  // instead of calling image generation, which then fails. Words go into the picture there;
+  // Magic layers can make them editable once the picture is back in OpenTempl.
+  const brief: Brief = opts.forChatGPT && briefIn.textMode === 'layers' ? { ...briefIn, textMode: 'baked' } : briefIn;
   const f = LOOK_FORMATS[brief.format];
   const subject = brief.subject.trim() || look.example.subject;
   const words = (['headline', 'subline', 'details'] as TextRole[]).map((r) => [r, brief[r].trim()] as const).filter(([, t]) => t);
   const out: string[] = [];
 
+  if (opts.forChatGPT)
+    out.push(`Use your image generation tool to make one picture from this brief. Do not write code, SVG or HTML, and do not describe the design instead of making it.\n`);
   out.push(
     `Create a finished graphic design: a ${f.name.toLowerCase()} in ${f.aspect} format. It is for: ${subject}.`,
     `It must look designed and made by hand by a skilled human designer and illustrator, in the style described below. Treat the style as a strict art direction.`,

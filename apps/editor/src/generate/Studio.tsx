@@ -66,6 +66,10 @@ export function Studio({ query }: { query: string }) {
   }, []);
 
   const look = looks?.find((l) => l.id === lookId) ?? null;
+  // Editable text needs the picture made here with a key; through ChatGPT the words go into the picture.
+  useEffect(() => {
+    if (!keyed && brief.textMode === 'layers') setBrief((b) => ({ ...b, textMode: 'baked' }));
+  }, [keyed, brief.textMode]);
   useEffect(() => {
     if (!look) return;
     setBrief((b) => ({ ...emptyBrief(look), subject: b.subject, mood: b.mood, colors: b.colors, refs: b.refs, extra: b.extra, format: look.formats.includes(b.format) ? b.format : emptyBrief(look).format }));
@@ -242,7 +246,7 @@ export function Studio({ query }: { query: string }) {
             <div className="fld">
               <span>Words</span>
               <div className="seg">
-                {TEXT_MODES.map((m) => (
+                {TEXT_MODES.filter((m) => keyed || m.id !== 'layers').map((m) => (
                   <button key={m.id} className={brief.textMode === m.id ? 'is-on' : ''} onClick={() => set({ textMode: m.id })}>
                     {m.label}
                   </button>
@@ -466,9 +470,9 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
   const [note, setNote] = useState<string | null>(null);
   const [drop, setDrop] = useState(false);
   const images = [...(brief.useLookSample ? [{ name: `${look.name} (style)`, url: sampleUrl(look.id) }] : []), ...brief.refs.map((r) => ({ name: r.name, url: r.url }))];
-  // The prompt always travels by clipboard into a fresh chat. Prefilling through chatgpt.com/?q=
-  // looked smoother, but ChatGPT's image tool failed on messages that arrived that way while the
-  // same text pasted by hand worked.
+  // ChatGPT prefills its box from ?q= (it never sends by itself). The clipboard carries a copy too,
+  // and is the only route when the link would get too long for the browser.
+  const viaUrl = encodeURIComponent(prompt).length < 12000;
   const flash = (s: string) => {
     setNote(s);
     setTimeout(() => setNote(null), 2200);
@@ -525,22 +529,22 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
         </div>
         <ol className="steps">
           <li className={step >= 0 ? 'is-on' : ''}>
-            <b>Copy the prompt and open ChatGPT.</b>
-            <p>The prompt goes on your clipboard and a new chat opens. Click in ChatGPT’s box and paste with ⌘V (Ctrl V). Don’t send it yet if you want to add the style pictures.</p>
+            <b>Open ChatGPT with the prompt.</b>
+            <p>A new chat opens with the prompt already in the box. Press Enter to make the picture.</p>
             <button
               className="btn btn-primary"
               onClick={async () => {
                 try {
                   await navigator.clipboard.writeText(prompt);
-                  flash('Prompt copied. Paste it into the new chat');
                 } catch {
-                  flash('Copy the prompt from “See or copy the prompt” below');
+                  // Not fatal: the link carries the prompt.
                 }
-                window.open('https://chatgpt.com/', '_blank', 'noopener');
+                window.open(viaUrl ? `https://chatgpt.com/?q=${encodeURIComponent(prompt)}` : 'https://chatgpt.com/', '_blank', 'noopener');
+                if (!viaUrl) flash('Prompt copied. Paste it into the new chat');
                 setStep(1);
               }}
             >
-              Copy prompt and open ChatGPT
+              Open ChatGPT
             </button>
           </li>
           {images.length ? (
