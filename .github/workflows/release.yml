@@ -1,0 +1,74 @@
+# Runs when a v* tag is pushed, or by hand. Builds unsigned installers on all three systems
+# and attaches them to a draft release, so nothing goes public until it is published in the UI.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: macos-latest, script: pack:mac }
+          - { os: windows-latest, script: pack:win }
+          - { os: ubuntu-latest, script: pack:linux }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      # No certificates yet. Stops electron-builder from hunting for a signing identity.
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Tag matches the app version
+        if: github.ref_type == 'tag'
+        shell: bash
+        run: |
+          version=$(node -p "require('./apps/desktop/package.json').version")
+          [ "$GITHUB_REF_NAME" = "v$version" ] || { echo "tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
+      - run: npm run build -w @opentempl/editor
+      # main.cjs serves apps/desktop/app, which the editor build writes to dist/app.
+      - name: Bundle the editor into the desktop app
+        shell: bash
+        run: cp -R dist/app apps/desktop/app
+      - run: npm run ${{ matrix.script }} -w @opentempl/desktop -- --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installers-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            apps/desktop/release/*.dmg
+            apps/desktop/release/*.exe
+            apps/desktop/release/*.AppImage
+            apps/desktop/release/*.deb
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: assets
+          merge-multiple: true
+      - run: cd assets && sha256sum -- * > SHA256SUMS.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "require('./apps/desktop/package.json').version")
+          tag="v$version"
+          [ "$GITHUB_REF_TYPE" = "tag" ] && tag="$GITHUB_REF_NAME"
+          notes=".github/release-notes/$tag.md"
+          [ -f "$notes" ] && notes_args=(--notes-file "$notes") || notes_args=(--generate-notes)
+          gh release create "$tag" assets/* --draft --target "$GITHUB_SHA" --title "OpenTempl ${tag#v}" "${notes_args[@]}"

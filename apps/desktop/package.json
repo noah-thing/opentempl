@@ -27,16 +27,19 @@
     "mac": {
       "category": "public.app-category.graphics-design",
       "icon": "icon.png",
-      "identity": null
+      "identity": null,
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}"
     },
     "win": {
-      "icon": "icon.png"
+      "icon": "icon.png",
+      "artifactName": "${productName}-${version}-win-x64.${ext}"
     },
     "linux": {
       "icon": "icon.png",
       "category": "Graphics",
       "executableName": "opentempl",
-      "maintainer": "Noah"
+      "maintainer": "Noah",
+      "artifactName": "${productName}-${version}-linux-x64.${ext}"
     },
     "fileAssociations": [
       {
