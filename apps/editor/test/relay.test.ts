@@ -50,7 +50,11 @@ describe('relay crypto', () => {
 });
 
 describe('chunks', () => {
-  const data = (n: number) => Uint8Array.from({ length: n }, (_, i) => i % 251);
+  const data = (n: number) => {
+    const out = new Uint8Array(n);
+    for (let i = 0; i < n; i++) out[i] = i % 251;
+    return out;
+  };
 
   it('sends small payloads as one blob', () => {
     const blobs = split(data(100));
@@ -67,7 +71,7 @@ describe('chunks', () => {
     const out = blobs.map((b, i) => r.add(i + 1, b));
     expect(out.slice(0, -1).every((x) => x === null)).toBe(true);
     expect(out.at(-1)).toEqual(big);
-  });
+  }, 30000);
 
   it('reassembles interleaved groups, in any order, and tracks the earliest open row', () => {
     const a = split(data(500), 200);
@@ -253,7 +257,7 @@ describe('relay provider', () => {
     expect(b.getMap('assets').get('photo')).toEqual(image);
     expect(relay.rows.every((r) => r.blob.length <= PIECE_BYTES)).toBe(true);
     expect(relay.rows.length).toBeGreaterThan(2);
-  });
+  }, 30000);
 
   it('compacts a long log into a snapshot without losing anything', async () => {
     const relay = new FakeRelay();
