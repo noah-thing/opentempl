@@ -118,7 +118,7 @@ export function useShortcuts() {
         if (editor.state.tool !== 'select') return editor.ui.set({ tool: 'select' });
         if (editor.state.cropId) return editor.ui.set({ cropId: null });
         if (editor.state.panel && ['font', 'color', 'effects', 'adjust', 'animate', 'position', 'chart', 'table'].includes(editor.state.panel))
-          return editor.ui.set({ panel: null });
+          return editor.closePanel();
         return editor.clearSelection();
       }
       if ((k === 'backspace' || k === 'delete') && sel.length) return stop(), editor.deleteSelected();

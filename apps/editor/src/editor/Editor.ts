@@ -16,6 +16,8 @@ import { localName } from '../collab/collab';
 import type { Comment } from '../doc/types';
 import { COBALT } from '../doc/colors';
 
+const CONTEXTUAL: PanelId[] = ['font', 'color', 'effects', 'adjust', 'animate', 'position', 'chart', 'table'];
+
 const CLIP_PREFIX = 'tavla/elements:';
 
 // Photos copied in one design travel with the elements to another design in
@@ -30,6 +32,9 @@ export class Editor {
   private clipboard: Element[] = [];
   private styleClipboard: { type: Element['type']; style: Record<string, unknown> } | null = null;
   private toastTimer = 0;
+  // The panel a contextual one was opened over, so closing it goes back there
+  // instead of leaving the side empty (Layers kept vanishing behind Colour and Font).
+  private panelBelow: PanelId = null;
 
   constructor(doc: DesignDoc) {
     this.doc = doc;
@@ -124,9 +129,8 @@ export class Editor {
 
   // Close contextual panels that no longer apply to the selection.
   private syncContextPanel() {
-    const contextual: PanelId[] = ['font', 'color', 'effects', 'adjust', 'animate', 'chart', 'table'];
-    if (!contextual.includes(this.state.panel)) return;
-    if (!this.state.selection.length && this.state.panel !== 'color') this.ui.set({ panel: null });
+    if (!CONTEXTUAL.includes(this.state.panel) || this.state.panel === 'position') return;
+    if (!this.state.selection.length && this.state.panel !== 'color') this.closePanel();
   }
 
   setActivePage(id: Id) {
@@ -135,7 +139,17 @@ export class Editor {
 
   openPanel(panel: PanelId, colorTarget?: string) {
     const same = this.state.panel === panel && (colorTarget === undefined || colorTarget === this.state.colorTarget);
-    this.ui.set({ panel: same && panel !== null ? null : panel, colorTarget: colorTarget ?? this.state.colorTarget });
+    if (same && panel !== null) return this.closePanel();
+    const current = this.state.panel;
+    if (!CONTEXTUAL.includes(panel)) this.panelBelow = null;
+    else if (current && !CONTEXTUAL.includes(current)) this.panelBelow = current;
+    this.ui.set({ panel, colorTarget: colorTarget ?? this.state.colorTarget });
+  }
+
+  closePanel() {
+    const back = CONTEXTUAL.includes(this.state.panel) ? this.panelBelow : null;
+    this.panelBelow = null;
+    this.ui.set({ panel: back });
   }
 
   toast(text: string) {

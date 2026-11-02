@@ -42,7 +42,7 @@ export function SidePanel() {
         <div className="panel-inner">
           <div className="panel-head">
             <h2>{entry.title}</h2>
-            <button className="icon-btn" title="Close panel" onClick={() => editor.ui.set({ panel: null })}>
+            <button className="icon-btn" title="Close panel" onClick={() => editor.closePanel()}>
               <Icon name="close" />
             </button>
           </div>
