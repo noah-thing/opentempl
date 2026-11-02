@@ -17,7 +17,7 @@ const GROUPS = ['Social', 'Print', 'Slides', 'Video', 'Web', 'Personal'];
 // What the editor does, in the order people reach for it. `panel` opens that rail
 // panel in a fresh design; tools without one start a blank design.
 const TOOLS: { icon: string; name: string; text: string; panel?: string }[] = [
-  { icon: 'templates', name: 'Templates', text: '325 templates in 34 styles. Every part can be changed.', panel: 'templates' },
+  { icon: 'templates', name: 'Templates', text: '337 templates in 34 styles. Every part can be changed.', panel: 'templates' },
   { icon: 'text', name: 'Text', text: 'Headings, text styles and the whole Google Fonts library.', panel: 'text' },
   { icon: 'photos', name: 'Photos', text: 'A free photo library, and your own pictures.', panel: 'photos' },
   { icon: 'elements', name: 'Elements', text: 'Shapes, lines, icons, stickers and frames.', panel: 'elements' },
