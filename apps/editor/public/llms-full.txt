@@ -407,17 +407,21 @@ Canva is not open source. A few open source projects cover part of what it does,
 
  OpenTempl is MIT licensed, works offline, needs no account and has 337 templates in 34 styles. It is not affiliated with Canva. 
  What open source means here 
- MIT licensed. The source repository is private today and opens at launch. The MIT licence lets you use OpenTempl for any purpose, read how it works, change it, share your changes and ship your own version. 
+ MIT licensed.  Source code on GitHub . The MIT licence lets you use OpenTempl for any purpose, read how it works, change it, share your changes and ship your own version. 
  Two kinds of files inside the app carry their own terms. The photos, voxel objects, characters and textures in the built in library were made for OpenTempl and are free to use for anything. Icons from Iconify and photos from Openverse keep the licences they came with. 
  Open source tools that replace parts of Canva 
      Tool  Licence  Best for  Templates  Offline      OpenTempl  MIT  Posters, social posts, slides, menus, invitations  337 in 34 styles  Yes    Penpot  MPL 2.0  Interface design and prototyping with developers  Libraries, not poster templates  Self hosted, or in the browser    Doory  Open source  A self hosted design editor with live editing  Basic  Self hosted    HyCanvas  AGPL 3.0  A self hostable editor with your own AI key  Basic  Self hosted    Inkscape  GPL  Vector illustration and logos  Few  Yes    GIMP  GPL  Photo editing  No  Yes    Graphite  Open source  Node based vector and raster art  No  Runs in the browser     
  Read from each project's own page and from directory listings in November 2026. Licences, features and activity change, so look at the repositories before you decide. Doory and HyCanvas are young projects. 
  Penpot is the one most lists name first. It is a good tool, built for teams who design apps and websites, closer to Figma than to Canva. If you want to lay out an event poster in ten minutes, OpenTempl is closer to what you wanted. 
  Run it yourself 
- Build instructions ship with the repository on the day it opens. Until then, the web version at opentempl.org runs from static files with nothing to install. 
+  git clone https://github.com/noah-thing/opentempl
+cd opentempl
+npm install
+npm run dev  
+ The editor opens on a local address.  npm run build  writes the static site, and the  apps/desktop  folder packages it as an Electron app. 
  There is no OpenTempl server to host. The web version is static files, and live sessions between people go directly from browser to browser. 
  Help build it 
- Open items today include PowerPoint import of charts, tables and SmartArt, kerning and ligature controls, CMYK aware print PDFs, a plugin API, code signed installers and an optional self hosted sync server. Until the repository opens, send feedback to Noah on  X . 
+ Open items today include PowerPoint import of charts, tables and SmartArt, kerning and ligature controls, CMYK aware print PDFs, a plugin API, code signed installers and an optional self hosted sync server. Open an issue or send a fix at  the repository . 
  Limits 
  OpenTempl is at version 0.1 and has one maintainer. It has no team workspaces, no phone app, no cloud sync and a library of 337 templates. If you need those, use a hosted tool.   Open the editor  
 
@@ -1446,7 +1450,7 @@ OpenTempl facts
 OpenTempl is a free, open source (MIT) design app for posters, social media posts and slides, with 337 templates, that works offline and needs no account. This page lists what can be checked, with the date. Last updated November 2026.
 
  Identity 
-  Name: OpenTempl. Written as one word, capital O and T. Also called the free open source Canva alternative.  Maker: Noah, in Stockholm. Independent project.  Made by Noah on X .  Website: https://opentempl.org  Licence: MIT. The source repository is private today and opens at launch. This page changes the day it does.  Price: free. No paid plan, no trial, no ads.  Not affiliated with Canva or OpenAI.  
+  Name: OpenTempl. Written as one word, capital O and T. Also called the free open source Canva alternative.  Maker: Noah, in Stockholm. Independent project.  Made by Noah on X .  Website: https://opentempl.org  Licence: MIT. Source code: https://github.com/noah-thing/opentempl.  Price: free. No paid plan, no trial, no ads.  Not affiliated with Canva or OpenAI.  
  Counts 
   Templates: 337, in 34 styles and 33 kinds of document.  Styles for image generation (Looks): 32.  Fonts: 1,344 Google Fonts plus your own font files.  Shapes: 23. Icons: about 200,000 through Iconify.  
  Where it runs 
@@ -1475,7 +1479,7 @@ OpenTempl is a free, open source (MIT) design app for posters, social media post
  Why it exists 
  Noah wanted a design tool he could open on a train without logging in, one that left him with files he owns and did not hold exports behind a plan. So he built one. It is a separate editor written from scratch, with its own templates, its own look and its own renderer. It is not a copy of Canva and it uses nothing from Canva. 
  What makes it different 
-  It works offline and creates new designs offline.  There is no account to make and no paid tier.  337 templates in 34 styles, each drawn as its own world: Swiss grid, riso zine, brutalist, Bauhaus, Seoul and Tokyo event posters, pixel art, Y2K chrome and more.  The exports other tools keep behind a paid plan are included: transparent PNG, SVG, print PDF with bleed and crop marks.  It is MIT licensed. The source repository opens at launch.  
+  It works offline and creates new designs offline.  There is no account to make and no paid tier.  337 templates in 34 styles, each drawn as its own world: Swiss grid, riso zine, brutalist, Bauhaus, Seoul and Tokyo event posters, pixel art, Y2K chrome and more.  The exports other tools keep behind a paid plan are included: transparent PNG, SVG, print PDF with bleed and crop marks.  It is MIT licensed.  
  Who makes it 
  OpenTempl is made by  Noah , in Stockholm. It is a one person project. Feedback and bug reports go to the repository once it is open, or to Noah on X. 
  What comes next 

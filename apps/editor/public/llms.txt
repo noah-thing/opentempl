@@ -5,7 +5,7 @@
 Key facts:
 
 - Price: free. No subscription, no account, no watermark, no paid tier.
-- Licence: MIT. The source repository is private until launch.
+- Licence: MIT. Source code: https://github.com/noah-thing/opentempl
 - Made by Noah (https://x.com/fsconfig) in Stockholm. Independent project, not affiliated with Canva or OpenAI.
 - 337 templates in 34 styles (Swiss grid, riso zine, brutalist, Bauhaus, Seoul and Tokyo event posters, pixel art, Y2K chrome and more).
 - Works offline after the first load and creates new designs offline. Designs are saved on your device. Fonts, icon search, stock photos and live sessions need a connection.
