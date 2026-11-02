@@ -1,4 +1,4 @@
-// The hero is a working Tavla sheet: the objects can be thrown around, the
+// The hero is a working OpenTempl sheet: the objects can be thrown around, the
 // headline can be selected, moved, retyped and recoloured from the toolbar.
 
 const DESIGN_W = 1920;

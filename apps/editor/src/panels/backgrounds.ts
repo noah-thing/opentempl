@@ -3,7 +3,7 @@ import { assetFromUrl } from '../io/upload';
 
 const base = `${import.meta.env.BASE_URL}library/`;
 
-// Background textures made for Tavla. Filled in as the library grows.
+// Background textures made for OpenTempl. Filled in as the library grows.
 export const BACKGROUNDS: { url: string; thumb: string; name: string }[] = [
   'mesh-pink',
   'mesh-blue',
@@ -17,7 +17,7 @@ export const BACKGROUNDS: { url: string; thumb: string; name: string }[] = [
 
 export async function placeBackgroundPhoto(editor: Editor, pageId: string, url: string, name: string) {
   try {
-    const asset = await assetFromUrl(url, name, 'Tavla library');
+    const asset = await assetFromUrl(url, name, 'OpenTempl library');
     editor.doc.addAsset(asset);
     editor.doc.updatePage(pageId, { background: { type: 'image', assetId: asset.id, fit: 'cover', opacity: 1 } });
   } catch {

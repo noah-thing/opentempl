@@ -108,7 +108,7 @@ export default function StylesPanel() {
           </>
         ) : (
           <p className="hint" style={{ margin: 0 }}>
-            Put a photo on the page, or select one, and Tavla pulls five colours out of it.
+            Put a photo on the page, or select one, and OpenTempl pulls five colours out of it.
           </p>
         )}
       </Section>

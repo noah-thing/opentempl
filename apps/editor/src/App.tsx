@@ -43,7 +43,7 @@ if (window.tavlaDesktop) {
     let id: string | null = null;
     if (name.endsWith('.pptx')) id = await (await import('./io/pptxImport')).importPptx(file);
     else if (name.endsWith('.pdf')) id = await (await import('./io/pdfImport')).importPdf(file);
-    else id = await (await import('./io/designs')).importTavla(file);
+    else id = await (await import('./io/designs')).importDesign(file);
     if (id) navigate(`/d/${id}`);
   });
 }

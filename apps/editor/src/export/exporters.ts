@@ -43,7 +43,7 @@ export async function exportDesign(doc: DesignDoc, opts: ExportOptions) {
   const progress = (i: number) => opts.onProgress?.(i, total);
 
   if (opts.format === 'tavla') {
-    download(await writeTavlaFile(doc), `${name}.tavla`);
+    download(await writeTavlaFile(doc), `${name}.opentempl`);
     return;
   }
 

@@ -8,7 +8,7 @@ import type { Brief } from './prompt';
 import { placeKnownText, splitIntoLayers, type FoundText, type LayerResult } from './layers';
 import { cutoutSubject, getSettings, hasKey, inpaint } from './openai';
 
-// Turns a generated picture into Tavla elements: either one image, or Magic
+// Turns a generated picture into OpenTempl elements: either one image, or Magic
 // layers (background, cut out subject, real text boxes).
 
 export interface LayerChoice {

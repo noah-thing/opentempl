@@ -236,7 +236,7 @@ export default function ElementsPanel() {
       <Section key={g} title={g === 'Voxel' ? 'Voxel objects' : g === 'Glass' ? 'Glass shapes' : 'Characters'}>
         <div className="grid-3">
           {STICKERS.filter((s) => s.group === g).map((s) => {
-            const item: LibraryItem = { kind: 'photo', url: s.url, name: s.name, w: s.w, h: s.h, credit: 'Tavla library' };
+            const item: LibraryItem = { kind: 'photo', url: s.url, name: s.name, w: s.w, h: s.h, credit: 'OpenTempl library' };
             return (
               <button key={s.url} className="shape-tile" title={s.name} onClick={() => addLibraryItem(editor, item)} {...dragProps(item)}>
                 <img src={s.url} alt={s.name} style={{ width: '78%', height: '78%', objectFit: 'contain' }} loading="lazy" />
@@ -268,7 +268,7 @@ export default function ElementsPanel() {
           <button className="btn btn-outline" onClick={() => addLibraryItem(editor, { kind: 'elements', elements: [makeTable()] })}>
             <Icon name="table" /> Table
           </button>
-          <button className="btn btn-outline" onClick={() => addLibraryItem(editor, { kind: 'elements', elements: [makeQr('https://tavla.app')] })}>
+          <button className="btn btn-outline" onClick={() => addLibraryItem(editor, { kind: 'elements', elements: [makeQr('https://opentempl.org')] })}>
             <Icon name="qr" /> QR code
           </button>
         </div>

@@ -16,6 +16,7 @@ const CATS: [FontCategory | 'all', string][] = [
   ['mono', 'Mono'],
 ];
 
+// The 'tavla:' localStorage prefix stays on purpose so saved settings survive the rename.
 function recent(): string[] {
   try {
     return JSON.parse(localStorage.getItem('tavla:recent-fonts') ?? '[]');

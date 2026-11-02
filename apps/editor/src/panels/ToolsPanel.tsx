@@ -13,7 +13,7 @@ export default function ToolsPanel() {
     { icon: 'resize', title: 'Resize', text: 'Turn a post into a story, a poster into slides. Everything rescales to fit.', run: () => editor.openPanel('resize') },
     { icon: 'bulk', title: 'Bulk create', text: 'Paste a spreadsheet and get one page per row: name tags, certificates, menus.', run: () => editor.openPanel('bulk') },
     { icon: 'wand', title: 'Remove background', text: image ? 'Cut the subject out of the selected photo.' : 'Select a photo first, then cut its subject out.', run: () => editor.openPanel('adjust') },
-    { icon: 'qr', title: 'QR code', text: 'A code for any link, in your colours. Vector, so it prints sharp.', run: () => editor.add([makeQr('https://tavla.app')]) },
+    { icon: 'qr', title: 'QR code', text: 'A code for any link, in your colours. Vector, so it prints sharp.', run: () => editor.add([makeQr('https://opentempl.org')]) },
     { icon: 'chart', title: 'Charts', text: 'Bar, line, pie and progress charts that stay editable.', run: () => editor.add([makeChart('column')]) },
     { icon: 'table', title: 'Table', text: 'Rows and columns with a header and stripes.', run: () => editor.add([makeTable()]) },
     { icon: 'history', title: 'Version history', text: 'Every ten minutes of work is saved as a version you can go back to.', run: () => editor.openPanel('history') },

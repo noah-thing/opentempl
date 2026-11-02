@@ -3,7 +3,7 @@ import { newId } from '../doc/design';
 import { makeImage, makeText } from '../doc/factory';
 import type { Asset, DesignSnapshot, Element, Page, TextElement } from '../doc/types';
 
-// Import a PDF as a new design, one Tavla page per PDF page.
+// Import a PDF as a new design, one OpenTempl page per PDF page.
 //
 // With `editable` (the default) the text comes in as real text boxes: the page
 // is drawn once with its text and once without, the text-free drawing becomes
@@ -228,7 +228,7 @@ function scaleText(box: Box, k: number): TextElement {
   const l0 = box.lines[0];
   const size = l0.size * k;
   const lh = Math.round(box.lh * 100) / 100;
-  // Same baseline maths as Tavla's own text layout, run backwards.
+  // Same baseline maths as OpenTempl's own text layout, run backwards.
   const offset = ((lh - (l0.face.ascent + l0.face.descent)) / 2 + l0.face.ascent) * size;
   const width = Math.max(...box.lines.map((l) => l.w)) * k;
   return makeText({

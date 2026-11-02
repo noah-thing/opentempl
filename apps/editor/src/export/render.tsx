@@ -8,7 +8,7 @@ import { RenderContext, type RenderEnv } from '../render/RenderContext';
 import { embeddedFontCss, ensureFont, fontsVersion } from '../fonts/fonts';
 
 // Turns pages into standalone SVG strings (fonts and images inlined) and then
-// into pixels. Everything Tavla exports goes through here, thumbnails included.
+// into pixels. Everything OpenTempl exports goes through here, thumbnails included.
 
 const dataUrlCache = new WeakMap<Uint8Array, string>();
 

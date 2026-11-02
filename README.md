@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="apps/desktop/icon.png" width="96" alt="Tavla" />
+  <img src="apps/desktop/icon.png" width="96" alt="OpenTempl" />
 </p>
 
-<h1 align="center">Tavla</h1>
+<h1 align="center">OpenTempl</h1>
 
 <p align="center">A free, open source design tool for posters, slides, videos and invites.<br />It runs in your browser, works offline, and your files stay on your machine.</p>
 
 ---
 
-Tavla is a Canva alternative built from scratch: a real canvas editor with pages, smart guides, text effects, photo editing, charts, animation, presenting and export, plus the features Canva keeps behind its Pro plan (background removal, magic resize, brand kits, bulk create, transparent PNG, SVG export, version history, custom fonts), given to everyone.
+OpenTempl is a Canva alternative built from scratch: a real canvas editor with pages, smart guides, text effects, photo editing, charts, animation, presenting and export, plus the features Canva keeps behind its Pro plan (background removal, magic resize, brand kits, bulk create, transparent PNG, SVG export, version history, custom fonts), given to everyone.
 
 There is no account and no server. Designs live in the browser's IndexedDB. Live collaboration goes peer to peer over WebRTC, encrypted with the key in the share link.
 
@@ -19,7 +19,7 @@ apps/editor    the editor (React 19, TypeScript, Yjs, Vite)
 apps/site      the marketing and download site (vanilla TypeScript, three.js for one voxel eye)
 apps/desktop   Electron shell that packages the editor as a desktop app
 research/      design synthesis from the reference board and the Canva teardown
-assets/        the Codex briefs used to make Tavla's photos, voxel objects and textures
+assets/        the Codex briefs used to make OpenTempl's photos, voxel objects and textures
 qa/            Playwright scripts used to check the editor end to end
 ```
 
@@ -30,7 +30,7 @@ npm install
 npm run dev          # editor on http://localhost:5181
 npm run dev:site     # site on http://localhost:5182
 npm run build        # site into dist/, editor into dist/app/
-npm test -w @tavla/editor   # unit tests (vitest)
+npm test -w @opentempl/editor   # unit tests (vitest)
 ```
 
 Browser tests live in `qa/` (Playwright scripts against the dev server). `scripts/ship-mini.sh` rebuilds the private preview on the Mac mini, and with `--desktop` also the desktop apps in the draft release.
@@ -41,7 +41,7 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Canvas.** Pages stacked or in a grid, zoom from 5% to 800%, pinch and ctrl scroll zoom around the cursor, space to pan, rulers with draggable guides, a layout grid, smart guides for edges, centres and equal gaps with the spacing written on the guide, marquee selection, alt drag to duplicate, drag elements between pages.
 
-**Elements.** 23 shapes with fills, gradients, borders and rounded corners; lines with arrowheads, dashes and bends; photo frames in any shape; Tavla's own voxel objects, characters and glass shapes; 200,000 icons through Iconify; charts (column, bar, line, area, pie, donut, progress) with a data editor that takes pasted spreadsheets; tables; QR codes; freehand drawing with pen, marker, highlighter, glow pen and eraser; a vector pen (click for corners, drag for curves, edit every point afterwards) and shape combining (union, subtract, intersect, exclude); connector lines that stick to shapes and follow them, pulled out of any selection from its connect dots; video clips with in place playback, filmstrip trimming, volume and loop.
+**Elements.** 23 shapes with fills, gradients, borders and rounded corners; lines with arrowheads, dashes and bends; photo frames in any shape; OpenTempl's own voxel objects, characters and glass shapes; 200,000 icons through Iconify; charts (column, bar, line, area, pie, donut, progress) with a data editor that takes pasted spreadsheets; tables; QR codes; freehand drawing with pen, marker, highlighter, glow pen and eraser; a vector pen (click for corners, drag for curves, edit every point afterwards) and shape combining (union, subtract, intersect, exclude); connector lines that stick to shapes and follow them, pulled out of any selection from its connect dots; video clips with in place playback, filmstrip trimming, volume and loop.
 
 **Text.** Its own line layout, so the screen, PNG, SVG and PDF all break lines in the same place. 1,344 Google Fonts plus your own font files, weights, italic, underline, strike, uppercase, letter and line spacing, lists, alignment, gradients, curved text, and ten effects: shadow, lift, hollow, splice, outline, echo, glitch, neon, highlight.
 
@@ -57,11 +57,11 @@ Desktop app (macOS, from `apps/desktop`): build the editor, copy `dist/app` to `
 
 **Make more.** Magic resize into any format, in place or as a copy. Bulk create: paste a table and get a page per row. Brand kits with logos, colours and fonts. 46 templates. Version history with a snapshot every ten minutes. A command palette on ⌘K with every action.
 
-**Export.** PNG (transparent, up to 4×), JPG, WebP, SVG, PDF for screen or print with live links and bleed, PowerPoint with editable text, MP4 video of pages, animations and clips with their mixed sound (WebCodecs), GIF, multi page ZIP, and the editable `.tavla` file (video clips included).
+**Export.** PNG (transparent, up to 4×), JPG, WebP, SVG, PDF for screen or print with live links and bleed, PowerPoint with editable text, MP4 video of pages, animations and clips with their mixed sound (WebCodecs), GIF, multi page ZIP, and the editable `.opentempl` file (video clips included).
 
-**Sound.** A soundtrack under the whole design, from your own file or one of four Tavla tones that the app synthesises on the spot. Trim it on its waveform, set volume and fade out. It plays in Present mode and is mixed with the clips' sound into MP4 exports.
+**Sound.** A soundtrack under the whole design, from your own file or one of four OpenTempl tones that the app synthesises on the spot. Trim it on its waveform, set volume and fade out. It plays in Present mode and is mixed with the clips' sound into MP4 exports.
 
-**Import.** `.tavla` files, PowerPoint files (slides, text with bold, italic and colour runs, theme colours, shapes, pictures with crops, backgrounds, speaker notes; placeholders take their position from the layout like in PowerPoint) and PDFs. PDF text comes in as editable text boxes over the page drawn without its text, in fonts with matching widths (Arimo for Helvetica and Arial, Tinos for Times, Cousine for Courier), with weight, colour and paragraph spacing read from the file; or pages as plain pictures if you prefer.
+**Import.** `.opentempl` files, PowerPoint files (slides, text with bold, italic and colour runs, theme colours, shapes, pictures with crops, backgrounds, speaker notes; placeholders take their position from the layout like in PowerPoint) and PDFs. PDF text comes in as editable text boxes over the page drawn without its text, in fonts with matching widths (Arimo for Helvetica and Arial, Tinos for Times, Cousine for Courier), with weight, colour and paragraph spacing read from the file; or pages as plain pictures if you prefer.
 
 **Share.** A live link for real time editing with cursors and selections of everyone in the room, peer to peer and encrypted.
 
@@ -71,4 +71,4 @@ A design is a Y.Doc: `meta`, `pageOrder`, `pages` and `elements` maps, plus `ass
 
 ## Licence
 
-MIT. The photos, voxel objects, characters and textures in `apps/editor/public/library` were made for Tavla and are free to use for anything. Icons from Iconify and photos from Openverse keep their own licences.
+MIT. The photos, voxel objects, characters and textures in `apps/editor/public/library` were made for OpenTempl and are free to use for anything. Icons from Iconify and photos from Openverse keep their own licences.

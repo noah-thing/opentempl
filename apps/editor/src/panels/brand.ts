@@ -4,7 +4,7 @@ import type { Asset } from '../doc/types';
 import { UI_FONT } from '../doc/factory';
 
 // Brand kits live on this device and work across every design. Canva keeps
-// these behind its paid plan; in Tavla you can have as many as you like.
+// these behind its paid plan; in OpenTempl you can have as many as you like.
 
 export interface BrandKit {
   id: string;

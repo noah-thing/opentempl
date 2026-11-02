@@ -18,6 +18,7 @@ const toU8 = (x: unknown) => (x instanceof Uint8Array ? x : new Uint8Array(x as 
 
 async function roomHostId(room: string) {
   // Hash the key so the broker never sees it.
+  // The 'tavla' room prefix stays on purpose: old share links must reach the same room.
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`tavla:${room}`));
   return 'tavla-' + [...new Uint8Array(digest)].slice(0, 12).map((b) => b.toString(16).padStart(2, '0')).join('');
 }

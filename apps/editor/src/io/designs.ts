@@ -30,7 +30,7 @@ export function onDesignsChange(l: () => void) {
 }
 const notify = () => listeners.forEach((l) => l());
 
-const dbName = (id: string) => `tavla-design-${id}`;
+const dbName = (id: string) => `tavla-design-${id}`; // legacy name kept on purpose, it is where saved designs live
 
 export async function listDesigns(): Promise<DesignEntry[]> {
   const all = await db.all<DesignEntry>('designs');
@@ -174,7 +174,7 @@ export async function duplicateDesign(id: string): Promise<string | null> {
   return createDesign({ snapshot: { ...snap, meta: { ...snap.meta, title: `${snap.meta.title} copy` } }, assets });
 }
 
-export async function importTavla(file: File): Promise<string | null> {
+export async function importDesign(file: File): Promise<string | null> {
   const file2 = readTavlaFile(new Uint8Array(await file.arrayBuffer()));
   if (!file2) return null;
   await Promise.all(file2.media.map((m) => putMedia(m.id, m.blob)));

@@ -1,4 +1,4 @@
-// The Tavla document model. Everything a design contains is plain JSON so it
+// The OpenTempl document model. Everything a design contains is plain JSON so it
 // can live inside a Y.Doc, travel between peers and be exported as a file.
 
 export type Id = string;

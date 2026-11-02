@@ -57,7 +57,7 @@ export function ShareDialog() {
           <div style={{ padding: 16, borderRadius: 14, background: 'var(--paper)' }}>
             <div style={{ fontWeight: 600, marginBottom: 4 }}>Design together, live</div>
             <p className="hint" style={{ margin: '0 0 12px' }}>
-              Anyone with the link edits this design with you in real time. Changes travel directly between your browsers over an encrypted connection. No account, and nothing is stored on a Tavla server.
+              Anyone with the link edits this design with you in real time. Changes travel directly between your browsers over an encrypted connection. No account, and nothing is stored on a OpenTempl server.
             </p>
             {room ? (
               <div className="stack">
@@ -87,12 +87,12 @@ export function ShareDialog() {
           </div>
           <div style={{ padding: 16, borderRadius: 14, boxShadow: 'inset 0 0 0 1px var(--line)' }}>
             <div style={{ fontWeight: 600, marginBottom: 4 }}>Send a copy</div>
-            <p className="hint" style={{ margin: '0 0 12px' }}>A .tavla file holds every page, photo and font choice. The other person opens it from File, Open.</p>
+            <p className="hint" style={{ margin: '0 0 12px' }}>An .opentempl file holds every page, photo and font choice. The other person opens it from File, Open.</p>
             <button
               className="btn btn-outline"
               onClick={async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' })}
             >
-              <Icon name="download" /> Download .tavla file
+              <Icon name="download" /> Download .opentempl file
             </button>
           </div>
         </div>

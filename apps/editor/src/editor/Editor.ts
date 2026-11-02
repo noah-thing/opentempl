@@ -279,7 +279,7 @@ export class Editor {
       }
     }
     try {
-      // Assets are left out of the system clipboard: other Tavla tabs share the
+      // Assets are left out of the system clipboard: other OpenTempl tabs share the
       // same origin storage so they can still resolve them later.
       navigator.clipboard?.writeText(CLIP_PREFIX + JSON.stringify(els)).catch(() => {});
     } catch {

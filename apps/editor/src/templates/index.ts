@@ -55,7 +55,7 @@ export function makeTemplate(def: TemplateDef): Template {
         try {
           const blob = await (await fetch(libUrl(id))).blob();
           const a = await prepareImage(blob, id.split('/').pop() ?? 'image');
-          assets.push({ ...a, id, credit: 'Tavla library' });
+          assets.push({ ...a, id, credit: 'OpenTempl library' });
         } catch {
           /* missing library file: the frame stays empty */
         }

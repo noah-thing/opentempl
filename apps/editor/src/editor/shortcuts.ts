@@ -109,7 +109,7 @@ export function useShortcuts() {
       if (mod && k === '0') return stop(), window.dispatchEvent(new Event('tavla:fit'));
       if (mod && k === '1') return stop(), editor.ui.set({ zoom: 1, autoFit: false });
       if (mod && k === 'e') return stop(), editor.ui.set({ exportOpen: true });
-      if (mod && k === 's') return stop(), editor.toast('Saved on this device. Tavla saves as you go.');
+      if (mod && k === 's') return stop(), editor.toast('Saved on this device. OpenTempl saves as you go.');
       if (e.altKey && e.shiftKey && k === 'h') return stop(), editor.flip('x');
       if (e.altKey && e.shiftKey && k === 'v') return stop(), editor.flip('y');
 
@@ -162,7 +162,7 @@ export function useShortcuts() {
       if (k === '?') return stop(), editor.ui.set({ shortcutsOpen: true });
     };
 
-    // Paste: Tavla elements, images from the clipboard, or plain text as a text box.
+    // Paste: OpenTempl elements, images from the clipboard, or plain text as a text box.
     const onPaste = async (e: ClipboardEvent) => {
       if (isTyping(e as unknown as KeyboardEvent) || editor.state.presenting) return;
       const dt = e.clipboardData;

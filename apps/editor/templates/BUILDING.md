@@ -1,11 +1,11 @@
-# Building Tavla templates
+# Building OpenTempl templates
 
-Tavla is a free, open source design studio (a Canva alternative). This folder holds the big template library, one source file per vibe.
+OpenTempl is a free, open source design studio (a Canva alternative). This folder holds the big template library, one source file per vibe.
 Read this whole file before writing anything.
 
-## What a good Tavla template is
+## What a good OpenTempl template is
 
-Noah, who owns Tavla, wants templates "very full of graphic design with a really nice vibe": they should feel like the best posters and
+Noah, who owns OpenTempl, wants templates "very full of graphic design with a really nice vibe": they should feel like the best posters and
 posts on Pinterest, made by a human designer with taste, never like generic Canva stock and never like AI output. Each one must also be
 **adaptable**: a stranger can swap the words, colours and photo and use it for a cucumber farm, a gig, a cafe, a book club or a product
 launch. Specific sample copy is good (it makes the design feel real), but the layout must not depend on one company or person.
@@ -97,7 +97,7 @@ colour ground so it can sit on the page with blend multiply). Name them for what
 1. Read your brief file and look at the reference pins it lists (contact sheets, then the best ones full size with Read).
    Write `templates/notes/<vibe>.md` for each of your vibes: 10 to 20 bullet points on what makes the vibe work (palettes with hex,
    type choices as Google Font names, layout moves, textures, what to avoid). Keep it practical; later builders reuse it.
-2. Write templates in `templates/vibes/<vibe>.mjs` (one default export array per vibe). Ids are kebab case, unique across Tavla:
+2. Write templates in `templates/vibes/<vibe>.mjs` (one default export array per vibe). Ids are kebab case, unique across OpenTempl:
    prefix them with the vibe (`riso-...`). Names are short and plain ("Garden party flyer").
 3. Build and look at every template:
    `node scripts/build-templates.mjs <vibe>` (fix every reported problem), then `node qa/tpl-shot.mjs <vibe> [id ...]`
@@ -111,7 +111,7 @@ colour ground so it can sit on the page with blend multiply). Name them for what
   their own line in headings, margins consistent, edges aligned.
 - Text boxes: width `w` is the wrapping width. Big display type needs a wide enough box or explicit `\n` line breaks.
   Heights are refitted by the editor, so stacked text must be positioned with real line heights in mind.
-- Does it look like the vibe and not like the default Tavla look (flat loud colour + one grotesk)?
+- Does it look like the vibe and not like the default OpenTempl look (flat loud colour + one grotesk)?
 - Is it adaptable (swap words, colours, photo) and is the sample copy specific and good?
 - None of the banned AI tells.
 

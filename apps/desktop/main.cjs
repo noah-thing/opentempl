@@ -1,4 +1,4 @@
-// Tavla desktop. Serves the built editor from a private tavla:// origin so
+// OpenTempl desktop. Serves the built editor from a private tavla:// origin so
 // designs saved in IndexedDB stay put between launches, and opens .tavla files.
 const { app, BrowserWindow, protocol, net, shell, Menu } = require('electron');
 const path = require('node:path');
@@ -6,6 +6,7 @@ const { pathToFileURL } = require('node:url');
 const fs = require('node:fs');
 
 protocol.registerSchemesAsPrivileged([
+  // The scheme keeps its old name on purpose: IndexedDB is keyed by origin, and a new one would hide saved designs.
   { scheme: 'tavla', privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true } },
 ]);
 
@@ -79,7 +80,7 @@ app.whenReady().then(() => {
     ]),
   );
   createWindow();
-  const arg = process.argv.find((a) => /\.(tavla|pptx|pdf)$/i.test(a));
+  const arg = process.argv.find((a) => /\.(opentempl|tavla|pptx|pdf)$/i.test(a));
   if (arg) openFile(arg);
   app.on('activate', () => BrowserWindow.getAllWindows().length === 0 && createWindow());
 });

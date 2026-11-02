@@ -57,7 +57,7 @@ export function EditorScreen({ id }: { id: string }) {
       if (room) collab = connectCollab(editor, room);
       stopVersions = startAutoVersions(opened.doc);
       setState({ open: opened, editor });
-      document.title = `${opened.doc.snapshot.meta.title} · Tavla`;
+      document.title = `${opened.doc.snapshot.meta.title} · OpenTempl`;
     })();
     return () => {
       cancelled = true;
@@ -74,7 +74,7 @@ export function EditorScreen({ id }: { id: string }) {
         <div style={{ display: 'grid', justifyItems: 'center', gap: 14, textAlign: 'center' }}>
           <Sign size={96} mood="wow" />
           <h2 style={{ margin: 0, fontSize: 28, fontWeight: 500, letterSpacing: '-0.03em' }}>This design lives on another device</h2>
-          <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>Tavla keeps designs in the browser that made them. Ask for a .tavla file or a live link.</p>
+          <p className="muted" style={{ margin: '0 0 6px', maxWidth: 380 }}>OpenTempl keeps designs in the browser that made them. Ask for an .opentempl file or a live link.</p>
           <button className="btn btn-ink" onClick={() => navigate('/')}>
             Back to your designs
           </button>

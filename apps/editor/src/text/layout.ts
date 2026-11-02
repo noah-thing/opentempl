@@ -1,6 +1,6 @@
 import type { TextElement, TextRun } from '../doc/types';
 
-// Tavla lays text out itself (instead of trusting the browser) so the canvas,
+// OpenTempl lays text out itself (instead of trusting the browser) so the canvas,
 // SVG export, PNG export and PDF all break lines in exactly the same places.
 // Text can carry runs: ranges with their own weight, slant, decoration or
 // colour. Measuring walks those runs, so mixed styles wrap correctly.

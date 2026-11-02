@@ -25,7 +25,7 @@ function commands(): Command[] {
     { label: 'Add a line chart', group: 'Add', icon: 'chart', run: (ed) => ed.add([makeChart('line')]) },
     { label: 'Add a pie chart', group: 'Add', icon: 'chart', run: (ed) => ed.add([makeChart('donut')]) },
     { label: 'Add a table', group: 'Add', icon: 'table', run: (ed) => ed.add([makeTable()]) },
-    { label: 'Add a QR code', group: 'Add', icon: 'qr', run: (ed) => ed.add([makeQr('https://tavla.app')]) },
+    { label: 'Add a QR code', group: 'Add', icon: 'qr', run: (ed) => ed.add([makeQr('https://opentempl.org')]) },
     ...SHAPE_KINDS.map((s) => ({
       label: `Add ${s.label.toLowerCase()}`,
       group: 'Shapes',

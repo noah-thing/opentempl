@@ -3,7 +3,7 @@ import type { PeerProvider } from './peerProvider';
 import type { Editor } from '../editor/Editor';
 import type { Id } from '../doc/types';
 
-// Live collaboration without accounts or a Tavla server: peers are introduced
+// Live collaboration without accounts or a OpenTempl server: peers are introduced
 // by the free PeerJS broker and then talk directly over encrypted WebRTC. The
 // broker only ever sees a hash of the room key, never the design.
 
@@ -45,6 +45,7 @@ export function activeCollab() {
 }
 
 export function localName() {
+  // Legacy 'tavla:' key kept on purpose so the saved display name survives.
   let n = localStorage.getItem('tavla:name');
   if (!n) {
     n = ANIMALS[Math.floor(Math.random() * ANIMALS.length)];

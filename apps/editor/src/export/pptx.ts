@@ -26,8 +26,8 @@ function nativeText(el: TextElement) {
 export async function exportPptx(doc: DesignDoc, snap: DesignSnapshot, pageIds: Id[], onProgress?: (d: number, t: number) => void) {
   const { default: PptxGenJS } = await import('pptxgenjs');
   const pptx = new PptxGenJS();
-  pptx.defineLayout({ name: 'TAVLA', width: snap.meta.width * IN, height: snap.meta.height * IN });
-  pptx.layout = 'TAVLA';
+  pptx.defineLayout({ name: 'OPENTEMPL', width: snap.meta.width * IN, height: snap.meta.height * IN });
+  pptx.layout = 'OPENTEMPL';
   pptx.title = snap.meta.title;
 
   let done = 0;

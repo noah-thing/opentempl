@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-// Tavla's icons are pixel art on a 16 x 16 grid. Each icon is written as a few
+// OpenTempl's icons are pixel art on a 16 x 16 grid. Each icon is written as a few
 // drawing instructions (rects, lines, circles, or a literal pixel grid) and
 // rasterised once into a single crisp path. Strokes are 2 pixels: chunky on
 // purpose, the same handwriting as the voxel objects on the site.

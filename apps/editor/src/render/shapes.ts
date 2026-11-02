@@ -210,7 +210,7 @@ export function pathToNodes(d: string): PenNode[] | null {
   let cy = 0;
   let closed = false;
   const cmds = [...d.matchAll(/([MLHVCQAZ])([^MLHVCQAZ]*)/gi)];
-  if (cmds.some(([, c]) => c !== c.toUpperCase())) return null; // only absolute paths, which is what Tavla writes
+  if (cmds.some(([, c]) => c !== c.toUpperCase())) return null; // only absolute paths, which is what OpenTempl writes
   const add = (x: number, y: number, ix = 0, iy = 0) => {
     nodes.push({ x, y, hx: 0, hy: 0, ix, iy });
     cx = x;

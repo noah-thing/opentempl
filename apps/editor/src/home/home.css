@@ -35,11 +35,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  max-width: 1480px;
-  margin: 0 auto;
-  padding: 14px clamp(16px, 4vw, 56px);
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: blur(16px);
+  /* Full width, so nothing shows past its ends when the page scrolls under it;
+     the padding keeps its contents on the same 1480 px column as the page. */
+  padding: 14px max(clamp(16px, 4vw, 56px), calc((100% - 1480px) / 2 + clamp(16px, 4vw, 56px)));
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--line-2);
 }
 .home-brand {
   color: var(--ink);
@@ -336,7 +336,7 @@
   --line: rgba(255, 255, 255, 0.4);
   --hover: rgba(255, 255, 255, 0.14);
   background: transparent;
-  backdrop-filter: none;
+  box-shadow: none;
 }
 .home-top.is-on-hero .btn-outline {
   color: #fff;

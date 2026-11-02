@@ -1,9 +1,9 @@
 {
-  "name": "@tavla/desktop",
-  "productName": "Tavla",
+  "name": "@opentempl/desktop",
+  "productName": "OpenTempl",
   "private": true,
   "version": "0.1.0",
-  "description": "Tavla desktop: the free design tool, offline, in its own window.",
+  "description": "OpenTempl desktop: the free design tool, offline, in its own window.",
   "main": "main.cjs",
   "author": "Noah",
   "license": "MIT",
@@ -14,8 +14,8 @@
     "pack:linux": "electron-builder --linux AppImage deb --x64"
   },
   "build": {
-    "appId": "app.tavla.desktop",
-    "productName": "Tavla",
+    "appId": "app.opentempl.desktop",
+    "productName": "OpenTempl",
     "files": [
       "main.cjs",
       "preload.cjs",
@@ -35,13 +35,18 @@
     "linux": {
       "icon": "icon.png",
       "category": "Graphics",
-      "executableName": "tavla",
+      "executableName": "opentempl",
       "maintainer": "Noah"
     },
     "fileAssociations": [
       {
+        "ext": "opentempl",
+        "name": "OpenTempl design",
+        "role": "Editor"
+      },
+      {
         "ext": "tavla",
-        "name": "Tavla design",
+        "name": "OpenTempl design (old extension)",
         "role": "Editor"
       },
       {

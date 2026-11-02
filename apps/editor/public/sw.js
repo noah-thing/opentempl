@@ -1,7 +1,7 @@
-// Tavla service worker: keeps the editor, the library and the fonts it has
+// OpenTempl service worker: keeps the editor, the library and the fonts it has
 // used available offline. Same origin files are served cache first and
 // refreshed in the background; Google Fonts are cached as they are fetched.
-const CACHE = 'tavla-v1';
+const CACHE = 'tavla-v1'; // legacy name kept on purpose, renaming it would drop users' offline cache
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html'])).then(() => self.skipWaiting()));

@@ -3,9 +3,10 @@ import type { DesignDoc } from '../doc/design';
 import type { Id } from '../doc/types';
 import { getMedia } from '../io/media';
 
-// Files start with a short marker so Tavla can tell its files from random binaries.
+// Files start with a short marker so OpenTempl can tell its files from random binaries.
 // TAVLA1 is the design alone. TAVLA2 adds video clips: a little-endian length,
 // a JSON header naming each clip, the design, then the clips' bytes in order.
+// The TAVLA markers stay: they are the file format, and old files must keep opening.
 export const TAVLA_MAGIC = new TextEncoder().encode('TAVLA1\n');
 const TAVLA2_MAGIC = new TextEncoder().encode('TAVLA2\n');
 
@@ -19,12 +20,12 @@ export async function writeTavlaFile(doc: DesignDoc): Promise<Blob> {
   const track = doc.snapshot.meta.soundtrack;
   const ids = [...new Set([...Object.values(doc.snapshot.elements).flatMap((e) => (e.type === 'video' ? [e.mediaId] : [])), ...(track ? [track.mediaId] : [])])];
   const media = (await Promise.all(ids.map(async (id) => ({ id, blob: await getMedia(id) })))).filter((m): m is { id: Id; blob: Blob } => !!m.blob);
-  if (!media.length) return new Blob([TAVLA_MAGIC, update as BlobPart], { type: 'application/x-tavla' });
+  if (!media.length) return new Blob([TAVLA_MAGIC, update as BlobPart], { type: 'application/x-opentempl' });
   const header: TavlaHeader = { update: update.length, media: media.map((m) => ({ id: m.id, mime: m.blob.type, size: m.blob.size })) };
   const hb = new TextEncoder().encode(JSON.stringify(header));
   const len = new Uint8Array(4);
   new DataView(len.buffer).setUint32(0, hb.length, true);
-  return new Blob([TAVLA2_MAGIC, len, hb, update as BlobPart, ...media.map((m) => m.blob)], { type: 'application/x-tavla' });
+  return new Blob([TAVLA2_MAGIC, len, hb, update as BlobPart, ...media.map((m) => m.blob)], { type: 'application/x-opentempl' });
 }
 
 export function readTavlaFile(bytes: Uint8Array): { update: Uint8Array; media: { id: Id; blob: Blob }[] } | null {

@@ -1,15 +1,15 @@
 {
-  "name": "tavla",
+  "name": "opentempl",
   "private": true,
   "version": "0.1.0",
-  "description": "Tavla, a free and open source design tool for posters, slides and everything in between.",
+  "description": "OpenTempl, the free, open source Canva alternative for posters, slides and everything in between.",
   "license": "MIT",
   "workspaces": ["apps/*"],
   "scripts": {
-    "dev": "npm run dev -w @tavla/editor",
-    "dev:site": "npm run dev -w @tavla/site",
-    "build": "npm run build -w @tavla/site && npm run build -w @tavla/editor",
+    "dev": "npm run dev -w @opentempl/editor",
+    "dev:site": "npm run dev -w @opentempl/site",
+    "build": "npm run build -w @opentempl/site && npm run build -w @opentempl/editor",
     "preview": "npx vite preview --outDir dist --port 4173",
-    "typecheck": "npm run typecheck -w @tavla/editor"
+    "typecheck": "npm run typecheck -w @opentempl/editor"
   }
 }

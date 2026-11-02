@@ -51,9 +51,9 @@ export default function AudioPanel() {
           </button>
         </div>
       )}
-      <Section title="Tavla tones">
+      <Section title="OpenTempl tones">
         <p className="hint" style={{ margin: '0 0 10px' }}>
-          Four little loops Tavla plays itself, made on your machine when you pick one. Free to use anywhere.
+          Four little loops OpenTempl plays itself, made on your machine when you pick one. Free to use anywhere.
         </p>
         <div className="tones">
           {TONES.map((t) => (

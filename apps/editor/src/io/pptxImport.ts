@@ -6,7 +6,7 @@ import { fontInfo } from '../fonts/fonts';
 import type { Asset, DesignSnapshot, Element, Fill, Page, ShapeKind, TextElement, TextRun } from '../doc/types';
 
 // Import a PowerPoint file as a new design: one page per slide, with text as
-// editable text (runs keep bold, italic and colour), shapes as Tavla shapes,
+// editable text (runs keep bold, italic and colour), shapes as OpenTempl shapes,
 // pictures with their crop, slide backgrounds and the speaker notes.
 // Placeholders without their own position borrow it from the slide layout or
 // the master, the way PowerPoint does. Charts, SmartArt and tables are skipped.

@@ -1,5 +1,5 @@
 // Light or dark editor chrome. The pages themselves always render as designed.
-const KEY = 'tavla:theme';
+const KEY = 'tavla:theme'; // legacy name kept on purpose so the saved theme survives
 
 export function applyTheme() {
   const t = localStorage.getItem(KEY) ?? 'light';

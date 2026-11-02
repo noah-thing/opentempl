@@ -3,7 +3,7 @@ import { DesignDoc } from '../doc/design';
 import { db } from './db';
 import type { DesignSnapshot } from '../doc/types';
 
-// Version history: full snapshots of the Y.Doc, kept per design. Tavla saves one
+// Version history: full snapshots of the Y.Doc, kept per design. OpenTempl saves one
 // automatically every 10 minutes of editing, and on demand from the File menu.
 
 export interface Version {

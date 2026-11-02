@@ -1,6 +1,6 @@
 {
-  "name": "Tavla",
-  "short_name": "Tavla",
+  "name": "OpenTempl",
+  "short_name": "OpenTempl",
   "description": "A free, open source design tool. Your files stay on your machine.",
   "start_url": "./",
   "scope": "./",
@@ -11,5 +11,5 @@
     { "src": "app-icon.png", "sizes": "180x180", "type": "image/png" },
     { "src": "app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
-  "file_handlers": [{ "action": "./", "accept": { "application/x-tavla": [".tavla"] } }]
+  "file_handlers": [{ "action": "./", "accept": { "application/x-opentempl": [".opentempl"], "application/x-tavla": [".tavla"] } }]
 }

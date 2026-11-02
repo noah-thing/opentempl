@@ -13,7 +13,7 @@ import { KeyDialog } from './KeyDialog';
 import './studio.css';
 
 // #/generate: the Looks gallery and the brief. A Look is an art direction; the
-// user says what it is for, and Tavla writes the prompt and either runs it with
+// user says what it is for, and OpenTempl writes the prompt and either runs it with
 // their OpenAI key or hands it to ChatGPT. Results open as layered designs.
 
 const MOODS = ['warm', 'playful', 'calm', 'loud', 'premium', 'nostalgic', 'raw', 'friendly', 'mysterious', 'fresh'];
@@ -57,7 +57,7 @@ export function Studio({ query }: { query: string }) {
   const brand = useBrand();
 
   useEffect(() => {
-    document.title = 'Generate · Tavla';
+    document.title = 'Generate · OpenTempl';
     loadLooks().then(setLooks);
     return onSettingsChange(() => setKeyed(hasKey())) as () => void;
   }, []);
@@ -196,8 +196,8 @@ export function Studio({ query }: { query: string }) {
             <div className="look-refs">
               <div className="look-refs-row">
                 <figure>
-                  <img src={sampleUrl(look.id)} alt={`${look.name}, made in Tavla`} />
-                  <figcaption>Made in Tavla</figcaption>
+                  <img src={sampleUrl(look.id)} alt={`${look.name}, made in OpenTempl`} />
+                  <figcaption>Made in OpenTempl</figcaption>
                 </figure>
                 {(look.refs ?? []).map((r) => (
                   <figure key={r.pin}>
@@ -521,7 +521,7 @@ function ChatGPTDialog({ look, brief, prompt, onClose, onResult }: { look: Look;
           ) : null}
           <li className={step >= 1 ? 'is-on' : ''}>
             <b>Send, then bring the picture back.</b>
-            <p>Download it from ChatGPT and drop it here. Tavla opens it with Magic layers.</p>
+            <p>Download it from ChatGPT and drop it here. OpenTempl opens it with Magic layers.</p>
             <label
               className={`dropzone ${drop ? 'is-over' : ''}`}
               onDragOver={(e) => {

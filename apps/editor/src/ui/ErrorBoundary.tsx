@@ -11,7 +11,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { error: E
   }
 
   componentDidCatch(error: Error) {
-    console.error('Tavla crashed while rendering', error);
+    console.error('OpenTempl crashed while rendering', error);
   }
 
   render() {

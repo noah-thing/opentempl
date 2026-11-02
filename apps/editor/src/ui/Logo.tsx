@@ -2,7 +2,7 @@
 // The 96 px file covers every size the interface draws it at, up to 3x screens.
 export function Mark({ size = 28 }: { size?: number; tone?: 'ink' | 'lime' }) {
   const src = `${import.meta.env.BASE_URL}${size > 32 ? 'mark-512.png' : 'mark-96.png'}`;
-  return <img src={src} width={size} height={size} alt="Tavla" draggable={false} style={{ display: 'block', flex: 'none' }} />;
+  return <img src={src} width={size} height={size} alt="OpenTempl" draggable={false} style={{ display: 'block', flex: 'none' }} />;
 }
 
 // Wordmark set in the grotesk, tight, with the mark in front.
@@ -10,7 +10,7 @@ export function Wordmark({ size = 22, tone = 'ink' }: { size?: number; tone?: 'i
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: size * 0.4, fontWeight: 600, fontSize: size, letterSpacing: '-0.045em' }}>
       <Mark size={size * 1.25} tone={tone} />
-      tavla
+      OpenTempl
     </span>
   );
 }

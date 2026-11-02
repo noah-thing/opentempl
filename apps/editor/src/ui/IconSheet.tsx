@@ -4,7 +4,7 @@ import { ICON_NAMES, Icon } from './icons';
 export function IconSheet() {
   return (
     <div style={{ height: '100%', overflow: 'auto', padding: 32, background: '#fff' }}>
-      <h1 style={{ margin: '0 0 20px', fontWeight: 500, letterSpacing: '-0.03em' }}>Tavla pixel icons · {ICON_NAMES.length}</h1>
+      <h1 style={{ margin: '0 0 20px', fontWeight: 500, letterSpacing: '-0.03em' }}>OpenTempl pixel icons · {ICON_NAMES.length}</h1>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 12 }}>
         {ICON_NAMES.map((n) => (
           <div key={n} style={{ display: 'grid', justifyItems: 'center', gap: 6, padding: 10, borderRadius: 10, background: '#F4F4F6' }}>

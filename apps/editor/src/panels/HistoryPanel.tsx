@@ -55,7 +55,7 @@ export default function HistoryPanel() {
       >
         <Icon name="history" /> Save this moment
       </button>
-      <p className="hint">Tavla also keeps a version every ten minutes you spend editing. The newest 40 stay.</p>
+      <p className="hint">OpenTempl also keeps a version every ten minutes you spend editing. The newest 40 stay.</p>
       {list === null ? (
         <div className="hint">Loading</div>
       ) : !list.length ? (

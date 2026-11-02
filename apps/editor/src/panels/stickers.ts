@@ -1,5 +1,5 @@
-// Tavla's own sticker library: voxel tools, googly characters and glass shapes
-// made for Tavla, shipped with the app and free to use for anything.
+// OpenTempl's own sticker library: voxel tools, googly characters and glass shapes
+// made for OpenTempl, shipped with the app and free to use for anything.
 
 const base = `${import.meta.env.BASE_URL}library/stickers/`;
 

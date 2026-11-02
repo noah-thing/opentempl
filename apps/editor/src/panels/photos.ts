@@ -1,6 +1,6 @@
 const base = `${import.meta.env.BASE_URL}library/`;
 
-// Photos shot for Tavla's library (generated, so free of releases and licences).
+// Photos shot for OpenTempl's library (generated, so free of releases and licences).
 export const LIBRARY_PHOTOS: { url: string; thumb: string; name: string; w: number; h: number }[] = [
   ['portrait', 'Portrait in blue', 2, 3],
   ['archipelago', 'Archipelago at dusk', 3, 2],

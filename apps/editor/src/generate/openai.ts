@@ -2,9 +2,9 @@ import { LOOK_FORMATS, legacySize, type LookFormat } from './looks';
 
 // Talks to the OpenAI image API with the user's own key. The key is kept in
 // this browser's local storage (or the desktop app's) and is only ever sent to
-// api.openai.com. Nothing goes through a Tavla server; there isn't one.
+// api.openai.com. Nothing goes through a OpenTempl server; there isn't one.
 
-const KEY = 'tavla.openai';
+const KEY = 'tavla.openai'; // legacy name kept on purpose so saved keys keep working
 
 export interface AiSettings {
   key: string;

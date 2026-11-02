@@ -1,14 +1,19 @@
-// The footer wordmark: "tavla" drawn on a pixel grid. The counters of the two
-// a's hold pupils that follow the pointer, so the name looks back at you.
+// The footer wordmark: "opentempl" drawn on a pixel grid. The counter of the
+// o holds pupils that follow the pointer, so the name looks back at you.
 
 const GLYPHS: Record<string, string[]> = {
+  o: ['.###.', '#...#', '#...#', '#...#', '.###.'],
+  p: ['####.', '#...#', '#...#', '#...#', '####.', '#....', '#....'],
+  e: ['.###.', '#...#', '#####', '#....', '.####'],
+  n: ['#.##.', '##..#', '#...#', '#...#', '#...#'],
   t: ['.#..', '.#..', '####', '.#..', '.#..', '.#..', '..##'],
-  a: ['.....', '.....', '.###.', '....#', '.####', '#...#', '.####'],
-  v: ['.....', '.....', '#...#', '#...#', '#...#', '.#.#.', '..#..'],
+  m: ['##.#.', '#.#.#', '#.#.#', '#.#.#', '#.#.#'],
   l: ['##.', '.#.', '.#.', '.#.', '.#.', '.#.', '.##'],
 };
+// Rows each glyph starts at: lowercase letters sit two rows down, t and l reach the top.
+const TOP: Record<string, number> = { o: 2, p: 2, e: 2, n: 2, m: 2, t: 0, l: 0 };
 
-const WORD = 'tavla';
+const WORD = 'opentempl';
 const GAP = 1;
 
 export function initWordmark() {
@@ -20,19 +25,20 @@ export function initWordmark() {
   for (const ch of WORD) {
     const g = GLYPHS[ch];
     const w = g[0].length;
-    g.forEach((row, y) =>
+    g.forEach((row, r) => {
+      const y = r + TOP[ch];
       [...row].forEach((c, x) => {
         if (c === '#') cells.push(`<rect class="px" x="${cx + x + 0.06}" y="${y + 0.06}" width="0.88" height="0.88" rx="0.14" style="--d:${(cx + x) * 18 + y * 30}ms"/>`);
-      }),
-    );
-    // The bowl of an "a" is the empty row 5, columns 1 to 3: the eye lives there.
-    if (ch === 'a') eyes.push({ x: cx + 1, y: 5 });
+      });
+    });
+    // The o is hollow at row 4, columns 1 to 3: the eye lives there.
+    if (ch === 'o') eyes.push({ x: cx + 1, y: 4 });
     cx += w + GAP;
   }
   const W = cx - GAP;
-  const H = 7;
+  const H = 9;
   const pupils = eyes.map((e, i) => `<rect class="pupil" data-i="${i}" x="${e.x + 1.06}" y="${e.y + 0.06}" width="0.88" height="0.88" rx="0.3"/>`).join('');
-  host.innerHTML = `<svg viewBox="-0.2 -0.2 ${W + 0.4} ${H + 0.4}" role="img" aria-label="tavla"><style>
+  host.innerHTML = `<svg viewBox="-0.2 -0.2 ${W + 0.4} ${H + 0.4}" role="img" aria-label="OpenTempl"><style>
     .px{fill:#0B0B0D;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-box:fill-box;transform-origin:center}
     .px:hover{transform:scale(.6) rotate(12deg);fill:#2B3BFF}
     .pupil{fill:#2B3BFF;transition:x .18s ease-out, y .18s ease-out}

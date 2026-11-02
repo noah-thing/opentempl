@@ -1,4 +1,4 @@
-// Tavla tones: four short music loops synthesised in the browser, so a design
+// OpenTempl tones: four short music loops synthesised in the browser, so a design
 // can have music with no library, no licence and no download. Each one is a
 // chord loop in D (I, vi, IV, V) played by a few tiny instruments through a
 // shared room, rendered offline and written out as a WAV file.

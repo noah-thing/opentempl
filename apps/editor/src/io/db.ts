@@ -1,9 +1,9 @@
-// A small promise wrapper around IndexedDB for Tavla's app level data. Each
+// A small promise wrapper around IndexedDB for OpenTempl's app level data. Each
 // design's content lives in its own y-indexeddb database; this one holds the
 // index of designs, thumbnails, the uploads library, brand kits, versions and
 // video clips (media).
 
-const DB_NAME = 'tavla';
+const DB_NAME = 'tavla'; // legacy name kept on purpose, renaming it would orphan saved designs
 const VERSION = 2;
 export type StoreName = 'designs' | 'thumbs' | 'uploads' | 'brand' | 'versions' | 'settings' | 'media';
 

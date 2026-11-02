@@ -24,8 +24,8 @@
   align-items: center;
   gap: 12px;
   padding: 12px clamp(16px, 3vw, 40px);
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
-  backdrop-filter: blur(14px);
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--line-2);
 }
 .studio-top .home-brand {
   display: flex;

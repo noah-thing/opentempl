@@ -4,7 +4,7 @@ import { addLibraryItem, dragProps, type LibraryItem } from './library';
 import { Search, Section } from './controls';
 import { LIBRARY_PHOTOS } from './photos';
 
-// Photos: Tavla's own library first, then Openverse, a search over 700 million
+// Photos: OpenTempl's own library first, then Openverse, a search over 700 million
 // openly licensed images run by WordPress. No account, no key.
 
 interface OvResult {
@@ -77,11 +77,11 @@ export default function PhotosPanel() {
               </button>
             ))}
           </div>
-          <Section title="Tavla library">
+          <Section title="OpenTempl library">
             <p className="hint" style={{ margin: '-2px 0 8px' }}>
-              Made for Tavla. Free for anything, no credit needed.
+              Made for OpenTempl. Free for anything, no credit needed.
             </p>
-            <Masonry>{LIBRARY_PHOTOS.map((p) => tile({ kind: 'photo', url: p.url, name: p.name, w: p.w, h: p.h, credit: 'Tavla library' }, p.thumb, p.url))}</Masonry>
+            <Masonry>{LIBRARY_PHOTOS.map((p) => tile({ kind: 'photo', url: p.url, name: p.name, w: p.w, h: p.h, credit: 'OpenTempl library' }, p.thumb, p.url))}</Masonry>
           </Section>
         </>
       ) : results === null ? (
@@ -111,7 +111,7 @@ export default function PhotosPanel() {
             </button>
           ) : null}
           <p className="hint" style={{ marginTop: 12 }}>
-            Openverse photos keep their Creative Commons licences. Tavla saves the credit with each photo you place.
+            Openverse photos keep their Creative Commons licences. OpenTempl saves the credit with each photo you place.
           </p>
         </>
       )}

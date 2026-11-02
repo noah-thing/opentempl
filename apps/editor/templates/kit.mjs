@@ -1,4 +1,4 @@
-// The template kit: small helpers that write Tavla elements as plain JSON.
+// The template kit: small helpers that write OpenTempl elements as plain JSON.
 // Template sources live in templates/vibes/<vibe>.mjs and export an array of
 // tpl(...) results; scripts/build-templates.mjs turns them into lazy packs in
 // public/templates. Every helper takes design units (px at the page size) and

@@ -28,7 +28,7 @@ export function KeyDialog({ onClose }: { onClose: () => void }) {
         </div>
         <div className="dialog-body key-dialog">
           <p>
-            Tavla makes pictures with your own OpenAI account, so you pay OpenAI directly for what you use and nothing goes through us. Make a key at{' '}
+            OpenTempl makes pictures with your own OpenAI account, so you pay OpenAI directly for what you use and nothing goes through us. Make a key at{' '}
             <a href="https://platform.openai.com/api-keys" target="_blank" rel="noreferrer">
               platform.openai.com/api-keys
             </a>

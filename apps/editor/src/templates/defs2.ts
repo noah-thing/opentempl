@@ -347,7 +347,7 @@ export const DEFS2: TemplateDef[] = [
           sticker('char-blob-blue', 2160, 1700, 420, { rotation: -6 }),
           text('Vote with a dot →', 2100, 2160, 900, { fontFamily: 'Caveat', fontSize: 80, fontWeight: 700, color: COBALT }),
           makeTable(4, 3, { x: 2280, y: 600, w: 1500, h: 600, cells: [['Idea', 'Cost', 'Owner'], ['Film night', '4 000 kr', 'Saga'], ['Kids class', '800 kr', 'Omar'], ['Bakery collab', '0 kr', 'Maja']], fontSize: 40 }),
-          makeQr('https://tavla.app', { x: 3500, y: 2160, w: 300, h: 300 }),
+          makeQr('https://opentempl.org', { x: 3500, y: 2160, w: 300, h: 300 }),
         ],
       },
     ],

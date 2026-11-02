@@ -96,7 +96,7 @@ export async function importFiles(editor: Editor, files: File[], opts: { at?: Po
       await importVideo(editor, file, at);
       continue;
     }
-    editor.toast(`${file.name} is not an image or video Tavla can place yet`);
+    editor.toast(`${file.name} is not an image or video OpenTempl can place yet`);
   }
 }
 

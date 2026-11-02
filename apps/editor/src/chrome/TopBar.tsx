@@ -5,7 +5,7 @@ import { Icon } from '../ui/icons';
 import { Mark } from '../ui/Logo';
 import { Menu, Popover, usePopover, type MenuItem } from '../ui/Popover';
 import { navigate } from '../App';
-import { duplicateDesign, importTavla } from '../io/designs';
+import { duplicateDesign, importDesign } from '../io/designs';
 import { pickFiles, importFiles } from '../io/upload';
 import { usePeers } from '../collab/collab';
 import { saveVersion } from '../io/versions';
@@ -31,14 +31,14 @@ export function TopBar() {
       },
     },
     {
-      label: 'Open a .tavla file',
+      label: 'Open an .opentempl file',
       icon: 'folder',
       onClick: async () => {
-        const [f] = await pickFiles('.tavla');
+        const [f] = await pickFiles('.opentempl,.tavla');
         if (!f) return;
-        const id = await importTavla(f);
+        const id = await importDesign(f);
         if (id) navigate(`/d/${id}`);
-        else editor.toast('That file is not a Tavla design');
+        else editor.toast('That file is not an OpenTempl design');
       },
     },
     { label: 'Upload photos or videos', icon: 'upload', onClick: async () => importFiles(editor, await pickFiles()) },
@@ -91,7 +91,7 @@ export function TopBar() {
     { label: 'Dark theme', checked: isDark(), onClick: () => toggleTheme() },
     { label: 'Find and replace', icon: 'search', kbd: '⌘F', onClick: () => editor.ui.set({ findOpen: true }) },
     { separator: true },
-    { label: 'Download as .tavla file', icon: 'download', onClick: async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
+    { label: 'Download as .opentempl file', icon: 'download', onClick: async () => (await import('../export/exporters')).exportDesign(editor.doc, { format: 'tavla', pageIds: [], scale: 1, transparent: false, quality: 0.9, pdfQuality: 'standard' }) },
     { label: 'Keyboard shortcuts', icon: 'keyboard', kbd: '?', onClick: () => editor.ui.set({ shortcutsOpen: true }) },
     { label: 'Command palette', icon: 'command', kbd: '⌘K', onClick: () => editor.ui.set({ commandOpen: true }) },
   ];
@@ -124,7 +124,7 @@ export function TopBar() {
           e.stopPropagation();
           if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
         }}
-        onBlur={() => (document.title = `${editor.s.meta.title} · Tavla`)}
+        onBlur={() => (document.title = `${editor.s.meta.title} · OpenTempl`)}
         aria-label="Design title"
       />
       <span className="saved">

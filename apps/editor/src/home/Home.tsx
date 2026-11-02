@@ -2,7 +2,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { Sign, Wordmark } from '../ui/Logo';
 import { Icon } from '../ui/icons';
 import { navigate } from '../App';
-import { deleteDesign, duplicateDesign, getThumb, importTavla, listDesigns, onDesignsChange, updateEntry, type DesignEntry } from '../io/designs';
+import { deleteDesign, duplicateDesign, getThumb, importDesign, listDesigns, onDesignsChange, updateEntry, type DesignEntry } from '../io/designs';
 import { pickFiles } from '../io/upload';
 import { Menu, Popover, type MenuItem } from '../ui/Popover';
 import { TEMPLATES } from '../templates';
@@ -40,8 +40,8 @@ async function openFile(f: File) {
   const name = f.name.toLowerCase();
   if (name.endsWith('.pdf')) return navigate(`/d/${await (await import('../io/pdfImport')).importPdf(f)}`);
   if (name.endsWith('.pptx')) return navigate(`/d/${await (await import('../io/pptxImport')).importPptx(f)}`);
-  if (name.endsWith('.tavla')) {
-    const id = await importTavla(f);
+  if (name.endsWith('.opentempl') || name.endsWith('.tavla')) {
+    const id = await importDesign(f);
     if (id) navigate(`/d/${id}`);
   }
 }
@@ -62,7 +62,7 @@ export function Home() {
   const [onHero, setOnHero] = useState(true);
 
   useEffect(() => {
-    document.title = 'Tavla';
+    document.title = 'OpenTempl';
     const load = () =>
       listDesigns().then((list) => {
         setDesigns(list);
@@ -103,12 +103,12 @@ export function Home() {
       onDrop={(e) => {
         e.preventDefault();
         setDrop(false);
-        const f = [...e.dataTransfer.files].find((x) => /\.(pdf|pptx|tavla)$/i.test(x.name));
+        const f = [...e.dataTransfer.files].find((x) => /\.(pdf|pptx|opentempl|tavla)$/i.test(x.name));
         if (f) openFile(f);
       }}
     >
       <header className={`home-top ${onHero ? 'is-on-hero' : ''}`}>
-        <a className="home-brand" href="#/" aria-label="Tavla home">
+        <a className="home-brand" href="#/" aria-label="OpenTempl home">
           <Wordmark size={21} tone="lime" />
         </a>
         <nav className="home-nav">
@@ -120,13 +120,13 @@ export function Home() {
         <button
           className="btn btn-outline"
           onClick={async () => {
-            const [f] = await pickFiles('.tavla,.pdf,.pptx');
+            const [f] = await pickFiles('.opentempl,.tavla,.pdf,.pptx');
             if (f) openFile(f);
           }}
         >
           <Icon name="folder" /> Open a file
         </button>
-        <a className="btn btn-outline" href="https://github.com/noah-thing/tavla" target="_blank" rel="noreferrer">
+        <a className="btn btn-outline" href="https://github.com/noah-thing/opentempl" target="_blank" rel="noreferrer">
           Source
         </a>
       </header>
@@ -151,7 +151,7 @@ export function Home() {
                 <button
                   className="hero-btn is-ghost"
                   onClick={async () => {
-                    const [f] = await pickFiles('.tavla,.pdf,.pptx');
+                    const [f] = await pickFiles('.opentempl,.tavla,.pdf,.pptx');
                     if (f) openFile(f);
                   }}
                 >
@@ -250,7 +250,7 @@ export function Home() {
           ) : (
             <div className="home-empty">
               <Sign size={28} />
-              <p>{q ? `Nothing called “${q}”. Try another word.` : 'Nothing yet. Start from a format or a template, or drop a .tavla file, a PDF or a PowerPoint anywhere on this page.'}</p>
+              <p>{q ? `Nothing called “${q}”. Try another word.` : 'Nothing yet. Start from a format or a template, or drop an .opentempl file, a PDF or a PowerPoint anywhere on this page.'}</p>
             </div>
           )}
         </section>
@@ -327,7 +327,7 @@ export function Home() {
       </main>
       {drop ? (
         <div className="home-drop">
-          <span>Drop a .tavla, PDF or PowerPoint file to open it</span>
+          <span>Drop an .opentempl file, PDF or PowerPoint file to open it</span>
         </div>
       ) : null}
     </div>
