@@ -1,5 +1,5 @@
 import { tpl, page, T, S, rect, circle, L, img, overlay, svg, qr, pattern, path } from '../kit.mjs';
-import { R, f, curve, jit, dense, blobPts, blob, star, rectD, lineD, polyD, squig, halftone, P, fl, sk, circ, g, wrap, art, uid, flowerD, leafD, face, asterisk, roughFilter } from '../notes/hand-kit.mjs';
+import { R, f, curve, jit, dense, blobPts, blob, star, rectD, lineD, polyD, squig, halftone, P, fl, sk, circ, g, wrap, art, uid, flowerD, leafD, face, asterisk, roughFilter } from '../hand-kit.mjs';
 
 const PAPER = '#F3EDDF';
 const PINK = '#FF48B0';
