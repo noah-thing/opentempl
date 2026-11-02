@@ -5,6 +5,8 @@
 	"compatibility_date": "2026-08-01",
 	// Nothing is logged, and no payload is ever read by the worker anyway: rooms hold ciphertext.
 	"observability": { "enabled": false },
+	// Socket opens per address per minute, checked before a room is ever woken.
+	"ratelimits": [{ "name": "OPENS", "namespace_id": "4101", "simple": { "limit": 30, "period": 60 } }],
 	"durable_objects": { "bindings": [{ "name": "ROOMS", "class_name": "Room" }] },
 	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["Room"] }],
 	// Origins allowed to open a socket: the site, the desktop app, and local development.

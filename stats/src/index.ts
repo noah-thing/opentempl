@@ -14,6 +14,7 @@ import { allowedOrigin, cleanEmail, EVENTS, PLATFORMS, SOURCES, UUID, VERSION } 
 interface Env {
 	DB: D1Database;
 	STATS_KEY: string;
+	CALLS?: RateLimit;
 }
 
 const MAX_BODY = 4 * 1024;
@@ -189,6 +190,10 @@ async function route(req: Request, env: Env, ctx: ExecutionContext): Promise<Res
 	const { pathname } = url;
 	if (req.method === 'OPTIONS') {
 		return new Response(null, { status: 204, headers: { 'access-control-allow-methods': 'GET, POST', 'access-control-allow-headers': 'content-type', 'access-control-max-age': '86400' } });
+	}
+	if (req.method === 'POST' || pathname === '/v1/unsubscribe' || pathname.startsWith('/stats')) {
+		const ip = req.headers.get('cf-connecting-ip');
+		if (ip && env.CALLS && !(await env.CALLS.limit({ key: ip })).success) { return new Response('too many', { status: 429 }); }
 	}
 	if (req.method === 'POST') {
 		if (pathname === '/v1/ping') { return ping(req, env); }

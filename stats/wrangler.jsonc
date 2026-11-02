@@ -5,6 +5,8 @@
 	"compatibility_date": "2026-10-15",
 	// Requests are not logged: the worker keeps only what migrations/0001_init.sql defines.
 	"observability": { "enabled": false },
+	// Requests per address per minute, so a flood is turned away before it reaches the database.
+	"ratelimits": [{ "name": "CALLS", "namespace_id": "4102", "simple": { "limit": 60, "period": 60 } }],
 	"d1_databases": [
 		{ "binding": "DB", "database_name": "opentempl-stats", "database_id": "4bfe2fb6-cc2b-411b-b408-6e74ced0f41e", "migrations_dir": "migrations" }
 	]

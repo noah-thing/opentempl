@@ -21,6 +21,8 @@ export default {
     if (request.headers.get('Upgrade') !== 'websocket') return new Response('Expected a WebSocket', { status: 426 });
     if (!originAllowed(request.headers.get('Origin'), env)) return new Response('Origin not allowed', { status: 403 });
     if (!ROOM_ID_PATTERN.test(match[1])) return new Response('Bad room id', { status: 400 });
+    const ip = request.headers.get('cf-connecting-ip');
+    if (ip && env.OPENS && !(await env.OPENS.limit({ key: ip })).success) return new Response('Too many connections', { status: 429 });
 
     return env.ROOMS.get(env.ROOMS.idFromName(match[1])).fetch(request);
   },
