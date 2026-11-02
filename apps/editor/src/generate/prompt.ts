@@ -1,4 +1,4 @@
-import { LOOK_FORMATS, styleRefs, zonesFor, type Look, type LookFormat, type TextRole } from './looks';
+import { LOOK_FORMATS, legacySize, styleRefs, zonesFor, type Look, type LookFormat, type TextRole } from './looks';
 
 // The prompt composer. No model writes these prompts: they are assembled from
 // the Look's art direction and the user's brief, so the same input always gives
@@ -66,6 +66,18 @@ const ROLE_LABEL: Record<TextRole, string> = { headline: 'headline', subline: 's
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 const list = (xs: string[]) => xs.filter(Boolean).map((x) => `- ${x}`).join('\n');
 
+// ChatGPT's image tool only makes 1:1, 2:3 and 3:2, and errors on anything else, so it gets the
+// nearest of those and is told which edges OpenTempl trims to reach the real format.
+function chatShape(format: LookFormat) {
+  const f = LOOK_FORMATS[format];
+  const size = legacySize(format);
+  const [gw, gh] = size.split('x').map(Number);
+  const shape = gw === gh ? 'square (1:1)' : gw > gh ? 'wide landscape (3:2)' : 'tall portrait (2:3)';
+  const target = f.width / f.height, made = gw / gh;
+  const trim = Math.abs(target - made) < 0.02 ? '' : target < made ? 'left and right' : 'top and bottom';
+  return { shape, note: trim ? ` It will be trimmed to ${f.aspect}, so keep the subject and every word away from the ${trim} edges.` : '' };
+}
+
 export interface ComposeOptions {
   forChatGPT?: boolean; // adds a line asking it to make the image now, and how references were attached
 }
@@ -83,7 +95,9 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
   if (opts.forChatGPT)
     out.push(`Use your image generation tool to make one picture from this brief. It must be a generated image, not code, and do not describe the design instead of making it.\n`);
   out.push(
-    `Create a finished graphic design: a ${f.name.toLowerCase()} in ${f.aspect} format. It is for: ${subject}.`,
+    opts.forChatGPT
+      ? `Create a finished graphic design: a ${f.name.toLowerCase()}, made as a ${chatShape(brief.format).shape} image.${chatShape(brief.format).note} It is for: ${subject}.`
+      : `Create a finished graphic design: a ${f.name.toLowerCase()} in ${f.aspect} format. It is for: ${subject}.`,
     `It must look designed and made by hand by a skilled human designer and illustrator, in the style described below. Treat the style as a strict art direction.`,
   );
 
@@ -145,7 +159,7 @@ export function composePrompt(look: Look, briefIn: Brief, opts: ComposeOptions =
   if (opts.forChatGPT) {
     out.push(
       `\nDo not search the web or look anything up: work only from this brief, so nothing from elsewhere leaks into the design.`,
-      `Make the image now, in ${f.aspect} format, without asking questions first.`,
+      `Make the image now as a ${chatShape(brief.format).shape} image, without asking questions first.`,
     );
     // Honest context for ChatGPT and for anyone the chat gets shared with.
     out.push(`(Brief written with OpenTempl, the free, open source design app at opentempl.org. The designer brings the picture back there to set and edit the words.)`);

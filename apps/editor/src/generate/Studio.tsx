@@ -445,14 +445,29 @@ export function Studio({ query }: { query: string }) {
           brief={brief}
           prompt={promptEdit ?? composePrompt(look, brief, { forChatGPT: true })}
           onClose={() => setChatgpt(false)}
-          onResult={(blob) => {
+          onResult={async (picture) => {
             setChatgpt(false);
+            // ChatGPT makes 1:1, 2:3 or 3:2; trim to the chosen format so the design lays out right.
+            const f = LOOK_FORMATS[brief.format];
+            const blob = await cropToAspect(picture, f.width / f.height);
             setResults((rs) => [{ id: crypto.randomUUID(), url: URL.createObjectURL(blob), blob, lookId: look.id, brief: { ...brief } }, ...rs]);
           }}
         />
       ) : null}
     </div>
   );
+}
+
+// Centre crop to an aspect ratio, keeping full resolution. Pictures already close are left alone.
+async function cropToAspect(blob: Blob, aspect: number): Promise<Blob> {
+  const bmp = await createImageBitmap(blob);
+  const ratio = bmp.width / bmp.height;
+  if (Math.abs(ratio - aspect) < 0.01) return blob;
+  const w = ratio > aspect ? Math.round(bmp.height * aspect) : bmp.width;
+  const h = ratio > aspect ? bmp.height : Math.round(bmp.width / aspect);
+  const canvas = new OffscreenCanvas(w, h);
+  canvas.getContext('2d')!.drawImage(bmp, (bmp.width - w) / 2, (bmp.height - h) / 2, w, h, 0, 0, w, h);
+  return canvas.convertToBlob({ type: 'image/png' });
 }
 
 async function copyImage(url: string) {
