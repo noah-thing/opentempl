@@ -1,0 +1,7 @@
+# Built by seo/build.mjs and scripts/build-templates.mjs; kept in the repo so the site deploys
+# without a render step. Marked generated so they stay out of diffs and the language stats.
+apps/editor/public/*.html linguist-generated
+apps/editor/public/**/*.html linguist-generated
+apps/editor/public/templates/*.json linguist-generated
+apps/editor/public/llms*.txt linguist-generated
+apps/site/** linguist-vendored
