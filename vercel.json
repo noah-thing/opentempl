@@ -89,6 +89,11 @@
   "functions": {
     "api/mcp.ts": {
       "maxDuration": 120
+    },
+    "api/render.ts": {
+      "maxDuration": 60,
+      "memory": 2048,
+      "includeFiles": "node_modules/@sparticuz/chromium/bin/**"
     }
   }
 }

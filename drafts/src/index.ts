@@ -7,7 +7,8 @@
  * draft is deleted 90 days after it last changed.
  *
  * It also draws previews, so the assistant can see what it made: a headless browser opens the editor's
- * render page and draws the draft through the same export code the editor uses.
+ * render page and draws the draft through the same export code the editor uses. The browser is the
+ * site's own /api/render function while this month's budget lasts, then Cloudflare Browser Rendering.
  */
 
 import puppeteer, { type Browser, type Page } from '@cloudflare/puppeteer';
@@ -23,7 +24,10 @@ interface Env {
 const MAX_BODY = 256 * 1024;
 const KEEP_DAYS = 90;
 const ID = /^[A-Za-z0-9]{12}$/;
-const KEEP_ALIVE_MS = 45_000;
+const KEEP_ALIVE_MS = 12_000;
+// Previews a month drawn by the Vercel function before falling back to Browser Rendering. Well under
+// what the Hobby plan's included compute covers, so the site's functions never get paused.
+const VERCEL_BUDGET = 3000;
 
 function sameKey(a: string, b: string): boolean {
 	if (!a || !b || a.length !== b.length) { return false; }
@@ -95,6 +99,22 @@ async function render(req: Request, env: Env): Promise<Response> {
 		body = JSON.parse(text);
 	} catch {
 		return json({ error: 'bad_json' }, 400);
+	}
+	const month = new Date().toISOString().slice(0, 7);
+	const used = await env.DB.prepare('INSERT INTO usage (month, renders) VALUES (?1, 1) ON CONFLICT (month) DO UPDATE SET renders = renders + 1 RETURNING renders')
+		.bind(month).first<{ renders: number }>().catch(() => null);
+	if (used && used.renders <= VERCEL_BUDGET) {
+		try {
+			const res = await fetch(`${env.RENDER_SITE}/api/render`, {
+				method: 'POST',
+				headers: { authorization: `Bearer ${env.DRAFTS_KEY}`, 'content-type': 'application/json' },
+				body: text,
+				signal: AbortSignal.timeout(55_000),
+			});
+			if (res.ok) { return new Response(res.body, { headers: { 'content-type': 'application/json' } }); }
+		} catch {
+			/* falls back to Browser Rendering */
+		}
 	}
 	let browser: Browser;
 	try {
