@@ -23,6 +23,19 @@ function bytesToDataUrl(bytes: Uint8Array, mime: string) {
   return url;
 }
 
+// The words set in each family on a page, so only the parts of a font they need get embedded.
+function textByFamily(page: Page, elements: Record<Id, Element>) {
+  const out = new Map<string, string>();
+  const add = (f: string, t: string) => out.set(f, (out.get(f) ?? '') + t);
+  for (const id of page.elementIds) {
+    const el = elements[id];
+    if (el?.type === 'text') add(el.fontFamily, el.uppercase ? el.text.toUpperCase() : el.text);
+    if (el?.type === 'table') add(el.fontFamily, el.cells.flat().join(''));
+    if (el?.type === 'chart') add(el.fontFamily, [...el.labels, ...el.series.map((s) => s.name)].join(''));
+  }
+  return out;
+}
+
 export function fontsUsed(page: Page, elements: Record<Id, Element>) {
   const set = new Set<string>();
   for (const id of page.elementIds) {
@@ -46,7 +59,8 @@ export async function pageSvg(doc: DesignDoc, snap: DesignSnapshot, pageId: Id, 
   const page = snap.pages[pageId];
   const families = fontsUsed(page, snap.elements);
   await Promise.all(families.map((f) => ensureFont(f)));
-  const css = opts.embedFonts === false ? '' : (await Promise.all(families.map((f) => embeddedFontCss(f)))).join('\n');
+  const words = textByFamily(page, snap.elements);
+  const css = opts.embedFonts === false ? '' : (await Promise.all(families.map((f) => embeddedFontCss(f, words.get(f))))).join('\n');
   const env: RenderEnv = {
     assetUrl: (id) => {
       const a = doc.getAsset(id);
@@ -186,7 +200,8 @@ export async function elementSvg(doc: DesignDoc, snap: DesignSnapshot, id: Id) {
   const pad = el.shadow ? el.shadow.blur + Math.max(Math.abs(el.shadow.x), Math.abs(el.shadow.y)) : el.type === 'text' && el.effect.kind !== 'none' ? el.fontSize * 0.4 : 2;
   const fams = 'fontFamily' in el ? [el.fontFamily, 'Host Grotesk'] : [];
   await Promise.all(fams.map((f) => ensureFont(f)));
-  const css = (await Promise.all(fams.map((f) => embeddedFontCss(f)))).join('\n');
+  const words = el.type === 'text' ? el.text : el.type === 'table' ? el.cells.flat().join('') : el.type === 'chart' ? el.labels.join('') : '';
+  const css = (await Promise.all(fams.map((f) => embeddedFontCss(f, words)))).join('\n');
   const env: RenderEnv = {
     assetUrl: (a) => {
       const asset = doc.getAsset(a);

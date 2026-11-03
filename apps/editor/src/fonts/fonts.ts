@@ -111,7 +111,8 @@ export function previewFont(family: string) {
 }
 
 // ---------- export embedding ----------
-const embedded = new Map<string, Promise<string>>();
+const sheets = new Map<string, Promise<string>>();
+const files = new Map<string, Promise<string>>();
 
 async function toDataUrl(url: string) {
   const res = await fetch(url);
@@ -123,27 +124,50 @@ async function toDataUrl(url: string) {
   });
 }
 
+function unicodeRanges(face: string): [number, number][] {
+  const m = face.match(/unicode-range:([^;]+);/);
+  if (!m) return [[0, 0x10ffff]];
+  return m[1].split(',').map((r) => {
+    const [a, b] = r.trim().replace(/^U\+/i, '').split('-');
+    return [parseInt(a, 16), parseInt(b ?? a, 16)] as [number, number];
+  });
+}
+
 // CSS with @font-face rules whose sources are inlined as data URLs, so an SVG
-// drawn into a canvas (which cannot fetch) still has its fonts.
-export function embeddedFontCss(family: string): Promise<string> {
-  let p = embedded.get(family);
-  if (!p) {
-    p = (async () => {
-      if (!byFamily.has(family)) return '';
-      try {
-        const css = await (await fetch(cssUrl(family))).text();
-        // Only keep latin and latin-ext subsets to keep exports small.
-        const blocks = css.split('/*').filter((b) => /latin/.test(b.slice(0, 40)) || !b.includes('*/'));
-        const kept = blocks.length ? blocks.map((b) => '/*' + b).join('') : css;
-        const urls = [...kept.matchAll(/url\((https:[^)]+)\)/g)].map((m) => m[1]);
-        let out = kept;
-        for (const u of new Set(urls)) out = out.split(u).join(await toDataUrl(u));
-        return out;
-      } catch {
-        return '';
-      }
-    })();
-    embedded.set(family, p);
+// drawn into a canvas (which cannot fetch) still has its fonts. Google splits a
+// family into pieces by script; the Latin piece always comes along, and any other
+// piece only when the text needs it (Korean and Japanese families have a hundred).
+export async function embeddedFontCss(family: string, text = ''): Promise<string> {
+  if (!byFamily.has(family)) return '';
+  try {
+    let sheet = sheets.get(family);
+    if (!sheet) {
+      sheet = fetch(cssUrl(family)).then((r) => r.text());
+      sheet.catch(() => sheets.delete(family));
+      sheets.set(family, sheet);
+    }
+    const faces = (await sheet).match(/@font-face\s*{[^}]*}/g) ?? [];
+    const used = [...new Set([...text].map((c) => c.codePointAt(0)!))];
+    const kept = faces.filter((f) => {
+      const ranges = unicodeRanges(f);
+      const has = (cp: number) => ranges.some(([a, b]) => cp >= a && cp <= b);
+      return has(0x41) || used.some(has);
+    });
+    const out = await Promise.all(
+      kept.map(async (f) => {
+        const url = f.match(/url\((https:[^)]+)\)/)?.[1];
+        if (!url) return f;
+        let data = files.get(url);
+        if (!data) {
+          data = toDataUrl(url);
+          data.catch(() => files.delete(url));
+          files.set(url, data);
+        }
+        return f.split(url).join(await data);
+      }),
+    );
+    return out.join('\n');
+  } catch {
+    return '';
   }
-  return p;
 }
