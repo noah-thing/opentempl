@@ -64,15 +64,9 @@ jobs:
       - name: Start the app
         shell: powershell
         run: |
-          $entry = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Where-Object { $_.DisplayName -like 'OpenTempl*' } | Select-Object -First 1
-          $entry | Format-List DisplayName, DisplayVersion, InstallLocation
-          $p = Start-Process -FilePath (Join-Path $entry.InstallLocation 'OpenTempl.exe') -PassThru
+          $app = Get-ChildItem -Path "$env:LOCALAPPDATA\Programs" -Filter 'OpenTempl.exe' -Recurse -Depth 1 | Select-Object -First 1 -ExpandProperty FullName
+          Write-Host $app
+          $p = Start-Process -FilePath $app -PassThru
           Start-Sleep -Seconds 20
           if ($p.HasExited) { throw "the app exited with $($p.ExitCode)" }
           Stop-Process -Id $p.Id -Force
-      - name: Show where the installer put things
-        if: failure()
-        shell: powershell
-        run: |
-          Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*', 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match 'templ' } | Format-List *
-          Get-ChildItem -Path $env:LOCALAPPDATA, $env:ProgramFiles, $env:APPDATA -Filter 'OpenTempl*.exe' -Recurse -Depth 3 -ErrorAction SilentlyContinue | Select-Object FullName

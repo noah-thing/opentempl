@@ -58,11 +58,10 @@
     Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
   }
 
-  # The installer records where it put the app; the folder name comes from the package name, not the product name.
-  $entry = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' -ErrorAction SilentlyContinue |
-    Where-Object { $_.DisplayName -like 'OpenTempl*' } | Select-Object -First 1
-  $app = if ($entry -and $entry.InstallLocation) { Join-Path $entry.InstallLocation 'OpenTempl.exe' }
-  if (-not $app -or -not (Test-Path $app)) { throw 'The installer finished, but OpenTempl.exe could not be found.' }
+  # The install folder is named after the npm package (Programs\@opentempldesktop), so look for the exe instead of guessing.
+  $app = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA 'Programs') -Filter 'OpenTempl.exe' -Recurse -Depth 1 -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending | Select-Object -First 1 -ExpandProperty FullName
+  if (-not $app) { throw 'The installer finished, but OpenTempl.exe could not be found.' }
   Write-Host "Installed OpenTempl $version. It is in the Start menu."
   if (-not $env:OPENTEMPL_NO_OPEN) { Start-Process -FilePath $app }
 }
