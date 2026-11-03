@@ -26,7 +26,10 @@ self.addEventListener('fetch', (e) => {
   if (!sameOrigin && !fonts) return;
   e.respondWith(
     caches.open(CACHE).then(async (cache) => {
-      const hit = await cache.match(req, { ignoreSearch: req.mode === 'navigate' });
+      let hit = await cache.match(req, { ignoreSearch: req.mode === 'navigate' });
+      // A stylesheet loaded by <link> is cached opaque. Handing that to fetch() (which exports
+      // use to embed fonts) fails, so CORS requests skip it and replace it with a readable copy.
+      if (hit && hit.type === 'opaque' && req.mode === 'cors') hit = undefined;
       const fresh = fetch(req)
         .then((res) => {
           if (res.ok || res.type === 'opaque') cache.put(req, res.clone());
