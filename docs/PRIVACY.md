@@ -30,6 +30,12 @@ Sharing a design is the one time a copy of it leaves your device, and it leaves 
 
 The code is in [`sync/`](../sync) and [`apps/editor/src/collab/`](../apps/editor/src/collab).
 
+## Designs made by an assistant (MCP)
+
+If you connect an AI assistant to the OpenTempl MCP server (`opentempl.org/api/mcp`), the designs it makes are not on your device yet: the assistant sends the steps that build each one (the template it started from, the words, colours, positions and photo links) to the server, which keeps them in a Cloudflare D1 database so the design's link can open it. Anyone with that link can open the design, the same as a share link; the id in it is random. A design is deleted 90 days after its last change. Nothing about who asked for it is stored: no account, name or address. To draw previews for the assistant, the same Worker opens the editor in a headless browser (Cloudflare Browser Rendering), which fetches the photos the design uses.
+
+Opening the link builds an ordinary design on your device. From then on it is like any other design, and changes you make stay on your device. The code is in [`mcp/`](../mcp), [`api/mcp.ts`](../api/mcp.ts) and [`drafts/`](../drafts).
+
 ## Email list (optional)
 
 The newsletter form in the footer, and the note after your first export, are the only places OpenTempl asks for an email address, and you never need to fill them in. If you do, the server stores the address in lowercase, when you signed up, which form you used, and a random unsubscribe token. The address is used for one thing: telling you when there are new templates, about once a month. It is never sold or shared.

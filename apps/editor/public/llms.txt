@@ -11,6 +11,7 @@ Key facts:
 - Works offline after the first load and creates new designs offline. Designs are saved on your device. Fonts, icon search, stock photos and live sessions need a connection.
 - Imports PDF and PowerPoint. Exports PNG (transparent), JPG, WebP, SVG, PDF (print with bleed and crop marks), PowerPoint, MP4 and GIF.
 - Generate tab: images in 32 styles with your own OpenAI key. OpenAI bills the user.
+- MCP server at https://opentempl.org/api/mcp: Claude, ChatGPT, Cursor and other MCP clients can search templates, build and edit designs, see rendered previews and hand back a link that opens the design in the editor. Free, no key. Setup: https://opentempl.org/mcp
 - Runs in the browser at https://opentempl.org; desktop builds for macOS, Windows and Linux ship with the first release.
 - Not the same as the Total.js OpenTemplates engine, the OpenTemplate PHP engine or OpenTemplate.org.
 - Does not have: team workspaces, a phone app, cloud sync, CMYK output.

@@ -53,6 +53,7 @@ Designs are saved in your browser or in the desktop app, as files you own. There
 - **Import.** PDF and PowerPoint files come in with editable text.
 - **Export.** PNG, JPG, PDF, SVG, PowerPoint and GIF, plus video of animated pages.
 - **Offline.** Works offline after the first load.
+- **For AI assistants.** An MCP server lets Claude, ChatGPT, Cursor and other assistants design in OpenTempl: search templates, build and edit designs, check a rendered preview of every change, and hand you a link that opens the result in the editor. Add `https://opentempl.org/api/mcp` as a connector; [setup for each app](https://opentempl.org/mcp).
 
 Not here yet: team workspaces, a phone app, CMYK output.
 
@@ -83,7 +84,9 @@ OpenTempl counts anonymously how many copies are in use and how often a few acti
 apps/editor/     the editor (React, TypeScript, Yjs, Vite); also what opentempl.org serves
 apps/desktop/    Electron shell that packages the editor for macOS, Windows and Linux
 apps/site/       an earlier marketing site, no longer deployed
-api/             Vercel function that proxies Unsplash so the key stays on the server
+api/             Vercel functions: the Unsplash proxy and the MCP server endpoint
+mcp/             the MCP server: tools, the design guide, and the draft format the editor also reads
+drafts/          Cloudflare Worker that keeps MCP designs until opened and renders their previews
 stats/           Cloudflare Worker for the anonymous counts and the email list
 sync/            Cloudflare Worker for the encrypted live sharing relay
 seo/             generator for the static pages on opentempl.org (guides, templates, sitemap)
