@@ -1,0 +1,19 @@
+{
+  "name": "opentempl-drafts",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Holds designs made through the OpenTempl MCP server until someone opens them, as a Cloudflare Worker.",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "migrate": "npx wrangler d1 migrations apply opentempl-drafts --remote",
+    "deploy": "npx wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260101.0",
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "@cloudflare/puppeteer": "^1.4.0"
+  }
+}

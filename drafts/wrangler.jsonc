@@ -1,0 +1,16 @@
+{
+	"$schema": "https://unpkg.com/wrangler@4.125.0/config-schema.json",
+	"name": "opentempl-drafts",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-10-15",
+	"observability": { "enabled": false },
+	"compatibility_flags": ["nodejs_compat"],
+	"browser": { "binding": "BROWSER" },
+	"vars": { "RENDER_SITE": "https://opentempl.org" },
+	"ratelimits": [{ "name": "READS", "namespace_id": "4103", "simple": { "limit": 60, "period": 60 } }],
+	"d1_databases": [
+		{ "binding": "DB", "database_name": "opentempl-drafts", "database_id": "1ce1ef65-c5c6-4c56-959e-9f90f5086773", "migrations_dir": "migrations" }
+	],
+	// Drafts nobody has touched for 90 days are removed once a day.
+	"triggers": { "crons": ["17 3 * * *"] }
+}
