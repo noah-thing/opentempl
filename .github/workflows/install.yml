@@ -64,7 +64,9 @@ jobs:
       - name: Start the app
         shell: powershell
         run: |
-          $p = Start-Process -FilePath "$env:LOCALAPPDATA\Programs\OpenTempl\OpenTempl.exe" -PassThru
+          $entry = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Where-Object { $_.DisplayName -like 'OpenTempl*' } | Select-Object -First 1
+          $entry | Format-List DisplayName, DisplayVersion, InstallLocation
+          $p = Start-Process -FilePath (Join-Path $entry.InstallLocation 'OpenTempl.exe') -PassThru
           Start-Sleep -Seconds 20
           if ($p.HasExited) { throw "the app exited with $($p.ExitCode)" }
           Stop-Process -Id $p.Id -Force

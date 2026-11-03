@@ -58,8 +58,11 @@
     Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
   }
 
-  $app = Join-Path $env:LOCALAPPDATA 'Programs\OpenTempl\OpenTempl.exe'
-  if (-not (Test-Path $app)) { throw "The installer finished, but $app is not there." }
+  # The installer records where it put the app; the folder name comes from the package name, not the product name.
+  $entry = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' -ErrorAction SilentlyContinue |
+    Where-Object { $_.DisplayName -like 'OpenTempl*' } | Select-Object -First 1
+  $app = if ($entry -and $entry.InstallLocation) { Join-Path $entry.InstallLocation 'OpenTempl.exe' }
+  if (-not $app -or -not (Test-Path $app)) { throw 'The installer finished, but OpenTempl.exe could not be found.' }
   Write-Host "Installed OpenTempl $version. It is in the Start menu."
   if (-not $env:OPENTEMPL_NO_OPEN) { Start-Process -FilePath $app }
 }
