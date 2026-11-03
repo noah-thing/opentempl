@@ -9,7 +9,7 @@ const INSTALL = 'opentempl:install';
 const SHARE = 'opentempl:share-counts';
 const PINGED = 'opentempl:pinged';
 
-export type StatEvent = 'design_created' | 'template_opened' | 'export' | 'generate_used' | 'chatgpt_used' | 'photo_placed';
+export type StatEvent = 'design_created' | 'template_opened' | 'export' | 'generate_used' | 'chatgpt_used' | 'photo_placed' | 'mcp_opened';
 type Platform = 'web' | 'mac' | 'win' | 'linux';
 
 function read(key: string): string | null {

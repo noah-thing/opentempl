@@ -1,7 +1,7 @@
 export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 export const VERSION = /^\d{1,3}\.\d{1,3}\.\d{1,3}(?:-[0-9a-z.]{1,20})?$/;
 export const PLATFORMS = new Set(['web', 'mac', 'win', 'linux']);
-export const EVENTS = new Set(['design_created', 'template_opened', 'export', 'generate_used', 'chatgpt_used', 'photo_placed']);
+export const EVENTS = new Set(['design_created', 'template_opened', 'export', 'generate_used', 'chatgpt_used', 'photo_placed', 'mcp_opened']);
 export const SOURCES = new Set(['footer', 'export']);
 
 const EMAIL = /^[^\s@<>()[\]\\,;:"]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/;

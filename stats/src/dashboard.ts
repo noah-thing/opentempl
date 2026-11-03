@@ -20,6 +20,7 @@ const EVENT_NAME: Record<string, string> = {
 	export: 'Exports',
 	generate_used: 'Generate used',
 	chatgpt_used: 'ChatGPT dialog opened',
+	mcp_opened: 'Design opened from an assistant',
 	photo_placed: 'Photos placed',
 };
 

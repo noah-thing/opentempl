@@ -11,11 +11,14 @@ import { IconSheet } from './ui/IconSheet';
 import { ErrorBoundary } from './ui/ErrorBoundary';
 import { Presenter } from './present/Presenter';
 import { RenderTemplate } from './templates/RenderTemplate';
+import { OpenDraft } from './agent/OpenDraft';
+
+const RenderDraft = lazy(() => import('./agent/RenderDraft').then((m) => ({ default: m.RenderDraft })));
 
 const Studio = lazy(() => import('./generate/Studio').then((m) => ({ default: m.Studio })));
 
 // Hash routes: #/ home, #/start sizes and tools, #/templates home at the wall,
-// #/d/<id> editor, #/new?format=<id>&template=<id>
+// #/d/<id> editor, #/new?format=<id>&template=<id>, #/open/<draft> a design from the MCP server
 function useHash() {
   const [hash, setHash] = useState(() => window.location.hash);
   useEffect(() => {
@@ -69,6 +72,13 @@ export function App() {
     return (
       <Suspense fallback={<Loading label="Opening the looks" />}>
         <Studio query={path.split('?')[1] ?? ''} />
+      </Suspense>
+    );
+  if (path.startsWith('/open/')) return <OpenDraft id={path.slice(6).split('?')[0]} />;
+  if (path === '/mcp-render')
+    return (
+      <Suspense fallback={null}>
+        <RenderDraft />
       </Suspense>
     );
   if (path.startsWith('/render')) return <RenderTemplate query={path.split('?')[1] ?? ''} />;
