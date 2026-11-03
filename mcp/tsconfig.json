@@ -10,5 +10,5 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["*.ts", "../api/mcp.ts", "../api/render.ts"]
+  "include": ["*.ts", "../api/mcp.ts"]
 }
