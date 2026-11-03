@@ -3,5 +3,6 @@
 apps/editor/public/*.html linguist-generated
 apps/editor/public/**/*.html linguist-generated
 apps/editor/public/templates/*.json linguist-generated
+apps/editor/public/mcp/catalog.json linguist-generated
 apps/editor/public/llms*.txt linguist-generated
 apps/site/** linguist-vendored
