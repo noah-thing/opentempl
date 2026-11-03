@@ -15,6 +15,9 @@ import { Subscribe } from '../ui/Subscribe';
 import { SHOW_USAGE_FROM, useUsage } from '../stats/client';
 import './home.css';
 
+// Inside the desktop app the download page has nothing to offer.
+const DESKTOP_LINK = !window.tavlaDesktop;
+
 // Home: the hero poster (search, a blank format, or a template from the sentence),
 // your designs, the Looks that lead into Generate, and the whole template wall.
 
@@ -143,6 +146,7 @@ export function Home({ jump }: { jump?: 'templates' } = {}) {
         <nav className="home-nav">
           <button onClick={() => wallRef.current?.scrollIntoView({ behavior: 'smooth' })}>Templates</button>
           <a href="#/generate">Generate</a>
+          {DESKTOP_LINK ? <a href="/download">Desktop app</a> : null}
           <button onClick={() => document.getElementById('your-designs')?.scrollIntoView({ behavior: 'smooth' })}>Your designs</button>
         </nav>
         <div className="grow" />
@@ -164,6 +168,7 @@ export function Home({ jump }: { jump?: 'templates' } = {}) {
             <a href="#/generate">Generate</a>
             <button onClick={() => document.getElementById('your-designs')?.scrollIntoView({ behavior: 'smooth' })}>Your designs</button>
             <button onClick={openPicked}>Open a file</button>
+            {DESKTOP_LINK ? <a href="/download">Desktop app</a> : null}
             {SHOW_SOURCE ? (
               <a href={REPO_URL} target="_blank" rel="noreferrer">
                 GitHub
@@ -195,6 +200,11 @@ export function Home({ jump }: { jump?: 'templates' } = {}) {
                   Browse templates
                 </button>
               </div>
+              {DESKTOP_LINK ? (
+                <a className="hero-desktop" href="/download">
+                  <Icon name="download" size={15} /> Desktop app for Mac, Windows and Linux
+                </a>
+              ) : null}
               <div className="hero-credit">
                 <Credit />
               </div>
@@ -365,6 +375,11 @@ export function Home({ jump }: { jump?: 'templates' } = {}) {
           <Wordmark size={15} />
           <span>Free and open source. Everything you make stays on this computer.</span>
           <span className="grow" />
+          {DESKTOP_LINK ? (
+            <a className="home-foot-link" href="/download">
+              Desktop app
+            </a>
+          ) : null}
           <GitHubLink label />
           <Credit />
         </footer>

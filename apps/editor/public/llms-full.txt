@@ -1525,23 +1525,24 @@ OpenTempl is a free, open source (MIT) design app for posters, social media post
 
 ---
 
-# Download OpenTempl: web app and desktop builds
+# Download OpenTempl for Mac, Windows and Linux
 
 URL: https://opentempl.org/download
 Updated: 2026-11-02
 
-Use OpenTempl
+Download OpenTempl
 
-OpenTempl runs in your browser and works offline once it has loaded. The desktop app for Mac, Windows and Linux is the same editor in its own window.
+The desktop app is the whole editor in its own window. It works offline, keeps your designs on your computer and costs nothing.
 
- Web app 
- Open https://opentempl.org. Chrome and Edge may offer to install it as an app, which then opens without a browser window. Your designs are saved on your device. Clear the site data and they go with it, so save a file for anything you want to keep. 
- Desktop app 
- Version 0.1.0. Every build is listed with its checksum on the  release page . 
-   macOS, Apple silicon  (M1 and newer)   macOS, Intel    Windows 10 and 11    Linux, AppImage  or  .deb   
- The first builds are not code signed. On macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway. 
+    macOS  Apple silicon and Intel  Your computer   Open Terminal, paste this and press Return. OpenTempl lands in Applications and opens.   Copy   curl -fsSL https://opentempl.org/install.sh | sh     Apple silicon .dmg  Intel .dmg      Windows  Windows 10 and 11  Your computer   Open PowerShell from the Start menu, paste this and press Enter. No administrator rights needed.   Copy   irm https://opentempl.org/install.ps1 | iex     Installer .exe      Linux  x86_64  Your computer   Open a terminal, paste this and press Enter. It uses apt on Ubuntu and Debian, and installs into your home folder anywhere else.   Copy   curl -fsSL https://opentempl.org/install.sh | sh     AppImage  .deb    Version 0.1.0.  Release notes and checksums    Why a command 
+ The builds are not code signed yet, so macOS and Windows warn about an unknown developer when you open a downloaded file. The command installs the same file from the  GitHub release , checks it against the release's checksums first, and skips that warning. You can read what it does before you run it:  install.sh  for macOS and Linux,  install.ps1  for Windows. 
+ If you download a file instead: on macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway. 
+ Updating 
+ Run the same command again. It replaces the app with the newest version and keeps your designs. 
+ Or use it in the browser 
+ Open https://opentempl.org. It is the same editor and works offline once it has loaded. Chrome and Edge can install it as an app from the address bar. Designs are saved on your device; clear the site data and they go with it, so save a file for anything you want to keep. 
  System 
- A recent version of Chrome, Edge, Firefox or Safari for the web app. Designs with many large photos use a lot of memory; close other heavy tabs for big posters. Background removal downloads a small model the first time you use it.   Open the editor  
+ macOS 12 or newer on Apple silicon or Intel. Windows 10 or 11, 64 bit. Linux on x86_64: the command uses apt on Ubuntu and Debian and installs into your home folder everywhere else. For the web app, a recent Chrome, Edge, Firefox or Safari. 
 
 Is it free?
 Yes. There is no paid plan, trial or watermark. The licence is MIT.
@@ -1550,7 +1551,10 @@ Do I need an account?
 No.
 
 Does it work offline?
-Yes, after it has loaded once. Fonts you have not used before, icon search, stock photos and live sessions need a connection. See the offline page.
+Yes. Fonts you have not used before, icon search, stock photos and live sessions need a connection. See the offline page.
 
 Where are my files?
-On your device. Export the editable OpenTempl file to keep a copy or move a design to another computer.
+On your computer. Export the editable OpenTempl file to keep a copy or move a design to another computer.
+
+How do I uninstall it?
+On macOS, move OpenTempl from Applications to the Bin. On Windows, remove it in Settings, Apps. On Linux, run sudo apt remove opentempl if it came from apt, or delete ~/.local/share/opentempl and ~/.local/bin/opentempl.

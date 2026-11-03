@@ -851,3 +851,26 @@ body {
     height: 34px;
   }
 }
+
+.hero-desktop {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+}
+.hero-desktop:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.home-foot-link {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.home-foot-link:hover {
+  color: var(--ink);
+}

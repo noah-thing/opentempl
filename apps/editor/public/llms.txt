@@ -21,7 +21,7 @@ Key facts:
 - [Home](https://opentempl.org/): the editor and 337 templates
 - [OpenTempl facts: licence, features and limits](https://opentempl.org/facts): Verified facts about OpenTempl: licence, price, template count, formats, what needs internet and what it does not do. Dated.
 - [What is OpenTempl? Free open source design app](https://opentempl.org/about): OpenTempl is a free, open source design app made by Noah in Stockholm. What it is, why it exists, the licence and what comes next.
-- [Download OpenTempl: web app and desktop builds](https://opentempl.org/download): Open OpenTempl in your browser, or download the desktop app for Mac, Windows and Linux. Free, MIT licensed, no account.
+- [Download OpenTempl for Mac, Windows and Linux](https://opentempl.org/download): Install the OpenTempl desktop app on Mac, Windows or Linux with one command, or download the installer. Free, MIT licensed, no account.
 
 ## Compare and decide
 

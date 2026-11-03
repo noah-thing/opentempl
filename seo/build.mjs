@@ -156,7 +156,7 @@ const NAV = [
   ['/templates', 'Templates'],
   ['/prompts', 'Prompts'],
   ['/canva-alternative', 'Canva alternative'],
-  ['/download', 'Download'],
+  ['/download', 'Desktop app'],
 ];
 const FOOT = [
   ['Make', [['/free-poster-maker', 'Poster maker'], ['/free-instagram-post-maker', 'Instagram posts'], ['/free-presentation-maker', 'Presentations'], ['/free-menu-maker', 'Menus'], ['/templates', 'All templates']]],
@@ -173,7 +173,7 @@ function footer(legal) {
   return `<footer class="foot"><div class="foot-in"><div class="foot-brand"><a class="brand" href="/"><img src="/mark-96.png" width="22" height="22" alt="">OpenTempl</a><p>${esc(ENTITY)}</p></div>${FOOT.map(([h, ls]) => `<div><h2>${h}</h2><ul>${ls.map(([u, t]) => `<li><a href="${u}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div><div class="foot-base"><a class="credit" href="${X_URL}" rel="noopener" title="Made by Noah, @fsconfig on X"><img src="/seo/img/misc/fsconfig.webp" width="18" height="18" alt=""><span>Made by <b>Noah</b>${BADGE}@fsconfig</span></a><p>${legal.join(' ')} MIT licence.</p></div></footer>`;
 }
 
-const COPY_JS = `document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(!b)return;var t=document.getElementById(b.getAttribute('data-copy'));if(!t)return;var txt=t.textContent;var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1600)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done,function(){sel(t)})}else{sel(t)}function sel(n){var r=document.createRange();r.selectNodeContents(n);var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(_){}}});`;
+const COPY_JS = `document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(!b)return;var t=document.getElementById(b.getAttribute('data-copy'));if(!t)return;var txt=t.textContent;var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1600)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done,function(){sel(t)})}else{sel(t)}function sel(n){var r=document.createRange();r.selectNodeContents(n);var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(_){}}});;(function(){var w=document.querySelector('.install');if(!w)return;var u=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||navigator.userAgent;var os=/mac|iphone|ipad/i.test(u)?'mac':/win/i.test(u)?'win':/linux|x11|cros/i.test(u)?'linux':'';var c=os&&w.querySelector('[data-os="'+os+'"]');if(c){c.classList.add('is-you');w.insertBefore(c,w.firstChild)}})();`;
 
 const ogList = { home: { h1: 'Design that\u2019s free, open and yours.', kicker: 'The free, open source Canva alternative' } };
 const pages = []; // every emitted page: {url, title, meta, text, updated, kind}
@@ -651,34 +651,33 @@ See also: [the facts page](/facts), [how OpenTempl compares with Canva](/canva-a
 `;
 const downloadMd = `---
 slug: download
-title: Download OpenTempl: web app and desktop builds
-meta: Open OpenTempl in your browser, or download the desktop app for Mac, Windows and Linux. Free, MIT licensed, no account.
-h1: Use OpenTempl
+title: Download OpenTempl for Mac, Windows and Linux
+meta: Install the OpenTempl desktop app on Mac, Windows or Linux with one command, or download the installer. Free, MIT licensed, no account.
+h1: Download OpenTempl
 crumb: Download
 kind: download
-cta: Open the editor
+cta: none
 software: yes
 ---
-OpenTempl runs in your browser and works offline once it has loaded. The desktop app for Mac, Windows and Linux is the same editor in its own window.
+The desktop app is the whole editor in its own window. It works offline, keeps your designs on your computer and costs nothing.
 
-## Web app
+## Why a command
 
-Open ${BASE}. Chrome and Edge may offer to install it as an app, which then opens without a browser window. Your designs are saved on your device. Clear the site data and they go with it, so save a file for anything you want to keep.
+The builds are not code signed yet, so macOS and Windows warn about an unknown developer when you open a downloaded file. The command installs the same file from the [GitHub release](https://github.com/noah-thing/opentempl/releases/tag/v${VERSION}), checks it against the release's checksums first, and skips that warning. You can read what it does before you run it: [install.sh](/install.sh) for macOS and Linux, [install.ps1](/install.ps1) for Windows.
 
-## Desktop app
+If you download a file instead: on macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway.
 
-Version ${VERSION}. Every build is listed with its checksum on the [release page](https://github.com/noah-thing/opentempl/releases/tag/v${VERSION}).
+## Updating
 
-- [macOS, Apple silicon](${dl('mac-arm64.dmg')}) (M1 and newer)
-- [macOS, Intel](${dl('mac-x64.dmg')})
-- [Windows 10 and 11](${dl('win-x64.exe')})
-- [Linux, AppImage](${dl('linux-x64.AppImage')}) or [.deb](${dl('linux-x64.deb')})
+Run the same command again. It replaces the app with the newest version and keeps your designs.
 
-The first builds are not code signed. On macOS, right click the app and choose Open the first time. On Windows, choose More info, then Run anyway.
+## Or use it in the browser
+
+Open ${BASE}. It is the same editor and works offline once it has loaded. Chrome and Edge can install it as an app from the address bar. Designs are saved on your device; clear the site data and they go with it, so save a file for anything you want to keep.
 
 ## System
 
-A recent version of Chrome, Edge, Firefox or Safari for the web app. Designs with many large photos use a lot of memory; close other heavy tabs for big posters. Background removal downloads a small model the first time you use it.
+macOS 12 or newer on Apple silicon or Intel. Windows 10 or 11, 64 bit. Linux on x86_64: the command uses apt on Ubuntu and Debian and installs into your home folder everywhere else. For the web app, a recent Chrome, Edge, Firefox or Safari.
 
 ## FAQ
 
@@ -689,11 +688,24 @@ Yes. There is no paid plan, trial or watermark. The licence is MIT.
 No.
 
 **Does it work offline?**
-Yes, after it has loaded once. Fonts you have not used before, icon search, stock photos and live sessions need a connection. See [the offline page](/canva-alternative-offline).
+Yes. Fonts you have not used before, icon search, stock photos and live sessions need a connection. See [the offline page](/canva-alternative-offline).
 
 **Where are my files?**
-On your device. Export the editable OpenTempl file to keep a copy or move a design to another computer.
+On your computer. Export the editable OpenTempl file to keep a copy or move a design to another computer.
+
+**How do I uninstall it?**
+On macOS, move OpenTempl from Applications to the Bin. On Windows, remove it in Settings, Apps. On Linux, run \`sudo apt remove opentempl\` if it came from apt, or delete \`~/.local/share/opentempl\` and \`~/.local/bin/opentempl\`.
 `;
+
+const installHtml = () => {
+  const card = (os, name, note, how, cmd, files) =>
+    `<section class="os" data-os="${os}"><div class="os-head"><h2>${name}</h2><span class="os-note">${note}</span><span class="os-you">Your computer</span></div><p>${how}</p><div class="promptbox cmdbox"><button class="copy" type="button" data-copy="cmd-${os}">Copy</button><pre id="cmd-${os}"><code>${esc(cmd)}</code></pre></div><p class="os-files">${files.map(([label, file]) => `<a class="btn ghost" href="${dl(file)}">${label}</a>`).join('')}</p></section>`;
+  return `<div class="install">${[
+    card('mac', 'macOS', 'Apple silicon and Intel', 'Open Terminal, paste this and press Return. OpenTempl lands in Applications and opens.', 'curl -fsSL https://opentempl.org/install.sh | sh', [['Apple silicon .dmg', 'mac-arm64.dmg'], ['Intel .dmg', 'mac-x64.dmg']]),
+    card('win', 'Windows', 'Windows 10 and 11', 'Open PowerShell from the Start menu, paste this and press Enter. No administrator rights needed.', 'irm https://opentempl.org/install.ps1 | iex', [['Installer .exe', 'win-x64.exe']]),
+    card('linux', 'Linux', 'x86_64', 'Open a terminal, paste this and press Enter. It uses apt on Ubuntu and Debian, and installs into your home folder anywhere else.', 'curl -fsSL https://opentempl.org/install.sh | sh', [['AppImage', 'linux-x64.AppImage'], ['.deb', 'linux-x64.deb']]),
+  ].join('')}<p class="os-ver">Version ${VERSION}. <a href="https://github.com/noah-thing/opentempl/releases/tag/v${VERSION}">Release notes and checksums</a></p></div>`;
+};
 for (const [name, src] of [['facts', factsMd()], ['about', aboutMd], ['download', downloadMd]]) fs.writeFileSync(path.join(root, 'seo', `.gen-${name}.md`), src);
 for (const name of ['facts', 'about', 'download']) {
   const { meta, body } = front(subst(fs.readFileSync(path.join(root, 'seo', `.gen-${name}.md`), 'utf8')));
@@ -706,9 +718,10 @@ for (const name of ['facts', 'about', 'download']) {
     meta: meta.meta,
     h1: meta.h1,
     lede,
-    bodyHtml: md(rest) + (meta.cta === 'none' ? '' : cta(meta.cta)),
+    bodyHtml: (name === 'download' ? installHtml() : '') + md(rest) + (meta.cta === 'none' ? '' : cta(meta.cta)),
     faq,
     crumbs: [[meta.crumb, '/' + meta.slug]],
+    jsCopy: name === 'download',
     legal: legalFor(body),
     ogName: meta.slug,
     kind: meta.kind,
@@ -802,7 +815,7 @@ for (const p of pages) {
   for (const m of html.matchAll(/href="(\/[^"#?]*)(?:[#?][^"]*)?"/g)) {
     const h = m[1].replace(/\/$/, '') || '/';
     if (h === '/' || have.has(h)) continue;
-    if (/\.(png|ico|webp|css|woff2|txt|xml|jpg)$/.test(h) || h.startsWith('/seo/')) continue;
+    if (/\.(png|ico|webp|css|woff2|txt|xml|jpg)$/.test(h) || fs.existsSync(path.join(pub, h)) || h.startsWith('/seo/')) continue;
     fail(`broken link ${h} in ${p.url}`);
   }
   if ((html.match(/<h1[ >]/g) ?? []).length !== 1) fail(`h1 count in ${p.url}`);

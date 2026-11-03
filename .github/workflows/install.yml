@@ -1,0 +1,70 @@
+# Runs the one line installers from the download page against the latest release on
+# each system, then starts the installed app to check that it stays up.
+name: install
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths:
+      - apps/editor/public/install.sh
+      - apps/editor/public/install.ps1
+      - .github/workflows/install.yml
+
+jobs:
+  unix:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: macos-latest, name: macOS }
+          - { os: ubuntu-latest, name: Linux apt }
+          - { os: ubuntu-latest, name: Linux AppImage, appimage: '1' }
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      OPENTEMPL_NO_OPEN: '1'
+      OPENTEMPL_APPIMAGE: ${{ matrix.appimage }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh apps/editor/public/install.sh
+      - name: Start the app
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = macOS ]; then
+            app=/Applications/OpenTempl.app/Contents/MacOS/OpenTempl
+          elif [ -n "$OPENTEMPL_APPIMAGE" ]; then
+            app=$HOME/.local/bin/opentempl
+          else
+            app=$(command -v opentempl)
+            dpkg -l | grep -i opentempl
+          fi
+          [ "$RUNNER_OS" = Linux ] && run="xvfb-run -a" || run=""
+          $run "$app" >app.log 2>&1 &
+          pid=$!
+          sleep 20
+          tail -20 app.log
+          # Still running after 20 seconds counts as started.
+          kill -0 "$pid" || { wait "$pid"; echo "the app exited with $?"; exit 1; }
+          kill "$pid"
+
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      OPENTEMPL_NO_OPEN: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install with Windows PowerShell
+        shell: powershell
+        run: Get-Content -Raw apps/editor/public/install.ps1 | Invoke-Expression
+      - name: Start the app
+        shell: powershell
+        run: |
+          $p = Start-Process -FilePath "$env:LOCALAPPDATA\Programs\OpenTempl\OpenTempl.exe" -PassThru
+          Start-Sleep -Seconds 20
+          if ($p.HasExited) { throw "the app exited with $($p.ExitCode)" }
+          Stop-Process -Id $p.Id -Force

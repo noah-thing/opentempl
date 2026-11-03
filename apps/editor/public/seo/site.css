@@ -100,3 +100,18 @@ summary:hover{color:#fff}
 @media(max-width:860px){.top nav{display:none}.top{justify-content:space-between}.foot-in{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 @media(max-width:520px){.doc{padding-top:36px}h2{font-size:23px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.install{margin-top:40px;display:grid;gap:14px}
+.os{padding:22px 22px 20px;background:var(--paper-2);border:1px solid var(--line-2);border-radius:2px}
+.os.is-you{border-color:var(--accent)}
+.os-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.os h2{margin:0;font-size:22px}
+.os-note{font-size:14px;color:var(--ink-3)}
+.os-you{display:none;margin-left:auto;font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--link)}
+.os.is-you .os-you{display:inline}
+.os p{margin:12px 0 0;font-size:15px;color:var(--ink-2)}
+.cmdbox{margin-top:14px}
+.cmdbox pre{padding:15px 92px 15px 16px;max-height:none;font-size:14px;color:var(--ink);background:var(--paper);white-space:pre;overflow-x:auto}
+.cmdbox .copy{top:50%;transform:translateY(-50%)}
+.os .os-files{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.os-files .btn{height:36px;padding:0 14px;font-size:14px}
+.os-ver{margin:6px 0 0;font-size:13px;color:var(--ink-3)}

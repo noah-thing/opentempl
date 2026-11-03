@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://opentempl.org"><b>opentempl.org</b></a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/noah-thing/opentempl/releases/latest">Download</a>
+  <a href="#install-the-desktop-app">Desktop app</a>
   &nbsp;·&nbsp;
   <a href="#features">Features</a>
   &nbsp;·&nbsp;
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="#quick-setup"><img alt="Web, macOS, Windows and Linux" src="https://img.shields.io/badge/Web%20%7C%20macOS%20%7C%20Windows%20%7C%20Linux-555?style=flat-square"></a>
+  <a href="#install-the-desktop-app"><img alt="Web, macOS, Windows and Linux" src="https://img.shields.io/badge/Web%20%7C%20macOS%20%7C%20Windows%20%7C%20Linux-555?style=flat-square"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/license-MIT-555?style=flat-square"></a>
   <a href="https://x.com/fsconfig"><img alt="Follow @fsconfig on X" src="https://img.shields.io/badge/follow-%40fsconfig-555?style=flat-square&logo=x&logoColor=white"></a>
 </p>
@@ -57,11 +57,29 @@ Designs are saved in your browser or in the desktop app, as files you own. There
 
 Not here yet: team workspaces, a phone app, CMYK output.
 
+## Install the desktop app
+
+The whole editor in its own window, offline. One line installs the latest release, after checking it against the release checksums.
+
+**macOS and Linux.** Paste into Terminal:
+
+```sh
+curl -fsSL https://opentempl.org/install.sh | sh
+```
+
+**Windows.** Paste into PowerShell:
+
+```powershell
+irm https://opentempl.org/install.ps1 | iex
+```
+
+Run the same line again to update. The scripts are [install.sh](apps/editor/public/install.sh) and [install.ps1](apps/editor/public/install.ps1). On Linux the script uses apt on Ubuntu and Debian and installs into your home folder elsewhere.
+
+You can also download the files from [opentempl.org/download](https://opentempl.org/download) or the [Releases](https://github.com/noah-thing/opentempl/releases/latest) page. They are not code signed yet, so the first time you may need to right click the app and choose Open (macOS), or choose More info, then Run anyway (Windows). The one line install skips that step.
+
 ## Quick setup
 
 **In the browser.** Open [opentempl.org](https://opentempl.org). Nothing to install.
-
-**Desktop.** Builds for macOS, Windows and Linux are on the [Releases](https://github.com/noah-thing/opentempl/releases/latest) page. They are not code signed yet, so the first time you may need to right click the app and choose Open (macOS), or choose More info, then Run anyway (Windows).
 
 **From source.** Requires Node.js 22 or newer.
 
