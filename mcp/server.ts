@@ -1,8 +1,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import { buildDesign, crowded, DraftError, outline, type Design, type Draft, type Op, type Sources, type TemplateDef } from './recipe';
-import { GUIDE, INSTRUCTIONS } from './guide';
+import { buildDesign, DraftError, notices, outline, type Design, type Draft, type Op, type Sources, type TemplateDef } from './recipe';
+import { guideSection, INSTRUCTIONS } from './guide';
 
 // The OpenTempl MCP server. Stateless: templates and the catalog come from the
 // site, designs live as drafts in the drafts worker, previews are drawn by the
@@ -128,12 +128,12 @@ interface Rendered {
   note?: string;
 }
 
-async function render(draft: Draft, pages: string[], maxSide: number): Promise<Rendered> {
+async function render(draft: Draft, pages: string[], maxSide: number, zoom?: { x: number; y: number; w: number; h: number }): Promise<Rendered> {
   try {
     const res = await fetch(`${DRAFTS}/v1/render`, {
       method: 'POST',
       headers: { authorization: `Bearer ${key()}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ draft, pages, maxSide }),
+      body: JSON.stringify({ draft, pages, maxSide, zoom }),
       signal: AbortSignal.timeout(55_000),
     });
     const body = (await res.json()) as { pages?: { id: string; jpg: string }[]; missing?: string[]; error?: string };
@@ -142,7 +142,7 @@ async function render(draft: Draft, pages: string[], maxSide: number): Promise<R
     }
     const images: CallToolResult['content'] = [];
     for (const p of body.pages) {
-      images.push({ type: 'text', text: `Preview of page ${p.id}:` });
+      images.push({ type: 'text', text: zoom ? `Close up of page ${p.id}, x ${zoom.x} to ${zoom.x + zoom.w}, y ${zoom.y} to ${zoom.y + zoom.h}:` : `Preview of page ${p.id}:` });
       images.push({ type: 'image', data: p.jpg, mimeType: 'image/jpeg' });
     }
     const note = body.missing?.length ? `These photos could not be loaded, so their frames are empty: ${body.missing.join(', ')}. The site may not share its images; use search_photos or list_library instead.` : undefined;
@@ -159,20 +159,28 @@ const props = z.record(z.string(), z.any());
 
 const EditSchema = z.discriminatedUnion('op', [
   z.object({ op: z.literal('set_text'), id, text: z.string(), fit: z.enum(['shrink', 'grow', 'none']).optional() }),
-  z.object({ op: z.literal('style'), id, props: props.describe('Properties to change, e.g. {"fontSize": 96, "color": "#111"}') }),
+  z.object({ op: z.literal('style'), id: id.optional(), ids: z.array(z.string()).optional().describe('Style many at once; runs like "p1-e10..p1-e40" work'), props: props.describe('Properties to change, e.g. {"fontSize": 96, "color": "#111"}') }),
   z.object({
     op: z.literal('set_image'),
     id: id.describe('An image element, a shape, or a page id for the page background'),
     url: z.string().optional(),
     library: z.string().optional().describe('A path from list_library'),
+    photo: z.string().optional().describe('A photo id from search_photos, like unsplash:Ab12Cd:photo-16175...'),
     credit: z.string().optional(),
     download: z.string().optional().describe('Unsplash download link from search_photos'),
     fit: z.enum(['cover', 'contain', 'tile']).optional(),
   }),
   z.object({ op: z.literal('add'), page: z.string(), element: props.describe('{"type": "text" | "shape" | "line" | "image" | "icon" | "svg" | "qr" | "chart" | "table" | "draw", ...props}'), below: z.string().optional() }),
   z.object({ op: z.literal('duplicate'), id, dx: z.number().optional(), dy: z.number().optional(), props: props.optional() }),
-  z.object({ op: z.literal('remove'), id }),
-  z.object({ op: z.literal('recolor'), from: z.string(), to: z.string() }),
+  z.object({ op: z.literal('remove'), id: id.optional(), ids: z.array(z.string()).optional().describe('Remove many; runs like "p1-e10..p1-e129" work') }),
+  z.object({ op: z.literal('recolor'), from: z.string().optional(), to: z.string().optional(), map: z.record(z.string(), z.string()).optional().describe('Several swaps at once: {"#E8341C": "#2E7D32", "#111111": "#1E1713"}') }),
+  z.object({
+    op: z.literal('align'),
+    ids: z.array(z.string()),
+    to: z.enum(['left', 'center', 'right', 'top', 'middle', 'bottom']),
+    relative: z.string().optional().describe('"page", "selection" (the ids together), or an element id to line up with. Default: page for one id, selection for several'),
+  }),
+  z.object({ op: z.literal('distribute'), ids: z.array(z.string()), axis: z.enum(['horizontal', 'vertical']), gap: z.number().optional().describe('Exact gap; leave out to spread evenly between the first and last') }),
   z.object({
     op: z.literal('page'),
     id: z.string(),
@@ -191,9 +199,19 @@ const EditSchema = z.discriminatedUnion('op', [
 
 const edits = z.array(EditSchema).max(400).describe('Edits applied in order. design_guide has the full reference.');
 
-// Icons are stored as their SVG so a design never depends on the icon service again.
+// Icons are stored as their SVG so a design never depends on the icon service again, and photo
+// ids from search_photos become the image address and the download report Unsplash asks for.
 async function resolveIcons(ops: Op[]) {
   for (const op of ops) {
+    const img = (op.op === 'set_image' ? op : op.op === 'add' && op.element?.type === 'image' ? op.element : null) as { photo?: unknown; url?: unknown; download?: unknown; credit?: unknown } | null;
+    if (img?.photo !== undefined) {
+      const m = String(img.photo).match(/^unsplash:([\w-]{6,20}):(photo-[\w-]{10,80})$/);
+      if (!m) throw new DraftError(`"${img.photo}" is not a photo id from search_photos. Pass its url instead.`);
+      img.url = `https://images.unsplash.com/${m[2]}?ixlib=rb-4.1.0&fm=jpg&q=85&fit=max&w=2400`;
+      img.download = `https://api.unsplash.com/photos/${m[1]}/download`;
+      if (!img.credit) throw new DraftError(`Give the credit that came with ${img.photo} (Unsplash asks for it).`);
+      delete img.photo;
+    }
     if (op.op !== 'add' || op.element?.type !== 'icon') continue;
     const name = String(op.element.icon ?? '');
     if (!/^[a-z0-9-]+:[a-z0-9-]+$/.test(name)) throw new DraftError(`Icon names look like "ph:star-bold"; "${name}" is not one. search_icons finds them.`);
@@ -228,12 +246,20 @@ function previewPages(d: Design, ops: Op[], limit: number): string[] {
 
 const SIZES = { small: 640, medium: 1000, large: 1500 };
 
-async function respond(stored: { id: string; version: number }, draft: Draft, d: Design, opts: { ops: Op[]; preview: boolean; size: keyof typeof SIZES; full: boolean; lead: string }): Promise<CallToolResult> {
-  const pages = previewPages(d, opts.ops, 4);
+// Exact element JSON for an assistant to learn from, without kilobytes of vector markup it cannot use.
+function rawPages(pages: Design['pages']): string {
+  return JSON.stringify(pages, (k, v) => (k === 'svg' && typeof v === 'string' && v.length > 400 ? `<svg ...${v.length} characters of vector art...>` : v));
+}
+
+type PreviewPages = string[] | 'all' | undefined;
+
+async function respond(stored: { id: string; version: number }, draft: Draft, d: Design, opts: { ops: Op[]; preview: boolean; pages?: PreviewPages; size: keyof typeof SIZES; full: boolean; lead: string }): Promise<CallToolResult> {
+  const pages = opts.pages === 'all' ? d.pages.slice(0, 8).map((p) => p.id) : opts.pages?.length ? opts.pages.filter((p) => d.pages.some((x) => x.id === p)) : previewPages(d, opts.ops, 4);
   const shot = opts.preview ? await render(draft, pages, SIZES[opts.size]) : { images: [] };
-  const warn = crowded(d);
+  const warn = notices(d);
   const head = [`${opts.lead} Design ${stored.id}, version ${stored.version}.`, `Open it in OpenTempl: ${link(stored.id)}`];
   if (shot.note) head.push(shot.note);
+  else if (opts.preview && d.pages.length > pages.length) head.push(`The preview shows ${pages.join(', ')} of ${d.pages.length} pages. preview_design renders any page, or zooms into a region to check small type.`);
   if (warn.length) head.push(`Check these:\n${warn.map((w) => `- ${w}`).join('\n')}`);
   const text = `${head.join('\n')}\n\n${outline(d, opts.full ? {} : { pages })}`;
   return { content: [{ type: 'text', text }, ...shot.images], structuredContent: { design_id: stored.id, version: stored.version, link: link(stored.id) } };
@@ -259,7 +285,10 @@ function scoreTemplate(t: TemplateEntry, style: { name: string; blurb: string } 
   return s ? s + (t.score ?? 5) / 3 : 0;
 }
 
-const err = (e: unknown): CallToolResult => ({ isError: true, content: [{ type: 'text', text: e instanceof DraftError ? e.message : `Something went wrong: ${(e as Error).message}` }] });
+const err = (e: unknown): CallToolResult => ({
+  isError: true,
+  content: [{ type: 'text', text: e instanceof DraftError ? `Nothing was changed. ${e.message}` : `Something went wrong: ${(e as Error).message}` }],
+});
 
 const safe =
   <A>(fn: (a: A) => Promise<CallToolResult>) =>
@@ -279,8 +308,13 @@ export function createServer() {
 
   server.registerTool(
     'design_guide',
-    { title: 'Design guide', description: 'The handbook: how designs are built here, every edit and property, and the rules that make a design look professional. Read it before your first design.', inputSchema: {}, annotations: read },
-    async () => ({ content: [{ type: 'text', text: GUIDE }] }),
+    {
+      title: 'Design guide',
+      description: 'The handbook: the rules that make a design look professional, the checklist for previews, every edit and every element property. Read it all before your first design.',
+      inputSchema: { section: z.enum(['all', 'craft', 'edits', 'elements']).optional().describe('craft: design rules and checklist; edits: the edit reference; elements: element properties. Default all') },
+      annotations: read,
+    },
+    async ({ section = 'all' }) => ({ content: [{ type: 'text', text: guideSection(section) }] }),
   );
 
   server.registerTool(
@@ -362,14 +396,14 @@ export function createServer() {
     {
       title: 'Look at a template',
       description: "A template's pages and every element (ids, text, fonts, sizes, colours, positions) with its preview. raw: true returns the exact element JSON, to learn how a polished layout is built.",
-      inputSchema: { id: z.string(), raw: z.boolean().optional(), page: z.number().int().min(1).optional().describe('With raw: only this page (1 based)') },
+      inputSchema: { id: z.string(), raw: z.boolean().optional(), page: z.number().int().min(1).optional().describe('Only this page (1 based); useful for long decks') },
       annotations: read,
     },
     safe(async ({ id: tid, raw, page }) => {
       const { entry, def } = await template(tid);
       const d = buildDesign({ v: 1, start: { template: tid }, ops: [] }, { template: def });
       const im = await thumb(tid);
-      const body = raw ? JSON.stringify(page ? d.pages[page - 1] : d.pages, null, 0) : outline(d);
+      const body = raw ? rawPages(page ? d.pages.slice(page - 1, page) : d.pages) : outline(d, page ? { pages: [d.pages[page - 1]?.id ?? ''] } : {});
       return {
         content: [{ type: 'text', text: `${entry.name} (${entry.vibe}, ${entry.category})\n${body}` }, ...(im ? [im] : [])],
       };
@@ -390,18 +424,19 @@ export function createServer() {
         title: z.string().optional(),
         edits: edits.optional(),
         preview: z.boolean().optional().describe('Render a preview (default true)'),
+        preview_pages: z.union([z.array(z.string()), z.literal('all')]).optional().describe('Which pages to preview; default the first page'),
         preview_size: z.enum(['small', 'medium', 'large']).optional(),
       },
       annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
     },
-    safe(async ({ template: tid, format, width, height, title, edits: ops = [], preview = true, preview_size = 'medium' }) => {
+    safe(async ({ template: tid, format, width, height, title, edits: ops = [], preview = true, preview_pages, preview_size = 'medium' }) => {
       const start = tid ? { template: tid } : format ? { format } : width && height ? { width, height } : null;
       if (!start) throw new DraftError('Give a template id, a format id, or a width and height.');
       const draft: Draft = { v: 1, title, start, ops: ops as Op[] };
       await resolveIcons(draft.ops);
       const d = buildDesign(draft, await sources(draft));
       const stored = await saveDraft(draft);
-      return respond(stored, draft, d, { ops: draft.ops.length ? draft.ops : [], preview, size: preview_size, full: true, lead: 'Created.' });
+      return respond(stored, draft, d, { ops: [], preview, pages: preview_pages, size: preview_size, full: true, lead: 'Created.' });
     }),
   );
 
@@ -410,17 +445,23 @@ export function createServer() {
     {
       title: 'Edit a design',
       description: 'Apply more edits to a design made with create_design. Returns the updated elements of the pages that changed and a fresh preview. The link stays the same and opens the newest version.',
-      inputSchema: { design_id: z.string(), edits, preview: z.boolean().optional(), preview_size: z.enum(['small', 'medium', 'large']).optional() },
+      inputSchema: {
+        design_id: z.string(),
+        edits,
+        preview: z.boolean().optional(),
+        preview_pages: z.union([z.array(z.string()), z.literal('all')]).optional().describe('Which pages to preview; default the pages these edits touched'),
+        preview_size: z.enum(['small', 'medium', 'large']).optional(),
+      },
       annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
     },
-    safe(async ({ design_id, edits: ops, preview = true, preview_size = 'medium' }) => {
+    safe(async ({ design_id, edits: ops, preview = true, preview_pages, preview_size = 'medium' }) => {
       const rec = await loadDraft(design_id);
       const added = ops as Op[];
       await resolveIcons(added);
       const draft: Draft = { ...rec.draft, ops: [...rec.draft.ops, ...added] };
       const d = buildDesign(draft, await sources(draft));
       const stored = await saveDraft(draft, rec.id);
-      return respond(stored, draft, d, { ops: added, preview, size: preview_size, full: false, lead: `Applied ${added.length} edit${added.length === 1 ? '' : 's'}.` });
+      return respond(stored, draft, d, { ops: added, preview, pages: preview_pages, size: preview_size, full: false, lead: `Applied ${added.length} edit${added.length === 1 ? '' : 's'}.` });
     }),
   );
 
@@ -429,10 +470,10 @@ export function createServer() {
     {
       title: 'Undo edits',
       description: 'Take back the last edits made to a design (count of edits, not calls).',
-      inputSchema: { design_id: z.string(), count: z.number().int().min(1).describe('How many of the most recent edits to remove') },
+      inputSchema: { design_id: z.string(), count: z.number().int().min(1).optional().describe('How many of the most recent edits to remove, default 1') },
       annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: false, openWorldHint: true },
     },
-    safe(async ({ design_id, count }) => {
+    safe(async ({ design_id, count = 1 }) => {
       const rec = await loadDraft(design_id);
       const draft: Draft = { ...rec.draft, ops: rec.draft.ops.slice(0, Math.max(0, rec.draft.ops.length - count)) };
       const d = buildDesign(draft, await sources(draft));
@@ -454,7 +495,7 @@ export function createServer() {
       const d = buildDesign(rec.draft, await sources(rec.draft));
       const parts = [`Design ${rec.id}, version ${rec.version}. Link: ${link(rec.id)}`];
       if (history) parts.push(`Started from ${JSON.stringify(rec.draft.start)}. Edits:\n${rec.draft.ops.map((o, i) => `${i + 1}. ${JSON.stringify(o).slice(0, 300)}`).join('\n')}`);
-      parts.push(raw ? JSON.stringify(page ? d.pages.filter((p) => p.id === page) : d.pages) : outline(d, page ? { pages: [page] } : {}));
+      parts.push(raw ? rawPages(page ? d.pages.filter((p) => p.id === page) : d.pages) : outline(d, page ? { pages: [page] } : {}));
       return { content: [{ type: 'text', text: parts.join('\n\n') }] };
     }),
   );
@@ -463,15 +504,20 @@ export function createServer() {
     'preview_design',
     {
       title: 'Preview a design',
-      description: 'Render pages of a design as images, exactly as the editor draws them.',
-      inputSchema: { design_id: z.string(), pages: z.array(z.string()).max(8).optional().describe('Page ids; default the first four'), size: z.enum(['small', 'medium', 'large']).optional() },
+      description: 'Render pages of a design as images, exactly as the editor draws them, or zoom into a region to check small type and fine detail.',
+      inputSchema: {
+        design_id: z.string(),
+        pages: z.array(z.string()).max(8).optional().describe('Page ids; default the first four'),
+        size: z.enum(['small', 'medium', 'large']).optional(),
+        zoom: z.object({ page: z.string().optional(), x: z.number(), y: z.number(), w: z.number(), h: z.number() }).optional().describe('A close up of one region of a page, in design pixels, drawn sharp enough to judge small type'),
+      },
       annotations: read,
     },
-    safe(async ({ design_id, pages, size = 'medium' }) => {
+    safe(async ({ design_id, pages, size = 'medium', zoom }) => {
       const rec = await loadDraft(design_id);
       const d = buildDesign(rec.draft, await sources(rec.draft));
-      const list = pages?.length ? pages : d.pages.slice(0, 4).map((p) => p.id);
-      const shot = await render(rec.draft, list, SIZES[size]);
+      const list = zoom ? [zoom.page ?? d.pages[0].id] : pages?.length ? pages : d.pages.slice(0, 4).map((p) => p.id);
+      const shot = await render(rec.draft, list, SIZES[size], zoom && { x: zoom.x, y: zoom.y, w: zoom.w, h: zoom.h });
       return { content: [{ type: 'text', text: shot.note ?? `Design ${rec.id}, ${d.pages.length} page${d.pages.length > 1 ? 's' : ''}. Link: ${link(rec.id)}` }, ...shot.images] };
     }),
   );
@@ -480,7 +526,7 @@ export function createServer() {
     'search_photos',
     {
       title: 'Search photos',
-      description: 'Search free Unsplash photos. Place one with set_image, or an image element, passing its url, credit and download exactly as given (Unsplash requires the credit and the download report).',
+      description: 'Search free Unsplash photos. Place one with set_image or an image element by passing its photo id and credit exactly as given: {"op": "set_image", "id": "p1-e2", "photo": "unsplash:...", "credit": "Photo by ... on Unsplash"}. Plain words work best ("bakery shelves", not a list of keywords).',
       inputSchema: {
         query: z.string().min(1).max(100),
         orientation: z.enum(['landscape', 'portrait', 'squarish']).optional(),
@@ -504,14 +550,14 @@ export function createServer() {
       const content: CallToolResult['content'] = [];
       const lines = json.results.map(
         (p, i) =>
-          `${i + 1}. ${p.alt_description ?? p.description ?? 'Photo'} · ${p.width}×${p.height} · main colour ${p.color}\n   url: ${p.urls.regular.replace(/&w=\d+/, '&w=2400')}\n   credit: Photo by ${p.user.name} on Unsplash\n   download: ${p.links.download_location}`,
+          `${i + 1}. ${p.alt_description ?? p.description ?? 'Photo'} · ${p.width}×${p.height} · main colour ${p.color}\n   photo: unsplash:${p.id}:${new URL(p.urls.regular).pathname.slice(1)}\n   credit: Photo by ${p.user.name} on Unsplash`,
       );
       content.push({ type: 'text', text: lines.join('\n') });
       if (previews) {
         const imgs = await Promise.all(
           json.results.map(async (p, i) => {
             try {
-              const r = await fetch(p.urls.thumb, { signal: AbortSignal.timeout(8_000) });
+              const r = await fetch(p.urls.small, { signal: AbortSignal.timeout(8_000) });
               return r.ok ? [{ type: 'text' as const, text: `${i + 1}:` }, { type: 'image' as const, data: Buffer.from(await r.arrayBuffer()).toString('base64'), mimeType: r.headers.get('content-type') ?? 'image/jpeg' }] : [];
             } catch {
               return [];
@@ -559,10 +605,16 @@ export function createServer() {
     },
     safe(async ({ query, category, limit = 30 }) => {
       const cat = await catalog();
-      const q = (query ?? '').toLowerCase();
-      const list = cat.fonts.filter(([name, c]) => (!category || c === category) && (!q || name.toLowerCase().includes(q)));
-      const sorted = [...list].sort((a, b) => b[3] - a[3]);
-      return { content: [{ type: 'text', text: sorted.slice(0, limit).map(([n, c, w]) => `${n} (${c}) weights ${w.join(' ')}`).join('\n') || 'No fonts match.' }] };
+      // Each word may name part of a family or a kind ("condensed", "serif", "mono"); more words matched ranks higher.
+      const KIND: Record<string, string> = { sans: 'sans', serif: 'serif', display: 'display', script: 'hand', handwriting: 'hand', hand: 'hand', mono: 'mono', monospace: 'mono' };
+      const q = words(query ?? '');
+      const scored = cat.fonts
+        .filter(([, c]) => !category || c === category)
+        .map((f) => ({ f, hits: q.filter((w) => f[0].toLowerCase().includes(w) || KIND[w] === f[1]).length }))
+        .filter((x) => !q.length || x.hits > 0)
+        .sort((a, b) => b.hits - a.hits || b.f[3] - a.f[3]);
+      const text = scored.slice(0, limit).map(({ f: [n, c, w] }) => `${n} (${c}) weights ${w.join(' ')}`).join('\n');
+      return { content: [{ type: 'text', text: text || 'No fonts match. Try one word: a kind (serif, display, mono) or part of a name (condensed, grotesk, slab).' }] };
     }),
   );
 

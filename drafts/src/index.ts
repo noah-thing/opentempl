@@ -10,7 +10,7 @@
  * render page and draws the draft through the same export code the editor uses.
  */
 
-import puppeteer from '@cloudflare/puppeteer';
+import puppeteer, { type Browser, type Page } from '@cloudflare/puppeteer';
 
 interface Env {
 	DB: D1Database;
@@ -23,6 +23,7 @@ interface Env {
 const MAX_BODY = 256 * 1024;
 const KEEP_DAYS = 90;
 const ID = /^[A-Za-z0-9]{12}$/;
+const KEEP_ALIVE_MS = 45_000;
 
 function sameKey(a: string, b: string): boolean {
 	if (!a || !b || a.length !== b.length) { return false; }
@@ -81,6 +82,7 @@ interface RenderBody {
 	draft: unknown;
 	pages?: string[];
 	maxSide?: number;
+	zoom?: { x: number; y: number; w: number; h: number };
 }
 
 async function render(req: Request, env: Env): Promise<Response> {
@@ -94,29 +96,66 @@ async function render(req: Request, env: Env): Promise<Response> {
 	} catch {
 		return json({ error: 'bad_json' }, 400);
 	}
-	let browser;
+	let browser: Browser;
 	try {
-		browser = await puppeteer.launch(env.BROWSER);
+		browser = await warmBrowser(env);
 	} catch (e) {
 		// Out of browser time for the day, or too many at once.
 		return json({ error: 'busy', detail: String((e as Error).message ?? e).slice(0, 200) }, 503);
 	}
 	try {
-		const page = await browser.newPage();
-		await page.setViewport({ width: 800, height: 600 });
-		await page.goto(`${env.RENDER_SITE}/#/mcp-render`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-		await page.waitForSelector('body[data-ready=yes]', { timeout: 20000 });
+		const page = await renderPage(browser, env);
 		const out = await page.evaluate(
 			// Runs in the page; opentemplRender is defined by the editor's render route.
-			(b: RenderBody) => (globalThis as unknown as { opentemplRender: (d: unknown, o: unknown) => Promise<unknown> }).opentemplRender(b.draft, { pages: b.pages, maxSide: b.maxSide }),
+			(b: RenderBody) => (globalThis as unknown as { opentemplRender: (d: unknown, o: unknown) => Promise<unknown> }).opentemplRender(b.draft, { pages: b.pages, maxSide: b.maxSide, zoom: b.zoom }),
 			body,
 		);
 		return json(out);
 	} catch (e) {
+		await browser.close().catch(() => {});
 		return json({ error: 'render_failed', detail: String((e as Error).message ?? e).slice(0, 300) }, 500);
 	} finally {
-		await browser.close().catch(() => {});
+		// Left running for a short while, so the next preview skips the launch and the page load.
+		browser.disconnect();
 	}
+}
+
+// Free accounts may only start a few browsers a minute, so a warm one is reused when there is one.
+// A browser stays marked as connected for a moment after the last preview let go of it, so wait for
+// it rather than start another.
+async function warmBrowser(env: Env): Promise<Browser> {
+	const until = Date.now() + 12_000;
+	for (;;) {
+		const sessions = await puppeteer.sessions(env.BROWSER).catch(() => []);
+		for (const s of sessions) {
+			if (s.connectionId) { continue; }
+			try {
+				return await puppeteer.connect(env.BROWSER, s.sessionId);
+			} catch {
+				/* taken by another request in the meantime */
+			}
+		}
+		if (sessions.length < 2) {
+			try {
+				return await puppeteer.launch(env.BROWSER, { keep_alive: KEEP_ALIVE_MS });
+			} catch (e) {
+				if (Date.now() > until) { throw e; }
+			}
+		}
+		if (Date.now() > until) { throw new Error('no browser free'); }
+		await new Promise(r => setTimeout(r, 700));
+	}
+}
+
+async function renderPage(browser: Browser, env: Env): Promise<Page> {
+	const url = `${env.RENDER_SITE}/#/mcp-render`;
+	const open = (await browser.pages()).find((p) => p.url() === url);
+	if (open && (await open.evaluate(() => typeof (globalThis as Record<string, unknown>).opentemplRender === 'function').catch(() => false))) { return open; }
+	const page = open ?? (await browser.newPage());
+	await page.setViewport({ width: 800, height: 600 });
+	await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+	await page.waitForSelector('body[data-ready=yes]', { timeout: 20000 });
+	return page;
 }
 
 export default {

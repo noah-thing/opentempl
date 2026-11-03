@@ -47,6 +47,8 @@ export interface Design {
   cover: string[]; // image elements whose crop is set to fill the frame once the photo's size is known
   fit: Record<string, Fit>; // text that changed: shrink to its box, or grow the box
   orig: Record<string, string>; // the words a text box held before set_text: they mark the room it has
+  resized: Record<string, { asked: number; got: number }>; // text set smaller than asked so it fits
+  tpl: string[]; // text and pages still holding the template's own words or notes
   seq: number;
 }
 
@@ -56,12 +58,14 @@ type Props = Record<string, unknown>;
 
 export type Op =
   | { op: 'set_text'; id: string; text: string; fit?: Fit }
-  | { op: 'style'; id: string; props: Props }
-  | { op: 'set_image'; id: string; url?: string; library?: string; credit?: string; download?: string; fit?: 'cover' | 'contain' | 'tile' }
+  | { op: 'style'; id?: string; ids?: string[]; props: Props }
+  | { op: 'set_image'; id: string; url?: string; library?: string; photo?: string; credit?: string; download?: string; fit?: 'cover' | 'contain' | 'tile' }
   | { op: 'add'; page: string; element: Props; below?: string }
   | { op: 'duplicate'; id: string; dx?: number; dy?: number; props?: Props }
-  | { op: 'remove'; id: string }
-  | { op: 'recolor'; from: string; to: string }
+  | { op: 'remove'; id?: string; ids?: string[] }
+  | { op: 'recolor'; from?: string; to?: string; map?: Record<string, string> }
+  | { op: 'align'; ids: string[]; to: 'left' | 'center' | 'right' | 'top' | 'middle' | 'bottom'; relative?: string }
+  | { op: 'distribute'; ids: string[]; axis: 'horizontal' | 'vertical'; gap?: number }
   | { op: 'page'; id: string; background?: unknown; notes?: string; name?: string; transition?: string; duration?: number; hidden?: boolean }
   | { op: 'add_page'; copy?: string; after?: string; background?: unknown; name?: string }
   | { op: 'move_page'; id: string; to: number }
@@ -91,6 +95,8 @@ export interface Sources {
   template?: TemplateDef;
   format?: FormatInfo;
   fonts?: Set<string>; // known families; unknown ones are refused when given
+  // How tall and wide text sets. The editor passes real measurements; without it they are estimated.
+  measure?: (el: TextElement) => { height: number; width: number };
 }
 
 // ---------------------------------------------------------------- values
@@ -104,6 +110,9 @@ const CAPS = ['none', 'arrow', 'triangle', 'circle', 'square', 'bar', 'diamond']
 const BLENDS = ['normal', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'];
 const CHARTS = ['bar', 'column', 'line', 'area', 'pie', 'donut', 'progress'];
 const PRESETS = ['none', 'warm', 'cool', 'mono', 'noir', 'fade', 'vivid', 'film', 'vintage', 'dream'];
+
+// Names people use for shapes the editor calls something else.
+const SHAPE_ALIAS: Record<string, ShapeKind> = { circle: 'ellipse', oval: 'ellipse', square: 'rect', rectangle: 'rect', rounded: 'squircle', polygon: 'hexagon', badge: 'burst', bubble: 'speech' };
 
 export const ENUMS = { SHAPES, PATTERNS, EFFECTS, ANIMS, TRANSITIONS, CAPS, BLENDS, CHARTS };
 
@@ -293,7 +302,7 @@ const FIELDS: Partial<Record<ElementType, Record<string, Check>>> = {
     valign: (v) => (v === 'middle' ? 'middle' : undefined),
   },
   shape: {
-    shape: (v) => oneOf(v, SHAPES, 'shape'),
+    shape: (v) => oneOf(SHAPE_ALIAS[v as string] ?? v, SHAPES, 'shape'),
     fill: (v) => fill(v),
     stroke: (v) => stroke(v),
     radius: (v) => num(v, 'radius', 0, 20000),
@@ -330,7 +339,7 @@ const FIELDS: Partial<Record<ElementType, Record<string, Check>>> = {
       return out;
     },
     radius: (v) => num(v, 'radius', 0, 20000),
-    mask: (v) => (v === null ? null : oneOf(v, SHAPES, 'mask')),
+    mask: (v) => (v === null ? null : oneOf(SHAPE_ALIAS[v as string] ?? v, SHAPES, 'mask')),
     border: (v) => stroke(v, 'border'),
   },
   svg: {
@@ -420,6 +429,11 @@ const ALIAS: Record<string, string> = {
 function applyProps(el: Element, props: Props, src: Sources, where: string): Element {
   const fields = { ...ANY, ...(FIELDS[el.type] ?? {}) };
   const out = { ...el } as Props;
+  if (el.type === 'line' && ['x1', 'y1', 'x2', 'y2'].some((k) => k in props)) {
+    const ends = lineEnds(el);
+    Object.assign(out, lineFromPoints({ ...ends, ...Object.fromEntries(['x1', 'y1', 'x2', 'y2'].filter((k) => k in props).map((k) => [k, props[k]])) }));
+    props = Object.fromEntries(Object.entries(props).filter(([k]) => !['x1', 'y1', 'x2', 'y2'].includes(k)));
+  }
   for (let [k, v] of Object.entries(props)) {
     // A line's "width" is its stroke, not its length.
     if (!(el.type === 'line' && k === 'width')) k = ALIAS[k] ?? k;
@@ -492,16 +506,18 @@ export function startDesign(draft: Draft, src: Sources): Design {
       duration: 5,
       elements: tp.elements.map((e, j) => ({ ...structuredClone(e), id: `p${i + 1}-e${j + 1}`, locked: false }) as Element),
     }));
-    return { title: draft.title ?? t.name, width: t.width, height: t.height, formatId: t.formatId, pages, images: {}, cover: [], fit: {}, orig: {}, seq: 0 };
+    // Words and notes the template came with, so leftovers can be pointed out later.
+    const tpl = [...pages.flatMap((p) => p.elements.filter((e) => e.type === 'text' && e.text.trim()).map((e) => e.id)), ...pages.filter((p) => p.notes.trim()).map((p) => p.id)];
+    return { title: draft.title ?? t.name, width: t.width, height: t.height, formatId: t.formatId, pages, images: {}, cover: [], fit: {}, orig: {}, resized: {}, tpl, seq: 0 };
   }
   if (s.format) {
     const f = src.format;
     if (!f || f.id !== s.format) fail(`unknown format "${s.format}"`);
-    return { title: draft.title ?? f.name, width: f.width, height: f.height, formatId: f.id, pages: [emptyPage('p1')], images: {}, cover: [], fit: {}, orig: {}, seq: 0 };
+    return { title: draft.title ?? f.name, width: f.width, height: f.height, formatId: f.id, pages: [emptyPage('p1')], images: {}, cover: [], fit: {}, orig: {}, resized: {}, tpl: [], seq: 0 };
   }
   const w = num(s.width, 'width', 16, 20000);
   const h = num(s.height, 'height', 16, 20000);
-  return { title: draft.title ?? 'Untitled design', width: Math.round(w), height: Math.round(h), pages: [emptyPage('p1')], images: {}, cover: [], fit: {}, orig: {}, seq: 0 };
+  return { title: draft.title ?? 'Untitled design', width: Math.round(w), height: Math.round(h), pages: [emptyPage('p1')], images: {}, cover: [], fit: {}, orig: {}, resized: {}, tpl: [], seq: 0 };
 }
 
 function findElement(d: Design, id: string) {
@@ -613,6 +629,87 @@ function lineFromPoints(spec: Props) {
   return { x: cx - len / 2, y: cy - h / 2, w: len, h, rotation: (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI };
 }
 
+export function lineEnds(el: { x: number; y: number; w: number; h: number; rotation: number }) {
+  const a = (el.rotation * Math.PI) / 180;
+  const cx = el.x + el.w / 2;
+  const cy = el.y + el.h / 2;
+  const dx = (Math.cos(a) * el.w) / 2;
+  const dy = (Math.sin(a) * el.w) / 2;
+  return { x1: cx - dx, y1: cy - dy, x2: cx + dx, y2: cy + dy };
+}
+
+// ---------------------------------------------------------------- fitting text
+
+// How much room some text takes, from character counts. Only used where real fonts are not at hand.
+export function estimateText(e: TextElement) {
+  const c = capacity({ ...e, h: 1 });
+  const words = e.text.split(/\s+/).reduce((m, w) => Math.max(m, w.length), 0);
+  return { height: c.linesFor(e.text) * e.fontSize * e.lineHeight, width: Math.max(Math.min(e.w, c.charWidth * Math.max(...e.text.split('\n').map((l) => l.length))), words * c.charWidth) };
+}
+
+// "grow": the box follows the words. "shrink": the words keep the room the old ones had (often more
+// than the stored box) and the type gets smaller until they fit. "none": left alone.
+function fitText(d: Design, el: TextElement, src: Sources) {
+  const mode = d.fit[el.id];
+  if (!mode || mode === 'none') return;
+  const measure = src.measure ?? estimateText;
+  const at = (size: number) => measure({ ...el, fontSize: size });
+  if (mode === 'grow') {
+    el.h = Math.max(Math.ceil(at(el.fontSize).height), Math.ceil(el.fontSize * el.lineHeight));
+    return;
+  }
+  const before = d.orig[el.id];
+  const room = Math.max(el.h, before === undefined ? 0 : measure({ ...el, text: before }).height);
+  const fits = (size: number) => {
+    const m = at(size);
+    return m.height <= room + 1 && m.width <= el.w + 1;
+  };
+  if (!fits(el.fontSize)) {
+    let lo = el.fontSize * 0.25;
+    let hi = el.fontSize;
+    for (let i = 0; i < 12; i++) {
+      const mid = (lo + hi) / 2;
+      if (fits(mid)) lo = mid;
+      else hi = mid;
+    }
+    const got = Math.max(4, Math.floor(lo * 10) / 10);
+    d.resized[el.id] = { asked: d.resized[el.id]?.asked ?? el.fontSize, got };
+    el.fontSize = got;
+  }
+  el.h = Math.max(el.h, Math.ceil(at(el.fontSize).height));
+}
+
+// ---------------------------------------------------------------- many ids
+
+// "p1-e10..p1-e40" names a run of elements; lists can mix single ids and runs.
+function expandIds(d: Design, raw: unknown, where: string): string[] {
+  const list = Array.isArray(raw) ? raw : [raw];
+  const out: string[] = [];
+  for (const item of list) {
+    const id = str(item, 'id', 80);
+    const m = id.match(/^(.*?)(\d+)\.\.(.*?)(\d+)$/);
+    if (!m) {
+      out.push(id);
+      continue;
+    }
+    if (m[1] !== m[3]) fail(`${where}: a run like "${id}" must keep the same prefix at both ends`);
+    const [a, b] = [Number(m[2]), Number(m[4])].sort((x, y) => x - y);
+    const run = [];
+    for (const p of d.pages) for (const e of p.elements) if (e.id.startsWith(m[1]) && /^\d+$/.test(e.id.slice(m[1].length)) && +e.id.slice(m[1].length) >= a && +e.id.slice(m[1].length) <= b) run.push(e.id);
+    if (!run.length) fail(`${where}: no elements in "${id}"`);
+    out.push(...run);
+  }
+  if (!out.length) fail(`${where}: give an id or a list of ids`);
+  return out;
+}
+
+type Box = { x: number; y: number; w: number; h: number };
+const union = (boxes: Box[]): Box => {
+  const x = Math.min(...boxes.map((b) => b.x));
+  const y = Math.min(...boxes.map((b) => b.y));
+  return { x, y, w: Math.max(...boxes.map((b) => b.x + b.w)) - x, h: Math.max(...boxes.map((b) => b.y + b.h)) - y };
+};
+
 function applyOp(d: Design, op: Op, src: Sources, n: number) {
   const where = `edit ${n + 1} (${(op as Props).op})`;
   const o = op as Props;
@@ -625,17 +722,25 @@ function applyOp(d: Design, op: Op, src: Sources, n: number) {
       delete el.runs; // run offsets belong to the old text
       hit.page.elements[hit.i] = el;
       d.fit[op.id] = op.fit ? oneOf(op.fit, ['shrink', 'grow', 'none'] as const, 'fit') : (d.fit[op.id] ?? 'shrink');
+      d.tpl = d.tpl.filter((t) => t !== op.id);
+      fitText(d, el, src);
       return;
     }
     case 'style': {
-      const hit = needElement(d, op.id, where);
       if (!op.props || typeof op.props !== 'object') fail(`${where}: props must be an object`);
-      hit.page.elements[hit.i] = applyProps(hit.el, op.props, src, where);
-      // A box given a height keeps it; any other change to how the text sets lets the box follow the text.
-      if (hit.el.type === 'text') {
-        const keys = Object.keys(op.props).map((k) => ALIAS[k] ?? k);
-        if (keys.includes('h')) d.fit[op.id] = 'none';
-        else if (keys.some((k) => ['text', 'fontSize', 'fontFamily', 'fontWeight', 'w', 'letterSpacing', 'lineHeight', 'uppercase', 'list'].includes(k))) d.fit[op.id] = 'grow';
+      for (const id of expandIds(d, op.ids ?? op.id, where)) {
+        const hit = needElement(d, id, where);
+        const el = applyProps(hit.el, op.props, src, where);
+        hit.page.elements[hit.i] = el;
+        // A box given a height keeps it; any other change to how the text sets lets the box follow the text.
+        if (el.type === 'text') {
+          const keys = Object.keys(op.props).map((k) => ALIAS[k] ?? k);
+          if (keys.includes('h')) d.fit[id] = 'none';
+          else if (keys.some((k) => ['text', 'fontSize', 'fontFamily', 'fontWeight', 'w', 'letterSpacing', 'lineHeight', 'uppercase', 'list'].includes(k))) d.fit[id] = 'grow';
+          if (keys.includes('fontSize')) delete d.resized[id];
+          if (keys.includes('text')) d.tpl = d.tpl.filter((t) => t !== id);
+          fitText(d, el, src);
+        }
       }
       return;
     }
@@ -687,12 +792,10 @@ function applyOp(d: Design, op: Op, src: Sources, n: number) {
         (el as unknown as Props).assetId = imageSource(d, image as never, where);
         d.cover.push(id);
       }
-      // The editor measures added text exactly; until then estimate its height from the words.
-      if (type === 'text' && spec.h === undefined) {
-        const t = el as TextElement;
-        t.h = Math.ceil(capacity({ ...t, h: 1 }).linesFor(t.text) * t.fontSize * t.lineHeight);
+      if (type === 'text') {
+        d.fit[id] = (o.element as Props).fit ? oneOf((o.element as Props).fit, ['shrink', 'grow', 'none'] as const, 'fit') : 'grow';
+        fitText(d, el as TextElement, src);
       }
-      if (type === 'text') d.fit[id] = (o.element as Props).fit ? oneOf((o.element as Props).fit, ['shrink', 'grow', 'none'] as const, 'fit') : 'grow';
       const below = op.below ? page.elements.findIndex((e) => e.id === op.below) : -1;
       if (op.below && below < 0) fail(`${where}: no element "${op.below}" on ${page.id}`);
       page.elements.splice(below >= 0 ? below : page.elements.length, 0, el);
@@ -708,32 +811,82 @@ function applyOp(d: Design, op: Op, src: Sources, n: number) {
       if (d.fit[op.id]) d.fit[id] = d.fit[op.id];
       if (op.id in d.orig) d.orig[id] = d.orig[op.id];
       if (d.cover.includes(op.id)) d.cover.push(id);
+      if (d.tpl.includes(op.id) && !(op.props && 'text' in op.props)) d.tpl.push(id);
+      if (el.type === 'text' && op.props) fitText(d, el, src);
       return;
     }
     case 'remove': {
-      const pi = d.pages.findIndex((p) => p.id === op.id);
-      if (pi >= 0) {
-        if (d.pages.length === 1) fail(`${where}: a design keeps at least one page`);
-        d.pages.splice(pi, 1);
-        return;
+      for (const id of expandIds(d, op.ids ?? op.id, where)) {
+        const pi = d.pages.findIndex((p) => p.id === id);
+        if (pi >= 0) {
+          if (d.pages.length === 1) fail(`${where}: a design keeps at least one page`);
+          d.pages.splice(pi, 1);
+          continue;
+        }
+        const hit = needElement(d, id, where);
+        hit.page.elements.splice(hit.i, 1);
       }
-      const hit = needElement(d, op.id, where);
-      hit.page.elements.splice(hit.i, 1);
       return;
     }
     case 'recolor': {
-      const from = hexKey(color(op.from, 'from'));
-      const to = color(op.to, 'to');
+      const pairs = op.map ? Object.entries(op.map) : [[op.from, op.to]];
+      if (!pairs.length) fail(`${where}: give from and to, or a map of colours`);
+      // All swaps read the colours as they were, so {"#000": "#fff", "#fff": "#000"} trades them.
+      const swaps = pairs.map(([f, t]) => [hexKey(color(f, 'from')), color(t, 'to')] as const);
+      const marks = swaps.map((_, i) => `#0000${String(i).padStart(2, '0')}fe`);
       for (const p of d.pages) {
-        p.background = recolorFill(p.background, from, to);
-        p.elements = p.elements.map((e) => recolorElement(e, from, to));
+        swaps.forEach(([f], i) => {
+          p.background = recolorFill(p.background, f, marks[i]);
+          p.elements = p.elements.map((e) => recolorElement(e, f, marks[i]));
+        });
+        swaps.forEach(([, t], i) => {
+          p.background = recolorFill(p.background, marks[i], t);
+          p.elements = p.elements.map((e) => recolorElement(e, marks[i], t));
+        });
+      }
+      return;
+    }
+    case 'align': {
+      const ids = expandIds(d, op.ids, where);
+      const els = ids.map((id) => needElement(d, id, where).el);
+      const rel = op.relative ?? (ids.length === 1 ? 'page' : 'selection');
+      const target: Box = rel === 'page' ? { x: 0, y: 0, w: d.width, h: d.height } : rel === 'selection' ? union(els) : needElement(d, rel, where).el;
+      const to = oneOf(op.to, ['left', 'center', 'right', 'top', 'middle', 'bottom'] as const, 'to');
+      for (const el of els) {
+        if (to === 'left') el.x = target.x;
+        if (to === 'center') el.x = target.x + (target.w - el.w) / 2;
+        if (to === 'right') el.x = target.x + target.w - el.w;
+        if (to === 'top') el.y = target.y;
+        if (to === 'middle') el.y = target.y + (target.h - el.h) / 2;
+        if (to === 'bottom') el.y = target.y + target.h - el.h;
+      }
+      return;
+    }
+    case 'distribute': {
+      const els = expandIds(d, op.ids, where).map((id) => needElement(d, id, where).el);
+      if (els.length < 2) fail(`${where}: distribute needs two or more elements`);
+      const horizontal = oneOf(op.axis, ['horizontal', 'vertical'] as const, 'axis') === 'horizontal';
+      const pos = (e: Box) => (horizontal ? e.x : e.y);
+      const size = (e: Box) => (horizontal ? e.w : e.h);
+      els.sort((a, b) => pos(a) - pos(b));
+      const first = els[0];
+      const last = els[els.length - 1];
+      const gap = op.gap !== undefined ? num(op.gap, 'gap', -10000, 10000) : (pos(last) + size(last) - pos(first) - els.reduce((t, e) => t + size(e), 0)) / (els.length - 1);
+      let at = pos(first);
+      for (const e of els) {
+        if (horizontal) e.x = at;
+        else e.y = at;
+        at += size(e) + gap;
       }
       return;
     }
     case 'page': {
       const page = needPage(d, op.id, where);
       if (op.background !== undefined) page.background = fill(op.background, 'background');
-      if (op.notes !== undefined) page.notes = str(op.notes, 'notes', 8000);
+      if (op.notes !== undefined) {
+        page.notes = str(op.notes, 'notes', 8000);
+        d.tpl = d.tpl.filter((t) => t !== page.id);
+      }
       if (op.name !== undefined) page.name = str(op.name, 'name', 120);
       if (op.transition !== undefined) page.transition = oneOf(op.transition, TRANSITIONS, 'transition') as PageTransition;
       if (op.duration !== undefined) page.duration = num(op.duration, 'duration', 0.5, 120);
@@ -755,10 +908,12 @@ function applyOp(d: Design, op: Op, src: Sources, n: number) {
             if (d.fit[e.id]) d.fit[nid] = d.fit[e.id];
             if (e.id in d.orig) d.orig[nid] = d.orig[e.id];
             if (d.cover.includes(e.id)) d.cover.push(nid);
+            if (d.tpl.includes(e.id)) d.tpl.push(nid);
             const g = e.groupId ? (groups.get(e.groupId) ?? groups.set(e.groupId, `${e.groupId}-${id}`).get(e.groupId)) : undefined;
             return { ...structuredClone(e), id: nid, groupId: g } as Element;
           }),
         };
+        if (d.tpl.includes(from.id)) d.tpl.push(id);
       } else page = emptyPage(id);
       if (op.background !== undefined) page.background = fill(op.background, 'background');
       if (op.name !== undefined) page.name = str(op.name, 'name', 120);
@@ -785,7 +940,7 @@ function applyOp(d: Design, op: Op, src: Sources, n: number) {
       d.title = str(op.title, 'title', 200);
       return;
   }
-  fail(`${where}: unknown edit. Use set_text, style, set_image, add, duplicate, remove, recolor, page, add_page, move_page, arrange or title`);
+  fail(`${where}: unknown edit. Use set_text, style, set_image, add, duplicate, remove, recolor, align, distribute, page, add_page, move_page, arrange or title`);
 }
 
 export function buildDesign(draft: Draft, src: Sources): Design {
@@ -834,7 +989,7 @@ export function capacity(e: TextElement) {
   const linesFor = (text: string) => text.split('\n').reduce((n, line) => n + Math.max(1, Math.ceil(line.length / perLine)), 0);
   // Stored heights are often only a first line; the words already there show the real room.
   const lines = Math.max(1, Math.round(e.h / (e.fontSize * e.lineHeight)), linesFor(e.text));
-  return { perLine, lines, linesFor };
+  return { perLine, lines, linesFor, charWidth: e.fontSize * em * (1 + e.letterSpacing / 1000) };
 }
 
 function describe(e: Element, d: Design): string {
@@ -848,8 +1003,10 @@ function describe(e: Element, d: Design): string {
     }
     case 'shape':
       return `shape ${e.shape} ${fillText(e.fill)}${e.stroke ? ` stroke ${e.stroke.width}px ${e.stroke.color}` : ''}${e.radius ? ` radius ${e.radius}` : ''} · ${box}`;
-    case 'line':
-      return `line ${e.width}px ${e.color} ${e.dash}${e.start !== 'none' || e.end !== 'none' ? ` caps ${e.start}/${e.end}` : ''} · ${box}`;
+    case 'line': {
+      const p = lineEnds(e);
+      return `line from ${r(p.x1)},${r(p.y1)} to ${r(p.x2)},${r(p.y2)} · ${e.width}px ${e.color} ${e.dash}${e.start !== 'none' || e.end !== 'none' ? ` caps ${e.start}/${e.end}` : ''}${e.opacity < 1 ? ` opacity ${e.opacity}` : ''}`;
+    }
     case 'image': {
       const src = !e.assetId ? 'EMPTY frame' : e.assetId.startsWith('web:') ? `photo ${d.images[e.assetId]?.url ?? ''}` : `library ${e.assetId.slice(4)}`;
       return `image ${src}${e.mask ? ` mask ${e.mask}` : ''}${e.radius ? ` radius ${e.radius}` : ''}${e.filters.preset !== 'none' ? ` filter ${e.filters.preset}` : ''}${e.filters.duotone ? ` duotone ${e.filters.duotone.join('/')}` : ''} · ${box}`;
@@ -901,21 +1058,37 @@ export function outline(d: Design, opts: { pages?: string[] } = {}): string {
     lines.push('');
     lines.push(`Page ${p.id}${p.name ? ` "${p.name}"` : ''} · background ${fillText(p.background)}${p.transition !== 'none' ? ` · transition ${p.transition}` : ''}${p.notes ? ` · notes ${JSON.stringify(p.notes.slice(0, 80))}` : ''}`);
     if (!p.elements.length) lines.push('  (empty)');
-    // Listed bottom to top, the order they are drawn in.
-    for (const e of p.elements) lines.push(`  ${e.id}  ${describe(e, d)}`);
+    // Listed bottom to top, the order they are drawn in. Runs of look alike pieces (a grid of
+    // squares, a row of dots) are folded into one line.
+    const rows = p.elements.map((e) => ({ e, text: describe(e, d), kind: e.type === 'text' ? e.id : describe({ ...e, x: 0, y: 0 }, d) }));
+    for (let i = 0; i < rows.length; ) {
+      let j = i;
+      while (j + 1 < rows.length && rows[j + 1].kind === rows[i].kind) j++;
+      if (j - i >= 3) {
+        const first = rows[i].e;
+        lines.push(`  ${first.id} .. ${rows[j].e.id}  ${j - i + 1} alike: ${rows[i].text} (first; the others repeat it elsewhere)`);
+      } else for (let k = i; k <= j; k++) lines.push(`  ${rows[k].e.id}  ${rows[k].text}`);
+      i = j + 1;
+    }
   }
   return lines.join('\n');
 }
 
-// Text that will probably not fit the room its old words had, judged from the font size alone.
-export function crowded(d: Design): string[] {
+// What the assistant should know after an edit: text set smaller than asked, and template words left in.
+export function notices(d: Design): string[] {
   const out: string[] = [];
-  for (const p of d.pages)
-    for (const e of p.elements) {
-      if (e.type !== 'text' || d.fit[e.id] !== 'shrink') continue;
-      const c = capacity({ ...e, text: d.orig[e.id] ?? e.text });
-      const need = c.linesFor(e.text);
-      if (need > c.lines + 0.5) out.push(`${e.id}: about ${need} lines of text in room for ${c.lines}; it will be set smaller to fit. Shorten it or widen the box if that is not wanted.`);
-    }
+  const all = new Map(d.pages.flatMap((p) => p.elements.map((e) => [e.id, e] as const)));
+  for (const [id, r] of Object.entries(d.resized)) {
+    const e = all.get(id);
+    if (e?.type === 'text') out.push(`${id} is set at ${Math.round(r.got)}px instead of ${Math.round(r.asked)}px so the words fit the room the old ones had. Shorten it, widen the box, or style a fontSize to set it yourself.`);
+  }
+  const left = d.tpl.filter((id) => all.has(id) || d.pages.some((p) => p.id === id));
+  if (left.length) {
+    const sample = left.slice(0, 10).map((id) => {
+      const e = all.get(id);
+      return e?.type === 'text' ? `${id} ${JSON.stringify(e.text.length > 40 ? e.text.slice(0, 37) + '...' : e.text)}` : `${id} notes`;
+    });
+    out.push(`Still the template's own words (change, remove or keep on purpose): ${sample.join(', ')}${left.length > 10 ? ` and ${left.length - 10} more` : ''}.`);
+  }
   return out;
 }

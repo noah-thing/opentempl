@@ -8,8 +8,8 @@ import { layoutText } from '../text/layout';
 import { DRAFTS_URL } from '../links';
 
 // Turns a draft (a design written as steps by an assistant) into a real design:
-// replays the steps, fetches every photo into the design, and sets changed text
-// to fit its box with the real fonts, which only a browser can measure.
+// replays the steps with the real fonts measured (which only a browser can do)
+// and fetches every photo into the design.
 
 export interface DraftRecord {
   id: string;
@@ -60,34 +60,6 @@ async function fetchAsset(id: string, d: Design, opts: { reportDownloads: boolea
   }
 }
 
-// "grow" lets the box follow the words. "shrink" keeps the room the old words had
-// (their height, which is often more than the stored box) and sets the type smaller
-// until the new words fit it.
-function fitText(el: Extract<Element, { type: 'text' }>, mode: string, version: number, before?: string) {
-  const measure = (size: number) => layoutText({ ...el, fontSize: size }, version);
-  if (mode === 'grow') {
-    el.h = Math.max(Math.ceil(measure(el.fontSize).height), Math.ceil(el.fontSize * el.lineHeight));
-    return;
-  }
-  if (mode !== 'shrink') return;
-  const room = Math.max(el.h, before === undefined ? 0 : layoutText({ ...el, text: before }, version).height);
-  const fits = (size: number) => {
-    const l = measure(size);
-    return l.height <= room + 1 && l.maxLineWidth <= el.w + 1;
-  };
-  if (!fits(el.fontSize)) {
-    let lo = el.fontSize * 0.25;
-    let hi = el.fontSize;
-    for (let i = 0; i < 12; i++) {
-      const mid = (lo + hi) / 2;
-      if (fits(mid)) lo = mid;
-      else hi = mid;
-    }
-    el.fontSize = Math.max(4, Math.floor(lo * 10) / 10);
-  }
-  el.h = Math.max(el.h, Math.ceil(measure(el.fontSize).height));
-}
-
 export interface Built {
   snapshot: DesignSnapshot;
   assets: Asset[];
@@ -95,13 +67,15 @@ export interface Built {
 }
 
 export async function buildDraft(draft: Draft, opts: { reportDownloads?: boolean } = {}): Promise<Built> {
-  const d = buildDesign(draft, await sourcesFor(draft));
+  const sources = await sourcesFor(draft);
+  // A first pass finds the fonts and photos; the second sets text with the real fonts measured.
+  const rough = buildDesign(draft, sources);
   const missing: string[] = [];
-  const assets = (await Promise.all(assetIds(d).map((id) => fetchAsset(id, d, { reportDownloads: !!opts.reportDownloads })))).filter((a): a is Asset => !!a);
+  const assets = (await Promise.all(assetIds(rough).map((id) => fetchAsset(id, rough, { reportDownloads: !!opts.reportDownloads })))).filter((a): a is Asset => !!a);
   const byId = new Map(assets.map((a) => [a.id, a]));
 
   const fonts = new Map<string, Set<number>>();
-  for (const p of d.pages)
+  for (const p of rough.pages)
     for (const e of p.elements)
       if (e.type === 'text' || e.type === 'chart' || e.type === 'table') {
         const set = fonts.get(e.fontFamily) ?? new Set<number>();
@@ -111,6 +85,13 @@ export async function buildDraft(draft: Draft, opts: { reportDownloads?: boolean
   await Promise.all([...fonts].flatMap(([f, ws]) => [...ws].map((w) => ensureFont(f, w))));
   await document.fonts.ready;
   const version = fontsVersion();
+  const d = buildDesign(draft, {
+    ...sources,
+    measure: (el) => {
+      const l = layoutText(el, version);
+      return { height: l.height, width: l.maxLineWidth };
+    },
+  });
 
   const pageOrder: string[] = [];
   const pages: Record<string, Page> = {};
@@ -126,7 +107,6 @@ export async function buildDraft(draft: Draft, opts: { reportDownloads?: boolean
           el.assetId = null;
         } else if (d.cover.includes(el.id)) el.crop = coverCrop(a.width, a.height, el.w, el.h);
       }
-      if (el.type === 'text' && d.fit[el.id]) fitText(el, d.fit[el.id], version, d.orig[el.id]);
       elements[el.id] = el;
     }
     const bg = p.background.type === 'image' && !byId.has(p.background.assetId) ? ({ type: 'solid', color: '#FFFFFF' } as const) : p.background;
